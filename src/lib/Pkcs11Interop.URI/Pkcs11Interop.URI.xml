@@ -1,0 +1,1019 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pkcs11Interop.URI</name>
+    </assembly>
+    <members>
+        <member name="T:Net.Pkcs11Interop.URI.Pkcs11UriSpec">
+            <summary>
+            Definitions from the PKCS#11 URI scheme specification
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11UriSchemeName">
+            <summary>
+            PKCS#11 URI scheme name
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11UriAndPathSeparator">
+            <summary>
+            Character that always follows after PKCS#11 URI scheme name
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathAttributesSeparator">
+            <summary>
+            Character that separates path attributes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathAttributeNameAndValueSeparator">
+            <summary>
+            Character that separates name and value of path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathAndQuerySeparator">
+            <summary>
+            Character that separates path and query parts
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11QueryAttributesSeparator">
+            <summary>
+            Character that separates query attributes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11QueryAttributeNameAndValueSeparator">
+            <summary>
+            Character that separates name and value of query attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Token">
+            <summary>
+            Name of "token" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TokenMaxLength">
+            <summary>
+            Max length of "token" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Manuf">
+            <summary>
+            Name of "manufacturer" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11ManufMaxLength">
+            <summary>
+            Max length of "manufacturer" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Serial">
+            <summary>
+            Name of "serial" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11SerialMaxLength">
+            <summary>
+            Max length of "serial" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Model">
+            <summary>
+            Name of "model" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11ModelMaxLength">
+            <summary>
+            Max length of "model" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11LibManuf">
+            <summary>
+            Name of "library-manufacturer" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11LibManufMaxLength">
+            <summary>
+            Max length of "library-manufacturer" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11LibDesc">
+            <summary>
+            Name of "library-description" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11LibDescMaxLength">
+            <summary>
+            Max length of "library-description" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11LibVer">
+            <summary>
+            Name of "library-version" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Object">
+            <summary>
+            Name of "object" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Type">
+            <summary>
+            Name of "type" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Id">
+            <summary>
+            Name of "id" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathVendorPrefix">
+            <summary>
+            Prefix of vendor specific path attribute name
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TypePublic">
+            <summary>
+            Value of "type" path attribute for public key
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TypePrivate">
+            <summary>
+            Value of "type" path attribute for private key
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TypeCert">
+            <summary>
+            Value of "type" path attribute for certificate
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TypeSecretKey">
+            <summary>
+            Value of "type" path attribute for secret key
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TypeData">
+            <summary>
+            Value of "type" path attribute for data object
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PinSource">
+            <summary>
+            Name of "pin-source" query attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PinValue">
+            <summary>
+            Name of "pin-value" query attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11ModuleName">
+            <summary>
+            Name of "module-name" query attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11ModulePath">
+            <summary>
+            Name of "module-path" query attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11QueryVendorPrefix">
+            <summary>
+            Prefix of vendor specific query attribute name
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathAttrValueChars">
+            <summary>
+            Characters allowed in value of path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11VendorAttrNameChars">
+            <summary>
+            Characters allowed in name of vendor specific attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11QueryAttrValueChars">
+            <summary>
+            Characters allowed in value of query attribute
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriSpec.#cctor">
+            <summary>
+            Static constructor for Net.Pkcs11Interop.URI.Pkcs11UriSpec class
+            </summary>
+        </member>
+        <member name="T:Net.Pkcs11Interop.URI.Pkcs11UriException">
+            <summary>
+            Exception that indicates error in PKCS#11 URI parsing or building process
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriException.#ctor">
+            <summary>
+            Initializes a new instance of the Net.Pkcs11Interop.URI.Pkcs11UriException class
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the Net.Pkcs11Interop.URI.Pkcs11UriException class with a specified error message
+            </summary>
+            <param name="message">The message that describes the error</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the Net.Pkcs11Interop.URI.Pkcs11UriException class with a specified error message and a reference to the inner exception that is the cause of this exception
+            </summary>
+            <param name="message">The message that describes the error</param>
+            <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="T:Net.Pkcs11Interop.URI.Pkcs11UriBuilder">
+            <summary>
+            PKCS#11 URI builder
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.#ctor">
+            <summary>
+            Intializes new instance of Pkcs11UriBuilder class that checks max lengths of path attribute values
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.#ctor(System.Boolean)">
+            <summary>
+            Intializes new instance of Pkcs11UriBuilder class
+            </summary>
+            <param name="checkLengths">Flag indicating whether max lengths of path attribute values should be checked</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.#ctor(Net.Pkcs11Interop.URI.Pkcs11Uri)">
+            <summary>
+            Intializes new instance of Pkcs11UriBuilder class with specified PKCS#11 URI whose ChecksLengths property specifies whether max lengths of path attribute values should be checked
+            </summary>
+            <param name="pkcs11Uri">PKCS#11 URI with default values</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.#ctor(Net.Pkcs11Interop.URI.Pkcs11Uri,System.Boolean)">
+            <summary>
+            Intializes new instance of Pkcs11UriBuilder class with specified PKCS#11 URI
+            </summary>
+            <param name="pkcs11Uri">PKCS#11 URI with default values</param>
+            <param name="checkLengths">Flag indicating whether max lengths of path attribute values should be checked</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.ConstructFromPkcs11Uri(Net.Pkcs11Interop.URI.Pkcs11Uri,System.Boolean)">
+            <summary>
+            Sets properties of Pkcs11UriBuilder class with default values specified by PKCS#11 URI
+            </summary>
+            <param name="pkcs11Uri">PKCS#11 URI with default values</param>
+            <param name="checkLengths">Flag indicating whether max lengths of path attribute values should be checked</param>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._checkLengths">
+            <summary>
+            Flag indicating whether max lengths of path attribute values are checked
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._tokenEncoded">
+            <summary>
+            Value of path attribute "token" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._token">
+            <summary>
+            Value of path attribute "token" that corresponds to the "label" member of the CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._manufacturerEncoded">
+            <summary>
+            Value of path attribute "manufacturer" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._manufacturer">
+            <summary>
+            Value of path attribute "manufacturer" that corresponds to the "manufacturerID" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._serialEncoded">
+            <summary>
+            Value of path attribute "serial" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._serial">
+            <summary>
+            Value of path attribute "serial" that corresponds to the "serialNumber" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._modelEncoded">
+            <summary>
+            Value of path attribute "model" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._model">
+            <summary>
+            Value of path attribute "model" that corresponds to the "model" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._libraryManufacturerEncoded">
+            <summary>
+            Value of path attribute "library-manufacturer" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._libraryManufacturer">
+            <summary>
+            Value of path attribute "library-manufacturer" that corresponds to the "manufacturerID" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._libraryDescriptionEncoded">
+            <summary>
+            Value of path attribute "library-description" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._libraryDescription">
+            <summary>
+            Value of path attribute "library-description" that corresponds to the "libraryDescription" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._libraryVersionEncoded">
+            <summary>
+            Value of path attribute "library-version" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._libraryVersion">
+            <summary>
+            Value of path attribute "library-version" that corresponds to the "libraryVersion" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._objectEncoded">
+            <summary>
+            Value of path attribute "object" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._object">
+            <summary>
+            Value of path attribute "object" that corresponds to the "CKA_LABEL" object attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._typeEncoded">
+            <summary>
+            Value of path attribute "type" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._type">
+            <summary>
+            Value of path attribute "type" that corresponds to the "CKA_CLASS" object attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._idEncoded">
+            <summary>
+            Value of path attribute "id" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._id">
+            <summary>
+            Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._unknownPathAttributes">
+            <summary>
+            Collection of unknown vendor specific path attributes that is validated when ToString() or ToPkcs11Uri() method is called
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.EncodeUnknownPathAttributes">
+            <summary>
+            Encodes collection of unknown vendor specific path attributes for PKCS#11 URI
+            </summary>
+            <returns>List of unknown vendor specific path attributes encoded for PKCS#11 URI</returns>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._pinSourceEncoded">
+            <summary>
+            Value of query attribute "pin-source" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._pinSource">
+            <summary>
+            Value of query attribute "pin-source" that specifies where token PIN can be obtained
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._pinValueEncoded">
+            <summary>
+            Value of query attribute "pin-value" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._pinValue">
+            <summary>
+            Value of query attribute "pin-value" that contains token PIN
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._moduleNameEncoded">
+            <summary>
+            Value of query attribute "module-name" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._moduleName">
+            <summary>
+            Value of query attribute "module-name" that specifies name of the PKCS#11 library
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._modulePathEncoded">
+            <summary>
+            Value of query attribute "module-path" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._modulePath">
+            <summary>
+            Value of query attribute "module-path" that specifies path to the PKCS#11 library
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._unknownQueryAttributes">
+            <summary>
+            Collection of unknown vendor specific query attributes that is validated when ToString() or ToPkcs11Uri() method is called
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.EncodeUnknownQueryAttributes">
+            <summary>
+            Encodes collection of unknown vendor specific query attributes for PKCS#11 URI
+            </summary>
+            <returns>List of unknown vendor specific query attributes encoded for PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.ToString">
+            <summary>
+            Generates PKCS#11 URI representing contents of Pkcs11UriBuilder instance
+            </summary>
+            <returns>PKCS#11 URI representing contents of Pkcs11UriBuilder instance</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.ToPkcs11Uri">
+            <summary>
+            Converts Pkcs11UriBuilder instance to Pkcs11Uri instance
+            </summary>
+            <returns>Pkcs11Uri instance representing contents of Pkcs11UriBuilder instance</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.PctEncodeByteArray(System.Byte[])">
+            <summary>
+            Percent encodes provided byte array
+            </summary>
+            <param name="byteArray">Byte array that should be encoded</param>
+            <returns>Percent encoded byte array</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.PctEncodeCharacter(System.Char)">
+            <summary>
+            Percent encodes provided character
+            </summary>
+            <param name="character">Character that should be encoded</param>
+            <returns>Percent encoded character</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.EncodePk11String(System.String,System.String,System.Char[],System.Boolean)">
+            <summary>
+            Checks whether Pk11String contains invalid characters and optionaly percent encodes invalid characters
+            </summary>
+            <param name="attributeName">Name of attribute whose value is being encoded</param>
+            <param name="pk11String">Pk11String that should be encoded</param>
+            <param name="allowedChars">Characters allowed to be present unencoded in Pk11String</param>
+            <param name="usePctEncoding">Flag indicating whether invalid characters should be percent encoded</param>
+            <returns>Encoded Pk11String</returns>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.ChecksLengths">
+            <summary>
+            Flag indicating whether max lengths of path attribute values are checked
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Token">
+            <summary>
+            Value of path attribute "token" that corresponds to the "label" member of the CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Manufacturer">
+            <summary>
+            Value of path attribute "manufacturer" that corresponds to the "manufacturerID" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Serial">
+            <summary>
+            Value of path attribute "serial" that corresponds to the "serialNumber" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Model">
+            <summary>
+            Value of path attribute "model" that corresponds to the "model" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.LibraryManufacturer">
+            <summary>
+            Value of path attribute "library-manufacturer" that corresponds to the "manufacturerID" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.LibraryDescription">
+            <summary>
+            Value of path attribute "library-description" that corresponds to the "libraryDescription" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.LibraryVersion">
+            <summary>
+            Value of path attribute "library-version" that corresponds to the "libraryVersion" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Object">
+            <summary>
+            Value of path attribute "object" that corresponds to the "CKA_LABEL" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Type">
+            <summary>
+            Value of path attribute "type" that corresponds to the "CKA_CLASS" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.Id">
+            <summary>
+            Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.UnknownPathAttributes">
+            <summary>
+            Collection of unknown vendor specific path attributes that is validated when ToString() or ToPkcs11Uri() method is called
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.PinSource">
+            <summary>
+            Value of query attribute "pin-source" that specifies where token PIN can be obtained
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.PinValue">
+            <summary>
+            Value of query attribute "pin-value" that contains token PIN
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.ModuleName">
+            <summary>
+            Value of query attribute "module-name" that specifies name of the PKCS#11 library
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.ModulePath">
+            <summary>
+            Value of query attribute "module-path" that specifies path to the PKCS#11 library
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.UnknownQueryAttributes">
+            <summary>
+            Collection of unknown vendor specific query attributes that is validated when ToString() or ToPkcs11Uri() method is called
+            </summary>
+        </member>
+        <member name="T:Net.Pkcs11Interop.URI.Pkcs11Uri">
+            <summary>
+            PKCS#11 URI parser
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.#ctor(System.String)">
+            <summary>
+            Intializes new instance of Pkcs11Uri class that parses provided PKCS#11 URI and checks max lengths of path attribute values
+            </summary>
+            <param name="uri">PKCS#11 URI to be parsed</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.#ctor(System.String,System.Boolean)">
+            <summary>
+            Intializes new instance of Pkcs11Uri class that parses provided PKCS#11 URI
+            </summary>
+            <param name="uri">PKCS#11 URI to be parsed</param>
+            <param name="checkLengths">Flag indicating whether max lengths of path attribute values should be checked</param>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._checkLengths">
+            <summary>
+            Flag indicating whether max lengths of path attribute values were checked
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._token">
+            <summary>
+            Value of path attribute "token" that corresponds to the "label" member of the CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._manufacturer">
+            <summary>
+            Value of path attribute "manufacturer" that corresponds to the "manufacturerID" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._serial">
+            <summary>
+            Value of path attribute "serial" that corresponds to the "serialNumber" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._model">
+            <summary>
+            Value of path attribute "model" that corresponds to the "model" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._libraryManufacturer">
+            <summary>
+            Value of path attribute "library-manufacturer" that corresponds to the "manufacturerID" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._libraryDescription">
+            <summary>
+            Value of path attribute "library-description" that corresponds to the "libraryDescription" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._libraryVersion">
+            <summary>
+            Value of path attribute "library-version" that corresponds to the "libraryVersion" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._object">
+            <summary>
+            Value of path attribute "object" that corresponds to the "CKA_LABEL" object attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._type">
+            <summary>
+            Value of path attribute "type" that corresponds to the "CKA_CLASS" object attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._id">
+            <summary>
+            Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._unknownPathAttributes">
+            <summary>
+            Collection of unknown vendor specific path attributes
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetObjectAttributes(System.Collections.Generic.List{Net.Pkcs11Interop.HighLevelAPI.ObjectAttribute}@)">
+            <summary>
+            Returns list of object attributes defined by PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">List of object attributes defined by PKCS#11 URI</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetObjectAttributes(System.Collections.Generic.List{Net.Pkcs11Interop.HighLevelAPI8.ObjectAttribute}@)">
+            <summary>
+            Returns list of object attributes defined by PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">List of object attributes defined by PKCS#11 URI</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetObjectAttributes(System.Collections.Generic.List{Net.Pkcs11Interop.HighLevelAPI4.ObjectAttribute}@)">
+            <summary>
+            Returns list of object attributes defined by PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">List of object attributes defined by PKCS#11 URI</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetObjectAttributes(Net.Pkcs11Interop.LowLevelAPI8.CK_ATTRIBUTE[]@)">
+            <summary>
+            Returns list of object attributes defined by PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">List of object attributes defined by PKCS#11 URI</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetObjectAttributes(Net.Pkcs11Interop.LowLevelAPI4.CK_ATTRIBUTE[]@)">
+            <summary>
+            Returns list of object attributes defined by PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">List of object attributes defined by PKCS#11 URI</param>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._pinSource">
+            <summary>
+            Value of query attribute "pin-source" that specifies where token PIN can be obtained
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._pinValue">
+            <summary>
+            Value of query attribute "pin-value" that contains token PIN
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._moduleName">
+            <summary>
+            Value of query attribute "module-name" that specifies name of the PKCS#11 library
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._modulePath">
+            <summary>
+            Value of query attribute "module-path" that specifies path to the PKCS#11 library
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._unknownQueryAttributes">
+            <summary>
+            Collection of unknown vendor specific query attributes
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.String,System.String,System.String)">
+            <summary>
+            Checks whether PKCS#11 library information matches PKCS#11 URI
+            </summary>
+            <param name="manufacturer">PKCS#11 library manufacturer</param>
+            <param name="description">PKCS#11 library description</param>
+            <param name="version">PKCS#11 library version</param>
+            <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI.LibraryInfo)">
+            <summary>
+            Checks whether PKCS#11 library information matches PKCS#11 URI
+            </summary>
+            <param name="libraryInfo">PKCS#11 library information</param>
+            <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI8.LibraryInfo)">
+            <summary>
+            Checks whether PKCS#11 library information matches PKCS#11 URI
+            </summary>
+            <param name="libraryInfo">PKCS#11 library information</param>
+            <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI4.LibraryInfo)">
+            <summary>
+            Checks whether PKCS#11 library information matches PKCS#11 URI
+            </summary>
+            <param name="libraryInfo">PKCS#11 library information</param>
+            <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.LowLevelAPI8.CK_INFO)">
+            <summary>
+            Checks whether PKCS#11 library information matches PKCS#11 URI
+            </summary>
+            <param name="libraryInfo">PKCS#11 library information</param>
+            <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.LowLevelAPI4.CK_INFO)">
+            <summary>
+            Checks whether PKCS#11 library information matches PKCS#11 URI
+            </summary>
+            <param name="libraryInfo">PKCS#11 library information</param>
+            <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.String,System.String,System.String,System.String)">
+            <summary>
+            Checks whether token information matches PKCS#11 URI
+            </summary>
+            <param name="token">Token label</param>
+            <param name="manufacturer">Token manufacturer</param>
+            <param name="serial">Token serial number</param>
+            <param name="model">Token model</param>
+            <returns>True if token information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI.TokenInfo)">
+            <summary>
+            Checks whether token information matches PKCS#11 URI
+            </summary>
+            <param name="tokenInfo">Token information</param>
+            <returns>True if token information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI8.TokenInfo)">
+            <summary>
+            Checks whether token information matches PKCS#11 URI
+            </summary>
+            <param name="tokenInfo">Token information</param>
+            <returns>True if token information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI4.TokenInfo)">
+            <summary>
+            Checks whether token information matches PKCS#11 URI
+            </summary>
+            <param name="tokenInfo">Token information</param>
+            <returns>True if token information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.LowLevelAPI8.CK_TOKEN_INFO)">
+            <summary>
+            Checks whether token information matches PKCS#11 URI
+            </summary>
+            <param name="tokenInfo">Token information</param>
+            <returns>True if token information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.LowLevelAPI4.CK_TOKEN_INFO)">
+            <summary>
+            Checks whether token information matches PKCS#11 URI
+            </summary>
+            <param name="tokenInfo">Token information</param>
+            <returns>True if token information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.Nullable{Net.Pkcs11Interop.Common.CKO},System.String,System.Byte[])">
+            <summary>
+            Checks whether object attributes match PKCS#11 URI
+            </summary>
+            <param name="ckaClass">Value of CKA_CLASS object attribute</param>
+            <param name="ckaLabel">Value of CKA_LABEL object attribute</param>
+            <param name="ckaId">Value of CKA_ID object attribute</param>
+            <returns>True if object attributes match PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.Collections.Generic.List{Net.Pkcs11Interop.HighLevelAPI.ObjectAttribute})">
+            <summary>
+            Checks whether object attributes match PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">Object attributes</param>
+            <returns>True if object attributes match PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.Collections.Generic.List{Net.Pkcs11Interop.HighLevelAPI8.ObjectAttribute})">
+            <summary>
+            Checks whether object attributes match PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">Object attributes</param>
+            <returns>True if object attributes match PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.Collections.Generic.List{Net.Pkcs11Interop.HighLevelAPI4.ObjectAttribute})">
+            <summary>
+            Checks whether object attributes match PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">Object attributes</param>
+            <returns>True if object attributes match PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.Collections.Generic.List{Net.Pkcs11Interop.LowLevelAPI8.CK_ATTRIBUTE})">
+            <summary>
+            Checks whether object attributes match PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">Object attributes</param>
+            <returns>True if object attributes match PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.Collections.Generic.List{Net.Pkcs11Interop.LowLevelAPI4.CK_ATTRIBUTE})">
+            <summary>
+            Checks whether object attributes match PKCS#11 URI
+            </summary>
+            <param name="objectAttributes">Object attributes</param>
+            <returns>True if object attributes match PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI.Pkcs11)">
+            <summary>
+            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            </summary>
+            <param name="pkcs11">High level PKCS#11 wrapper</param>
+            <returns>List of slots matching PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI8.Pkcs11)">
+            <summary>
+            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            </summary>
+            <param name="pkcs11">High level PKCS#11 wrapper</param>
+            <returns>List of slots matching PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI4.Pkcs11)">
+            <summary>
+            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            </summary>
+            <param name="pkcs11">High level PKCS#11 wrapper</param>
+            <returns>List of slots matching PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.LowLevelAPI8.Pkcs11,System.UInt64[]@)">
+            <summary>
+            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            </summary>
+            <param name="pkcs11">Low level PKCS#11 wrapper</param>
+            <param name="slotList">List of slots matching PKCS#11 URI</param>
+            <returns>CKR_OK if successful; any other value otherwise</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.LowLevelAPI4.Pkcs11,System.UInt32[]@)">
+            <summary>
+            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            </summary>
+            <param name="pkcs11">Low level PKCS#11 wrapper</param>
+            <param name="slotList">List of slots matching PKCS#11 URI</param>
+            <returns>CKR_OK if successful; any other value otherwise</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Extract(System.String)">
+            <summary>
+            Extracts PKCS#11 URI from text and removes all whitespaces
+            </summary>
+            <param name="text">Text that contains PKCS#11 URI</param>
+            <returns>PKCS#11 URI without whitespaces</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Parse(System.String)">
+            <summary>
+            Parses PKCS#11 URI
+            </summary>
+            <param name="uri">PKCS#11 URI that should be parsed</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.ParsePathAttribute(System.String)">
+            <summary>
+            Parses path attribute
+            </summary>
+            <param name="attribute">Path attribute that should be parsed</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.ParseQueryAttribute(System.String)">
+            <summary>
+            Parses query attribute
+            </summary>
+            <param name="attribute">Query attribute that should be parsed</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.DecodePk11String(System.String,System.String,System.Char[],System.Boolean)">
+            <summary>
+            Checks whether Pk11String contains invalid characters and optionaly decodes percent encoded characters
+            </summary>
+            <param name="attributeName">Name of attribute whose value is being decoded</param>
+            <param name="pk11String">Pk11String that should be decoded</param>
+            <param name="allowedChars">Characters allowed to be present unencoded in Pk11String</param>
+            <param name="decodePctEncodedChars">Flag indicating whether percent encoded characters should be decoded</param>
+            <returns>Decoded Pk11String</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.IsHexDigit(System.Char)">
+            <summary>
+            Checks whether character is hex digit
+            </summary>
+            <param name="c">Character that should be checked</param>
+            <returns>True if character is hex digit false otherwise</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.SimpleStringsMatch(System.String,System.String)">
+            <summary>
+            Checks whether string matches the value of string attribute
+            </summary>
+            <param name="uriString">Value of string attribute present (or not) in PKCS#11 URI</param>
+            <param name="inputString">String that should be compared with the value of string attribute</param>
+            <returns>True if string matches the value of string attribute</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.ObjectTypesMatch(System.Nullable{Net.Pkcs11Interop.Common.CKO},System.Nullable{Net.Pkcs11Interop.Common.CKO})">
+            <summary>
+            Checks whether type matches the value of "type" path attribute
+            </summary>
+            <param name="uriType">Value of "type" path attribute present (or not) in PKCS#11 URI</param>
+            <param name="inputType">Type that should be compared with the value of "type" path attribute</param>
+            <returns>True if type matches the value of "type" path attribute</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.ByteArraysMatch(System.Byte[],System.Byte[])">
+            <summary>
+            Checks whether byte array matches the value of "id" path attribute
+            </summary>
+            <param name="uriArray">Value of "id" path attribute present (or not) in PKCS#11 URI</param>
+            <param name="inputArray">Byte array that should be compared with the value of "id" path attribute</param>
+            <returns>True if byte array matches the value of "id" path attribute</returns>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.ChecksLengths">
+            <summary>
+            Flag indicating whether max lengths of path attribute values were checked
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.DefinesLibrary">
+            <summary>
+            Flag indicating whether PKCS#11 URI path attributes define specific PKCS#11 library
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.DefinesToken">
+            <summary>
+            Flag indicating whether PKCS#11 URI path attributes define specific token
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.DefinesObject">
+            <summary>
+            Flag indicating whether PKCS#11 URI path attributes define specific object
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Token">
+            <summary>
+            Value of path attribute "token" that corresponds to the "label" member of the CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Manufacturer">
+            <summary>
+            Value of path attribute "manufacturer" that corresponds to the "manufacturerID" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Serial">
+            <summary>
+            Value of path attribute "serial" that corresponds to the "serialNumber" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Model">
+            <summary>
+            Value of path attribute "model" that corresponds to the "model" member of CK_TOKEN_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.LibraryManufacturer">
+            <summary>
+            Value of path attribute "library-manufacturer" that corresponds to the "manufacturerID" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.LibraryDescription">
+            <summary>
+            Value of path attribute "library-description" that corresponds to the "libraryDescription" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.LibraryVersion">
+            <summary>
+            Value of path attribute "library-version" that corresponds to the "libraryVersion" member of CK_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Object">
+            <summary>
+            Value of path attribute "object" that corresponds to the "CKA_LABEL" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Type">
+            <summary>
+            Value of path attribute "type" that corresponds to the "CKA_CLASS" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Id">
+            <summary>
+            Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.UnknownPathAttributes">
+            <summary>
+            Collection of unknown vendor specific path attributes
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.PinSource">
+            <summary>
+            Value of query attribute "pin-source" that specifies where token PIN can be obtained
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.PinValue">
+            <summary>
+            Value of query attribute "pin-value" that contains token PIN
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.ModuleName">
+            <summary>
+            Value of query attribute "module-name" that specifies name of the PKCS#11 library
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.ModulePath">
+            <summary>
+            Value of query attribute "module-path" that specifies path to the PKCS#11 library
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.UnknownQueryAttributes">
+            <summary>
+            Collection of unknown vendor specific query attributes
+            </summary>
+        </member>
+    </members>
+</doc>
