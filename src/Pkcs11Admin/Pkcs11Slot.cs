@@ -396,7 +396,7 @@ namespace Net.Pkcs11Admin
                     attributes = new List<ulong>();
                     foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.CertificateAttributes.CommonAttributes)
                         attributes.Add(classAttribute.Value);
-                    ulong certType = requiredAttributes[0].GetValueAsUlong();
+                    ulong certType = requiredAttributes[1].GetValueAsUlong();
                     if (Pkcs11Admin.Instance.Config.CertificateAttributes.TypeSpecificAttributes.ContainsKey(certType))
                         foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.CertificateAttributes.TypeSpecificAttributes[certType])
                             attributes.Add(classAttribute.Value);
@@ -448,7 +448,7 @@ namespace Net.Pkcs11Admin
                     attributes = new List<ulong>();
                     foreach (ClassAttribute classAttribute in keyAttributes.CommonAttributes)
                         attributes.Add(classAttribute.Value);
-                    ulong keyType = requiredAttributes[0].GetValueAsUlong();
+                    ulong keyType = requiredAttributes[1].GetValueAsUlong();
                     if (keyAttributes.TypeSpecificAttributes.ContainsKey(keyType))
                         foreach (ClassAttribute classAttribute in keyAttributes.TypeSpecificAttributes[keyType])
                             attributes.Add(classAttribute.Value);
@@ -511,7 +511,7 @@ namespace Net.Pkcs11Admin
                     attributes = new List<ulong>();
                     foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.DomainParamsAttributes.CommonAttributes)
                         attributes.Add(classAttribute.Value);
-                    ulong keyType = requiredAttributes[0].GetValueAsUlong();
+                    ulong keyType = requiredAttributes[1].GetValueAsUlong();
                     if (Pkcs11Admin.Instance.Config.DomainParamsAttributes.TypeSpecificAttributes.ContainsKey(keyType))
                         foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.DomainParamsAttributes.TypeSpecificAttributes[keyType])
                             attributes.Add(classAttribute.Value);
