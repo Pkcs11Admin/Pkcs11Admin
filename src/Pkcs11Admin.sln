@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pkcs11Admin.WinForms", "Pkc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pkcs11Admin", "Pkcs11Admin\Pkcs11Admin.csproj", "{73DD852B-0308-4758-B98C-9D1E6075ED31}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{22956514-F6FF-44A5-8725-CEBA8461A765}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.txt = CHANGELOG.txt
+		ISSUES.txt = ISSUES.txt
+		LICENSE.txt = LICENSE.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

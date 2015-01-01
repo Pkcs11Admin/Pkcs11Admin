@@ -1,0 +1,2 @@
+Pkcs11Admin 0.1.1 (2015-01-01)
+ - Initial technology preview release

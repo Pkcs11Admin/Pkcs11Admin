@@ -1,0 +1,2 @@
+This version of application represents work in progress and therefore may miss important features or contain critical bugs.
+Please visit project website - www.pkcs11admin.net - for more information on how to report problems or request new features.
