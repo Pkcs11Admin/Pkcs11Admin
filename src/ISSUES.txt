@@ -1,2 +1,31 @@
 This version of application represents work in progress and therefore may miss important features or contain critical bugs.
 Please visit project website - www.pkcs11admin.net - for more information on how to report problems or request new features.
+
+TODOs with HIGH PRIORITY:
+- HARD - Finish definition of TypeSpecificAttributes in default configuration
+- HARD - Add effective cryptoki version to each known attribute
+- Request confirmation of object deletion
+- Allow deletion of multiple objects
+- Export mechanisms to CSV file
+- Import data object from file
+- Export data object to file
+- Import certificate from file
+- Export certificate to file
+- HARD - Key and KeyPair generation
+- Key import
+- Key export
+- PKCS#10 CSR generation
+- Generation of self-signed certificate
+
+TODOs with LOW PRIORITY:
+- Update Pkcs11Interop.URI with new attributes defined in draft 17
+- Create certificate dialog that will work on Linux and OS X
+- Create log viewer dialog
+- Custom editors for ulong, bool, string, datetime attributes
+- ASN.1 view for attribute value
+- Display attribute description
+- HARD - Support for array attributes
+- HARD - Implement carets in HexBox on Linux and OS X
+- GUI finetuning on Linux or GTK# frontend
+- GUI finetuning on OS X or Xamarin.Mac frontend
+- Consider adding localization support
