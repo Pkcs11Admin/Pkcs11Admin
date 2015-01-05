@@ -302,7 +302,15 @@ namespace Net.Pkcs11Admin.WinForms
             try
             {
                 _selectedSlot.Login(CKU.CKU_USER, null);
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
+                return;
+            }
 
+            try
+            {
                 WaitDialog.ShowInstance(this);
                 await Task.Run(() => _selectedSlot.Reload());
                 ReloadForm();
@@ -342,7 +350,15 @@ namespace Net.Pkcs11Admin.WinForms
             try
             {
                 _selectedSlot.Login(CKU.CKU_SO, null);
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
+                return;
+            }
 
+            try
+            {
                 WaitDialog.ShowInstance(this);
                 await Task.Run(() => _selectedSlot.Reload());
                 ReloadForm();
@@ -360,7 +376,14 @@ namespace Net.Pkcs11Admin.WinForms
             try
             {
                 _selectedSlot.Logout();
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
+            }
 
+            try
+            {
                 WaitDialog.ShowInstance(this);
                 await Task.Run(() => _selectedSlot.Reload());
                 ReloadForm();
