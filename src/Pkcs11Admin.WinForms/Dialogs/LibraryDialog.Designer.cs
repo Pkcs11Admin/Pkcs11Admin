@@ -80,7 +80,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TextBoxPkcs11Library.Location = new System.Drawing.Point(13, 42);
             this.TextBoxPkcs11Library.Name = "TextBoxPkcs11Library";
             this.TextBoxPkcs11Library.Size = new System.Drawing.Size(551, 20);
-            this.TextBoxPkcs11Library.TabIndex = 1;
+            this.TextBoxPkcs11Library.TabIndex = 0;
             // 
             // ButtonBrowsePkcs11Library
             // 
@@ -88,7 +88,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonBrowsePkcs11Library.Location = new System.Drawing.Point(570, 40);
             this.ButtonBrowsePkcs11Library.Name = "ButtonBrowsePkcs11Library";
             this.ButtonBrowsePkcs11Library.Size = new System.Drawing.Size(75, 23);
-            this.ButtonBrowsePkcs11Library.TabIndex = 2;
+            this.ButtonBrowsePkcs11Library.TabIndex = 1;
             this.ButtonBrowsePkcs11Library.Text = "Browse...";
             this.ButtonBrowsePkcs11Library.UseVisualStyleBackColor = true;
             this.ButtonBrowsePkcs11Library.Click += new System.EventHandler(this.ButtonBrowsePkcs11Library_Click);
@@ -100,7 +100,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonCancel.Location = new System.Drawing.Point(596, 260);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
-            this.ButtonCancel.TabIndex = 11;
+            this.ButtonCancel.TabIndex = 10;
             this.ButtonCancel.Text = "Cancel";
             this.ButtonCancel.UseVisualStyleBackColor = true;
             // 
@@ -110,7 +110,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonOk.Location = new System.Drawing.Point(515, 260);
             this.ButtonOk.Name = "ButtonOk";
             this.ButtonOk.Size = new System.Drawing.Size(75, 23);
-            this.ButtonOk.TabIndex = 10;
+            this.ButtonOk.TabIndex = 9;
             this.ButtonOk.Text = "OK";
             this.ButtonOk.UseVisualStyleBackColor = true;
             this.ButtonOk.Click += new System.EventHandler(this.ButtonOk_Click);
@@ -125,7 +125,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxOverwriteLogFile.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.CheckBoxOverwriteLogFile.Name = "CheckBoxOverwriteLogFile";
             this.CheckBoxOverwriteLogFile.Size = new System.Drawing.Size(142, 17);
-            this.CheckBoxOverwriteLogFile.TabIndex = 6;
+            this.CheckBoxOverwriteLogFile.TabIndex = 5;
             this.CheckBoxOverwriteLogFile.Text = "Overwrite existing log file";
             this.CheckBoxOverwriteLogFile.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +135,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TextBoxLogFile.Location = new System.Drawing.Point(13, 114);
             this.TextBoxLogFile.Name = "TextBoxLogFile";
             this.TextBoxLogFile.Size = new System.Drawing.Size(551, 20);
-            this.TextBoxLogFile.TabIndex = 4;
+            this.TextBoxLogFile.TabIndex = 3;
             // 
             // ButtonBrowsePkcs11Logger
             // 
@@ -162,7 +162,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonBrowseLogFile.Location = new System.Drawing.Point(570, 112);
             this.ButtonBrowseLogFile.Name = "ButtonBrowseLogFile";
             this.ButtonBrowseLogFile.Size = new System.Drawing.Size(75, 23);
-            this.ButtonBrowseLogFile.TabIndex = 5;
+            this.ButtonBrowseLogFile.TabIndex = 4;
             this.ButtonBrowseLogFile.Text = "Browse...";
             this.ButtonBrowseLogFile.UseVisualStyleBackColor = true;
             this.ButtonBrowseLogFile.Click += new System.EventHandler(this.ButtonBrowseLogFile_Click);
@@ -174,7 +174,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxEnablePkcs11Logger.Location = new System.Drawing.Point(13, 212);
             this.CheckBoxEnablePkcs11Logger.Name = "CheckBoxEnablePkcs11Logger";
             this.CheckBoxEnablePkcs11Logger.Size = new System.Drawing.Size(246, 17);
-            this.CheckBoxEnablePkcs11Logger.TabIndex = 9;
+            this.CheckBoxEnablePkcs11Logger.TabIndex = 6;
             this.CheckBoxEnablePkcs11Logger.Text = "Enable logging of low-level PKCS#11 API calls";
             this.CheckBoxEnablePkcs11Logger.UseVisualStyleBackColor = true;
             this.CheckBoxEnablePkcs11Logger.CheckedChanged += new System.EventHandler(this.CheckBoxEnablePkcs11Logger_CheckedChanged);
@@ -197,9 +197,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelPkcs11Logger.Location = new System.Drawing.Point(10, 167);
             this.LabelPkcs11Logger.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LabelPkcs11Logger.Name = "LabelPkcs11Logger";
-            this.LabelPkcs11Logger.Size = new System.Drawing.Size(300, 13);
+            this.LabelPkcs11Logger.Size = new System.Drawing.Size(321, 13);
             this.LabelPkcs11Logger.TabIndex = 9;
-            this.LabelPkcs11Logger.Text = "Relative name or absolute path of {0}-bit pkcs11-logger library:";
+            this.LabelPkcs11Logger.Text = "Relative name or absolute path of {0}-bit PKCS11-LOGGER library:";
             // 
             // groupBox3
             // 
@@ -233,7 +233,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxEnableLogging.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.CheckBoxEnableLogging.Name = "CheckBoxEnableLogging";
             this.CheckBoxEnableLogging.Size = new System.Drawing.Size(96, 17);
-            this.CheckBoxEnableLogging.TabIndex = 3;
+            this.CheckBoxEnableLogging.TabIndex = 2;
             this.CheckBoxEnableLogging.Text = "Enable logging";
             this.CheckBoxEnableLogging.UseVisualStyleBackColor = true;
             this.CheckBoxEnableLogging.CheckedChanged += new System.EventHandler(this.CheckBoxEnableLogging_CheckedChanged);
@@ -258,6 +258,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Load PKCS#11 library";
             this.TopMost = true;
+            this.Shown += new System.EventHandler(this.LibraryDialog_Shown);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);

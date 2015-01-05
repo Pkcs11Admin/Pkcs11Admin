@@ -24,7 +24,7 @@ namespace Net.Pkcs11Admin.WinForms
     {
         public static void ShowInfo(IWin32Window owner, string message)
         {
-            MessageBox.Show(owner, message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(owner, message, Pkcs11AdminInfo.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static void ShowError(IWin32Window owner, Exception exception)
@@ -34,7 +34,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         public static void ShowError(IWin32Window owner, string message)
         {
-            MessageBox.Show(owner, message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(owner, message, Pkcs11AdminInfo.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static ListViewItem GetSingleSelectedItem(ListView listView)

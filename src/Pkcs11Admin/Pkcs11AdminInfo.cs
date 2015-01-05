@@ -16,6 +16,7 @@
  */
 
 using Net.Pkcs11Interop.Common;
+using System.IO;
 using System.Reflection;
 
 namespace Net.Pkcs11Admin
@@ -98,6 +99,14 @@ namespace Net.Pkcs11Admin
                     return "Mac OS X";
                 else
                     return "Unknown OS";
+            }
+        }
+
+        public static string ExecutingAssemblyDirectory
+        {
+            get
+            {
+                return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             }
         }
     }

@@ -101,7 +101,7 @@ namespace Net.Pkcs11Admin
 
         public string GetDefaultLoggerPath()
         {
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string path = Pkcs11AdminInfo.ExecutingAssemblyDirectory;
             path += Path.DirectorySeparatorChar + "pkcs11-logger-";
             path += (Platform.Uses32BitRuntime) ? "x86" : "x64";
 
