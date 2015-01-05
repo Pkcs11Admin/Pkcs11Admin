@@ -85,7 +85,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             if ((CheckBoxEnablePkcs11Logger.Checked) && (string.IsNullOrEmpty(TextBoxPkcs11Logger.Text)))
             {
-                WinFormsUtils.ShowError(this, "PKCS11-LOGGER library is not specified");
+                WinFormsUtils.ShowError(this, "PKCS#11 logging library is not specified");
                 return;
             }
 

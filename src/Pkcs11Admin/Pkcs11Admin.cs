@@ -92,9 +92,14 @@ namespace Net.Pkcs11Admin
 
                 if (enablePkcs11Logger)
                 {
+                    // Setup PKCS11-LOGGER
                     System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_LIBRARY_PATH", pkcs11Library);
                     System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_LOG_FILE_PATH", logFile);
                     System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_FLAGS", "0");
+
+                    // Support also PKCS#11 Spy from OpenSC project
+                    System.Environment.SetEnvironmentVariable("PKCS11SPY", pkcs11Library);
+                    System.Environment.SetEnvironmentVariable("PKCS11SPY_OUTPUT", logFile);
 
                     Library = new Pkcs11Library(pkcs11Library, pkcs11Logger);
                 }

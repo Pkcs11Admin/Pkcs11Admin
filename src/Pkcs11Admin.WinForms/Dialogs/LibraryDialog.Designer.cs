@@ -173,9 +173,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxEnablePkcs11Logger.AutoSize = true;
             this.CheckBoxEnablePkcs11Logger.Location = new System.Drawing.Point(13, 212);
             this.CheckBoxEnablePkcs11Logger.Name = "CheckBoxEnablePkcs11Logger";
-            this.CheckBoxEnablePkcs11Logger.Size = new System.Drawing.Size(246, 17);
+            this.CheckBoxEnablePkcs11Logger.Size = new System.Drawing.Size(368, 17);
             this.CheckBoxEnablePkcs11Logger.TabIndex = 6;
-            this.CheckBoxEnablePkcs11Logger.Text = "Enable logging of low-level PKCS#11 API calls";
+            this.CheckBoxEnablePkcs11Logger.Text = "Enable logging of low-level calls with PKCS11-LOGGER or PKCS11-SPY";
             this.CheckBoxEnablePkcs11Logger.UseVisualStyleBackColor = true;
             this.CheckBoxEnablePkcs11Logger.CheckedChanged += new System.EventHandler(this.CheckBoxEnablePkcs11Logger_CheckedChanged);
             // 
@@ -197,9 +197,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelPkcs11Logger.Location = new System.Drawing.Point(10, 167);
             this.LabelPkcs11Logger.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LabelPkcs11Logger.Name = "LabelPkcs11Logger";
-            this.LabelPkcs11Logger.Size = new System.Drawing.Size(321, 13);
+            this.LabelPkcs11Logger.Size = new System.Drawing.Size(317, 13);
             this.LabelPkcs11Logger.TabIndex = 9;
-            this.LabelPkcs11Logger.Text = "Relative name or absolute path of {0}-bit PKCS11-LOGGER library:";
+            this.LabelPkcs11Logger.Text = "Relative name or absolute path of {0}-bit PKCS#11 logging library:";
             // 
             // groupBox3
             // 
