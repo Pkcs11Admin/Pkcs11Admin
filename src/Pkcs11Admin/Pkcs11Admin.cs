@@ -27,6 +27,17 @@ namespace Net.Pkcs11Admin
     {
         private bool _disposed = false;
 
+        #region LoadLibrary parameters
+
+        private string _pkcs11Library = null;
+        private bool _enableLogging = false;
+        private string _logFile = null;
+        private bool _overwriteLogFile = false;
+        private string _pkcs11Logger = null;
+        private bool _enablePkcs11Logger = false;
+
+        #endregion
+
         private object _logFileLock = new object();
 
         public string LogFile
@@ -47,7 +58,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        public static Pkcs11Admin Instance = new Pkcs11Admin();
+        public static readonly Pkcs11Admin Instance = new Pkcs11Admin();
 
         private Pkcs11Admin()
         {
@@ -97,6 +108,22 @@ namespace Net.Pkcs11Admin
                 LogFile = null;
                 Library = new Pkcs11Library(pkcs11Library);
             }
+
+            // Keep input parameters for ReloadLibrary() method
+            _pkcs11Library = pkcs11Library;
+            _enableLogging = enableLogging;
+            _logFile = logFile;
+            _overwriteLogFile = overwriteLogFile;
+            _pkcs11Logger = pkcs11Logger;
+            _enablePkcs11Logger = enablePkcs11Logger;
+        }
+
+        public void ReloadLibrary()
+        {
+            if (Library == null)
+                throw new Exception("No library loaded");
+
+            LoadLibrary(_pkcs11Library, _enableLogging, _logFile, _overwriteLogFile, _pkcs11Logger, _enablePkcs11Logger);
         }
 
         public string GetDefaultLoggerPath()

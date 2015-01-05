@@ -81,29 +81,52 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 MenuItemLoadLibrary.Enabled = true;
                 MenuItemOpenLogFile.Enabled = false;
-                MenuItemRefresh.Enabled = false;
+                MenuItemReloadLibrary.Enabled = false;
+                MenuItemRefreshSlot.Enabled = false;
                 MenuItemExit.Enabled = true;
             }
             else
             {
                 MenuItemLoadLibrary.Enabled = true;
                 MenuItemOpenLogFile.Enabled = (!string.IsNullOrEmpty(Pkcs11Admin.Instance.LogFile));
-                MenuItemRefresh.Enabled = true;
+                MenuItemReloadLibrary.Enabled = true;
+                MenuItemRefreshSlot.Enabled = (_selectedSlot != null);
                 MenuItemExit.Enabled = true;
             }
         }
 
         private void MenuItemLoadLibrary_Click(object sender, EventArgs e)
         {
-            LoadLibrary();
+            using (LibraryDialog libraryDialog = new LibraryDialog())
+                if (libraryDialog.ShowDialog(this) == DialogResult.OK)
+                    SetupLoadedLibrary();
         }
 
         private void MenuItemOpenLogFile_Click(object sender, EventArgs e)
         {
-            OpenLogFile();
+            if (!string.IsNullOrEmpty(Pkcs11Admin.Instance.LogFile))
+                System.Diagnostics.Process.Start(Pkcs11Admin.Instance.LogFile); // TODO - Create own viewer ???
         }
 
-        private async void MenuItemRefresh_Click(object sender, EventArgs e)
+        private async void MenuItemReloadLibrary_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                WaitDialog.ShowInstance(this);
+                await Task.Run(() => Pkcs11Admin.Instance.ReloadLibrary());
+                WaitDialog.CloseInstance();
+            }
+            catch (Exception ex)
+            {
+                WaitDialog.CloseInstance();
+                WinFormsUtils.ShowError(this, ex);
+                return;
+            }
+
+            SetupLoadedLibrary();
+        }
+
+        private async void MenuItemRefreshSlot_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1332,25 +1355,10 @@ namespace Net.Pkcs11Admin.WinForms
             ReloadMainFormStatusStripLabel();
         }
 
-        private void LoadLibrary()
+        private void SetupLoadedLibrary()
         {
-            using (LibraryDialog libraryDialog = new LibraryDialog())
-            {
-                if (libraryDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    _selectedLibrary = Pkcs11Admin.Instance.Library;
-                    InitializeMenuItemSlot(_selectedLibrary.Slots);
-                }
-            }
-        }
-
-        private void OpenLogFile()
-        {
-            if (!string.IsNullOrEmpty(Pkcs11Admin.Instance.LogFile))
-            {
-                // TODO - Create own viewer ???
-                System.Diagnostics.Process.Start(Pkcs11Admin.Instance.LogFile);
-            }
+            _selectedLibrary = Pkcs11Admin.Instance.Library;
+            InitializeMenuItemSlot(_selectedLibrary.Slots);
         }
 
         private bool EditPkcs11ObjectAttributes(ListView listView)

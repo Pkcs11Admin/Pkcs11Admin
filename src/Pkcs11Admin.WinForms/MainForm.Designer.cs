@@ -50,8 +50,10 @@ namespace Net.Pkcs11Admin.WinForms
             this.MenuItemApplication = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemLoadLibrary = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemOpenLogFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemApplicationSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuItemReloadLibrary = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemRefreshSlot = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemApplicationSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,8 +146,10 @@ namespace Net.Pkcs11Admin.WinForms
             this.MenuItemApplication.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItemLoadLibrary,
             this.MenuItemOpenLogFile,
-            this.MenuItemRefresh,
             this.MenuItemApplicationSeparator1,
+            this.MenuItemReloadLibrary,
+            this.MenuItemRefreshSlot,
+            this.MenuItemApplicationSeparator2,
             this.MenuItemExit});
             this.MenuItemApplication.Name = "MenuItemApplication";
             this.MenuItemApplication.Size = new System.Drawing.Size(80, 20);
@@ -165,17 +169,29 @@ namespace Net.Pkcs11Admin.WinForms
             this.MenuItemOpenLogFile.Text = "Open log file...";
             this.MenuItemOpenLogFile.Click += new System.EventHandler(this.MenuItemOpenLogFile_Click);
             // 
-            // MenuItemRefresh
-            // 
-            this.MenuItemRefresh.Name = "MenuItemRefresh";
-            this.MenuItemRefresh.Size = new System.Drawing.Size(195, 22);
-            this.MenuItemRefresh.Text = "Refresh";
-            this.MenuItemRefresh.Click += new System.EventHandler(this.MenuItemRefresh_Click);
-            // 
             // MenuItemApplicationSeparator1
             // 
             this.MenuItemApplicationSeparator1.Name = "MenuItemApplicationSeparator1";
             this.MenuItemApplicationSeparator1.Size = new System.Drawing.Size(192, 6);
+            // 
+            // MenuItemReloadLibrary
+            // 
+            this.MenuItemReloadLibrary.Name = "MenuItemReloadLibrary";
+            this.MenuItemReloadLibrary.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemReloadLibrary.Text = "Reload PKCS#11 library";
+            this.MenuItemReloadLibrary.Click += new System.EventHandler(this.MenuItemReloadLibrary_Click);
+            // 
+            // MenuItemRefreshSlot
+            // 
+            this.MenuItemRefreshSlot.Name = "MenuItemRefreshSlot";
+            this.MenuItemRefreshSlot.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemRefreshSlot.Text = "Refresh selected slot";
+            this.MenuItemRefreshSlot.Click += new System.EventHandler(this.MenuItemRefreshSlot_Click);
+            // 
+            // MenuItemApplicationSeparator2
+            // 
+            this.MenuItemApplicationSeparator2.Name = "MenuItemApplicationSeparator2";
+            this.MenuItemApplicationSeparator2.Size = new System.Drawing.Size(192, 6);
             // 
             // MenuItemExit
             // 
@@ -847,7 +863,7 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.TabPage TabPageKeys;
         private System.Windows.Forms.TabPage TabPageCertificates;
         private System.Windows.Forms.ToolStripMenuItem MenuItemLoadLibrary;
-        private System.Windows.Forms.ToolStripSeparator MenuItemApplicationSeparator1;
+        private System.Windows.Forms.ToolStripSeparator MenuItemApplicationSeparator2;
         private System.Windows.Forms.ListView ListViewBasicInfo;
         private System.Windows.Forms.Label LabelBasicInfo;
         private System.Windows.Forms.Label LabelMechanisms;
@@ -879,7 +895,7 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ToolStripMenuItem MenuItemProtectedTokenInit;
         private System.Windows.Forms.ToolStripMenuItem MenuItemUserInit;
         private System.Windows.Forms.ToolStripMenuItem MenuItemProtectedUserInit;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemRefresh;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemRefreshSlot;
         private System.Windows.Forms.TabPage TabPageDomainParams;
         private System.Windows.Forms.ListView ListViewDomainParams;
         private System.Windows.Forms.Label LabelDomainParams;
@@ -898,6 +914,8 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ComboBox ComboBoxKeys;
         private System.Windows.Forms.ComboBox ComboBoxDomainParams;
         private System.Windows.Forms.Button ButtonDomainParams;
+        private System.Windows.Forms.ToolStripSeparator MenuItemApplicationSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemReloadLibrary;
 
     }
 }
