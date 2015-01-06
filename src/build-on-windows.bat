@@ -23,9 +23,9 @@ rmdir /S /Q Pkcs11Admin-%1
 mkdir Pkcs11Admin-%1 || exit /b 1
 
 copy Pkcs11Admin.WinForms\bin\%1\Release\Be.Windows.Forms.HexBox.dll Pkcs11Admin-%1 || exit /b 1
-copy Pkcs11Admin.WinForms\bin\%1\Release\pkcs11-logger-%1.dll Pkcs11Admin-%1 || exit /b 1
-copy Pkcs11Admin.WinForms\bin\%1\Release\pkcs11-logger-%1.dylib Pkcs11Admin-%1 || exit /b 1
-copy Pkcs11Admin.WinForms\bin\%1\Release\pkcs11-logger-%1.so Pkcs11Admin-%1 || exit /b 1
+copy lib\pkcs11-logger\pkcs11-logger-%1.dll Pkcs11Admin-%1 || exit /b 1
+copy lib\pkcs11-logger\pkcs11-logger-%1.dylib Pkcs11Admin-%1 || exit /b 1
+copy lib\pkcs11-logger\pkcs11-logger-%1.so Pkcs11Admin-%1 || exit /b 1
 copy Pkcs11Admin.WinForms\bin\%1\Release\Pkcs11Admin.dll Pkcs11Admin-%1 || exit /b 1
 copy Pkcs11Admin.WinForms\bin\%1\Release\Pkcs11Admin.WinForms.exe Pkcs11Admin-%1 || exit /b 1
 copy Pkcs11Admin.WinForms\bin\%1\Release\Pkcs11Admin.WinForms.exe.config Pkcs11Admin-%1 || exit /b 1

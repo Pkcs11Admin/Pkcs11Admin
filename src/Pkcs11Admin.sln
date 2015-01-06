@@ -16,24 +16,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AnyCPU = Debug|AnyCPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|AnyCPU = Release|AnyCPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Debug|x64.ActiveCfg = Debug|x64
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Debug|x64.Build.0 = Debug|x64
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Debug|x86.ActiveCfg = Debug|x86
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Debug|x86.Build.0 = Debug|x86
+		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Release|AnyCPU.Build.0 = Release|AnyCPU
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Release|x64.ActiveCfg = Release|x64
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Release|x64.Build.0 = Release|x64
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Release|x86.ActiveCfg = Release|x86
 		{CA6E7772-37CE-48F5-97DA-D9D1BBE510AD}.Release|x86.Build.0 = Release|x86
+		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Debug|x64.ActiveCfg = Debug|x64
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Debug|x64.Build.0 = Debug|x64
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Debug|x86.ActiveCfg = Debug|x86
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Debug|x86.Build.0 = Debug|x86
+		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Release|AnyCPU.Build.0 = Release|AnyCPU
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Release|x64.ActiveCfg = Release|x64
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Release|x64.Build.0 = Release|x64
 		{73DD852B-0308-4758-B98C-9D1E6075ED31}.Release|x86.ActiveCfg = Release|x86
