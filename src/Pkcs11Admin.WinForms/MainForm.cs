@@ -21,6 +21,7 @@ using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -733,7 +734,7 @@ namespace Net.Pkcs11Admin.WinForms
         private void SetComboBoxMechanismsItems()
         {
             ComboBoxMechanisms.Items.Clear();
-            ComboBoxMechanisms.Items.Add(new Operation(OperationType.Export, "NOT IMPLEMENTED - Export mechanism list to file..."));
+            ComboBoxMechanisms.Items.Add(new Operation(OperationType.Export, "Export mechanisms to the file..."));
             ComboBoxMechanisms.SelectedIndex = 0;
         }
 
@@ -742,8 +743,9 @@ namespace Net.Pkcs11Admin.WinForms
             Operation selectedOperation = ComboBoxMechanisms.SelectedItem as Operation;
             switch (selectedOperation.Type)
             {
-                case OperationType.Export: // TODO
-                    WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+                case OperationType.Export:
+                    string csvFileName = Path.GetFileNameWithoutExtension(_selectedLibrary.Info.LibraryPath) + "_mechanisms.csv";
+                    ExportListView(ListViewMechanisms, csvFileName);
                     break;
 
                 default:
@@ -1438,11 +1440,31 @@ namespace Net.Pkcs11Admin.WinForms
             X509Certificate2UI.DisplayCertificate(x509Cert, this.Handle);
         }
 
+        private void ExportListView(ListView listView, string fileName)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.FileName = fileName;
+
+                // Set filters
+                saveFileDialog.Filter = "All files (*.*)|*.*|Text CSV (*.csv)|*.csv";
+                saveFileDialog.FilterIndex = (Path.GetExtension(fileName) == ".csv") ? 2 : 1;
+
+                // Set dialog properties
+                saveFileDialog.CreatePrompt = false;
+                saveFileDialog.OverwritePrompt = true;
+
+                // Open dialog
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                    WinFormsUtils.DumpListViewToCsvFile(listView, saveFileDialog.FileName);
+            }
+        }
+
         #endregion
 
         #region Utils
 
-        private static void AppendToListView(ListView listView, string listViewGroupName, List<KeyValuePair<Pkcs11Info, string[]>> data)
+        private void AppendToListView(ListView listView, string listViewGroupName, List<KeyValuePair<Pkcs11Info, string[]>> data)
         {
             if (listView == null)
                 throw new ArgumentNullException("listView");
