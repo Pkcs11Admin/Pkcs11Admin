@@ -45,16 +45,28 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.WaitDialogProgressBar = new System.Windows.Forms.ProgressBar();
+            this.WaitDialogPanel = new System.Windows.Forms.Panel();
+            this.WaitDialogPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // WaitDialogProgressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 13);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(408, 23);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar1.TabIndex = 0;
+            this.WaitDialogProgressBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WaitDialogProgressBar.Location = new System.Drawing.Point(0, 0);
+            this.WaitDialogProgressBar.Name = "WaitDialogProgressBar";
+            this.WaitDialogProgressBar.Size = new System.Drawing.Size(414, 29);
+            this.WaitDialogProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.WaitDialogProgressBar.TabIndex = 0;
+            // 
+            // WaitDialogPanel
+            // 
+            this.WaitDialogPanel.Controls.Add(this.WaitDialogProgressBar);
+            this.WaitDialogPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WaitDialogPanel.Location = new System.Drawing.Point(10, 10);
+            this.WaitDialogPanel.Name = "WaitDialogPanel";
+            this.WaitDialogPanel.Size = new System.Drawing.Size(414, 29);
+            this.WaitDialogPanel.TabIndex = 1;
             // 
             // WaitDialog
             // 
@@ -62,7 +74,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 49);
             this.ControlBox = false;
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.WaitDialogPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "WaitDialog";
             this.Padding = new System.Windows.Forms.Padding(10);
@@ -73,11 +85,14 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Text = "Operation in progress...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WaitDialog_FormClosing);
             this.Load += new System.EventHandler(this.WaitDialog_Load);
+            this.WaitDialogPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar WaitDialogProgressBar;
+        private System.Windows.Forms.Panel WaitDialogPanel;
     }
 }
