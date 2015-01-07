@@ -70,13 +70,13 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.AppendText(@"Copyright (c) 2012-2014 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Author: Jaroslav Imrich <jimrich@jimrich.sk>" + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Licensing for open source projects:" + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Pkcs11Interop is available under the terms of the GNU Affero General Public License version 3 as published by the Free Software Foundation. Please see <http://www.gnu.org/licenses/agpl-3.0.html> for more details." + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Licensing for other types of projects:" + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Pkcs11Interop is available under the terms of flexible commercial license. Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details." + Environment.NewLine + Environment.NewLine);
 
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize * 2, FontStyle.Bold);
@@ -87,13 +87,13 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.AppendText(@"Copyright (c) 2013-2014 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Author: Jaroslav Imrich <jimrich@jimrich.sk>" + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Licensing for open source projects:" + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Pkcs11Interop.URI is available under the terms of the GNU Affero General Public License version 3 as published by the Free Software Foundation. Please see <http://www.gnu.org/licenses/agpl-3.0.html> for more details." + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Licensing for other types of projects:" + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Pkcs11Interop.URI is available under the terms of flexible commercial license. Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details." + Environment.NewLine + Environment.NewLine);
 
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize * 2, FontStyle.Bold);
@@ -102,11 +102,11 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.AppendText(@"HEX editor control for Windows Forms" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Copyright (c) 2011 Bernhard Elbl" + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:" + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software." + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." + Environment.NewLine + Environment.NewLine);
 
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize * 2, FontStyle.Bold);
@@ -117,13 +117,13 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.AppendText(@"Copyright (c) 2011-2014 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Author: Jaroslav Imrich <jimrich@jimrich.sk>" + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Licensing for open source projects:" + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"PKCS11-LOGGER is available under the terms of the GNU Affero General Public License version 3 as published by the Free Software Foundation. Please see <http://www.gnu.org/licenses/agpl-3.0.html> for more details." + Environment.NewLine + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"Licensing for other types of projects:" + Environment.NewLine);
-            RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"PKCS11-LOGGER is available under the terms of flexible commercial license. Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details." + Environment.NewLine + Environment.NewLine);
         }
     }
