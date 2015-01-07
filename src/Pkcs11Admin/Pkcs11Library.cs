@@ -15,6 +15,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,19 @@ namespace Net.Pkcs11Admin
         public Pkcs11Library(string libraryPath, string loggerPath = null)
         {
             _path = libraryPath;
-            _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, true);
+
+            try
+            {
+                _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, true);
+            }
+            catch (Pkcs11Exception ex)
+            {
+                if (ex.RV == CKR.CKR_CANT_LOCK)
+                    _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, false);
+                else
+                    throw;
+            }
+            
             Info = GetPkcs11LibraryInfo();
             Slots = GetPkcs11Slots();
         }
