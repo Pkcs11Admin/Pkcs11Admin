@@ -55,6 +55,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicense.AppendText(@"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details." + Environment.NewLine + Environment.NewLine);
             RichTextBoxLicense.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicense.AppendText(@"You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.");
+
+            RichTextBoxLicense.SelectionStart = 0;
+            RichTextBoxLicense.ScrollToCaret();
         }
 
         private void SetLicensesText()
@@ -125,6 +128,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.AppendText(@"Licensing for other types of projects:" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"PKCS11-LOGGER is available under the terms of flexible commercial license. Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details." + Environment.NewLine + Environment.NewLine);
+
+            RichTextBoxLicenses.SelectionStart = 0;
+            RichTextBoxLicenses.ScrollToCaret();
         }
     }
 }
