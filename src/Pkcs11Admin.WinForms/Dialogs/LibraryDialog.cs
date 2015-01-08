@@ -91,9 +91,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             try
             {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() =>
-                    Pkcs11Admin.Instance.LoadLibrary(
+                await WaitDialog.Execute(
+                    this,
+                    () => Pkcs11Admin.Instance.LoadLibrary(
                         TextBoxPkcs11Library.Text,
                         CheckBoxEnableLogging.Checked,
                         TextBoxLogFile.Text,
@@ -102,12 +102,10 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                         CheckBoxEnablePkcs11Logger.Checked
                     )
                 );
-                WaitDialog.CloseInstance();
                 DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
-                WaitDialog.CloseInstance();
                 WinFormsUtils.ShowError(this, ex);
             }
         }

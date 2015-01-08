@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Net.Pkcs11Admin.WinForms.Dialogs
@@ -50,7 +51,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 e.Cancel = true;
         }
 
-        public static void ShowInstance(Form owner)
+        private static void ShowInstance(Form owner)
         {
             lock (_lockObject)
             {
@@ -64,7 +65,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             }
         }
 
-        public static void CloseInstance()
+        private static void CloseInstance()
         {
             lock (_lockObject)
             {
@@ -75,6 +76,46 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 _instance.Close();
                 _instance.Dispose();
                 _instance = null;
+            }
+        }
+
+        public static async Task Execute(Form owner, Action action)
+        {
+            if (owner == null)
+                throw new ArgumentNullException("owner");
+
+            if (action == null)
+                throw new ArgumentNullException("action");
+
+            await Execute(owner, null, action, null);
+        }
+
+        public static async Task Execute(Form owner, Action actionBeforeTask, Action actionInTask, Action actionAfterTask)
+        {
+            if (owner == null)
+                throw new ArgumentNullException("owner");
+
+            if (actionInTask == null)
+                throw new ArgumentNullException("actionInTask");
+
+            try
+            {
+                ShowInstance(owner);
+
+                if (actionBeforeTask != null)
+                    actionBeforeTask();
+                
+                await Task.Run(actionInTask);
+
+                if (actionAfterTask != null)
+                    actionAfterTask();
+
+                CloseInstance();
+            }
+            catch
+            {
+                CloseInstance();
+                throw;
             }
         }
     }

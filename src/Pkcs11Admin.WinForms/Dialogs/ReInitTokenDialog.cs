@@ -66,14 +66,11 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             try
             {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => _slot.InitToken(TextBoxCurrentPin.Text, TextBoxTokenLabel.Text));
-                WaitDialog.CloseInstance();
+                await WaitDialog.Execute(this, () => _slot.InitToken(TextBoxCurrentPin.Text, TextBoxTokenLabel.Text));
                 DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
-                WaitDialog.CloseInstance();
                 WinFormsUtils.ShowError(this, ex);
             }
         }

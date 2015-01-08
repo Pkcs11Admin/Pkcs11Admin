@@ -113,13 +113,10 @@ namespace Net.Pkcs11Admin.WinForms
         {
             try
             {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => Pkcs11Admin.Instance.ReloadLibrary());
-                WaitDialog.CloseInstance();
+                await WaitDialog.Execute(this, Pkcs11Admin.Instance.ReloadLibrary);
             }
             catch (Exception ex)
             {
-                WaitDialog.CloseInstance();
                 WinFormsUtils.ShowError(this, ex);
                 return;
             }
@@ -129,18 +126,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private async void MenuItemRefreshSlot_Click(object sender, EventArgs e)
         {
-            try
-            {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => _selectedSlot.Reload());
-                ReloadForm();
-                WaitDialog.CloseInstance();
-            }
-            catch (Exception ex)
-            {
-                WaitDialog.CloseInstance();
-                WinFormsUtils.ShowError(this, ex);
-            }
+            await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void MenuItemExit_Click(object sender, EventArgs e)
@@ -202,18 +188,7 @@ namespace Net.Pkcs11Admin.WinForms
 
             _selectedSlot = (Pkcs11Slot)selectedMenuItem.Tag;
 
-            try
-            {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => _selectedSlot.Reload());
-                ReloadForm();
-                WaitDialog.CloseInstance();
-            }
-            catch (Exception ex)
-            {
-                WaitDialog.CloseInstance();
-                WinFormsUtils.ShowError(this, ex);
-            }
+            await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -279,23 +254,8 @@ namespace Net.Pkcs11Admin.WinForms
         private async void MenuItemUserLogin_Click(object sender, EventArgs e)
         {
             using (LoginDialog pinDialog = new LoginDialog(_selectedSlot, CKU.CKU_USER))
-            {
                 if (pinDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        WaitDialog.ShowInstance(this);
-                        await Task.Run(() => _selectedSlot.Reload());
-                        ReloadForm();
-                        WaitDialog.CloseInstance();
-                    }
-                    catch (Exception ex)
-                    {
-                        WaitDialog.CloseInstance();
-                        WinFormsUtils.ShowError(this, ex);
-                    }
-                }
-            }
+                    await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private async void MenuItemProtectedUserLogin_Click(object sender, EventArgs e)
@@ -310,40 +270,14 @@ namespace Net.Pkcs11Admin.WinForms
                 return;
             }
 
-            try
-            {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => _selectedSlot.Reload());
-                ReloadForm();
-                WaitDialog.CloseInstance();
-            }
-            catch (Exception ex)
-            {
-                WaitDialog.CloseInstance();
-                WinFormsUtils.ShowError(this, ex);
-            }
+            await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private async void MenuItemSoLogin_Click(object sender, EventArgs e)
         {
             using (LoginDialog pinDialog = new LoginDialog(_selectedSlot, CKU.CKU_SO))
-            {
                 if (pinDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        WaitDialog.ShowInstance(this);
-                        await Task.Run(() => _selectedSlot.Reload());
-                        ReloadForm();
-                        WaitDialog.CloseInstance();
-                    }
-                    catch (Exception ex)
-                    {
-                        WaitDialog.CloseInstance();
-                        WinFormsUtils.ShowError(this, ex);
-                    }
-                }
-            }
+                    await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private async void MenuItemProtectedSoLogin_Click(object sender, EventArgs e)
@@ -358,18 +292,7 @@ namespace Net.Pkcs11Admin.WinForms
                 return;
             }
 
-            try
-            {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => _selectedSlot.Reload());
-                ReloadForm();
-                WaitDialog.CloseInstance();
-            }
-            catch (Exception ex)
-            {
-                WaitDialog.CloseInstance();
-                WinFormsUtils.ShowError(this, ex);
-            }
+            await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private async void MenuItemLogout_Click(object sender, EventArgs e)
@@ -383,18 +306,7 @@ namespace Net.Pkcs11Admin.WinForms
                 WinFormsUtils.ShowError(this, ex);
             }
 
-            try
-            {
-                WaitDialog.ShowInstance(this);
-                await Task.Run(() => _selectedSlot.Reload());
-                ReloadForm();
-                WaitDialog.CloseInstance();
-            }
-            catch (Exception ex)
-            {
-                WaitDialog.CloseInstance();
-                WinFormsUtils.ShowError(this, ex);
-            }
+            await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void MenuItemUserChange_Click(object sender, EventArgs e)
@@ -438,67 +350,22 @@ namespace Net.Pkcs11Admin.WinForms
             if (!_selectedSlot.TokenInfo.TokenInitialized)
             {
                 using (InitTokenDialog initTokenDialog = new InitTokenDialog(_selectedSlot))
-                {
                     if (initTokenDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        try
-                        {
-                            WaitDialog.ShowInstance(this);
-                            await Task.Run(() => _selectedSlot.Reload());
-                            ReloadForm();
-                            WaitDialog.CloseInstance();
-                        }
-                        catch (Exception ex)
-                        {
-                            WaitDialog.CloseInstance();
-                            WinFormsUtils.ShowError(this, ex);
-                        }
-                    }
-                }
+                        await ReloadFormAfter(_selectedSlot.Reload);
             }
             else
             {
                 using (ReInitTokenDialog reInitTokenDialog = new ReInitTokenDialog(_selectedSlot))
-                {
                     if (reInitTokenDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        try
-                        {
-                            WaitDialog.ShowInstance(this);
-                            await Task.Run(() => _selectedSlot.Reload());
-                            ReloadForm();
-                            WaitDialog.CloseInstance();
-                        }
-                        catch (Exception ex)
-                        {
-                            WaitDialog.CloseInstance();
-                            WinFormsUtils.ShowError(this, ex);
-                        }
-                    }
-                }
+                        await ReloadFormAfter(_selectedSlot.Reload);
             }
         }
 
         private async void MenuItemProtectedTokenInit_Click(object sender, EventArgs e)
         {
             using (ProtectedInitTokenDialog protectedInitTokenDialog = new ProtectedInitTokenDialog(_selectedSlot))
-            {
                 if (protectedInitTokenDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        WaitDialog.ShowInstance(this);
-                        await Task.Run(() => _selectedSlot.Reload());
-                        ReloadForm();
-                        WaitDialog.CloseInstance();
-                    }
-                    catch (Exception ex)
-                    {
-                        WaitDialog.CloseInstance();
-                        WinFormsUtils.ShowError(this, ex);
-                    }
-                }
-            }
+                    await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void MenuItemUserInit_Click(object sender, EventArgs e)
@@ -822,20 +689,7 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             if (formReloadNeeded)
-            {
-                try
-                {
-                    WaitDialog.ShowInstance(this);
-                    await Task.Run(() => _selectedSlot.Reload());
-                    ReloadForm();
-                    WaitDialog.CloseInstance();
-                }
-                catch (Exception ex)
-                {
-                    WaitDialog.CloseInstance();
-                    WinFormsUtils.ShowError(this, ex);
-                }
-            }
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -932,20 +786,7 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             if (formReloadNeeded)
-            {
-                try
-                {
-                    WaitDialog.ShowInstance(this);
-                    await Task.Run(() => _selectedSlot.Reload());
-                    ReloadForm();
-                    WaitDialog.CloseInstance();
-                }
-                catch (Exception ex)
-                {
-                    WaitDialog.CloseInstance();
-                    WinFormsUtils.ShowError(this, ex);
-                }
-            }
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -1047,20 +888,7 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             if (formReloadNeeded)
-            {
-                try
-                {
-                    WaitDialog.ShowInstance(this);
-                    await Task.Run(() => _selectedSlot.Reload());
-                    ReloadForm();
-                    WaitDialog.CloseInstance();
-                }
-                catch (Exception ex)
-                {
-                    WaitDialog.CloseInstance();
-                    WinFormsUtils.ShowError(this, ex);
-                }
-            }
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -1162,20 +990,7 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             if (formReloadNeeded)
-            {
-                try
-                {
-                    WaitDialog.ShowInstance(this);
-                    await Task.Run(() => _selectedSlot.Reload());
-                    ReloadForm();
-                    WaitDialog.CloseInstance();
-                }
-                catch (Exception ex)
-                {
-                    WaitDialog.CloseInstance();
-                    WinFormsUtils.ShowError(this, ex);
-                }
-            }
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -1255,20 +1070,7 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             if (formReloadNeeded)
-            {
-                try
-                {
-                    WaitDialog.ShowInstance(this);
-                    await Task.Run(() => _selectedSlot.Reload());
-                    ReloadForm();
-                    WaitDialog.CloseInstance();
-                }
-                catch (Exception ex)
-                {
-                    WaitDialog.CloseInstance();
-                    WinFormsUtils.ShowError(this, ex);
-                }
-            }
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -1378,6 +1180,18 @@ namespace Net.Pkcs11Admin.WinForms
             ReloadTabPageDomainParams();
 
             ReloadMainFormStatusStripLabel();
+        }
+
+        private async Task ReloadFormAfter(Action action)
+        {
+            try
+            {
+                await WaitDialog.Execute(this, null, action, ReloadForm);
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
+            }
         }
 
         private void SetupLoadedLibrary()
