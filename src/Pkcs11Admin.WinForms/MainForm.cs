@@ -1226,12 +1226,16 @@ namespace Net.Pkcs11Admin.WinForms
 
         private bool DeletePkcs11Object(ListView listView)
         {
-            // TODO - Delete multiple objects with question dialog
-            ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(listView);
-            if (selectedItem == null)
+            List<ListViewItem> selectedItems = WinFormsUtils.GetSelectedItems(listView);
+            if (selectedItems == null)
                 return false;
 
-            _selectedSlot.DeleteObject((Pkcs11ObjectInfo)selectedItem.Tag);
+            if (DialogResult.No == WinFormsUtils.AskQuestion(this, string.Format("Are you sure you want to delete {0} object(s)", selectedItems.Count)))
+                return false;
+
+            foreach (ListViewItem selectedItem in selectedItems)
+                _selectedSlot.DeleteObject((Pkcs11ObjectInfo)selectedItem.Tag);
+
             return true;
         }
 

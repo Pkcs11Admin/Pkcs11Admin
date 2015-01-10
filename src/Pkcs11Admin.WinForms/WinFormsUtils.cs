@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -39,6 +40,11 @@ namespace Net.Pkcs11Admin.WinForms
             MessageBox.Show(owner, message, Pkcs11AdminInfo.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public static DialogResult AskQuestion(IWin32Window owner, string question)
+        {
+            return MessageBox.Show(owner, question, Pkcs11AdminInfo.AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
         public static ListViewItem GetSingleSelectedItem(ListView listView)
         {
             if (listView == null)
@@ -57,6 +63,24 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             return listView.SelectedItems[0];
+        }
+
+        public static List<ListViewItem> GetSelectedItems(ListView listView)
+        {
+            if (listView == null)
+                throw new ArgumentNullException("listView");
+
+            if (listView.SelectedItems.Count < 1)
+            {
+                ShowInfo(null, "Please select object first");
+                return null;
+            }
+
+            List<ListViewItem> selectedItems = new List<ListViewItem>();
+            foreach (ListViewItem selectedItem in listView.SelectedItems)
+                selectedItems.Add(selectedItem);
+
+            return selectedItems;
         }
 
         public static void DumpListViewToCsvFile(ListView listView, string filePath)
