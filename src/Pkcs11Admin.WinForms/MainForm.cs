@@ -145,7 +145,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void ReloadMenuItemSlot()
         {
-            MenuItemSlot.Enabled = (_selectedLibrary != null);
+            MenuItemSlot.Enabled = ((_selectedLibrary != null) && (_selectedLibrary.Slots.Count > 0));
         }
 
         private void InitializeMenuItemSlot(List<Pkcs11Slot> slots)
@@ -169,19 +169,9 @@ namespace Net.Pkcs11Admin.WinForms
             _selectedSlot = null;
 
             if (MenuItemSlot.DropDownItems.Count == 0)
-            {
-                ToolStripMenuItem menuItem = new ToolStripMenuItem();
-                menuItem.Text = "No slot found";
-                menuItem.Enabled = false;
-
-                MenuItemSlot.DropDownItems.Add(menuItem);
-
                 ReloadForm();
-            }
             else
-            {
                 MenuItemSlot.DropDownItems[0].PerformClick();
-            }
         }
 
         private async void MenuItemSlot_Click(object sender, EventArgs e)
@@ -1086,14 +1076,20 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void ReloadMainFormStatusStripLabel()
         {
-            if (_selectedSlot == null)
+            string errorFormat = "Error occurred: {0}";
+            string objectCountFormat = "Found {0} object(s)";
+
+            if ((_selectedLibrary == null) && (_selectedSlot == null))
             {
-                MainFormStatusStripLabel.Text = string.Empty;
+                ShowInfoInStatusStrip(string.Empty);
                 return;
             }
 
-            string errorFormat = "Error occurred: {0}";
-            string objectCountFormat = "Found {0} object(s)";
+            if ((_selectedLibrary != null) && (_selectedLibrary.Slots.Count == 0))
+            {
+                ShowErrorInStatusStrip(string.Format(errorFormat, "No slots/readers found"));
+                return;
+            }
 
             if (MainFormTabControl.SelectedTab == TabPageBasicInfo)
             {
