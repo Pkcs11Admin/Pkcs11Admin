@@ -114,6 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\StringUtils.cs" />
     <Compile Include="Pkcs11Uri.cs" />
+    <Compile Include="TokenNotPresentException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -164,6 +164,7 @@ namespace Net.Pkcs11Admin
             try
             {
                 SlotInfo = ReadSlotInfo();
+                SlotInfoException = null;
             }
             catch (Exception ex)
             {
@@ -173,7 +174,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+                
                 TokenInfo = ReadTokenInfo();
+                TokenInfoException = null;
             }
             catch (Exception ex)
             {
@@ -183,7 +188,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 SessionInfo = ReadSessionInfo();
+                SessionInfoException = null;
             }
             catch (Exception ex)
             {
@@ -193,7 +202,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 Mechanisms = ReadMechanisms();
+                MechanismsException = null;
             }
             catch (Exception ex)
             {
@@ -203,7 +216,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 HwFeatures = ReadHwFeatures();
+                HwFeaturesException = null;
             }
             catch (Exception ex)
             {
@@ -213,7 +230,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 DataObjects = ReadDataObjects();
+                DataObjectsException = null;
             }
             catch (Exception ex)
             {
@@ -223,7 +244,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 Certificates = ReadCertificates();
+                CertificatesException = null;
             }
             catch (Exception ex)
             {
@@ -233,7 +258,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 Keys = ReadKeys();
+                KeysException = null;
             }
             catch (Exception ex)
             {
@@ -243,7 +272,11 @@ namespace Net.Pkcs11Admin
 
             try
             {
+                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                    throw new TokenNotPresentException();
+
                 DomainParams = ReadDomainParams();
+                DomainParamsException = null;
             }
             catch (Exception ex)
             {
