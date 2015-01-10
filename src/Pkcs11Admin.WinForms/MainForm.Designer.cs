@@ -158,45 +158,49 @@ namespace Net.Pkcs11Admin.WinForms
             // MenuItemLoadLibrary
             // 
             this.MenuItemLoadLibrary.Name = "MenuItemLoadLibrary";
-            this.MenuItemLoadLibrary.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemLoadLibrary.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.MenuItemLoadLibrary.Size = new System.Drawing.Size(242, 22);
             this.MenuItemLoadLibrary.Text = "Load PKCS#11 library...";
             this.MenuItemLoadLibrary.Click += new System.EventHandler(this.MenuItemLoadLibrary_Click);
             // 
             // MenuItemOpenLogFile
             // 
             this.MenuItemOpenLogFile.Name = "MenuItemOpenLogFile";
-            this.MenuItemOpenLogFile.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemOpenLogFile.Size = new System.Drawing.Size(242, 22);
             this.MenuItemOpenLogFile.Text = "Open log file...";
             this.MenuItemOpenLogFile.Click += new System.EventHandler(this.MenuItemOpenLogFile_Click);
             // 
             // MenuItemApplicationSeparator1
             // 
             this.MenuItemApplicationSeparator1.Name = "MenuItemApplicationSeparator1";
-            this.MenuItemApplicationSeparator1.Size = new System.Drawing.Size(193, 6);
+            this.MenuItemApplicationSeparator1.Size = new System.Drawing.Size(239, 6);
             // 
             // MenuItemReloadLibrary
             // 
             this.MenuItemReloadLibrary.Name = "MenuItemReloadLibrary";
-            this.MenuItemReloadLibrary.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemReloadLibrary.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F5)));
+            this.MenuItemReloadLibrary.Size = new System.Drawing.Size(242, 22);
             this.MenuItemReloadLibrary.Text = "Reload PKCS#11 library";
             this.MenuItemReloadLibrary.Click += new System.EventHandler(this.MenuItemReloadLibrary_Click);
             // 
             // MenuItemRefreshSlot
             // 
             this.MenuItemRefreshSlot.Name = "MenuItemRefreshSlot";
-            this.MenuItemRefreshSlot.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemRefreshSlot.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.MenuItemRefreshSlot.Size = new System.Drawing.Size(242, 22);
             this.MenuItemRefreshSlot.Text = "Refresh selected slot";
             this.MenuItemRefreshSlot.Click += new System.EventHandler(this.MenuItemRefreshSlot_Click);
             // 
             // MenuItemApplicationSeparator2
             // 
             this.MenuItemApplicationSeparator2.Name = "MenuItemApplicationSeparator2";
-            this.MenuItemApplicationSeparator2.Size = new System.Drawing.Size(193, 6);
+            this.MenuItemApplicationSeparator2.Size = new System.Drawing.Size(239, 6);
             // 
             // MenuItemExit
             // 
             this.MenuItemExit.Name = "MenuItemExit";
-            this.MenuItemExit.Size = new System.Drawing.Size(196, 22);
+            this.MenuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.MenuItemExit.Size = new System.Drawing.Size(242, 22);
             this.MenuItemExit.Text = "Exit";
             this.MenuItemExit.Click += new System.EventHandler(this.MenuItemExit_Click);
             // 
