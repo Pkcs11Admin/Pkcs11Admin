@@ -722,6 +722,60 @@ namespace Net.Pkcs11Admin
                 session.CreateObject(objectAttributes);
         }
 
+        public List<Tuple<ObjectAttribute, ClassAttribute>> ImportDataObject(string fileName, byte[] fileContent)
+        {
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
+
+            bool ckaLabelFound = false;
+            bool ckaValueFound = false;
+
+            for (int i = 0; i < objectAttributes.Count; i++)
+            {
+                ObjectAttribute objectAttribute = objectAttributes[i].Item1;
+                ClassAttribute classAttribute = objectAttributes[i].Item2;
+
+                if (objectAttribute.Type == (ulong)CKA.CKA_LABEL)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_LABEL, fileName), classAttribute);
+                    ckaLabelFound = true;
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_VALUE)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_VALUE, fileContent), classAttribute);
+                    ckaValueFound = true;
+                }
+            }
+
+            if (!ckaLabelFound)
+                throw new Exception("TODO - ClassAttributeNotFoundException");
+
+            if (!ckaValueFound)
+                throw new Exception("TODO - ClassAttributeNotFoundException");
+
+            return objectAttributes;
+        }
+
+        public void ExportDataObject(Pkcs11ObjectInfo objectInfo, out string fileName, out byte[] fileContent)
+        {
+            if (this._disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
+
+            if (objectInfo == null)
+                throw new ArgumentNullException("objectInfo");
+
+            using (Session session = _slot.OpenSession(true))
+            {
+                List<ulong> attributes = new List<ulong>();
+                attributes.Add((ulong)CKA.CKA_LABEL);
+                attributes.Add((ulong)CKA.CKA_VALUE);
+
+                List<ObjectAttribute> objectAttributes = session.GetAttributeValue(objectInfo.ObjectHandle, attributes);
+
+                fileName = objectAttributes[0].GetValueAsString();
+                fileContent = objectAttributes[1].GetValueAsByteArray();
+            }
+        }
+
         #region IDisposable
 
         public void Dispose()

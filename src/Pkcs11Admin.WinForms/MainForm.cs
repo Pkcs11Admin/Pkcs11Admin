@@ -741,8 +741,8 @@ namespace Net.Pkcs11Admin.WinForms
             ComboBoxDataObjects.Items.Add(new Operation(OperationType.Create, "Create new data object..."));
             ComboBoxDataObjects.Items.Add(new Operation(OperationType.Edit, "Edit attributes of selected data object..."));
             ComboBoxDataObjects.Items.Add(new Operation(OperationType.Delete, "Delete selected data objects..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Import, "NOT IMPLEMENTED - Import file as a new data object..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Export, "NOT IMPLEMENTED - Export selected data object to the file..."));
+            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Import, "Import file as a new data object..."));
+            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Export, "Export selected data object to the file..."));
             ComboBoxDataObjects.Items.Add(new Operation(OperationType.BuildUri, "Build PKCS#11 URI for selected data object..."));
             ComboBoxDataObjects.SelectedIndex = 0;
         }
@@ -766,9 +766,12 @@ namespace Net.Pkcs11Admin.WinForms
                     formReloadNeeded = DeletePkcs11Object(ListViewDataObjects);
                     break;
 
-                case OperationType.Import: // TODO
-                case OperationType.Export: // TODO
-                    WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+                case OperationType.Import:
+                    formReloadNeeded = ImportDataObject();
+                    break;
+
+                case OperationType.Export:
+                    ExportDataObject();
                     break;
 
                 case OperationType.BuildUri:
@@ -1248,6 +1251,12 @@ namespace Net.Pkcs11Admin.WinForms
                 return (createObjectDialog.ShowDialog() == DialogResult.OK);
         }
 
+        private bool CreatePkcs11Object(List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes)
+        {
+            using (CreateObjectDialog createObjectDialog = new CreateObjectDialog(_selectedSlot, objectAttributes))
+                return (createObjectDialog.ShowDialog() == DialogResult.OK);
+        }
+
         private void BuildPkcs11Uri(ListView listView)
         {
             ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(listView);
@@ -1286,6 +1295,74 @@ namespace Net.Pkcs11Admin.WinForms
                 // Open dialog
                 if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
                     WinFormsUtils.DumpListViewToCsvFile(listView, saveFileDialog.FileName);
+            }
+        }
+
+        private bool ImportDataObject()
+        {
+            // Let user select a file
+            string filePath = null;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                // Set filters
+                openFileDialog.Filter = "All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+
+                // Open dialog
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                    filePath = openFileDialog.FileName;
+            }
+
+            if (string.IsNullOrEmpty(filePath))
+                return false;
+
+            // Read file content
+            string fileName = Path.GetFileName(filePath);
+            byte[] fileContent = File.ReadAllBytes(filePath);
+
+            // Construct new object attributes
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = _selectedSlot.ImportDataObject(fileName, fileContent);
+
+            // Let user modify object attributes before the object is created
+            return CreatePkcs11Object(objectAttributes);
+        }
+
+        private void ExportDataObject()
+        {
+            try
+            {
+                ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewDataObjects);
+                if (selectedItem == null)
+                    return;
+
+                string fileName = null;
+                byte[] fileContent = null;
+                _selectedSlot.ExportDataObject((Pkcs11DataObjectInfo)selectedItem.Tag, out fileName, out fileContent);
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.FileName = fileName;
+
+                    // Set filters
+                    saveFileDialog.Filter = "All files (*.*)|*.*";
+                    saveFileDialog.FilterIndex = 1;
+
+                    // Set dialog properties
+                    saveFileDialog.CreatePrompt = false;
+                    saveFileDialog.OverwritePrompt = true;
+
+                    // Open dialog
+                    if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        File.WriteAllBytes(saveFileDialog.FileName, fileContent);
+                        WinFormsUtils.ShowInfo(this, "Object successfully exported");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
             }
         }
 
