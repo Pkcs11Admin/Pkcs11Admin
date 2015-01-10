@@ -1076,9 +1076,6 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void ReloadMainFormStatusStripLabel()
         {
-            string errorFormat = "Error occurred: {0}";
-            string objectCountFormat = "Found {0} object(s)";
-
             if ((_selectedLibrary == null) && (_selectedSlot == null))
             {
                 ShowInfoInStatusStrip(string.Empty);
@@ -1087,62 +1084,62 @@ namespace Net.Pkcs11Admin.WinForms
 
             if ((_selectedLibrary != null) && (_selectedLibrary.Slots.Count == 0))
             {
-                ShowErrorInStatusStrip(string.Format(errorFormat, "No slots/readers found"));
+                ShowErrorInStatusStrip("No slots/readers found");
                 return;
             }
 
             if (MainFormTabControl.SelectedTab == TabPageBasicInfo)
             {
                 if (_selectedSlot.SlotInfoException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.SlotInfoException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.SlotInfoException);
                 else if (_selectedSlot.TokenInfoException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.TokenInfoException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.TokenInfoException);
                 else if (_selectedSlot.SessionInfoException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.SessionInfoException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.SessionInfoException);
                 else
                     ShowInfoInStatusStrip(string.Empty);
             }
             else if (MainFormTabControl.SelectedTab == TabPageMechanisms)
             {
                 if (_selectedSlot.MechanismsException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.MechanismsException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.MechanismsException);
                 else
-                    ShowInfoInStatusStrip(string.Format(objectCountFormat, ListViewMechanisms.Items.Count));
+                    ShowObjectCountInStatusStrip(ListViewMechanisms.Items.Count);
             }
             else if (MainFormTabControl.SelectedTab == TabPageHwFeatures)
             {
                 if (_selectedSlot.HwFeaturesException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.HwFeaturesException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.HwFeaturesException);
                 else
-                    ShowInfoInStatusStrip(string.Format(objectCountFormat, ListViewHwFeatures.Items.Count));
+                    ShowObjectCountInStatusStrip(ListViewHwFeatures.Items.Count);
             }
             else if (MainFormTabControl.SelectedTab == TabPageDataObjects)
             {
                 if (_selectedSlot.DataObjectsException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.DataObjectsException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.DataObjectsException);
                 else
-                    ShowInfoInStatusStrip(string.Format(objectCountFormat, ListViewDataObjects.Items.Count));
+                    ShowObjectCountInStatusStrip(ListViewDataObjects.Items.Count);
             }
             else if (MainFormTabControl.SelectedTab == TabPageCertificates)
             {
                 if (_selectedSlot.CertificatesException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.CertificatesException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.CertificatesException);
                 else
-                    ShowInfoInStatusStrip(string.Format(objectCountFormat, ListViewCertificates.Items.Count));
+                    ShowObjectCountInStatusStrip(ListViewCertificates.Items.Count);
             }
             else if (MainFormTabControl.SelectedTab == TabPageKeys)
             {
                 if (_selectedSlot.KeysException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.KeysException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.KeysException);
                 else
-                    ShowInfoInStatusStrip(string.Format(objectCountFormat, ListViewKeys.Items.Count));
+                    ShowObjectCountInStatusStrip(ListViewKeys.Items.Count);
             }
             else if (MainFormTabControl.SelectedTab == TabPageDomainParams)
             {
                 if (_selectedSlot.DomainParamsException != null)
-                    ShowErrorInStatusStrip(string.Format(errorFormat, _selectedSlot.DomainParamsException.Message));
+                    ShowExceptionInStatusStrip(_selectedSlot.DomainParamsException);
                 else
-                    ShowInfoInStatusStrip(string.Format(objectCountFormat, ListViewDomainParams.Items.Count));
+                    ShowObjectCountInStatusStrip(ListViewDomainParams.Items.Count);
             }
             else
             {
@@ -1160,6 +1157,19 @@ namespace Net.Pkcs11Admin.WinForms
         {
             MainFormStatusStripLabel.ForeColor = System.Drawing.Color.Red;
             MainFormStatusStripLabel.Text = message;
+        }
+
+        private void ShowExceptionInStatusStrip(Exception exception)
+        {
+            if (exception is TokenNotPresentException)
+                ShowErrorInStatusStrip(exception.Message);
+            else
+                ShowErrorInStatusStrip(string.Format("Error occurred: {0}", _selectedSlot.SlotInfoException.Message));
+        }
+
+        private void ShowObjectCountInStatusStrip(int count)
+        {
+            ShowInfoInStatusStrip(string.Format("Found {0} object(s)", count));
         }
 
         #endregion
