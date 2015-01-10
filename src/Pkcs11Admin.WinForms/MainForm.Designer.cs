@@ -158,21 +158,21 @@ namespace Net.Pkcs11Admin.WinForms
             // MenuItemLoadLibrary
             // 
             this.MenuItemLoadLibrary.Name = "MenuItemLoadLibrary";
-            this.MenuItemLoadLibrary.Size = new System.Drawing.Size(195, 22);
+            this.MenuItemLoadLibrary.Size = new System.Drawing.Size(196, 22);
             this.MenuItemLoadLibrary.Text = "Load PKCS#11 library...";
             this.MenuItemLoadLibrary.Click += new System.EventHandler(this.MenuItemLoadLibrary_Click);
             // 
             // MenuItemOpenLogFile
             // 
             this.MenuItemOpenLogFile.Name = "MenuItemOpenLogFile";
-            this.MenuItemOpenLogFile.Size = new System.Drawing.Size(195, 22);
+            this.MenuItemOpenLogFile.Size = new System.Drawing.Size(196, 22);
             this.MenuItemOpenLogFile.Text = "Open log file...";
             this.MenuItemOpenLogFile.Click += new System.EventHandler(this.MenuItemOpenLogFile_Click);
             // 
             // MenuItemApplicationSeparator1
             // 
             this.MenuItemApplicationSeparator1.Name = "MenuItemApplicationSeparator1";
-            this.MenuItemApplicationSeparator1.Size = new System.Drawing.Size(192, 6);
+            this.MenuItemApplicationSeparator1.Size = new System.Drawing.Size(193, 6);
             // 
             // MenuItemReloadLibrary
             // 
@@ -191,12 +191,12 @@ namespace Net.Pkcs11Admin.WinForms
             // MenuItemApplicationSeparator2
             // 
             this.MenuItemApplicationSeparator2.Name = "MenuItemApplicationSeparator2";
-            this.MenuItemApplicationSeparator2.Size = new System.Drawing.Size(192, 6);
+            this.MenuItemApplicationSeparator2.Size = new System.Drawing.Size(193, 6);
             // 
             // MenuItemExit
             // 
             this.MenuItemExit.Name = "MenuItemExit";
-            this.MenuItemExit.Size = new System.Drawing.Size(195, 22);
+            this.MenuItemExit.Size = new System.Drawing.Size(196, 22);
             this.MenuItemExit.Text = "Exit";
             this.MenuItemExit.Click += new System.EventHandler(this.MenuItemExit_Click);
             // 
@@ -820,6 +820,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.MainFormStatusStrip.ResumeLayout(false);
             this.MainFormStatusStrip.PerformLayout();

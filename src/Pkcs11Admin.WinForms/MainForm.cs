@@ -70,6 +70,11 @@ namespace Net.Pkcs11Admin.WinForms
 #endif
         }
 
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Pkcs11Admin.Instance.Dispose();
+        }
+
         #endregion
 
         #region MainFormMenuStrip
