@@ -149,7 +149,7 @@ namespace Net.Pkcs11Admin
         {
             _slot = slot;
 
-            Reload();
+            Reload(true);
         }
 
         #endregion
@@ -157,6 +157,11 @@ namespace Net.Pkcs11Admin
         #region Slot information gathering
 
         public void Reload()
+        {
+            Reload(false);
+        }
+
+        private void Reload(bool onlySlotInfo)
         {
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
@@ -171,6 +176,9 @@ namespace Net.Pkcs11Admin
                 SlotInfo = null;
                 SlotInfoException = ex;
             }
+
+            if (onlySlotInfo)
+                return;
 
             try
             {
