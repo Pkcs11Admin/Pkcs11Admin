@@ -74,9 +74,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Be.Windows.Forms.HexBox.1.6.1\lib\net40\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
-    <Reference Include="Pkcs11Interop, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Pkcs11Interop, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Pkcs11Interop.2.0.1.1\lib\net40\Pkcs11Interop.dll</HintPath>
+      <HintPath>..\packages\Pkcs11Interop.2.0.2\lib\net40\Pkcs11Interop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

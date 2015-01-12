@@ -1402,15 +1402,10 @@ namespace Net.Pkcs11Admin.WinForms
 
         private string CheckSpecialTokenInfoValues(ulong ul, bool checkInfinite)
         {
-            // TODO - Move to Pkcs11Interop
-            ulong CK_UNAVAILABLE_INFORMATION = ~0UL;
-            ulong CK_EFFECTIVELY_INFINITE = 0;
-            // TODO - Move to Pkcs11Interop
-
-            if (ul == CK_UNAVAILABLE_INFORMATION)
+            if (CK.IsCkInformationUnavailable(ul))
                 return "information unavailable";
 
-            if (checkInfinite && (ul == CK_EFFECTIVELY_INFINITE))
+            if (checkInfinite && (ul == CK.CK_EFFECTIVELY_INFINITE))
                 return "unlimited";
 
             return ul.ToString();

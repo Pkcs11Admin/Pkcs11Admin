@@ -68,8 +68,9 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Pkcs11Interop">
-      <HintPath>..\packages\Pkcs11Interop.2.0.1.1\lib\net40\Pkcs11Interop.dll</HintPath>
+    <Reference Include="Pkcs11Interop, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Pkcs11Interop.2.0.2\lib\net40\Pkcs11Interop.dll</HintPath>
     </Reference>
     <Reference Include="Pkcs11Interop.URI">
       <HintPath>..\lib\Pkcs11Interop.URI\Pkcs11Interop.URI.dll</HintPath>
