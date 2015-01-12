@@ -98,6 +98,7 @@
     <Compile Include="Configuration\AttributeType.cs" />
     <Compile Include="Pkcs11Admin.cs" />
     <Compile Include="Pkcs11AdminInfo.cs" />
+    <Compile Include="CurrentVersionInfo.cs" />
     <Compile Include="Pkcs11DomainParamsInfo.cs" />
     <Compile Include="Pkcs11SessionInfo.cs" />
     <Compile Include="Pkcs11CertificateInfo.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Configuration\StringUtils.cs" />
     <Compile Include="Pkcs11Uri.cs" />
     <Compile Include="TokenNotPresentException.cs" />
+    <Compile Include="XmlSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -56,6 +56,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.MenuItemApplicationSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.MenuItemSlot = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,16 +208,24 @@ namespace Net.Pkcs11Admin.WinForms
             // MenuItemHelp
             // 
             this.MenuItemHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemCheckUpdates,
             this.MenuItemAbout});
             this.MenuItemHelp.Name = "MenuItemHelp";
             this.MenuItemHelp.Size = new System.Drawing.Size(44, 20);
             this.MenuItemHelp.Text = "Help";
             // 
+            // MenuItemCheckUpdates
+            // 
+            this.MenuItemCheckUpdates.Name = "MenuItemCheckUpdates";
+            this.MenuItemCheckUpdates.Size = new System.Drawing.Size(170, 22);
+            this.MenuItemCheckUpdates.Text = "Check for updates";
+            this.MenuItemCheckUpdates.Click += new System.EventHandler(this.MenuItemCheckUpdates_Click);
+            // 
             // MenuItemAbout
             // 
             this.MenuItemAbout.Name = "MenuItemAbout";
-            this.MenuItemAbout.Size = new System.Drawing.Size(107, 22);
-            this.MenuItemAbout.Text = "About";
+            this.MenuItemAbout.Size = new System.Drawing.Size(170, 22);
+            this.MenuItemAbout.Text = "About...";
             this.MenuItemAbout.Click += new System.EventHandler(this.MenuItemAbout_Click);
             // 
             // MainFormMenuStrip
@@ -921,6 +930,7 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.Button ButtonDomainParams;
         private System.Windows.Forms.ToolStripSeparator MenuItemApplicationSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuItemReloadLibrary;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemCheckUpdates;
 
     }
 }

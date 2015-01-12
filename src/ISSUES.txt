@@ -6,8 +6,6 @@ TODOs with HIGH PRIORITY:
 - Setup creation of nightly builds
 - HARD - Finish definition of TypeSpecificAttributes in default configuration
 - HARD - Add effective cryptoki version to each known attribute
-- Import data object from file
-- Export data object to file
 - Import certificate from file
 - Export certificate to file
 - HARD - Key and KeyPair generation
@@ -15,7 +13,6 @@ TODOs with HIGH PRIORITY:
 - Key export
 - PKCS#10 CSR generation
 - Generation of self-signed certificate
-- Add "Check for updates" feature
 
 TODOs with LOW PRIORITY:
 - Log important events

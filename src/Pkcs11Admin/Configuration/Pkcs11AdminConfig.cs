@@ -104,26 +104,8 @@ namespace Net.Pkcs11Admin.Configuration
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
 
-            Pkcs11AdminConfig pkcs11AdminConfig = null;
-
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
-            {
-                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings()
-                {
-                    CloseInput = false,
-                    ConformanceLevel = ConformanceLevel.Document,
-                    DtdProcessing = DtdProcessing.Prohibit,
-                    ValidationType = ValidationType.None
-                };
-
-                using (XmlReader xmlReader = XmlReader.Create(fileStream, xmlReaderSettings))
-                {
-                    DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(Pkcs11AdminConfig));
-                    pkcs11AdminConfig = (Pkcs11AdminConfig)dataContractSerializer.ReadObject(xmlReader);
-                }
-            }
-
-            return pkcs11AdminConfig;
+                return XmlSerializer.Deserialize<Pkcs11AdminConfig>(fileStream);
         }
 
         public static void Save(string path, Pkcs11AdminConfig pkcs11AdminConfig)
@@ -135,21 +117,7 @@ namespace Net.Pkcs11Admin.Configuration
                 throw new ArgumentNullException("pkcs11AdminConfig");
 
             using (FileStream fileStream = new FileStream(path, FileMode.Create))
-            {
-                XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings()
-                {
-                    CloseOutput = false,
-                    Encoding = new UTF8Encoding(false, true),
-                    OmitXmlDeclaration = false,
-                    Indent = true
-                };
-
-                using (XmlWriter xmlWriter = XmlWriter.Create(fileStream, xmlWriterSettings))
-                {
-                    DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(Pkcs11AdminConfig));
-                    dataContractSerializer.WriteObject(xmlWriter, pkcs11AdminConfig);
-                }
-            }
+                XmlSerializer.Serialize(pkcs11AdminConfig, fileStream);
         }
 
         public static Pkcs11AdminConfig GetDefault()

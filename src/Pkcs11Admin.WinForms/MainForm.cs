@@ -385,6 +385,40 @@ namespace Net.Pkcs11Admin.WinForms
 
         #region MenuItemHelp
 
+        private async void MenuItemCheckUpdates_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await WaitDialog.Execute(this, Pkcs11Admin.Instance.DownloadCurrentVersionInfo);
+
+                CurrentVersionInfo currentVersionInfo = Pkcs11Admin.Instance.CurrentVersionInfo;
+
+                Version thisVersion = new Version(Pkcs11AdminInfo.AppVersion);
+                Version currentVersion = new Version(currentVersionInfo.Version);
+
+                if (0 > thisVersion.CompareTo(currentVersion))
+                {
+                    if (WinFormsUtils.AskQuestion(this, "Application update is available." + Environment.NewLine + "Do you want to open downloads page?") == DialogResult.Yes)
+                    {
+                        Uri uri = new Uri(currentVersionInfo.DownloadUrl, UriKind.Absolute);
+                        if ((!uri.IsAbsoluteUri) || ((uri.Scheme != Uri.UriSchemeHttp) && (uri.Scheme != Uri.UriSchemeHttps)))
+                            throw new Exception("Invalid update URL");
+
+                        System.Diagnostics.Process.Start(currentVersionInfo.DownloadUrl);
+                    }
+                }
+                else
+                {
+                    WinFormsUtils.ShowInfo(this, "Application is up to date.");
+                }
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
+                return;
+            }
+        }
+
         private void MenuItemAbout_Click(object sender, EventArgs e)
         {
             using (AboutDialog aboutDialog = new AboutDialog())

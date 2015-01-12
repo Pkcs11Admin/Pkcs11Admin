@@ -19,6 +19,7 @@ using Net.Pkcs11Admin.Configuration;
 using Net.Pkcs11Interop.Common;
 using System;
 using System.IO;
+using System.Net;
 using System.Reflection;
 
 namespace Net.Pkcs11Admin
@@ -170,6 +171,31 @@ namespace Net.Pkcs11Admin
             lock (_logFileLock)
                 File.AppendAllText(LogFile, string.Format("{0:yyyy-MM-dd HH:mm:ss} : {1}{2}", DateTime.Now, message, Environment.NewLine));
         }
+
+        #region CurrentVersionInfo
+
+        private CurrentVersionInfo _currentVersionInfo = null;
+
+        public CurrentVersionInfo CurrentVersionInfo
+        {
+            get
+            {
+                return _currentVersionInfo;
+            }
+            private set
+            {
+                _currentVersionInfo = value;
+            }
+        }
+
+        public void DownloadCurrentVersionInfo()
+        {
+            using (WebResponse webResponse = WebRequest.CreateHttp("http://www.pkcs11admin.net/CurrentVersionInfo.xml").GetResponse())
+            using (Stream webResponseStream = webResponse.GetResponseStream())
+                _currentVersionInfo = XmlSerializer.Deserialize<CurrentVersionInfo>(webResponseStream);
+        }
+
+        #endregion
 
         #region IDisposable
 
