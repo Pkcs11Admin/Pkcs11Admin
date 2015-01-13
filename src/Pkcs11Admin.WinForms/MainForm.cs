@@ -1201,7 +1201,7 @@ namespace Net.Pkcs11Admin.WinForms
             if (exception is TokenNotPresentException)
                 ShowErrorInStatusStrip(exception.Message);
             else
-                ShowErrorInStatusStrip(string.Format("Error occurred: {0}", _selectedSlot.SlotInfoException.Message));
+                ShowErrorInStatusStrip(string.Format("Error occurred: {0}", exception.Message));
         }
 
         private void ShowObjectCountInStatusStrip(int count)
