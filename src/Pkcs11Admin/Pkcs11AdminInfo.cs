@@ -79,11 +79,11 @@ namespace Net.Pkcs11Admin
             }
         }
 
-        public static string RuntimePlatform
+        public static string RuntimeBitness
         {
             get
             {
-                return (Platform.Uses32BitRuntime) ? "x86" : "x64";
+                return (Platform.Uses32BitRuntime) ? "32-bit" : "64-bit";
             }
         }
 
@@ -92,7 +92,7 @@ namespace Net.Pkcs11Admin
             get
             {
                 if (Platform.IsWindows)
-                    return "Windows";
+                    return "MS Windows";
                 else if (Platform.IsLinux)
                     return "Linux";
                 else if (Platform.IsMacOsX)

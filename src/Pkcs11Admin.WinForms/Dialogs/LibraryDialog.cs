@@ -31,8 +31,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             EnableLoggingControls();
 
-            LabelPkcs11Library.Text = string.Format(LabelPkcs11Library.Text, (Platform.Uses32BitRuntime) ? "32" : "64");
-            LabelPkcs11Logger.Text = string.Format(LabelPkcs11Logger.Text, (Platform.Uses32BitRuntime) ? "32" : "64");
+            LabelPkcs11Library.Text = string.Format(LabelPkcs11Library.Text, Pkcs11AdminInfo.RuntimeBitness);
+            LabelPkcs11Logger.Text = string.Format(LabelPkcs11Logger.Text, Pkcs11AdminInfo.RuntimeBitness);
             TextBoxLogFile.Text = Pkcs11Admin.Instance.GetDefaultLogPath();
             TextBoxPkcs11Logger.Text = Pkcs11Admin.Instance.GetDefaultLoggerPath();
         }
@@ -124,38 +124,25 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                // Set path components
-                string path = TextBoxPkcs11Library.Text;
-                if (Path.IsPathRooted(path))
-                {
-                    openFileDialog.InitialDirectory = Path.GetDirectoryName(path);
-                    openFileDialog.FileName = Path.GetFileName(path);
-                }
-                else
-                {
-                    openFileDialog.InitialDirectory = Pkcs11AdminInfo.ExecutingAssemblyDirectory;
-                    openFileDialog.FileName = path;
-                }
+                openFileDialog.Title = string.Format("Please select {0} PKCS#11 library", Pkcs11AdminInfo.RuntimeBitness);
 
-                // Set filters
                 openFileDialog.Filter = "All files (*.*)|*.*";
                 if (Platform.IsWindows)
                 {
                     openFileDialog.Filter += "|Shared libraries (*.dll)|*.dll";
-                    openFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".dll")) ? 2 : 1;
+                    openFileDialog.FilterIndex = 2;
                 }
                 else if (Platform.IsLinux)
                 {
                     openFileDialog.Filter += "|Shared libraries (*.so)|*.so";
-                    openFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".so")) ? 2 : 1;
+                    openFileDialog.FilterIndex = 2;
                 }
                 else if (Platform.IsMacOsX)
                 {
                     openFileDialog.Filter += "|Shared libraries (*.so;*.dylib)|*.so;*.dylib";
-                    openFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".so") || (Path.GetExtension(path) == ".dylib")) ? 2 : 1;
+                    openFileDialog.FilterIndex = 2;
                 }
 
-                // Open dialog
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
                     TextBoxPkcs11Library.Text = openFileDialog.FileName;
             }
@@ -165,28 +152,15 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                // Set path components
-                string path = TextBoxLogFile.Text;
-                if (Path.IsPathRooted(path))
-                {
-                    saveFileDialog.InitialDirectory = Path.GetDirectoryName(path);
-                    saveFileDialog.FileName = Path.GetFileName(path);
-                }
-                else
-                {
-                    saveFileDialog.InitialDirectory = Pkcs11AdminInfo.ExecutingAssemblyDirectory;
-                    saveFileDialog.FileName = path;
-                }
+                saveFileDialog.Title = "Please select log file";
 
-                // Set filters
                 saveFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
-                saveFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".txt")) ? 2 : 1;
+                saveFileDialog.FilterIndex = 2;
 
-                // Set dialog properties
+                saveFileDialog.AddExtension = true;
                 saveFileDialog.CreatePrompt = false;
                 saveFileDialog.OverwritePrompt = false;
 
-                // Open dialog
                 if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
                     TextBoxLogFile.Text = saveFileDialog.FileName;
             }
@@ -196,38 +170,25 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                // Set path components
-                string path = TextBoxPkcs11Logger.Text;
-                if (Path.IsPathRooted(path))
-                {
-                    openFileDialog.InitialDirectory = Path.GetDirectoryName(path);
-                    openFileDialog.FileName = Path.GetFileName(path);
-                }
-                else
-                {
-                    openFileDialog.InitialDirectory = Pkcs11AdminInfo.ExecutingAssemblyDirectory;
-                    openFileDialog.FileName = path;
-                }
+                openFileDialog.Title = string.Format("Please select {0} PKCS#11 logging library", Pkcs11AdminInfo.RuntimeBitness);
 
-                // Set filters
                 openFileDialog.Filter = "All files (*.*)|*.*";
                 if (Platform.IsWindows)
                 {
                     openFileDialog.Filter += "|Shared libraries (*.dll)|*.dll";
-                    openFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".dll")) ? 2 : 1;
+                    openFileDialog.FilterIndex = 2;
                 }
                 else if (Platform.IsLinux)
                 {
                     openFileDialog.Filter += "|Shared libraries (*.so)|*.so";
-                    openFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".so")) ? 2 : 1;
+                    openFileDialog.FilterIndex = 2;
                 }
                 else if (Platform.IsMacOsX)
                 {
                     openFileDialog.Filter += "|Shared libraries (*.so;*.dylib)|*.so;*.dylib";
-                    openFileDialog.FilterIndex = (string.IsNullOrEmpty(path) || (Path.GetExtension(path) == ".so") || (Path.GetExtension(path) == ".dylib")) ? 2 : 1;
+                    openFileDialog.FilterIndex = 2;
                 }
 
-                // Open dialog
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
                     TextBoxPkcs11Logger.Text = openFileDialog.FileName;
             }

@@ -158,7 +158,7 @@ namespace Net.Pkcs11Admin
             if (overwriteLogFile && File.Exists(LogFile))
                 File.Delete(LogFile);
 
-            Log(string.Format("{0} {1} ({2} {3})", Pkcs11AdminInfo.AppTitle, Pkcs11AdminInfo.AppVersion, Pkcs11AdminInfo.OperatingSystem, Pkcs11AdminInfo.RuntimePlatform));
+            Log(string.Format("{0} {1} {2} on {3}", Pkcs11AdminInfo.AppTitle, Pkcs11AdminInfo.AppVersion, Pkcs11AdminInfo.RuntimeBitness, Pkcs11AdminInfo.OperatingSystem));
             Log(string.Format("{0}", Pkcs11AdminInfo.AppDescription));
             Log("Please visit www.pkcs11admin.net for more information");
         }

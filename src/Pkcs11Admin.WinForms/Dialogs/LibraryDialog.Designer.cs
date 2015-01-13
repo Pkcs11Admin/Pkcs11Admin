@@ -70,9 +70,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelPkcs11Library.Location = new System.Drawing.Point(10, 23);
             this.LabelPkcs11Library.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LabelPkcs11Library.Name = "LabelPkcs11Library";
-            this.LabelPkcs11Library.Size = new System.Drawing.Size(280, 13);
+            this.LabelPkcs11Library.Size = new System.Drawing.Size(266, 13);
             this.LabelPkcs11Library.TabIndex = 0;
-            this.LabelPkcs11Library.Text = "Relative name or absolute path of {0}-bit PKCS#11 library:";
+            this.LabelPkcs11Library.Text = "Relative name or absolute path of {0} PKCS#11 library:";
             // 
             // TextBoxPkcs11Library
             // 
@@ -197,9 +197,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelPkcs11Logger.Location = new System.Drawing.Point(10, 167);
             this.LabelPkcs11Logger.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LabelPkcs11Logger.Name = "LabelPkcs11Logger";
-            this.LabelPkcs11Logger.Size = new System.Drawing.Size(317, 13);
+            this.LabelPkcs11Logger.Size = new System.Drawing.Size(303, 13);
             this.LabelPkcs11Logger.TabIndex = 9;
-            this.LabelPkcs11Logger.Text = "Relative name or absolute path of {0}-bit PKCS#11 logging library:";
+            this.LabelPkcs11Logger.Text = "Relative name or absolute path of {0} PKCS#11 logging library:";
             // 
             // groupBox3
             // 

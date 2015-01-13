@@ -41,7 +41,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             InitializeComponent();
 
-            Text = string.Format("{0} {1} ({2} {3})", Pkcs11AdminInfo.AppTitle, Pkcs11AdminInfo.AppVersion, Pkcs11AdminInfo.OperatingSystem, Pkcs11AdminInfo.RuntimePlatform);
+            Text = string.Format("{0} {1} {2} on {3}", Pkcs11AdminInfo.AppTitle, Pkcs11AdminInfo.AppVersion, Pkcs11AdminInfo.RuntimeBitness, Pkcs11AdminInfo.OperatingSystem);
 
             // Set DoubleBuffered property of ListViews
             PropertyInfo property = typeof(ListView).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -642,7 +642,7 @@ namespace Net.Pkcs11Admin.WinForms
         private void SetComboBoxMechanismsItems()
         {
             ComboBoxMechanisms.Items.Clear();
-            ComboBoxMechanisms.Items.Add(new Operation(OperationType.Export, "Export mechanisms to the file..."));
+            ComboBoxMechanisms.Items.Add(new Operation(OperationType.Export, "Export mechanisms to CSV file..."));
             ComboBoxMechanisms.SelectedIndex = 0;
         }
 
@@ -1330,15 +1330,13 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 saveFileDialog.FileName = fileName;
 
-                // Set filters
                 saveFileDialog.Filter = "All files (*.*)|*.*|Text CSV (*.csv)|*.csv";
-                saveFileDialog.FilterIndex = (Path.GetExtension(fileName) == ".csv") ? 2 : 1;
+                saveFileDialog.FilterIndex = 2;
 
-                // Set dialog properties
+                saveFileDialog.AddExtension = true;
                 saveFileDialog.CreatePrompt = false;
                 saveFileDialog.OverwritePrompt = true;
 
-                // Open dialog
                 if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
                     WinFormsUtils.DumpListViewToCsvFile(listView, saveFileDialog.FileName);
             }
@@ -1351,11 +1349,9 @@ namespace Net.Pkcs11Admin.WinForms
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                // Set filters
                 openFileDialog.Filter = "All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
 
-                // Open dialog
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
                     filePath = openFileDialog.FileName;
             }
@@ -1390,19 +1386,16 @@ namespace Net.Pkcs11Admin.WinForms
                 {
                     saveFileDialog.FileName = fileName;
 
-                    // Set filters
                     saveFileDialog.Filter = "All files (*.*)|*.*";
                     saveFileDialog.FilterIndex = 1;
 
-                    // Set dialog properties
                     saveFileDialog.CreatePrompt = false;
                     saveFileDialog.OverwritePrompt = true;
 
-                    // Open dialog
                     if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
                     {
                         File.WriteAllBytes(saveFileDialog.FileName, fileContent);
-                        WinFormsUtils.ShowInfo(this, "Object successfully exported");
+                        WinFormsUtils.ShowInfo(this, "Data object successfully exported");
                     }
                 }
             }
