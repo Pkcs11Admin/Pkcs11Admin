@@ -342,6 +342,12 @@ namespace Net.Pkcs11Admin.WinForms
 
         private async void MenuItemTokenInit_Click(object sender, EventArgs e)
         {
+            string question = "Token initialization destroys all token objects and disables normal user access until SO initializes normal user's PIN." + Environment.NewLine +
+            "Are you sure you want to continue?";
+
+            if (DialogResult.Yes != WinFormsUtils.AskQuestion(this, question))
+                return;
+
             if (!_selectedSlot.TokenInfo.TokenInitialized)
             {
                 using (InitTokenDialog initTokenDialog = new InitTokenDialog(_selectedSlot))
@@ -358,6 +364,12 @@ namespace Net.Pkcs11Admin.WinForms
 
         private async void MenuItemProtectedTokenInit_Click(object sender, EventArgs e)
         {
+            string question = "Token initialization destroys all token objects and disables normal user access until SO initializes normal user's PIN." + Environment.NewLine +
+            "Are you sure you want to continue?";
+
+            if (DialogResult.Yes != WinFormsUtils.AskQuestion(this, question))
+                return;
+
             using (ProtectedInitTokenDialog protectedInitTokenDialog = new ProtectedInitTokenDialog(_selectedSlot))
                 if (protectedInitTokenDialog.ShowDialog() == DialogResult.OK)
                     await ReloadFormAfter(_selectedSlot.Reload);
