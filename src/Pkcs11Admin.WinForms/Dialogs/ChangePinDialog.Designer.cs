@@ -227,7 +227,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.TopMost = true;
             this.InputLanguageChanged += new System.Windows.Forms.InputLanguageChangedEventHandler(this.ChangePinDialog_InputLanguageChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChangePinDialog_KeyDown);
             this.MainStatusStrip.ResumeLayout(false);

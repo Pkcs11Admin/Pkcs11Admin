@@ -257,7 +257,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Load PKCS#11 library";
-            this.TopMost = true;
             this.Shown += new System.EventHandler(this.LibraryDialog_Shown);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

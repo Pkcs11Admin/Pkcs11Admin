@@ -177,7 +177,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.TopMost = true;
             this.InputLanguageChanged += new System.Windows.Forms.InputLanguageChangedEventHandler(this.LoginDialog_InputLanguageChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginDialog_KeyDown);
             this.MainStatusStrip.ResumeLayout(false);

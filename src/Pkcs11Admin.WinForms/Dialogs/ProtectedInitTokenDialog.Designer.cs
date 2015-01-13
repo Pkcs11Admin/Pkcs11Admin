@@ -163,7 +163,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Initialize token/card";
-            this.TopMost = true;
             this.InputLanguageChanged += new System.Windows.Forms.InputLanguageChangedEventHandler(this.ProtectedInitTokenDialog_InputLanguageChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProtectedInitTokenDialog_KeyDown);
             this.MainStatusStrip.ResumeLayout(false);
