@@ -115,103 +115,74 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11SessionInfo(Slot slot)
+        internal Pkcs11SessionInfo(SessionInfo sessionInfo, bool protectedAuthenticationPath)
         {
-            if (slot == null)
-                throw new ArgumentNullException("slot");
+            if (sessionInfo == null)
+                throw new ArgumentNullException("sessionInfo");
 
-            _slot = slot;
-
-            if (!_slot.GetSlotInfo().SlotFlags.TokenPresent)
+            switch (sessionInfo.State)
             {
-                UserLoggedIn = false;
-                UserCanLogin = false;
-                UserCanLoginProtected = false;
-                UserCanChangePin = false;
-                UserCanChangePinProtected = false;
-                SoLoggedIn = false;
-                SoCanLogin = false;
-                SoCanLoginProtected = false;
-                SoCanChangePin = false;
-                SoCanChangePinProtected = false;
-                SoCanSetUserPin = false;
-                SoCanSetUserPinProtected = false;
-                CanLogout = false;
-                CanInitToken = false;
-                CanInitTokenProtected = false;
-            }
-            else
-            {
-                bool protectedAuthenticationPath = _slot.GetTokenInfo().TokenFlags.ProtectedAuthenticationPath;
+                case CKS.CKS_RO_PUBLIC_SESSION:
+                case CKS.CKS_RW_PUBLIC_SESSION:
 
-                using (Session session = _slot.OpenSession(false))
-                {
-                    SessionInfo sessionInfo = session.GetSessionInfo();
-                    switch (sessionInfo.State)
-                    {
-                        case CKS.CKS_RO_PUBLIC_SESSION:
-                        case CKS.CKS_RW_PUBLIC_SESSION:
+                    UserLoggedIn = false;
+                    UserCanLogin = true;
+                    UserCanLoginProtected = protectedAuthenticationPath;
+                    UserCanChangePin = false;
+                    UserCanChangePinProtected = false;
+                    SoLoggedIn = false;
+                    SoCanLogin = true;
+                    SoCanLoginProtected = protectedAuthenticationPath;
+                    SoCanChangePin = false;
+                    SoCanChangePinProtected = false;
+                    SoCanSetUserPin = false;
+                    SoCanSetUserPinProtected = false;
+                    CanLogout = false;
+                    CanInitToken = true;
+                    CanInitTokenProtected = protectedAuthenticationPath;
 
-                            UserLoggedIn = false;
-                            UserCanLogin = true;
-                            UserCanLoginProtected = protectedAuthenticationPath;
-                            UserCanChangePin = false;
-                            UserCanChangePinProtected = false;
-                            SoLoggedIn = false;
-                            SoCanLogin = true;
-                            SoCanLoginProtected = protectedAuthenticationPath;
-                            SoCanChangePin = false;
-                            SoCanChangePinProtected = false;
-                            SoCanSetUserPin = false;
-                            SoCanSetUserPinProtected = false;
-                            CanLogout = false;
-                            CanInitToken = true;
-                            CanInitTokenProtected = protectedAuthenticationPath;
+                    break;
 
-                            break;
+                case CKS.CKS_RO_USER_FUNCTIONS:
+                case CKS.CKS_RW_USER_FUNCTIONS:
 
-                        case CKS.CKS_RO_USER_FUNCTIONS:
-                        case CKS.CKS_RW_USER_FUNCTIONS:
+                    UserLoggedIn = true;
+                    UserCanLogin = false;
+                    UserCanLoginProtected = false;
+                    UserCanChangePin = true;
+                    UserCanChangePinProtected = protectedAuthenticationPath;
+                    SoLoggedIn = false;
+                    SoCanLogin = false;
+                    SoCanLoginProtected = false;
+                    SoCanChangePin = false;
+                    SoCanChangePinProtected = false;
+                    SoCanSetUserPin = false;
+                    SoCanSetUserPinProtected = false;
+                    CanLogout = true;
+                    CanInitToken = false;
+                    CanInitTokenProtected = false;
 
-                            UserLoggedIn = true;
-                            UserCanLogin = false;
-                            UserCanLoginProtected = false;
-                            UserCanChangePin = true;
-                            UserCanChangePinProtected = protectedAuthenticationPath;
-                            SoLoggedIn = false;
-                            SoCanLogin = false;
-                            SoCanLoginProtected = false;
-                            SoCanChangePin = false;
-                            SoCanChangePinProtected = false;
-                            SoCanSetUserPin = false;
-                            SoCanSetUserPinProtected = false;
-                            CanLogout = true;
-                            CanInitToken = false;
-                            CanInitTokenProtected = false;
+                    break;
 
-                            break;
+                case CKS.CKS_RW_SO_FUNCTIONS:
 
-                        case CKS.CKS_RW_SO_FUNCTIONS:
+                    UserLoggedIn = false;
+                    UserCanLogin = false;
+                    UserCanLoginProtected = false;
+                    UserCanChangePin = false;
+                    UserCanChangePinProtected = false;
+                    SoLoggedIn = true;
+                    SoCanLogin = false;
+                    SoCanLoginProtected = false;
+                    SoCanChangePin = true;
+                    SoCanChangePinProtected = protectedAuthenticationPath;
+                    SoCanSetUserPin = true;
+                    SoCanSetUserPinProtected = protectedAuthenticationPath;
+                    CanLogout = true;
+                    CanInitToken = false;
+                    CanInitTokenProtected = false;
 
-                            UserLoggedIn = false;
-                            UserCanLogin = false;
-                            UserCanLoginProtected = false;
-                            UserCanChangePin = false;
-                            UserCanChangePinProtected = false;
-                            SoLoggedIn = true;
-                            SoCanLogin = false;
-                            SoCanLoginProtected = false;
-                            SoCanChangePin = true;
-                            SoCanChangePinProtected = protectedAuthenticationPath;
-                            SoCanSetUserPin = true;
-                            SoCanSetUserPinProtected = protectedAuthenticationPath;
-                            CanLogout = true;
-                            CanInitToken = false;
-                            CanInitTokenProtected = false;
-
-                            break;
-                    }
-                }
+                    break;
             }
         }
     }

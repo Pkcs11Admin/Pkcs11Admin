@@ -156,6 +156,75 @@ namespace Net.Pkcs11Admin
 
         #region Slot information gathering
 
+        private void MarkSlotAsUsable()
+        {
+            SlotInfo = null;
+            SlotInfoException = null;
+
+            TokenInfo = null;
+            TokenInfoException = null;
+
+            SessionInfo = null;
+            SessionInfoException = null;
+
+            Mechanisms = null;
+            MechanismsException = null;
+
+            HwFeatures = null;
+            HwFeaturesException = null;
+
+            DataObjects = null;
+            DataObjectsException = null;
+
+            Certificates = null;
+            CertificatesException = null;
+
+            Keys = null;
+            KeysException = null;
+
+            DomainParams = null;
+            DomainParamsException = null;
+        }
+
+        private void MarkSlotAsUnusable(Exception ex, bool isSlotInfoException = false, bool isTokenInfoException = false, bool isSessionInfoException = false)
+        {
+            if (isSlotInfoException)
+            {
+                SlotInfo = null;
+                SlotInfoException = ex;
+            }
+
+            if (isSlotInfoException || isTokenInfoException)
+            {
+                TokenInfo = null;
+                TokenInfoException = ex;
+            }
+
+            if (isSlotInfoException || isTokenInfoException || isSessionInfoException)
+            {
+                SessionInfo = null;
+                SessionInfoException = ex;
+            }
+
+            Mechanisms = null;
+            MechanismsException = ex;
+
+            HwFeatures = null;
+            HwFeaturesException = ex;
+
+            DataObjects = null;
+            DataObjectsException = ex;
+
+            Certificates = null;
+            CertificatesException = ex;
+
+            Keys = null;
+            KeysException = ex;
+
+            DomainParams = null;
+            DomainParamsException = ex;
+        }
+
         public void Reload()
         {
             Reload(false);
@@ -166,6 +235,8 @@ namespace Net.Pkcs11Admin
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
+            MarkSlotAsUsable();
+
             try
             {
                 SlotInfo = ReadSlotInfo();
@@ -173,8 +244,9 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                SlotInfo = null;
-                SlotInfoException = ex;
+                // In order to keep the code sane consider slot unusable if C_GetSlotInfo fails
+                MarkSlotAsUnusable(ex, isSlotInfoException: true);
+                return;
             }
 
             if (onlySlotInfo)
@@ -182,37 +254,33 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
+                if (!SlotInfo.TokenPresent)
                     throw new TokenNotPresentException();
-                
+
                 TokenInfo = ReadTokenInfo();
                 TokenInfoException = null;
             }
             catch (Exception ex)
             {
-                TokenInfo = null;
-                TokenInfoException = ex;
+                // In order to keep the code sane consider slot unusable if C_GetTokenInfo fails
+                MarkSlotAsUnusable(ex, isTokenInfoException: true);
+                return;
             }
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 SessionInfo = ReadSessionInfo();
                 SessionInfoException = null;
             }
             catch (Exception ex)
             {
-                SessionInfo = null;
-                SessionInfoException = ex;
+                // In order to keep the code sane consider slot unusable if C_GetSessionInfo fails
+                MarkSlotAsUnusable(ex, isSessionInfoException: true);
+                return;
             }
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 Mechanisms = ReadMechanisms();
                 MechanismsException = null;
             }
@@ -224,9 +292,6 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 HwFeatures = ReadHwFeatures();
                 HwFeaturesException = null;
             }
@@ -238,9 +303,6 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 DataObjects = ReadDataObjects();
                 DataObjectsException = null;
             }
@@ -252,9 +314,6 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 Certificates = ReadCertificates();
                 CertificatesException = null;
             }
@@ -266,9 +325,6 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 Keys = ReadKeys();
                 KeysException = null;
             }
@@ -280,9 +336,6 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                if ((SlotInfo != null) && (!SlotInfo.TokenPresent))
-                    throw new TokenNotPresentException();
-
                 DomainParams = ReadDomainParams();
                 DomainParamsException = null;
             }
@@ -305,7 +358,8 @@ namespace Net.Pkcs11Admin
 
         private Pkcs11SessionInfo ReadSessionInfo()
         {
-            return new Pkcs11SessionInfo(_slot);
+            using (Session session = _slot.OpenSession(false))
+                return new Pkcs11SessionInfo(session.GetSessionInfo(), TokenInfo.ProtectedAuthenticationPath);
         }
 
         private List<Pkcs11MechanismInfo> ReadMechanisms()
