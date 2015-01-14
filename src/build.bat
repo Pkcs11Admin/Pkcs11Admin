@@ -1,14 +1,19 @@
-@rem Build the source code
 setlocal
+
 @rem Initialize build environment of Visual Studio 2013
 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\vsvars32.bat" || @goto :error
+
 @rem Build for x86 platform
 msbuild Pkcs11Admin.sln /p:Configuration=Release /p:Platform=x86 /target:Clean || exit /b 1
 msbuild Pkcs11Admin.sln /p:Configuration=Release /p:Platform=x86 /target:Build || exit /b 1
+
 @rem Build for AnyCPU platform
 msbuild Pkcs11Admin.sln /p:Configuration=Release /p:Platform=AnyCPU /target:Clean || exit /b 1
 msbuild Pkcs11Admin.sln /p:Configuration=Release /p:Platform=AnyCPU /target:Build || exit /b 1
+
 endlocal
+
+setlocal
 
 @rem Prepare output directory
 set OUTDIR=Pkcs11Admin-Release
@@ -41,6 +46,8 @@ pushd packages\Pkcs11Interop.* || exit /b 1
 copy license.txt ..\..\%OUTDIR%\LICENSE\Pkcs11Interop.txt || exit /b 1
 popd || exit /b 1
 copy lib\Pkcs11Interop.URI\license.txt %OUTDIR%\LICENSE\Pkcs11Interop.URI.txt || exit /b 1
+
+endlocal
 
 @echo *** BUILD SUCCESSFUL ***
 @exit /b 0
