@@ -5,3 +5,4 @@ test-results/
 TestResults/
 *.suo
 *.user
+Pkcs11Admin-Release/

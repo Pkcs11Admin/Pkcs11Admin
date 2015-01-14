@@ -134,18 +134,17 @@ namespace Net.Pkcs11Admin
 
         public string GetDefaultLoggerPath()
         {
-            string path = Pkcs11AdminInfo.ExecutingAssemblyDirectory;
-            path += Path.DirectorySeparatorChar + "pkcs11-logger-";
-            path += (Platform.Uses32BitRuntime) ? "x86" : "x64";
+            string fileName = "pkcs11-logger-";
+            fileName += (Platform.Uses32BitRuntime) ? "x86" : "x64";
 
             if (Platform.IsWindows)
-                path += ".dll";
+                fileName += ".dll";
             else if (Platform.IsLinux)
-                path += ".so";
+                fileName += ".so";
             else if (Platform.IsMacOsX)
-                path += ".dylib";
+                fileName += ".dylib";
 
-            return path;
+            return Path.Combine(Pkcs11AdminInfo.ExecutingAssemblyDirectory, "pkcs11-logger", fileName);
         }
 
         public string GetDefaultLogPath()
