@@ -155,7 +155,7 @@ namespace Net.Pkcs11Admin.WinForms
             for (int i = 0; i < slots.Count; i++)
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
-                menuItem.Text = slots[i].SlotInfo.SlotDescription;
+                menuItem.Text = (slots[i].SlotInfo != null) ? slots[i].SlotInfo.SlotDescription : "Unknown slot";
                 menuItem.Tag  = slots[i];
                 menuItem.CheckOnClick = true;
                 menuItem.Click += new EventHandler(MenuItemSlot_Click);
