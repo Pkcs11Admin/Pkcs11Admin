@@ -93,6 +93,15 @@ namespace Net.Pkcs11Admin
                 {
                     // Dispose managed objects
 
+                    if (Slots != null)
+                    {
+                        for (int i = 0; i < Slots.Count; i++)
+                        {
+                            Slots[i].Dispose();
+                            Slots[i] = null;
+                        }
+                    }
+
                     if (_pkcs11 != null)
                     {
                         _pkcs11.Dispose();
