@@ -190,7 +190,7 @@ namespace Net.Pkcs11Admin
 
         public void DownloadCurrentVersionInfo()
         {
-            using (WebResponse webResponse = WebRequest.CreateHttp("http://www.pkcs11admin.net/CurrentVersionInfo.xml").GetResponse())
+            using (WebResponse webResponse = HttpWebRequest.Create("http://www.pkcs11admin.net/CurrentVersionInfo.xml").GetResponse())
             using (Stream webResponseStream = webResponse.GetResponseStream())
                 _currentVersionInfo = XmlSerializer.Deserialize<CurrentVersionInfo>(webResponseStream);
         }
