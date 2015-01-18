@@ -167,6 +167,7 @@ namespace Net.Pkcs11Admin.WinForms
             // MenuItemOpenLogFile
             // 
             this.MenuItemOpenLogFile.Name = "MenuItemOpenLogFile";
+            this.MenuItemOpenLogFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.MenuItemOpenLogFile.Size = new System.Drawing.Size(242, 22);
             this.MenuItemOpenLogFile.Text = "Open log file...";
             this.MenuItemOpenLogFile.Click += new System.EventHandler(this.MenuItemOpenLogFile_Click);
