@@ -23,6 +23,9 @@ mkdir %OUTDIR% || exit /b 1
 @rem Copy binaries to the output directory
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Be.Windows.Forms.HexBox.dll %OUTDIR% || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Interop.dll %OUTDIR% || exit /b 1
+pushd packages\Pkcs11Interop.* || exit /b 1
+copy lib\net40\Pkcs11Interop.dll.config ..\..\%OUTDIR%\ || exit /b 1
+popd || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Interop.URI.dll %OUTDIR% || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.dll %OUTDIR% || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.WinForms.exe %OUTDIR% || exit /b 1
