@@ -1,2 +1,30 @@
+Pkcs11Admin 0.2.0 (2015-01-19)
+- Fixed library loading dialog to be more foolproof and user friendly
+- Added support for PKCS#11 libraries that do not support native OS locking
+- Added support for PKCS#11 Spy logging library from OpenSC project
+- Added new application menu item for library reloading
+- Added shortcuts to application menu items
+- Fixed library unloading on application exit
+- Fixed layout of about dialog on non-windows platforms
+- Fixed layout of wait dialog on non-windows platforms
+- Fixed token access when there is no token present
+- Notice in status bar is shown when there is no slot present
+- Only first token is searched for objects when library is loaded
+- Slot and token is considered unusable when C_GetSlotInfo, C_GetTokenInfo or C_SessionInfo fails
+- CKO_OTP_KEYs are not searched for with libraries supporting older standard than PKCS#11 v2.20
+- Fixed exception handling during protected authentication
+- Changed default log path to more accessible directory
+- Added logging of selected exceptions
+- Added option to export mechanisms to CSV file
+- Added support for data object import and export
+- Multiple objects can be destroyed in a single operation
+- User confirmation is required before the objects are destroyed
+- User confirmation is required before token initialization
+- Added "Check for updates" feature
+- Updated to Pkcs11Interop 2.0.2
+- Added Pkcs11Interop.dll.config to the release bundle so dll mapping can be used on non-windows platforms
+- Merged x86 and x64 releases into a single multiplatform binary release
+- Many other smaller bug fixes and improvements
+
 Pkcs11Admin 0.1.1 (2015-01-01)
  - Initial technology preview release
