@@ -34,6 +34,17 @@ namespace Net.Pkcs11Admin.Configuration
             return (string.IsNullOrEmpty(hexString)) ? null : ConvertUtils.HexStringToBytes(hexString.Replace(" ", ""));
         }
 
+        /// <summary>
+        /// Compares two specified cryptoki versions and returns an integer that indicates their relative position in the sort order.
+        /// </summary>
+        /// <param name="version1">The first version to compare</param>
+        /// <param name="version2">The second version to compare</param>
+        /// <returns>Less than zero - versionA is less than versionB. Zero - versionA equals versionB. Greater than zero - versionA is greater than versionB.</returns>
+        public static int CompareCkVersions(string versionA, string versionB)
+        {
+            return string.Compare(versionA, versionB);
+        }
+
         public static void GetAttributeNameAndValue(ObjectAttribute objectAttribute, out string name, out string value)
         {
             if (objectAttribute == null)

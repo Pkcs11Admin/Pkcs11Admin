@@ -595,7 +595,9 @@ namespace Net.Pkcs11Admin
             infos.AddRange(ReadKeys(CKO.CKO_PRIVATE_KEY, Pkcs11Admin.Instance.Config.PrivateKeyAttributes));
             infos.AddRange(ReadKeys(CKO.CKO_PUBLIC_KEY, Pkcs11Admin.Instance.Config.PublicKeyAttributes));
             infos.AddRange(ReadKeys(CKO.CKO_SECRET_KEY, Pkcs11Admin.Instance.Config.SecretKeyAttributes));
-            infos.AddRange(ReadKeys(CKO.CKO_OTP_KEY, Pkcs11Admin.Instance.Config.OtpKeyAttributes)); // TODO : Skip in libraries older than 2.20
+            // TODO - This is not good enough because some libraries may still return error for unknown object classes
+            if (0 <= StringUtils.CompareCkVersions(Pkcs11Admin.Instance.Library.Info.CryptokiVersion, "2.20"))
+                infos.AddRange(ReadKeys(CKO.CKO_OTP_KEY, Pkcs11Admin.Instance.Config.OtpKeyAttributes));
 
             return infos;
         }
