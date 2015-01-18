@@ -244,6 +244,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 // In order to keep the code sane consider slot unusable if C_GetSlotInfo fails
                 MarkSlotAsUnusable(ex, isSlotInfoException: true);
                 return;
@@ -262,6 +264,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 // In order to keep the code sane consider slot unusable if C_GetTokenInfo fails
                 MarkSlotAsUnusable(ex, isTokenInfoException: true);
                 return;
@@ -274,6 +278,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 // In order to keep the code sane consider slot unusable if C_GetSessionInfo fails
                 MarkSlotAsUnusable(ex, isSessionInfoException: true);
                 return;
@@ -286,6 +292,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 Mechanisms = null;
                 MechanismsException = ex;
             }
@@ -297,6 +305,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 HwFeatures = null;
                 HwFeaturesException = ex;
             }
@@ -308,6 +318,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 DataObjects = null;
                 DataObjectsException = ex;
             }
@@ -319,6 +331,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 Certificates = null;
                 CertificatesException = ex;
             }
@@ -330,6 +344,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 Keys = null;
                 KeysException = ex;
             }
@@ -341,6 +357,8 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
+                Pkcs11Admin.Instance.Log(ex);
+
                 DomainParams = null;
                 DomainParamsException = ex;
             }

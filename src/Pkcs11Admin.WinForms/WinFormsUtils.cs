@@ -32,7 +32,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         public static void ShowError(IWin32Window owner, Exception exception)
         {
-            Pkcs11Admin.Instance.Log(exception.ToString());
+            Pkcs11Admin.Instance.Log(exception);
             ShowError(owner, exception.Message); // TODO - Handle specific exceptions
         }
 

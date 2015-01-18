@@ -172,6 +172,12 @@ namespace Net.Pkcs11Admin
                 File.AppendAllText(LogFile, string.Format("{0:yyyy-MM-dd HH:mm:ss} : {1}{2}", DateTime.Now, message, Environment.NewLine));
         }
 
+        public void Log(Exception exception)
+        {
+            if (exception != null)
+                Log(exception.ToString());
+        }
+
         #region CurrentVersionInfo
 
         private CurrentVersionInfo _currentVersionInfo = null;
