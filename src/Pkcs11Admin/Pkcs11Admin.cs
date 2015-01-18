@@ -149,7 +149,8 @@ namespace Net.Pkcs11Admin
 
         public string GetDefaultLogPath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + Path.DirectorySeparatorChar + "Pkcs11Admin.txt";
+            string dirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            return Path.Combine(dirPath, "Pkcs11Admin.txt");
         }
 
         public void InitializeLogging(bool overwriteLogFile)
