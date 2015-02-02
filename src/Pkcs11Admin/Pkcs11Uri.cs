@@ -18,6 +18,7 @@
 using Net.Pkcs11Admin.Configuration;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.URI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -321,70 +322,16 @@ namespace Net.Pkcs11Admin
         
         #endregion
 
-        public Pkcs11Uri()
-        {
-            // Module definition
-            this.ModulePath = null;
-            this.ModulePathPresent = false;
-            this.ModuleName = null;
-            this.ModuleNamePresent = false;
-
-            // Library definition
-            this.LibraryManufacturer = null;
-            this.LibraryManufacturerPresent = false;
-            this.LibraryDescription = null;
-            this.LibraryDescriptionPresent = false;
-            this.LibraryVersion = null;
-            this.LibraryVersionPresent = false;
-
-            // Slot definition
-            this.SlotManufacturer = null;
-            this.SlotManufacturerPresent = false;
-            this.SlotDescription = null;
-            this.SlotDescriptionPresent = false;
-            this.SlotId = null;
-            this.SlotIdPresent = false;
-
-            // Token definition
-            this.Manufacturer = null;
-            this.ManufacturerPresent = false;
-            this.Model = null;
-            this.ModelPresent = false;
-            this.Serial = null;
-            this.SerialPresent = false;
-            this.Token = null;
-            this.TokenPresent = false;
-
-            // Token PIN definition
-            this.PinValue = null;
-            this.PinSourcePresent = false;
-            this.PinSource = null;
-            this.PinSourcePresent = false;
-
-            // Object definition
-            this.Type = null;
-            this.TypePresent = false;
-            this.Object = null;
-            this.ObjectPresent = false;
-            this.Id = null;
-            this.IdPresent = false;
-        }
-
         public Pkcs11Uri(Pkcs11Library pkcs11Library, Pkcs11Slot pkcs11Slot, Pkcs11ObjectInfo pkcs11ObjectInfo)
         {
+            if (pkcs11Library == null)
+                throw new ArgumentNullException("pkcs11Library");
+
             // Module definition
             this.ModulePath = pkcs11Library.Info.LibraryPath;
             this.ModulePathPresent = true;
             this.ModuleName = null;
             this.ModuleNamePresent = false;
-
-            // Slot definition
-            this.SlotManufacturer = pkcs11Slot.SlotInfo.ManufacturerId;
-            this.SlotManufacturerPresent = false;
-            this.SlotDescription = pkcs11Slot.SlotInfo.SlotDescription;
-            this.SlotDescriptionPresent = false;
-            this.SlotId = pkcs11Slot.SlotInfo.SlotId;
-            this.SlotIdPresent = false;
 
             // Library definition
             this.LibraryManufacturer = pkcs11Library.Info.ManufacturerId;
@@ -394,38 +341,55 @@ namespace Net.Pkcs11Admin
             this.LibraryVersion = pkcs11Library.Info.LibraryVersion;
             this.LibraryVersionPresent = false;
 
-            // Token definition
-            this.Manufacturer = pkcs11Slot.TokenInfo.ManufacturerId;
-            this.ManufacturerPresent = false;
-            this.Model = pkcs11Slot.TokenInfo.Model;
-            this.ModelPresent = false;
-            this.Serial = pkcs11Slot.TokenInfo.SerialNumber;
-            this.SerialPresent = true;
-            this.Token = pkcs11Slot.TokenInfo.Label;
-            this.TokenPresent = true;
-
-            // Token PIN definition
-            this.PinValue = null;
-            this.PinSourcePresent = false;
-            this.PinSource = null;
-            this.PinSourcePresent = false;
-
-            // Object definition
-            this.Type = (CKO)pkcs11Slot.LoadObjectAttributes(pkcs11ObjectInfo, new List<ulong> { (ulong)CKA.CKA_CLASS })[0].GetValueAsUlong();
-            this.TypePresent = true;
-
-            this.Object = pkcs11Slot.LoadObjectAttributes(pkcs11ObjectInfo, new List<ulong> { (ulong)CKA.CKA_LABEL })[0].GetValueAsString();
-            this.ObjectPresent = true;
-            
-            if (this.Type == CKO.CKO_DATA)
+            if (pkcs11Slot != null)
             {
-                this.Id = null;
-                this.IdPresent = false;
-            }
-            else
-            {
-                this.Id = StringUtils.BytesToHexString(pkcs11Slot.LoadObjectAttributes(pkcs11ObjectInfo, new List<ulong> { (ulong)CKA.CKA_ID })[0].GetValueAsByteArray());
-                this.IdPresent = true;
+                // Slot definition
+                this.SlotManufacturer = pkcs11Slot.SlotInfo.ManufacturerId;
+                this.SlotManufacturerPresent = false;
+                this.SlotDescription = pkcs11Slot.SlotInfo.SlotDescription;
+                this.SlotDescriptionPresent = false;
+                this.SlotId = pkcs11Slot.SlotInfo.SlotId;
+                this.SlotIdPresent = false;
+
+                if (pkcs11Slot.TokenInfo != null)
+                {
+                    // Token definition
+                    this.Manufacturer = pkcs11Slot.TokenInfo.ManufacturerId;
+                    this.ManufacturerPresent = false;
+                    this.Model = pkcs11Slot.TokenInfo.Model;
+                    this.ModelPresent = false;
+                    this.Serial = pkcs11Slot.TokenInfo.SerialNumber;
+                    this.SerialPresent = true;
+                    this.Token = pkcs11Slot.TokenInfo.Label;
+                    this.TokenPresent = true;
+
+                    // Token PIN definition
+                    this.PinValue = null;
+                    this.PinSourcePresent = false;
+                    this.PinSource = null;
+                    this.PinSourcePresent = false;
+
+                    if (pkcs11ObjectInfo != null)
+                    {
+                        // Object definition
+                        this.Type = (CKO)pkcs11Slot.LoadObjectAttributes(pkcs11ObjectInfo, new List<ulong> { (ulong)CKA.CKA_CLASS })[0].GetValueAsUlong();
+                        this.TypePresent = true;
+
+                        this.Object = pkcs11Slot.LoadObjectAttributes(pkcs11ObjectInfo, new List<ulong> { (ulong)CKA.CKA_LABEL })[0].GetValueAsString();
+                        this.ObjectPresent = true;
+
+                        if (this.Type == CKO.CKO_DATA)
+                        {
+                            this.Id = null;
+                            this.IdPresent = false;
+                        }
+                        else
+                        {
+                            this.Id = StringUtils.BytesToHexString(pkcs11Slot.LoadObjectAttributes(pkcs11ObjectInfo, new List<ulong> { (ulong)CKA.CKA_ID })[0].GetValueAsByteArray());
+                            this.IdPresent = true;
+                        }
+                    }
+                }
             }
         }
 

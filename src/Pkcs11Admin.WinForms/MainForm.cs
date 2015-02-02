@@ -53,6 +53,7 @@ namespace Net.Pkcs11Admin.WinForms
             property.SetValue(ListViewKeys, true, null);
             property.SetValue(ListViewDomainParams, true, null);
 
+            SetComboBoxBasicInfoItems();
             SetComboBoxMechanismsItems();
             SetComboBoxHwFeaturesItems();
             SetComboBoxDataObjectsItems();
@@ -549,6 +550,28 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewBasicInfo.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             ListViewBasicInfo.EndUpdate();
+        }
+
+        private void SetComboBoxBasicInfoItems()
+        {
+            ComboBoxBasicInfo.Items.Clear();
+            ComboBoxBasicInfo.Items.Add(new Operation(OperationType.BuildUri, "Build PKCS#11 URI..."));
+            ComboBoxBasicInfo.SelectedIndex = 0;
+        }
+
+        private void ButtonBasicInfo_Click(object sender, EventArgs e)
+        {
+            Operation selectedOperation = ComboBoxBasicInfo.SelectedItem as Operation;
+            switch (selectedOperation.Type)
+            {
+                case OperationType.BuildUri:
+                    BuildPkcs11Uri();
+                    break;
+
+                default:
+                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
+                    break;
+            }
         }
 
         #endregion
@@ -1301,6 +1324,12 @@ namespace Net.Pkcs11Admin.WinForms
         {
             using (CreateObjectDialog createObjectDialog = new CreateObjectDialog(_selectedSlot, objectAttributes))
                 return (createObjectDialog.ShowDialog() == DialogResult.OK);
+        }
+
+        private void BuildPkcs11Uri()
+        {
+            using (UriDialog uriDialog = new UriDialog(_selectedLibrary, _selectedSlot, null))
+                uriDialog.ShowDialog();
         }
 
         private void BuildPkcs11Uri(ListView listView)

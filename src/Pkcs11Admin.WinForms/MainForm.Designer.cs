@@ -114,6 +114,8 @@ namespace Net.Pkcs11Admin.WinForms
             this.ButtonDomainParams = new System.Windows.Forms.Button();
             this.ListViewDomainParams = new System.Windows.Forms.ListView();
             this.LabelDomainParams = new System.Windows.Forms.Label();
+            this.ComboBoxBasicInfo = new System.Windows.Forms.ComboBox();
+            this.ButtonBasicInfo = new System.Windows.Forms.Button();
             this.MainFormStatusStrip.SuspendLayout();
             this.MainFormMenuStrip.SuspendLayout();
             this.MainFormPanel.SuspendLayout();
@@ -427,6 +429,8 @@ namespace Net.Pkcs11Admin.WinForms
             // 
             // TabPageBasicInfo
             // 
+            this.TabPageBasicInfo.Controls.Add(this.ButtonBasicInfo);
+            this.TabPageBasicInfo.Controls.Add(this.ComboBoxBasicInfo);
             this.TabPageBasicInfo.Controls.Add(this.ListViewBasicInfo);
             this.TabPageBasicInfo.Controls.Add(this.LabelBasicInfo);
             this.TabPageBasicInfo.Location = new System.Drawing.Point(4, 22);
@@ -821,6 +825,28 @@ namespace Net.Pkcs11Admin.WinForms
             this.LabelDomainParams.TabIndex = 0;
             this.LabelDomainParams.Text = "These domain parameters objects were found:";
             // 
+            // ComboBoxBasicInfo
+            // 
+            this.ComboBoxBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBoxBasicInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxBasicInfo.FormattingEnabled = true;
+            this.ComboBoxBasicInfo.Location = new System.Drawing.Point(13, 328);
+            this.ComboBoxBasicInfo.Name = "ComboBoxBasicInfo";
+            this.ComboBoxBasicInfo.Size = new System.Drawing.Size(643, 21);
+            this.ComboBoxBasicInfo.TabIndex = 2;
+            // 
+            // ButtonBasicInfo
+            // 
+            this.ButtonBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonBasicInfo.Location = new System.Drawing.Point(662, 327);
+            this.ButtonBasicInfo.Name = "ButtonBasicInfo";
+            this.ButtonBasicInfo.Size = new System.Drawing.Size(75, 23);
+            this.ButtonBasicInfo.TabIndex = 3;
+            this.ButtonBasicInfo.Text = "Start";
+            this.ButtonBasicInfo.UseVisualStyleBackColor = true;
+            this.ButtonBasicInfo.Click += new System.EventHandler(this.ButtonBasicInfo_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -932,6 +958,8 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ToolStripSeparator MenuItemApplicationSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuItemReloadLibrary;
         private System.Windows.Forms.ToolStripMenuItem MenuItemCheckUpdates;
+        private System.Windows.Forms.Button ButtonBasicInfo;
+        private System.Windows.Forms.ComboBox ComboBoxBasicInfo;
 
     }
 }
