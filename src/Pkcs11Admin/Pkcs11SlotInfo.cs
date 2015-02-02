@@ -21,6 +21,12 @@ namespace Net.Pkcs11Admin
 {
     public class Pkcs11SlotInfo : Pkcs11Info
     {
+        public ulong SlotId
+        {
+            get;
+            private set;
+        }
+
         public string SlotDescription
         {
             get;
@@ -71,6 +77,7 @@ namespace Net.Pkcs11Admin
 
         internal Pkcs11SlotInfo(SlotInfo slotInfo)
         {
+            SlotId = slotInfo.SlotId;
             SlotDescription = slotInfo.SlotDescription;
             ManufacturerId = slotInfo.ManufacturerId;
             Flags = slotInfo.SlotFlags.Flags;

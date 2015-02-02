@@ -70,7 +70,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Managed .NET wrapper for unmanaged PKCS#11 libraries" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
-            RichTextBoxLicenses.AppendText(@"Copyright (c) 2012-2014 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
+            RichTextBoxLicenses.AppendText(@"Copyright (c) 2012-2015 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Author: Jaroslav Imrich <jimrich@jimrich.sk>" + Environment.NewLine + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
@@ -87,7 +87,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"PKCS#11 URI extensions for Pkcs11Interop library" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
-            RichTextBoxLicenses.AppendText(@"Copyright (c) 2013-2014 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
+            RichTextBoxLicenses.AppendText(@"Copyright (c) 2013-2015 JWC s.r.o. <http://www.jwc.sk>" + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
             RichTextBoxLicenses.AppendText(@"Author: Jaroslav Imrich <jimrich@jimrich.sk>" + Environment.NewLine + Environment.NewLine);
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);

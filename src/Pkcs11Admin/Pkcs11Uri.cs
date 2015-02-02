@@ -113,9 +113,61 @@ namespace Net.Pkcs11Admin
         
         #endregion
 
+        #region Slot definition
+
+        [Category("06. Slot manufacturer")]
+        [DisplayName("Attribute value:")]
+        public string SlotManufacturer
+        {
+            get;
+            set;
+        }
+
+        [Category("06. Slot manufacturer")]
+        [DisplayName("Present in URI:")]
+        public bool SlotManufacturerPresent
+        {
+            get;
+            set;
+        }
+
+        [Category("07. Slot description")]
+        [DisplayName("Attribute value:")]
+        public string SlotDescription
+        {
+            get;
+            set;
+        }
+
+        [Category("07. Slot description")]
+        [DisplayName("Present in URI:")]
+        public bool SlotDescriptionPresent
+        {
+            get;
+            set;
+        }
+
+        [Category("08. Slot ID")]
+        [DisplayName("Attribute value:")]
+        public ulong? SlotId
+        {
+            get;
+            set;
+        }
+
+        [Category("08. Slot ID")]
+        [DisplayName("Present in URI:")]
+        public bool SlotIdPresent
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
         #region Token definition
 
-        [Category("06. Token manufacturer")]
+        [Category("09. Token manufacturer")]
         [DisplayName("Attribute value:")]
         public string Manufacturer
         {
@@ -123,7 +175,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("06. Token manufacturer")]
+        [Category("09. Token manufacturer")]
         [DisplayName("Present in URI:")]
         public bool ManufacturerPresent
         {
@@ -131,7 +183,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("07. Token model")]
+        [Category("10. Token model")]
         [DisplayName("Attribute value:")]
         public string Model
         {
@@ -139,7 +191,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("07. Token model")]
+        [Category("10. Token model")]
         [DisplayName("Present in URI:")]
         public bool ModelPresent
         {
@@ -147,7 +199,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("08. Token serial number")]
+        [Category("11. Token serial number")]
         [DisplayName("Attribute value:")]
         public string Serial
         {
@@ -155,7 +207,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("08. Token serial number")]
+        [Category("11. Token serial number")]
         [DisplayName("Present in URI:")]
         public bool SerialPresent
         {
@@ -163,7 +215,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("08. Token label")]
+        [Category("12. Token label")]
         [DisplayName("Attribute value:")]
         public string Token
         {
@@ -171,7 +223,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("08. Token label")]
+        [Category("12. Token label")]
         [DisplayName("Present in URI:")]
         public bool TokenPresent
         {
@@ -183,7 +235,7 @@ namespace Net.Pkcs11Admin
 
         #region Token PIN definition
 
-        [Category("09. Token PIN value")]
+        [Category("13. Token PIN value")]
         [DisplayName("Attribute value:")]
         public string PinValue
         {
@@ -191,7 +243,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("09. Token PIN value")]
+        [Category("13. Token PIN value")]
         [DisplayName("Present in URI:")]
         public bool PinValuePresent
         {
@@ -199,7 +251,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("10. Token PIN source")]
+        [Category("14. Token PIN source")]
         [DisplayName("Attribute value:")]
         public string PinSource
         {
@@ -207,7 +259,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("10. Token PIN source")]
+        [Category("14. Token PIN source")]
         [DisplayName("Present in URI:")]
         public bool PinSourcePresent
         {
@@ -219,7 +271,7 @@ namespace Net.Pkcs11Admin
 
         #region Object definition
 
-        [Category("11. Object type (CKA_CLASS)")]
+        [Category("15. Object type (CKA_CLASS)")]
         [DisplayName("Attribute value:")]
         public CKO? Type
         {
@@ -227,7 +279,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("11. Object type (CKA_CLASS)")]
+        [Category("15. Object type (CKA_CLASS)")]
         [DisplayName("Present in URI:")]
         public bool TypePresent
         {
@@ -235,7 +287,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("12. Object label (CKA_LABEL)")]
+        [Category("16. Object label (CKA_LABEL)")]
         [DisplayName("Attribute value:")]
         public string Object
         {
@@ -243,7 +295,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("12. Object label (CKA_LABEL)")]
+        [Category("16. Object label (CKA_LABEL)")]
         [DisplayName("Present in URI:")]
         public bool ObjectPresent
         {
@@ -251,7 +303,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("13. Object identifier (CKA_ID)")]
+        [Category("17. Object identifier (CKA_ID)")]
         [DisplayName("Attribute value:")]
         public string Id
         {
@@ -259,7 +311,7 @@ namespace Net.Pkcs11Admin
             set;
         }
 
-        [Category("13. Object identifier (CKA_ID)")]
+        [Category("17. Object identifier (CKA_ID)")]
         [DisplayName("Present in URI:")]
         public bool IdPresent
         {
@@ -284,6 +336,14 @@ namespace Net.Pkcs11Admin
             this.LibraryDescriptionPresent = false;
             this.LibraryVersion = null;
             this.LibraryVersionPresent = false;
+
+            // Slot definition
+            this.SlotManufacturer = null;
+            this.SlotManufacturerPresent = false;
+            this.SlotDescription = null;
+            this.SlotDescriptionPresent = false;
+            this.SlotId = null;
+            this.SlotIdPresent = false;
 
             // Token definition
             this.Manufacturer = null;
@@ -317,6 +377,14 @@ namespace Net.Pkcs11Admin
             this.ModulePathPresent = true;
             this.ModuleName = null;
             this.ModuleNamePresent = false;
+
+            // Slot definition
+            this.SlotManufacturer = pkcs11Slot.SlotInfo.ManufacturerId;
+            this.SlotManufacturerPresent = false;
+            this.SlotDescription = pkcs11Slot.SlotInfo.SlotDescription;
+            this.SlotDescriptionPresent = false;
+            this.SlotId = pkcs11Slot.SlotInfo.SlotId;
+            this.SlotIdPresent = false;
 
             // Library definition
             this.LibraryManufacturer = pkcs11Library.Info.ManufacturerId;
@@ -373,6 +441,11 @@ namespace Net.Pkcs11Admin
             pkcs11UriBuilder.LibraryManufacturer = (!this.LibraryManufacturerPresent) ? null : this.LibraryManufacturer;
             pkcs11UriBuilder.LibraryDescription = (!this.LibraryDescriptionPresent) ? null : this.LibraryDescription;
             pkcs11UriBuilder.LibraryVersion = (!this.LibraryVersionPresent) ? null : this.LibraryVersion;
+
+            // Slot definition
+            pkcs11UriBuilder.SlotManufacturer = (!this.SlotManufacturerPresent) ? null : this.SlotManufacturer;
+            pkcs11UriBuilder.SlotDescription = (!this.SlotDescriptionPresent) ? null : this.SlotDescription;
+            pkcs11UriBuilder.SlotId = (!this.SlotIdPresent) ? null : this.SlotId;
 
             // Token definition
             pkcs11UriBuilder.Manufacturer = (!this.ManufacturerPresent) ? null : this.Manufacturer;

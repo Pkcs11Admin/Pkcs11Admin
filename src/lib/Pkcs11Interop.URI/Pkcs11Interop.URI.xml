@@ -119,16 +119,6 @@
             Name of "type" path attribute
             </summary>
         </member>
-        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Id">
-            <summary>
-            Name of "id" path attribute
-            </summary>
-        </member>
-        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathVendorPrefix">
-            <summary>
-            Prefix of vendor specific path attribute name
-            </summary>
-        </member>
         <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11TypePublic">
             <summary>
             Value of "type" path attribute for public key
@@ -154,6 +144,36 @@
             Value of "type" path attribute for data object
             </summary>
         </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11Id">
+            <summary>
+            Name of "id" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11SlotManuf">
+            <summary>
+            Name of "slot-manufacturer" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11SlotManufMaxLength">
+            <summary>
+            Max length of "slot-manufacturer" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11SlotDesc">
+            <summary>
+            Name of "slot-description" path attribute
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11SlotDescMaxLength">
+            <summary>
+            Max length of "slot-description" path attribute in bytes
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11SlotId">
+            <summary>
+            Name of "slot-id" path attribute
+            </summary>
+        </member>
         <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PinSource">
             <summary>
             Name of "pin-source" query attribute
@@ -172,11 +192,6 @@
         <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11ModulePath">
             <summary>
             Name of "module-path" query attribute
-            </summary>
-        </member>
-        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11QueryVendorPrefix">
-            <summary>
-            Prefix of vendor specific query attribute name
             </summary>
         </member>
         <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriSpec.Pk11PathAttrValueChars">
@@ -363,6 +378,36 @@
             Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
             </summary>
         </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._slotManufacturerEncoded">
+            <summary>
+            Value of path attribute "slot-manufacturer" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._slotManufacturer">
+            <summary>
+            Value of path attribute "slot-manufacturer" that corresponds to the "manufacturerID" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._slotDescriptionEncoded">
+            <summary>
+            Value of path attribute "slot-description" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._slotDescription">
+            <summary>
+            Value of path attribute "slot-description" that corresponds to the "slotDescription" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._slotIdEncoded">
+            <summary>
+            Value of path attribute "slot-id" encoded for PKCS#11 URI
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._slotId">
+            <summary>
+            Value of path attribute "slot-id" that corresponds to the decimal number of "CK_SLOT_ID" type
+            </summary>
+        </member>
         <member name="F:Net.Pkcs11Interop.URI.Pkcs11UriBuilder._unknownPathAttributes">
             <summary>
             Collection of unknown vendor specific path attributes that is validated when ToString() or ToPkcs11Uri() method is called
@@ -516,6 +561,21 @@
             Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
             </summary>
         </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.SlotManufacturer">
+            <summary>
+            Value of path attribute "slot-manufacturer" that corresponds to the "manufacturerID" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.SlotDescription">
+            <summary>
+            Value of path attribute "slot-description" that corresponds to the "slotDescription" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.SlotId">
+            <summary>
+            Value of path attribute "slot-id" that corresponds to the decimal number of "CK_SLOT_ID" type
+            </summary>
+        </member>
         <member name="P:Net.Pkcs11Interop.URI.Pkcs11UriBuilder.UnknownPathAttributes">
             <summary>
             Collection of unknown vendor specific path attributes that is validated when ToString() or ToPkcs11Uri() method is called
@@ -619,6 +679,21 @@
             Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
             </summary>
         </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._slotManufacturer">
+            <summary>
+            Value of path attribute "slot-manufacturer" that corresponds to the "manufacturerID" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._slotDescription">
+            <summary>
+            Value of path attribute "slot-description" that corresponds to the "slotDescription" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._slotId">
+            <summary>
+            Value of path attribute "slot-id" that corresponds to the decimal number of "CK_SLOT_ID" type
+            </summary>
+        </member>
         <member name="F:Net.Pkcs11Interop.URI.Pkcs11Uri._unknownPathAttributes">
             <summary>
             Collection of unknown vendor specific path attributes
@@ -683,9 +758,9 @@
             <summary>
             Checks whether PKCS#11 library information matches PKCS#11 URI
             </summary>
-            <param name="manufacturer">PKCS#11 library manufacturer</param>
-            <param name="description">PKCS#11 library description</param>
-            <param name="version">PKCS#11 library version</param>
+            <param name="libraryManufacturer">PKCS#11 library manufacturer</param>
+            <param name="libraryDescription">PKCS#11 library description</param>
+            <param name="libraryVersion">PKCS#11 library version</param>
             <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
         </member>
         <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI.LibraryInfo)">
@@ -723,14 +798,60 @@
             <param name="libraryInfo">PKCS#11 library information</param>
             <returns>True if PKCS#11 library information matches PKCS#11 URI</returns>
         </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.String,System.String,System.Nullable{System.UInt64})">
+            <summary>
+            Checks whether slot information matches PKCS#11 URI
+            </summary>
+            <param name="slotManufacturer">Slot manufacturer</param>
+            <param name="slotDescription">Slot description</param>
+            <param name="slotId">Slot identifier</param>
+            <returns>True if slot information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI.SlotInfo)">
+            <summary>
+            Checks whether slot information matches PKCS#11 URI
+            </summary>
+            <param name="slotInfo">Slot information</param>
+            <returns>True if slot information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI8.SlotInfo)">
+            <summary>
+            Checks whether slot information matches PKCS#11 URI
+            </summary>
+            <param name="slotInfo">Slot information</param>
+            <returns>True if slot information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI4.SlotInfo)">
+            <summary>
+            Checks whether slot information matches PKCS#11 URI
+            </summary>
+            <param name="slotInfo">Slot information</param>
+            <returns>True if slot information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.LowLevelAPI8.CK_SLOT_INFO,System.Nullable{System.UInt64})">
+            <summary>
+            Checks whether slot information matches PKCS#11 URI
+            </summary>
+            <param name="slotInfo">Slot information</param>
+            <param name="slotId">Slot identifier</param>
+            <returns>True if slot information matches PKCS#11 URI</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.LowLevelAPI4.CK_SLOT_INFO,System.Nullable{System.UInt32})">
+            <summary>
+            Checks whether slot information matches PKCS#11 URI
+            </summary>
+            <param name="slotInfo">Slot information</param>
+            <param name="slotId">Slot identifier</param>
+            <returns>True if slot information matches PKCS#11 URI</returns>
+        </member>
         <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(System.String,System.String,System.String,System.String)">
             <summary>
             Checks whether token information matches PKCS#11 URI
             </summary>
-            <param name="token">Token label</param>
-            <param name="manufacturer">Token manufacturer</param>
-            <param name="serial">Token serial number</param>
-            <param name="model">Token model</param>
+            <param name="tokenLabel">Token label</param>
+            <param name="tokenManufacturer">Token manufacturer</param>
+            <param name="tokenSerial">Token serial number</param>
+            <param name="tokenModel">Token model</param>
             <returns>True if token information matches PKCS#11 URI</returns>
         </member>
         <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.Matches(Net.Pkcs11Interop.HighLevelAPI.TokenInfo)">
@@ -812,40 +933,45 @@
             <param name="objectAttributes">Object attributes</param>
             <returns>True if object attributes match PKCS#11 URI</returns>
         </member>
-        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI.Pkcs11)">
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI.Pkcs11,System.Boolean)">
             <summary>
-            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            Obtains a list of all PKCS#11 URI matching slots
             </summary>
             <param name="pkcs11">High level PKCS#11 wrapper</param>
+            <param name="tokenPresent">Flag indicating whether the list obtained includes only those slots with a token present (true), or all slots (false)</param>
             <returns>List of slots matching PKCS#11 URI</returns>
         </member>
-        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI8.Pkcs11)">
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI8.Pkcs11,System.Boolean)">
             <summary>
-            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            Obtains a list of all PKCS#11 URI matching slots
             </summary>
             <param name="pkcs11">High level PKCS#11 wrapper</param>
+            <param name="tokenPresent">Flag indicating whether the list obtained includes only those slots with a token present (true), or all slots (false)</param>
             <returns>List of slots matching PKCS#11 URI</returns>
         </member>
-        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI4.Pkcs11)">
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.HighLevelAPI4.Pkcs11,System.Boolean)">
             <summary>
-            Obtains a list of all slots where token that matches PKCS#11 URI is present
+            Obtains a list of all PKCS#11 URI matching slots
             </summary>
             <param name="pkcs11">High level PKCS#11 wrapper</param>
+            <param name="tokenPresent">Flag indicating whether the list obtained includes only those slots with a token present (true), or all slots (false)</param>
             <returns>List of slots matching PKCS#11 URI</returns>
         </member>
-        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.LowLevelAPI8.Pkcs11,System.UInt64[]@)">
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.LowLevelAPI8.Pkcs11,System.Boolean,System.UInt64[]@)">
             <summary>
             Obtains a list of all slots where token that matches PKCS#11 URI is present
             </summary>
             <param name="pkcs11">Low level PKCS#11 wrapper</param>
+            <param name="tokenPresent">Flag indicating whether the list obtained includes only those slots with a token present (true), or all slots (false)</param>
             <param name="slotList">List of slots matching PKCS#11 URI</param>
             <returns>CKR_OK if successful; any other value otherwise</returns>
         </member>
-        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.LowLevelAPI4.Pkcs11,System.UInt32[]@)">
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.GetMatchingSlotList(Net.Pkcs11Interop.LowLevelAPI4.Pkcs11,System.Boolean,System.UInt32[]@)">
             <summary>
             Obtains a list of all slots where token that matches PKCS#11 URI is present
             </summary>
             <param name="pkcs11">Low level PKCS#11 wrapper</param>
+            <param name="tokenPresent">Flag indicating whether the list obtained includes only those slots with a token present (true), or all slots (false)</param>
             <param name="slotList">List of slots matching PKCS#11 URI</param>
             <returns>CKR_OK if successful; any other value otherwise</returns>
         </member>
@@ -915,6 +1041,14 @@
             <param name="inputArray">Byte array that should be compared with the value of "id" path attribute</param>
             <returns>True if byte array matches the value of "id" path attribute</returns>
         </member>
+        <member name="M:Net.Pkcs11Interop.URI.Pkcs11Uri.SlotIdsMatch(System.Nullable{System.UInt64},System.Nullable{System.UInt64})">
+            <summary>
+            Checks whether id matches the value of "slot-id" path attribute
+            </summary>
+            <param name="uriId">Value of "slot-id" path attribute present (or not) in PKCS#11 URI</param>
+            <param name="inputId">Id that should be compared with the value of "slot-id" path attribute</param>
+            <returns>True if id matches the value of "slot-id" path attribute</returns>
+        </member>
         <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.ChecksLengths">
             <summary>
             Flag indicating whether max lengths of path attribute values were checked
@@ -923,6 +1057,11 @@
         <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.DefinesLibrary">
             <summary>
             Flag indicating whether PKCS#11 URI path attributes define specific PKCS#11 library
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.DefinesSlot">
+            <summary>
+            Flag indicating whether PKCS#11 URI path attributes define specific slot
             </summary>
         </member>
         <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.DefinesToken">
@@ -983,6 +1122,21 @@
         <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.Id">
             <summary>
             Value of path attribute "id" that corresponds to the "CKA_ID" object attribute
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.SlotManufacturer">
+            <summary>
+            Value of path attribute "slot-manufacturer" that corresponds to the "manufacturerID" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.SlotDescription">
+            <summary>
+            Value of path attribute "slot-description" that corresponds to the "slotDescription" member of CK_SLOT_INFO structure
+            </summary>
+        </member>
+        <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.SlotId">
+            <summary>
+            Value of path attribute "slot-id" that corresponds to the decimal number of "CK_SLOT_ID" type
             </summary>
         </member>
         <member name="P:Net.Pkcs11Interop.URI.Pkcs11Uri.UnknownPathAttributes">
