@@ -17,7 +17,6 @@
 
 using Net.Pkcs11Admin.Configuration;
 using Net.Pkcs11Interop.Common;
-using Net.Pkcs11Interop.URI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

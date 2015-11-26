@@ -1,7 +1,7 @@
 setlocal
 
-@rem Initialize build environment of Visual Studio 2013
-call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\vsvars32.bat" || @goto :error
+@rem Initialize build environment of Visual Studio 2015
+call "c:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\vsvars32.bat"
 
 @rem Build for x86 platform
 msbuild Pkcs11Admin.sln /p:Configuration=Release /p:Platform=x86 /target:Clean || exit /b 1
@@ -26,7 +26,6 @@ copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Interop.dll %OUTDIR% || exit 
 pushd packages\Pkcs11Interop.* || exit /b 1
 copy lib\net40\Pkcs11Interop.dll.config ..\..\%OUTDIR%\ || exit /b 1
 popd || exit /b 1
-copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Interop.URI.dll %OUTDIR% || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.dll %OUTDIR% || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.WinForms.exe %OUTDIR% || exit /b 1
 copy Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.WinForms.exe.config %OUTDIR% || exit /b 1
@@ -48,7 +47,6 @@ copy LICENSE.txt %OUTDIR%\LICENSE\Pkcs11Admin.txt || exit /b 1
 pushd packages\Pkcs11Interop.* || exit /b 1
 copy license.txt ..\..\%OUTDIR%\LICENSE\Pkcs11Interop.txt || exit /b 1
 popd || exit /b 1
-copy lib\Pkcs11Interop.URI\license.txt %OUTDIR%\LICENSE\Pkcs11Interop.URI.txt || exit /b 1
 
 endlocal
 
