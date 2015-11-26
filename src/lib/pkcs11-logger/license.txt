@@ -1,5 +1,5 @@
 PKCS11-LOGGER - PKCS#11 logging proxy module
-Copyright (c) 2011-2014 JWC s.r.o. <http://www.jwc.sk>
+Copyright (c) 2011-2015 JWC s.r.o. <http://www.jwc.sk>
 Author: Jaroslav Imrich <jimrich@jimrich.sk>
 
 Licensing for open source projects:
