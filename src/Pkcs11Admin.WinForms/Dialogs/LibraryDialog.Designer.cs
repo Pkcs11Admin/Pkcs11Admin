@@ -55,7 +55,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonBrowsePkcs11Logger = new System.Windows.Forms.Button();
             this.TextBoxPkcs11Logger = new System.Windows.Forms.TextBox();
             this.ButtonBrowseLogFile = new System.Windows.Forms.Button();
-            this.CheckBoxEnablePkcs11Logger = new System.Windows.Forms.CheckBox();
             this.LabelLogFile = new System.Windows.Forms.Label();
             this.LabelPkcs11Logger = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -97,7 +96,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // 
             this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ButtonCancel.Location = new System.Drawing.Point(596, 260);
+            this.ButtonCancel.Location = new System.Drawing.Point(596, 240);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
             this.ButtonCancel.TabIndex = 10;
@@ -107,7 +106,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // ButtonOk
             // 
             this.ButtonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonOk.Location = new System.Drawing.Point(515, 260);
+            this.ButtonOk.Location = new System.Drawing.Point(515, 240);
             this.ButtonOk.Name = "ButtonOk";
             this.ButtonOk.Size = new System.Drawing.Size(75, 23);
             this.ButtonOk.TabIndex = 9;
@@ -121,7 +120,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxOverwriteLogFile.AutoSize = true;
             this.CheckBoxOverwriteLogFile.Checked = true;
             this.CheckBoxOverwriteLogFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxOverwriteLogFile.Location = new System.Drawing.Point(13, 140);
+            this.CheckBoxOverwriteLogFile.Location = new System.Drawing.Point(13, 189);
             this.CheckBoxOverwriteLogFile.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.CheckBoxOverwriteLogFile.Name = "CheckBoxOverwriteLogFile";
             this.CheckBoxOverwriteLogFile.Size = new System.Drawing.Size(142, 17);
@@ -132,7 +131,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // TextBoxLogFile
             // 
             this.TextBoxLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBoxLogFile.Location = new System.Drawing.Point(13, 114);
+            this.TextBoxLogFile.Location = new System.Drawing.Point(13, 163);
             this.TextBoxLogFile.Name = "TextBoxLogFile";
             this.TextBoxLogFile.Size = new System.Drawing.Size(551, 20);
             this.TextBoxLogFile.TabIndex = 3;
@@ -140,7 +139,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // ButtonBrowsePkcs11Logger
             // 
             this.ButtonBrowsePkcs11Logger.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.ButtonBrowsePkcs11Logger.Location = new System.Drawing.Point(570, 184);
+            this.ButtonBrowsePkcs11Logger.Location = new System.Drawing.Point(570, 112);
             this.ButtonBrowsePkcs11Logger.Name = "ButtonBrowsePkcs11Logger";
             this.ButtonBrowsePkcs11Logger.Size = new System.Drawing.Size(75, 23);
             this.ButtonBrowsePkcs11Logger.TabIndex = 8;
@@ -151,7 +150,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // TextBoxPkcs11Logger
             // 
             this.TextBoxPkcs11Logger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBoxPkcs11Logger.Location = new System.Drawing.Point(13, 186);
+            this.TextBoxPkcs11Logger.Location = new System.Drawing.Point(13, 114);
+            this.TextBoxPkcs11Logger.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.TextBoxPkcs11Logger.Name = "TextBoxPkcs11Logger";
             this.TextBoxPkcs11Logger.Size = new System.Drawing.Size(551, 20);
             this.TextBoxPkcs11Logger.TabIndex = 7;
@@ -159,7 +159,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // ButtonBrowseLogFile
             // 
             this.ButtonBrowseLogFile.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.ButtonBrowseLogFile.Location = new System.Drawing.Point(570, 112);
+            this.ButtonBrowseLogFile.Location = new System.Drawing.Point(570, 161);
             this.ButtonBrowseLogFile.Name = "ButtonBrowseLogFile";
             this.ButtonBrowseLogFile.Size = new System.Drawing.Size(75, 23);
             this.ButtonBrowseLogFile.TabIndex = 4;
@@ -167,23 +167,11 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonBrowseLogFile.UseVisualStyleBackColor = true;
             this.ButtonBrowseLogFile.Click += new System.EventHandler(this.ButtonBrowseLogFile_Click);
             // 
-            // CheckBoxEnablePkcs11Logger
-            // 
-            this.CheckBoxEnablePkcs11Logger.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.CheckBoxEnablePkcs11Logger.AutoSize = true;
-            this.CheckBoxEnablePkcs11Logger.Location = new System.Drawing.Point(13, 212);
-            this.CheckBoxEnablePkcs11Logger.Name = "CheckBoxEnablePkcs11Logger";
-            this.CheckBoxEnablePkcs11Logger.Size = new System.Drawing.Size(368, 17);
-            this.CheckBoxEnablePkcs11Logger.TabIndex = 6;
-            this.CheckBoxEnablePkcs11Logger.Text = "Enable logging of low-level calls with PKCS11-LOGGER or PKCS11-SPY";
-            this.CheckBoxEnablePkcs11Logger.UseVisualStyleBackColor = true;
-            this.CheckBoxEnablePkcs11Logger.CheckedChanged += new System.EventHandler(this.CheckBoxEnablePkcs11Logger_CheckedChanged);
-            // 
             // LabelLogFile
             // 
             this.LabelLogFile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LabelLogFile.AutoSize = true;
-            this.LabelLogFile.Location = new System.Drawing.Point(10, 95);
+            this.LabelLogFile.Location = new System.Drawing.Point(10, 144);
             this.LabelLogFile.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LabelLogFile.Name = "LabelLogFile";
             this.LabelLogFile.Size = new System.Drawing.Size(138, 13);
@@ -194,7 +182,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // 
             this.LabelPkcs11Logger.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LabelPkcs11Logger.AutoSize = true;
-            this.LabelPkcs11Logger.Location = new System.Drawing.Point(10, 167);
+            this.LabelPkcs11Logger.Location = new System.Drawing.Point(10, 95);
             this.LabelPkcs11Logger.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LabelPkcs11Logger.Name = "LabelPkcs11Logger";
             this.LabelPkcs11Logger.Size = new System.Drawing.Size(303, 13);
@@ -215,13 +203,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.groupBox3.Controls.Add(this.ButtonBrowsePkcs11Logger);
             this.groupBox3.Controls.Add(this.ButtonBrowsePkcs11Library);
             this.groupBox3.Controls.Add(this.LabelLogFile);
-            this.groupBox3.Controls.Add(this.CheckBoxEnablePkcs11Logger);
             this.groupBox3.Controls.Add(this.TextBoxPkcs11Logger);
             this.groupBox3.Controls.Add(this.LabelPkcs11Logger);
             this.groupBox3.Location = new System.Drawing.Point(13, 8);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(658, 246);
+            this.groupBox3.Size = new System.Drawing.Size(658, 226);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             // 
@@ -244,7 +231,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonCancel;
-            this.ClientSize = new System.Drawing.Size(684, 296);
+            this.ClientSize = new System.Drawing.Size(684, 276);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.ButtonOk);
             this.Controls.Add(this.ButtonCancel);
@@ -276,7 +263,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.Button ButtonBrowsePkcs11Logger;
         private System.Windows.Forms.TextBox TextBoxPkcs11Logger;
         private System.Windows.Forms.Button ButtonBrowseLogFile;
-        private System.Windows.Forms.CheckBox CheckBoxEnablePkcs11Logger;
         private System.Windows.Forms.Label LabelLogFile;
         private System.Windows.Forms.Label LabelPkcs11Logger;
         private System.Windows.Forms.GroupBox groupBox3;

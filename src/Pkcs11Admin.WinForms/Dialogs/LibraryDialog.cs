@@ -33,8 +33,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             LabelPkcs11Library.Text = string.Format(LabelPkcs11Library.Text, Pkcs11AdminInfo.RuntimeBitness);
             LabelPkcs11Logger.Text = string.Format(LabelPkcs11Logger.Text, Pkcs11AdminInfo.RuntimeBitness);
-            TextBoxLogFile.Text = Pkcs11Admin.Instance.GetDefaultLogPath();
             TextBoxPkcs11Logger.Text = Pkcs11Admin.Instance.GetDefaultLoggerPath();
+            TextBoxLogFile.Text = Pkcs11Admin.Instance.GetDefaultLogPath();
         }
 
         private void LibraryDialog_Shown(object sender, EventArgs e)
@@ -49,15 +49,14 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             ButtonBrowsePkcs11Library.Enabled = true;
             CheckBoxEnableLogging.Enabled = true;
 
+            LabelPkcs11Logger.Enabled = CheckBoxEnableLogging.Checked;
+            TextBoxPkcs11Logger.Enabled = CheckBoxEnableLogging.Checked;
+            ButtonBrowsePkcs11Logger.Enabled = CheckBoxEnableLogging.Checked;
+
             LabelLogFile.Enabled = CheckBoxEnableLogging.Checked;
             TextBoxLogFile.Enabled = CheckBoxEnableLogging.Checked;
             ButtonBrowseLogFile.Enabled = CheckBoxEnableLogging.Checked;
             CheckBoxOverwriteLogFile.Enabled = CheckBoxEnableLogging.Checked;
-
-            LabelPkcs11Logger.Enabled = CheckBoxEnableLogging.Checked && CheckBoxEnablePkcs11Logger.Checked;
-            TextBoxPkcs11Logger.Enabled = CheckBoxEnableLogging.Checked && CheckBoxEnablePkcs11Logger.Checked;
-            ButtonBrowsePkcs11Logger.Enabled = CheckBoxEnableLogging.Checked && CheckBoxEnablePkcs11Logger.Checked;
-            CheckBoxEnablePkcs11Logger.Enabled = CheckBoxEnableLogging.Checked;
         }
 
         private async void ButtonOk_Click(object sender, EventArgs e)
@@ -70,6 +69,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             if (CheckBoxEnableLogging.Checked)
             {
+                if (string.IsNullOrEmpty(TextBoxPkcs11Logger.Text))
+                {
+                    WinFormsUtils.ShowError(this, "PKCS#11 logging library is not specified");
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(TextBoxLogFile.Text))
                 {
                     WinFormsUtils.ShowError(this, "Log file is not specified");
@@ -83,23 +88,16 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 }
             }
 
-            if ((CheckBoxEnablePkcs11Logger.Checked) && (string.IsNullOrEmpty(TextBoxPkcs11Logger.Text)))
-            {
-                WinFormsUtils.ShowError(this, "PKCS#11 logging library is not specified");
-                return;
-            }
-
             try
             {
                 await WaitDialog.Execute(
                     this,
                     () => Pkcs11Admin.Instance.LoadLibrary(
                         TextBoxPkcs11Library.Text,
-                        CheckBoxEnableLogging.Checked,
-                        TextBoxLogFile.Text,
-                        CheckBoxOverwriteLogFile.Checked,
                         TextBoxPkcs11Logger.Text,
-                        CheckBoxEnablePkcs11Logger.Checked
+                        TextBoxLogFile.Text,
+                        CheckBoxEnableLogging.Checked,
+                        CheckBoxOverwriteLogFile.Checked
                     )
                 );
                 DialogResult = DialogResult.OK;

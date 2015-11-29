@@ -20,7 +20,6 @@ using Net.Pkcs11Interop.Common;
 using System;
 using System.IO;
 using System.Net;
-using System.Reflection;
 
 namespace Net.Pkcs11Admin
 {
@@ -31,20 +30,19 @@ namespace Net.Pkcs11Admin
         #region LoadLibrary parameters
 
         private string _pkcs11Library = null;
-        private bool _enableLogging = false;
-        private string _logFile = null;
-        private bool _overwriteLogFile = false;
         private string _pkcs11Logger = null;
-        private bool _enablePkcs11Logger = false;
+        private string _logFile = null;
+        private bool _enableLogging = false;
+        private bool _overwriteLogFile = false;
 
         #endregion
 
-        private object _logFileLock = new object();
-
         public string LogFile
         {
-            get;
-            private set;
+            get
+            {
+                return _logFile;
+            }
         }
 
         public Pkcs11AdminConfig Config
@@ -66,7 +64,7 @@ namespace Net.Pkcs11Admin
             Config = Pkcs11AdminConfig.GetDefault();
         }
 
-        public void LoadLibrary(string pkcs11Library, bool enableLogging, string logFile, bool overwriteLogFile, string pkcs11Logger, bool enablePkcs11Logger)
+        public void LoadLibrary(string pkcs11Library, string pkcs11Logger, string logFile, bool enableLogging, bool overwriteLogFile)
         {
             if (string.IsNullOrEmpty(pkcs11Library))
                 throw new ArgumentNullException("pkcs11Library");
@@ -88,30 +86,23 @@ namespace Net.Pkcs11Admin
 
             if (enableLogging)
             {
-                LogFile = logFile;
-                InitializeLogging(overwriteLogFile);
+                if (overwriteLogFile && File.Exists(logFile))
+                    File.Delete(logFile);
 
-                if (enablePkcs11Logger)
-                {
-                    // Setup PKCS11-LOGGER
-                    System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_LIBRARY_PATH", pkcs11Library);
-                    System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_LOG_FILE_PATH", logFile);
-                    System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_FLAGS", "0");
+                // Setup PKCS11-LOGGER
+                System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_LIBRARY_PATH", pkcs11Library);
+                System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_LOG_FILE_PATH", logFile);
+                System.Environment.SetEnvironmentVariable("PKCS11_LOGGER_FLAGS", "0");
 
-                    // Support also PKCS#11 Spy from OpenSC project
-                    System.Environment.SetEnvironmentVariable("PKCS11SPY", pkcs11Library);
-                    System.Environment.SetEnvironmentVariable("PKCS11SPY_OUTPUT", logFile);
+                // Support also PKCS#11 Spy from OpenSC project
+                System.Environment.SetEnvironmentVariable("PKCS11SPY", pkcs11Library);
+                System.Environment.SetEnvironmentVariable("PKCS11SPY_OUTPUT", logFile);
 
-                    Library = new Pkcs11Library(pkcs11Library, pkcs11Logger);
-                }
-                else
-                {
-                    Library = new Pkcs11Library(pkcs11Library);
-                }
+                Library = new Pkcs11Library(pkcs11Library, pkcs11Logger);
             }
             else
             {
-                LogFile = null;
+                logFile = null;
                 Library = new Pkcs11Library(pkcs11Library);
             }
 
@@ -121,7 +112,6 @@ namespace Net.Pkcs11Admin
             _logFile = logFile;
             _overwriteLogFile = overwriteLogFile;
             _pkcs11Logger = pkcs11Logger;
-            _enablePkcs11Logger = enablePkcs11Logger;
         }
 
         public void ReloadLibrary()
@@ -129,7 +119,7 @@ namespace Net.Pkcs11Admin
             if (Library == null)
                 throw new Exception("No library loaded");
 
-            LoadLibrary(_pkcs11Library, _enableLogging, _logFile, _overwriteLogFile, _pkcs11Logger, _enablePkcs11Logger);
+            LoadLibrary(_pkcs11Library, _pkcs11Logger, _logFile,  _enableLogging, _overwriteLogFile);
         }
 
         public string GetDefaultLoggerPath()
@@ -151,31 +141,6 @@ namespace Net.Pkcs11Admin
         {
             string dirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             return Path.Combine(dirPath, "Pkcs11Admin.txt");
-        }
-
-        public void InitializeLogging(bool overwriteLogFile)
-        {
-            if (overwriteLogFile && File.Exists(LogFile))
-                File.Delete(LogFile);
-
-            Log(string.Format("{0} {1} {2} on {3}", Pkcs11AdminInfo.AppTitle, Pkcs11AdminInfo.AppVersion, Pkcs11AdminInfo.RuntimeBitness, Pkcs11AdminInfo.OperatingSystem));
-            Log(string.Format("{0}", Pkcs11AdminInfo.AppDescription));
-            Log("Please visit www.pkcs11admin.net for more information");
-        }
-
-        public void Log(string message)
-        {
-            if (string.IsNullOrEmpty(LogFile))
-                return;
-
-            lock (_logFileLock)
-                File.AppendAllText(LogFile, string.Format("{0:yyyy-MM-dd HH:mm:ss} : {1}{2}", DateTime.Now, message, Environment.NewLine));
-        }
-
-        public void Log(Exception exception)
-        {
-            if (exception != null)
-                Log(exception.ToString());
         }
 
         #region CurrentVersionInfo

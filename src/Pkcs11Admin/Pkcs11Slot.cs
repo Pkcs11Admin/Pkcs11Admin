@@ -244,7 +244,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 // In order to keep the code sane consider slot unusable if C_GetSlotInfo fails
                 MarkSlotAsUnusable(ex, isSlotInfoException: true);
@@ -264,7 +264,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 // In order to keep the code sane consider slot unusable if C_GetTokenInfo fails
                 MarkSlotAsUnusable(ex, isTokenInfoException: true);
@@ -278,7 +278,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 // In order to keep the code sane consider slot unusable if C_GetSessionInfo fails
                 MarkSlotAsUnusable(ex, isSessionInfoException: true);
@@ -292,7 +292,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 Mechanisms = null;
                 MechanismsException = ex;
@@ -305,7 +305,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 HwFeatures = null;
                 HwFeaturesException = ex;
@@ -318,7 +318,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 DataObjects = null;
                 DataObjectsException = ex;
@@ -331,7 +331,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 Certificates = null;
                 CertificatesException = ex;
@@ -344,7 +344,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 Keys = null;
                 KeysException = ex;
@@ -357,7 +357,7 @@ namespace Net.Pkcs11Admin
             }
             catch (Exception ex)
             {
-                Pkcs11Admin.Instance.Log(ex);
+                // TODO - Log exception
 
                 DomainParams = null;
                 DomainParamsException = ex;
