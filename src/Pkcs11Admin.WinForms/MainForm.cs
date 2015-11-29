@@ -69,6 +69,7 @@ namespace Net.Pkcs11Admin.WinForms
 #if !DEBUG
             WinFormsUtils.ShowInfo(this, "This version of application represents work in progress and therefore may miss important features or contain critical bugs." + Environment.NewLine + Environment.NewLine + "Please visit project website - www.pkcs11admin.net - for more information on how to report problems or request new features.");
 #endif
+            ShowLibraryDialog();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -104,9 +105,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemLoadLibrary_Click(object sender, EventArgs e)
         {
-            using (LibraryDialog libraryDialog = new LibraryDialog())
-                if (libraryDialog.ShowDialog(this) == DialogResult.OK)
-                    SetupLoadedLibrary();
+            ShowLibraryDialog();
         }
 
         private void MenuItemOpenLogFile_Click(object sender, EventArgs e)
@@ -1275,6 +1274,13 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 WinFormsUtils.ShowError(this, ex);
             }
+        }
+
+        private void ShowLibraryDialog()
+        {
+            using (LibraryDialog libraryDialog = new LibraryDialog())
+                if (libraryDialog.ShowDialog(this) == DialogResult.OK)
+                    SetupLoadedLibrary();
         }
 
         private void SetupLoadedLibrary()
