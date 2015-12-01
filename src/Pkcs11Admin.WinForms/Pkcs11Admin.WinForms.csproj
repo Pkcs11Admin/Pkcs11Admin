@@ -90,6 +90,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\EnhancedListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Operation.cs" />
     <Compile Include="OperationType.cs" />
     <Compile Include="Dialogs\AboutDialog.cs">

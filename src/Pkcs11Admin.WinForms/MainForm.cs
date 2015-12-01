@@ -16,6 +16,7 @@
  */
 
 using Net.Pkcs11Admin.Configuration;
+using Net.Pkcs11Admin.WinForms.Controls;
 using Net.Pkcs11Admin.WinForms.Dialogs;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
@@ -593,30 +594,30 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewMechanisms.Items.Clear();
             ListViewMechanisms.Groups.Clear();
 
-            ListViewMechanisms.Columns.Add("Mechanism", -2, HorizontalAlignment.Left);
-            ListViewMechanisms.Columns.Add("Min key size", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Max key size", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Flags", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Performed in HW", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Encryption", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Decryption", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Digesting", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Signing", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Signing with recovery", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Verification", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Verification with recovery", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Key generation", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Key pair generation", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Key wrapping", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Key unwrapping", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Key derivation", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("Has extensions", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("EC over Fp", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("EC over F2m", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("EC with ecParameters", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("EC with namedCurve", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("EC point uncompressed", -2, HorizontalAlignment.Center);
-            ListViewMechanisms.Columns.Add("EC point compressed", -2, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Mechanism", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewMechanisms.AddColumn("Min key size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Max key size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Flags", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Performed in HW", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Encryption", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Decryption", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Digesting", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Signing", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Signing with recovery", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Verification", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Verification with recovery", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Key generation", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Key pair generation", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Key wrapping", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Key unwrapping", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Key derivation", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("Has extensions", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("EC over Fp", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("EC over F2m", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("EC with ecParameters", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("EC with namedCurve", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("EC point uncompressed", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
+            ListViewMechanisms.AddColumn("EC point compressed", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
 
@@ -704,8 +705,8 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewHwFeatures.Items.Clear();
             ListViewHwFeatures.Groups.Clear();
 
-            ListViewHwFeatures.Columns.Add("HW feature type", -2, HorizontalAlignment.Left);
-            ListViewHwFeatures.Columns.Add("Storage size", -2, HorizontalAlignment.Left);
+            ListViewHwFeatures.AddColumn("HW feature type", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewHwFeatures.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
 
@@ -775,10 +776,10 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDataObjects.Items.Clear();
             ListViewDataObjects.Groups.Clear();
 
-            ListViewDataObjects.Columns.Add("Label", -2, HorizontalAlignment.Left);
-            ListViewDataObjects.Columns.Add("Application", -2, HorizontalAlignment.Left);
-            ListViewDataObjects.Columns.Add("Private", -2, HorizontalAlignment.Left);
-            ListViewDataObjects.Columns.Add("Storage size", -2, HorizontalAlignment.Left);
+            ListViewDataObjects.AddColumn("Label", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewDataObjects.AddColumn("Application", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewDataObjects.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
+            ListViewDataObjects.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
 
@@ -875,11 +876,11 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewCertificates.Items.Clear();
             ListViewCertificates.Groups.Clear();
 
-            ListViewCertificates.Columns.Add("Label", -2, HorizontalAlignment.Left);
-            ListViewCertificates.Columns.Add("ID", -2, HorizontalAlignment.Left);
-            ListViewCertificates.Columns.Add("Certificate type", -2, HorizontalAlignment.Left);
-            ListViewCertificates.Columns.Add("Private", -2, HorizontalAlignment.Left);
-            ListViewCertificates.Columns.Add("Storage size", -2, HorizontalAlignment.Left);
+            ListViewCertificates.AddColumn("Label", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewCertificates.AddColumn("ID", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewCertificates.AddColumn("Certificate type", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewCertificates.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
+            ListViewCertificates.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
 
@@ -977,12 +978,12 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewKeys.Items.Clear();
             ListViewKeys.Groups.Clear();
 
-            ListViewKeys.Columns.Add("Label", -2, HorizontalAlignment.Left);
-            ListViewKeys.Columns.Add("ID", -2, HorizontalAlignment.Left);
-            ListViewKeys.Columns.Add("Key type", -2, HorizontalAlignment.Left);
-            ListViewKeys.Columns.Add("Key type", -2, HorizontalAlignment.Left);
-            ListViewKeys.Columns.Add("Private", -2, HorizontalAlignment.Left);
-            ListViewKeys.Columns.Add("Storage size", -2, HorizontalAlignment.Left);
+            ListViewKeys.AddColumn("Label", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewKeys.AddColumn("ID", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewKeys.AddColumn("Key type", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewKeys.AddColumn("Key type", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewKeys.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
+            ListViewKeys.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
 
@@ -1079,10 +1080,10 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDomainParams.Items.Clear();
             ListViewDomainParams.Groups.Clear();
 
-            ListViewDomainParams.Columns.Add("Label", -2, HorizontalAlignment.Left);
-            ListViewDomainParams.Columns.Add("Key type", -2, HorizontalAlignment.Left);
-            ListViewDomainParams.Columns.Add("Private", -2, HorizontalAlignment.Left);
-            ListViewDomainParams.Columns.Add("Storage size", -2, HorizontalAlignment.Left);
+            ListViewDomainParams.AddColumn("Label", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewDomainParams.AddColumn("Key type", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewDomainParams.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
+            ListViewDomainParams.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
 

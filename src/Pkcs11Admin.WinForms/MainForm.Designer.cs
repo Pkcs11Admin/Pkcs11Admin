@@ -82,40 +82,40 @@ namespace Net.Pkcs11Admin.WinForms
             this.MainFormPanel = new System.Windows.Forms.Panel();
             this.MainFormTabControl = new System.Windows.Forms.TabControl();
             this.TabPageBasicInfo = new System.Windows.Forms.TabPage();
-            this.ListViewBasicInfo = new System.Windows.Forms.ListView();
+            this.ButtonBasicInfo = new System.Windows.Forms.Button();
+            this.ComboBoxBasicInfo = new System.Windows.Forms.ComboBox();
+            this.ListViewBasicInfo = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelBasicInfo = new System.Windows.Forms.Label();
             this.TabPageMechanisms = new System.Windows.Forms.TabPage();
             this.ButtonMechanisms = new System.Windows.Forms.Button();
             this.ComboBoxMechanisms = new System.Windows.Forms.ComboBox();
-            this.ListViewMechanisms = new System.Windows.Forms.ListView();
+            this.ListViewMechanisms = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelMechanisms = new System.Windows.Forms.Label();
             this.TabPageHwFeatures = new System.Windows.Forms.TabPage();
             this.ButtonHwFeatures = new System.Windows.Forms.Button();
             this.ComboBoxHwFeatures = new System.Windows.Forms.ComboBox();
-            this.ListViewHwFeatures = new System.Windows.Forms.ListView();
+            this.ListViewHwFeatures = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelHwFeatures = new System.Windows.Forms.Label();
             this.TabPageDataObjects = new System.Windows.Forms.TabPage();
             this.ButtonDataObjects = new System.Windows.Forms.Button();
             this.ComboBoxDataObjects = new System.Windows.Forms.ComboBox();
-            this.ListViewDataObjects = new System.Windows.Forms.ListView();
+            this.ListViewDataObjects = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelDataObjects = new System.Windows.Forms.Label();
             this.TabPageCertificates = new System.Windows.Forms.TabPage();
             this.ButtonCertificates = new System.Windows.Forms.Button();
             this.ComboBoxCertificates = new System.Windows.Forms.ComboBox();
-            this.ListViewCertificates = new System.Windows.Forms.ListView();
+            this.ListViewCertificates = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelCertificates = new System.Windows.Forms.Label();
             this.TabPageKeys = new System.Windows.Forms.TabPage();
             this.ButtonKeys = new System.Windows.Forms.Button();
             this.ComboBoxKeys = new System.Windows.Forms.ComboBox();
-            this.ListViewKeys = new System.Windows.Forms.ListView();
+            this.ListViewKeys = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelKeys = new System.Windows.Forms.Label();
             this.TabPageDomainParams = new System.Windows.Forms.TabPage();
             this.ComboBoxDomainParams = new System.Windows.Forms.ComboBox();
             this.ButtonDomainParams = new System.Windows.Forms.Button();
-            this.ListViewDomainParams = new System.Windows.Forms.ListView();
+            this.ListViewDomainParams = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.LabelDomainParams = new System.Windows.Forms.Label();
-            this.ComboBoxBasicInfo = new System.Windows.Forms.ComboBox();
-            this.ButtonBasicInfo = new System.Windows.Forms.Button();
             this.MainFormStatusStrip.SuspendLayout();
             this.MainFormMenuStrip.SuspendLayout();
             this.MainFormPanel.SuspendLayout();
@@ -441,6 +441,28 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageBasicInfo.Text = "Basic info";
             this.TabPageBasicInfo.UseVisualStyleBackColor = true;
             // 
+            // ButtonBasicInfo
+            // 
+            this.ButtonBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonBasicInfo.Location = new System.Drawing.Point(662, 327);
+            this.ButtonBasicInfo.Name = "ButtonBasicInfo";
+            this.ButtonBasicInfo.Size = new System.Drawing.Size(75, 23);
+            this.ButtonBasicInfo.TabIndex = 3;
+            this.ButtonBasicInfo.Text = "Start";
+            this.ButtonBasicInfo.UseVisualStyleBackColor = true;
+            this.ButtonBasicInfo.Click += new System.EventHandler(this.ButtonBasicInfo_Click);
+            // 
+            // ComboBoxBasicInfo
+            // 
+            this.ComboBoxBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBoxBasicInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxBasicInfo.FormattingEnabled = true;
+            this.ComboBoxBasicInfo.Location = new System.Drawing.Point(13, 328);
+            this.ComboBoxBasicInfo.Name = "ComboBoxBasicInfo";
+            this.ComboBoxBasicInfo.Size = new System.Drawing.Size(643, 21);
+            this.ComboBoxBasicInfo.TabIndex = 2;
+            // 
             // ListViewBasicInfo
             // 
             this.ListViewBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -453,6 +475,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewBasicInfo.MultiSelect = false;
             this.ListViewBasicInfo.Name = "ListViewBasicInfo";
             this.ListViewBasicInfo.Size = new System.Drawing.Size(724, 295);
+            this.ListViewBasicInfo.Sortable = false;
             this.ListViewBasicInfo.TabIndex = 1;
             this.ListViewBasicInfo.UseCompatibleStateImageBehavior = false;
             this.ListViewBasicInfo.View = System.Windows.Forms.View.Details;
@@ -513,6 +536,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewMechanisms.Location = new System.Drawing.Point(13, 26);
             this.ListViewMechanisms.Name = "ListViewMechanisms";
             this.ListViewMechanisms.Size = new System.Drawing.Size(724, 295);
+            this.ListViewMechanisms.Sortable = true;
             this.ListViewMechanisms.TabIndex = 0;
             this.ListViewMechanisms.UseCompatibleStateImageBehavior = false;
             this.ListViewMechanisms.View = System.Windows.Forms.View.Details;
@@ -573,6 +597,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewHwFeatures.Location = new System.Drawing.Point(13, 26);
             this.ListViewHwFeatures.Name = "ListViewHwFeatures";
             this.ListViewHwFeatures.Size = new System.Drawing.Size(724, 295);
+            this.ListViewHwFeatures.Sortable = true;
             this.ListViewHwFeatures.TabIndex = 1;
             this.ListViewHwFeatures.UseCompatibleStateImageBehavior = false;
             this.ListViewHwFeatures.View = System.Windows.Forms.View.Details;
@@ -633,6 +658,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewDataObjects.Location = new System.Drawing.Point(13, 26);
             this.ListViewDataObjects.Name = "ListViewDataObjects";
             this.ListViewDataObjects.Size = new System.Drawing.Size(724, 295);
+            this.ListViewDataObjects.Sortable = true;
             this.ListViewDataObjects.TabIndex = 1;
             this.ListViewDataObjects.UseCompatibleStateImageBehavior = false;
             this.ListViewDataObjects.View = System.Windows.Forms.View.Details;
@@ -693,6 +719,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewCertificates.Location = new System.Drawing.Point(13, 26);
             this.ListViewCertificates.Name = "ListViewCertificates";
             this.ListViewCertificates.Size = new System.Drawing.Size(724, 295);
+            this.ListViewCertificates.Sortable = true;
             this.ListViewCertificates.TabIndex = 1;
             this.ListViewCertificates.UseCompatibleStateImageBehavior = false;
             this.ListViewCertificates.View = System.Windows.Forms.View.Details;
@@ -753,6 +780,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewKeys.Location = new System.Drawing.Point(13, 26);
             this.ListViewKeys.Name = "ListViewKeys";
             this.ListViewKeys.Size = new System.Drawing.Size(724, 295);
+            this.ListViewKeys.Sortable = true;
             this.ListViewKeys.TabIndex = 1;
             this.ListViewKeys.UseCompatibleStateImageBehavior = false;
             this.ListViewKeys.View = System.Windows.Forms.View.Details;
@@ -812,6 +840,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewDomainParams.Location = new System.Drawing.Point(13, 26);
             this.ListViewDomainParams.Name = "ListViewDomainParams";
             this.ListViewDomainParams.Size = new System.Drawing.Size(724, 295);
+            this.ListViewDomainParams.Sortable = true;
             this.ListViewDomainParams.TabIndex = 1;
             this.ListViewDomainParams.UseCompatibleStateImageBehavior = false;
             this.ListViewDomainParams.View = System.Windows.Forms.View.Details;
@@ -824,28 +853,6 @@ namespace Net.Pkcs11Admin.WinForms
             this.LabelDomainParams.Size = new System.Drawing.Size(225, 13);
             this.LabelDomainParams.TabIndex = 0;
             this.LabelDomainParams.Text = "These domain parameters objects were found:";
-            // 
-            // ComboBoxBasicInfo
-            // 
-            this.ComboBoxBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ComboBoxBasicInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxBasicInfo.FormattingEnabled = true;
-            this.ComboBoxBasicInfo.Location = new System.Drawing.Point(13, 328);
-            this.ComboBoxBasicInfo.Name = "ComboBoxBasicInfo";
-            this.ComboBoxBasicInfo.Size = new System.Drawing.Size(643, 21);
-            this.ComboBoxBasicInfo.TabIndex = 2;
-            // 
-            // ButtonBasicInfo
-            // 
-            this.ButtonBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonBasicInfo.Location = new System.Drawing.Point(662, 327);
-            this.ButtonBasicInfo.Name = "ButtonBasicInfo";
-            this.ButtonBasicInfo.Size = new System.Drawing.Size(75, 23);
-            this.ButtonBasicInfo.TabIndex = 3;
-            this.ButtonBasicInfo.Text = "Start";
-            this.ButtonBasicInfo.UseVisualStyleBackColor = true;
-            this.ButtonBasicInfo.Click += new System.EventHandler(this.ButtonBasicInfo_Click);
             // 
             // MainForm
             // 
@@ -905,18 +912,18 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.TabPage TabPageCertificates;
         private System.Windows.Forms.ToolStripMenuItem MenuItemLoadLibrary;
         private System.Windows.Forms.ToolStripSeparator MenuItemApplicationSeparator2;
-        private System.Windows.Forms.ListView ListViewBasicInfo;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewBasicInfo;
         private System.Windows.Forms.Label LabelBasicInfo;
         private System.Windows.Forms.Label LabelMechanisms;
-        private System.Windows.Forms.ListView ListViewMechanisms;
+        private Controls.EnhancedListView ListViewMechanisms;
         private System.Windows.Forms.Label LabelHwFeatures;
         private System.Windows.Forms.Label LabelDataObjects;
         private System.Windows.Forms.Label LabelKeys;
         private System.Windows.Forms.Label LabelCertificates;
-        private System.Windows.Forms.ListView ListViewHwFeatures;
-        private System.Windows.Forms.ListView ListViewDataObjects;
-        private System.Windows.Forms.ListView ListViewKeys;
-        private System.Windows.Forms.ListView ListViewCertificates;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewHwFeatures;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewDataObjects;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewKeys;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewCertificates;
         private System.Windows.Forms.ToolStripMenuItem MenuItemToken;
         private System.Windows.Forms.ToolStripMenuItem MenuItemLogin;
         private System.Windows.Forms.ToolStripMenuItem MenuItemLogout;
@@ -938,7 +945,7 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ToolStripMenuItem MenuItemProtectedUserInit;
         private System.Windows.Forms.ToolStripMenuItem MenuItemRefreshSlot;
         private System.Windows.Forms.TabPage TabPageDomainParams;
-        private System.Windows.Forms.ListView ListViewDomainParams;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewDomainParams;
         private System.Windows.Forms.Label LabelDomainParams;
         private System.Windows.Forms.ToolStripMenuItem MenuItemOpenLogFile;
         private System.Windows.Forms.ToolStripMenuItem MenuItemSlot;
