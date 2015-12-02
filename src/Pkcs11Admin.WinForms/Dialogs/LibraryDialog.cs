@@ -152,7 +152,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             {
                 saveFileDialog.Title = "Please select log file";
 
-                saveFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
+                saveFileDialog.Filter = "All files (*.*)|*.*|Log files (*.log)|*.log";
                 saveFileDialog.FilterIndex = 2;
 
                 saveFileDialog.AddExtension = true;

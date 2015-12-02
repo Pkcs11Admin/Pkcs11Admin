@@ -140,7 +140,7 @@ namespace Net.Pkcs11Admin
         public string GetDefaultLogPath()
         {
             string dirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            return Path.Combine(dirPath, "Pkcs11Admin.txt");
+            return Path.Combine(dirPath, "Pkcs11Admin.log");
         }
 
         #region CurrentVersionInfo
