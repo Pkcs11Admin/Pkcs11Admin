@@ -99,7 +99,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonCancel.Location = new System.Drawing.Point(596, 240);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
-            this.ButtonCancel.TabIndex = 10;
+            this.ButtonCancel.TabIndex = 9;
             this.ButtonCancel.Text = "Cancel";
             this.ButtonCancel.UseVisualStyleBackColor = true;
             // 
@@ -109,7 +109,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonOk.Location = new System.Drawing.Point(515, 240);
             this.ButtonOk.Name = "ButtonOk";
             this.ButtonOk.Size = new System.Drawing.Size(75, 23);
-            this.ButtonOk.TabIndex = 9;
+            this.ButtonOk.TabIndex = 8;
             this.ButtonOk.Text = "OK";
             this.ButtonOk.UseVisualStyleBackColor = true;
             this.ButtonOk.Click += new System.EventHandler(this.ButtonOk_Click);
@@ -124,7 +124,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxOverwriteLogFile.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.CheckBoxOverwriteLogFile.Name = "CheckBoxOverwriteLogFile";
             this.CheckBoxOverwriteLogFile.Size = new System.Drawing.Size(142, 17);
-            this.CheckBoxOverwriteLogFile.TabIndex = 5;
+            this.CheckBoxOverwriteLogFile.TabIndex = 7;
             this.CheckBoxOverwriteLogFile.Text = "Overwrite existing log file";
             this.CheckBoxOverwriteLogFile.UseVisualStyleBackColor = true;
             // 
@@ -134,7 +134,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TextBoxLogFile.Location = new System.Drawing.Point(13, 163);
             this.TextBoxLogFile.Name = "TextBoxLogFile";
             this.TextBoxLogFile.Size = new System.Drawing.Size(551, 20);
-            this.TextBoxLogFile.TabIndex = 3;
+            this.TextBoxLogFile.TabIndex = 5;
             // 
             // ButtonBrowsePkcs11Logger
             // 
@@ -142,7 +142,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonBrowsePkcs11Logger.Location = new System.Drawing.Point(570, 112);
             this.ButtonBrowsePkcs11Logger.Name = "ButtonBrowsePkcs11Logger";
             this.ButtonBrowsePkcs11Logger.Size = new System.Drawing.Size(75, 23);
-            this.ButtonBrowsePkcs11Logger.TabIndex = 8;
+            this.ButtonBrowsePkcs11Logger.TabIndex = 4;
             this.ButtonBrowsePkcs11Logger.Text = "Browse...";
             this.ButtonBrowsePkcs11Logger.UseVisualStyleBackColor = true;
             this.ButtonBrowsePkcs11Logger.Click += new System.EventHandler(this.ButtonBrowsePkcs11Logger_Click);
@@ -154,7 +154,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TextBoxPkcs11Logger.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.TextBoxPkcs11Logger.Name = "TextBoxPkcs11Logger";
             this.TextBoxPkcs11Logger.Size = new System.Drawing.Size(551, 20);
-            this.TextBoxPkcs11Logger.TabIndex = 7;
+            this.TextBoxPkcs11Logger.TabIndex = 3;
             // 
             // ButtonBrowseLogFile
             // 
@@ -162,7 +162,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonBrowseLogFile.Location = new System.Drawing.Point(570, 161);
             this.ButtonBrowseLogFile.Name = "ButtonBrowseLogFile";
             this.ButtonBrowseLogFile.Size = new System.Drawing.Size(75, 23);
-            this.ButtonBrowseLogFile.TabIndex = 4;
+            this.ButtonBrowseLogFile.TabIndex = 6;
             this.ButtonBrowseLogFile.Text = "Browse...";
             this.ButtonBrowseLogFile.UseVisualStyleBackColor = true;
             this.ButtonBrowseLogFile.Click += new System.EventHandler(this.ButtonBrowseLogFile_Click);
