@@ -475,7 +475,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewBasicInfo.MultiSelect = false;
             this.ListViewBasicInfo.Name = "ListViewBasicInfo";
             this.ListViewBasicInfo.Size = new System.Drawing.Size(724, 295);
-            this.ListViewBasicInfo.Sortable = false;
+            this.ListViewBasicInfo.Sortable = true;
             this.ListViewBasicInfo.TabIndex = 1;
             this.ListViewBasicInfo.UseCompatibleStateImageBehavior = false;
             this.ListViewBasicInfo.View = System.Windows.Forms.View.Details;

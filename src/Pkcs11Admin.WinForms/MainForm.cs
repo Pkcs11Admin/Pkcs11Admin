@@ -467,8 +467,8 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewBasicInfo.Items.Clear();
             ListViewBasicInfo.Groups.Clear();
 
-            ListViewBasicInfo.Columns.Add("Property name", -2, HorizontalAlignment.Left);
-            ListViewBasicInfo.Columns.Add("Property value", -2, HorizontalAlignment.Left);
+            ListViewBasicInfo.AddColumn("Property name", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
+            ListViewBasicInfo.AddColumn("Property value", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
 
             List<KeyValuePair<Pkcs11Info, string[]>> data = null;
 
