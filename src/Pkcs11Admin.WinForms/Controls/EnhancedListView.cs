@@ -84,7 +84,7 @@ namespace Net.Pkcs11Admin.WinForms.Controls
             else
                 _sorting = SortOrder.Ascending;
 
-            ColumnType type = (ColumnType)Columns[e.Column].Tag;
+            ColumnType type = (Columns[e.Column].Tag != null) ? (ColumnType)Columns[e.Column].Tag : ColumnType.String;
 
             switch (type)
             {

@@ -47,7 +47,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             this.ButtonEdit = new System.Windows.Forms.Button();
             this.ButtonRefresh = new System.Windows.Forms.Button();
-            this.ListViewAttributes = new System.Windows.Forms.ListView();
+            this.ListViewAttributes = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.ColumnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ButtonClose = new System.Windows.Forms.Button();
@@ -84,12 +84,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ColumnHeaderType,
             this.ColumnHeaderValue});
             this.ListViewAttributes.FullRowSelect = true;
-            this.ListViewAttributes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewAttributes.HideSelection = false;
             this.ListViewAttributes.Location = new System.Drawing.Point(13, 13);
             this.ListViewAttributes.MultiSelect = false;
             this.ListViewAttributes.Name = "ListViewAttributes";
             this.ListViewAttributes.Size = new System.Drawing.Size(658, 306);
+            this.ListViewAttributes.Sortable = true;
             this.ListViewAttributes.TabIndex = 2;
             this.ListViewAttributes.UseCompatibleStateImageBehavior = false;
             this.ListViewAttributes.View = System.Windows.Forms.View.Details;
@@ -139,7 +139,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         #endregion
 
         private System.Windows.Forms.Button ButtonRefresh;
-        private System.Windows.Forms.ListView ListViewAttributes;
+        private Net.Pkcs11Admin.WinForms.Controls.EnhancedListView ListViewAttributes;
         private System.Windows.Forms.ColumnHeader ColumnHeaderType;
         private System.Windows.Forms.ColumnHeader ColumnHeaderValue;
         private System.Windows.Forms.Button ButtonEdit;
