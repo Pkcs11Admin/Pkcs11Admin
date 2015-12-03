@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Asn1Net.Reader</name>
+    </assembly>
+    <members>
+        <member name="T:Net.Asn1.Reader.Asn1Class">
+            <summary>
+            Enumeration of possible classes in Identifier octet of the ASN.1 node.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1Class.Universal">
+            <summary>
+            The type is native to ASN.1.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1Class.Application">
+            <summary>
+            The type is only valid for one specific application
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1Class.ContextSpecific">
+            <summary>
+            Meaning of this type depends on the context (such as within a sequence, set or choice)
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1Class.Private">
+            <summary>
+            Defined in private specifications
+            </summary>
+        </member>
+        <member name="T:Net.Asn1.Reader.Asn1NodeType">
+            <summary>
+            Internal enumeration of possible nodes when parsing ASN.1 structure.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1NodeType.Primitive">
+            <summary>
+            ASN.1 type contains primitive value such as Utf8String, Integer etc.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1NodeType.ConstructedStart">
+            <summary>
+            ASN.1 type contains another ASN.1 type. This could be Sequence, Set etc.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1NodeType.ConstructedEnd">
+            <summary>
+            Virtual type of node indicating that ASN.1 constructed node has been parsed completely.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1NodeType.DocumentStart">
+            <summary>
+            Virtual type of node indicating that parser is at the beginning of ASN.1 structure.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Asn1NodeType.DocumentEnd">
+            <summary>
+            Virtual type of node indicating that parsing of ASN.1 structure has been completed.
+            </summary>
+        </member>
+        <member name="T:Net.Asn1.Reader.Asn1Type">
+            <summary>
+            Enumeration of possible ASN.1 universal class tags in Identifier octet.
+            </summary>
+        </member>
+        <member name="T:Net.Asn1.Reader.BerReader">
+            <summary>
+            BER reader. Implementation works on top o a stream. The stream should be seekable.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.BerReader._disposed">
+            <summary>
+            Flag indicating whether instance has been disposed
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.BerReader._nodeStack">
+            <summary>
+            Stack to help going through the structure of ASN.1.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.BerReader._current">
+            <summary>
+            Current node that can be read.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.BerReader._innerStream">
+            <summary>
+            Inner stream on top of which this class operates.
+            </summary>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.#ctor(System.IO.Stream,System.Boolean)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="stream">Stream that holds ASN.1 structure that shall be parsed.</param>
+            <param name="leaveOpen">True to leave the stream open after the BerReader object is disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.Read(System.Boolean)">
+            <summary>
+            Parse next node in ASN.1 structure.
+            </summary>
+            <param name="readContent">Flag indicating that value of each node should be read as well.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.InternalReadElement(System.Boolean)">
+            <summary>
+            Parse ASN.1 node and sets the result to <see cref="T:Net.Asn1.Reader.InternalNode"/> class.
+            <param name="readContent">Flag indicating that value of each node should be read as well.</param>
+            </summary>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadLength">
+            <summary>
+            Reads length of given ASN.1 object.
+            </summary>
+            <returns>Length of ASN.1 object value.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadIdentifierOctet">
+            <summary>
+            Reads identifier octet from ASN.1 object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadByteOrThrow(System.IO.Stream)">
+            <summary>
+            Reads one byte from given stream.
+            </summary>
+            <param name="stream">Stream to read from.</param>
+            <returns>Read byte.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadToEnd(System.Boolean)">
+            <summary>
+            Parse whole ASN.1 structure. <see cref="T:Net.Asn1.Reader.InternalNode"/> class holds all the mappings. Values of the tags are not read.
+            </summary>
+            <param name="readContent">Flag indicating that value of each node should be read as well.</param>
+            <returns>Internal node with map of parsed ASN.1 structure.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadContentAsBuffer">
+            <summary>
+            Read value of current node.
+            </summary>
+            <returns>Value read.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadContentAsBuffer(Net.Asn1.Reader.InternalNode)">
+            <summary>
+            Read value of given node. Underlying stream in BER reader has to be seekable to do that.
+            </summary>
+            <param name="node">Node  whose value shall be read.</param>
+            <returns>Content of the given node.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadContentAsBuffer(System.Byte[])">
+            <summary>
+            Read value of current node.
+            </summary>
+            <param name="outputBuffer">Reader will read content to this parameter. 
+            The parameter need to be initialized beforehand with length of actual read node.</param>
+            <returns>Value read.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.ReadContentAsBuffer(Net.Asn1.Reader.InternalNode,System.Byte[])">
+            <summary>
+            Read value of given node. Underlying stream in BER reader has to be seekable to do that.
+            </summary>
+            <param name="node">Node  whose value shall be read.</param>
+            <param name="outputBuffer">Reader will read content to this parameter. 
+            The parameter need to be initialized beforehand with length of actual read node.</param>
+            <returns>Content of the given node.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.Dispose">
+            <summary>
+            Disposes object.
+            </summary>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.Dispose(System.Boolean)">
+            <summary>
+            Disposes object.
+            </summary>
+            <param name="disposing">Flag indicating if it is safe to dispose managed resources.</param>
+        </member>
+        <member name="M:Net.Asn1.Reader.BerReader.Finalize">
+            <summary>
+            Class destructor that disposes object if caller forgot to do so
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.BerReader.CurrentNode">
+            <summary>
+            Gets current node. Usable when reading of content of a ASN.1 tag is not so important at the moment.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.BerReader.Depth">
+            <summary>
+            Value indicating the actual depth of parser in ASN.1 structure.
+            </summary>
+        </member>
+        <member name="T:Net.Asn1.Reader.Helpers">
+            <summary>
+            Helper methods, mostly converters.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Helpers.utcTimeRegex">
+            <summary>
+            Regular expression for parsing UTCTime according to ITU-T X.690 recommendation
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.Helpers.generalizedTimeRegex">
+            <summary>
+            Regular expression for parsing GeenralizedTime according to ITU-T X.690 recommendation
+            </summary>
+        </member>
+        <member name="M:Net.Asn1.Reader.Helpers.ConvertFromUniversalTime(System.String)">
+            <summary>
+            Converts string value to DateTimeOffset. String value is representing UTCTime according to ITU-T X.680 recommendation
+            </summary>
+            <param name="time">UTCTime as string value.</param>
+            <returns>Value converted to DateTimeOffset.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.Helpers.ConvertFromGeneralizedTime(System.String)">
+            <summary>
+            Converts string value to DateTimeOffset. String value is representing GeneralizedTime according to ITU-T X.680 recommendation
+            </summary>
+            <param name="time">GeneralizedTime as string value.</param>
+            <returns>Value converted to DateTimeOffset.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Net.Asn1.Reader.Helpers.ParseEncodedOid(System.Byte[])" -->
+        <member name="T:Net.Asn1.Reader.Identifier">
+            <summary>
+            Identifier Octet in ASN.1 object
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.Identifier.Class">
+            <summary>
+            Class of ASN.1 tag.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.Identifier.Constructed">
+            <summary>
+            Flag P/C from Identifier octet of ASN.1 node.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.Identifier.Tag">
+            <summary>
+            Tag number of ASN.1 node
+            </summary>
+        </member>
+        <member name="T:Net.Asn1.Reader.InternalNode">
+            <summary>
+            Class holds information about parsed ASN.1 node.
+            </summary>
+        </member>
+        <member name="F:Net.Asn1.Reader.InternalNode._childNodes">
+            <summary>
+            Internal list of child nodes of this ASN.1 node.
+            </summary>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsBigInteger">
+            <summary>
+            Read the value of the given node as BigInteger.
+            </summary>
+            <returns>Content of the given node.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsObjectIdentifier">
+            <summary>
+            Read the value of the given node as string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsString">
+            <summary>
+            Read the value of the given node as string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadConventAsDateTimeOffset">
+            <summary>
+            Read the value of the given node as DateTimeOffset.
+            </summary>
+            <returns>>Value of the given node as DateTimeOffset.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsBoolean">
+            <summary>
+            Read the value of the given node as Boolean.
+            </summary>
+            <returns>>Value of the given node as Boolean.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsBitString">
+            <summary>
+            Read the value of the given node as BitString.
+            </summary>
+            <returns>>Value of the given node as BitString.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsReal">
+            <summary>
+            Read the value of the given node as Real (double).
+            </summary>
+            <returns>>Value of the given node as Real (double).</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ExtractRealFromBinaryEncoding(System.Byte)">
+            <summary>
+            Extract Real value from binary encoded data.
+            </summary>
+            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
+            <returns>Extracted value.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ExtractRealFromDecimalEncoding">
+            <summary>
+            Extract Real value from decimal encoded data.
+            </summary>
+            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
+            <returns>Extracted value.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ExtractRealFromSpecialValueEncoding(System.Byte)">
+            <summary>
+            Extract Real value from special encoded data.
+            </summary>
+            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
+            <returns>Extracted value.</returns>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.Identifier">
+            <summary>
+            Identifier of ASN.1 object
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.Length">
+            <summary>
+            Length of ASN.1 node data. Identifier and Length octets of TLV are excluded. It is length of the Value octets.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.RawValue">
+            <summary>
+            Value of ASN.1 node in bytes. This property is not set automatically by Reader. 
+            User should set it by calling specific method on Reader to read the value.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.StartPosition">
+            <summary>
+            Start position of ASN.1 node in the inner stream.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.EndPosition">
+            <summary>
+            End position of ASN.1 node in the inner stream.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.HasIndefiniteLength">
+            <summary>
+            Flag indicating indefinite length of ASN.1 node.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.DataOffsetToStream">
+            <summary>
+            Position to the inner stream where Value octets begin.
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.IsConstructed">
+            <summary>
+            Flag indicating that this node is not <see cref="F:Net.Asn1.Reader.Asn1NodeType.Primitive"/>
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.NodeType">
+            <summary>
+            Type of the ASN.1 node
+            </summary>
+        </member>
+        <member name="P:Net.Asn1.Reader.InternalNode.ChildNodes">
+            <summary>
+            Gets list of childs of this ASN.1 node.
+            </summary>
+        </member>
+    </members>
+</doc>

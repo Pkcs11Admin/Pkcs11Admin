@@ -70,6 +70,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Asn1Net.Forms.TreeView, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Asn1Net.Forms.TreeView.1.1.0.0\lib\net40\Asn1Net.Forms.TreeView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Asn1Net.Reader, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Asn1Net.Reader.1.0.0.1\lib\net40\Asn1Net.Reader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Be.Windows.Forms.HexBox, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Be.Windows.Forms.HexBox.1.6.1\lib\net40\Be.Windows.Forms.HexBox.dll</HintPath>
@@ -92,6 +100,12 @@
   <ItemGroup>
     <Compile Include="Controls\EnhancedListView.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Asn1Viewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Asn1Viewer.Designer.cs">
+      <DependentUpon>Asn1Viewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Operation.cs" />
     <Compile Include="OperationType.cs" />
@@ -184,6 +198,9 @@
     <Compile Include="WinFormsUtils.cs" />
     <EmbeddedResource Include="Dialogs\AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Asn1Viewer.resx">
+      <DependentUpon>Asn1Viewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ChangePinDialog.resx">
       <DependentUpon>ChangePinDialog.cs</DependentUpon>

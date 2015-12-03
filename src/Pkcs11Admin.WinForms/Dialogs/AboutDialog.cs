@@ -112,6 +112,32 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
             RichTextBoxLicenses.AppendText(@"PKCS11-LOGGER is available under the terms of flexible commercial license. Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details." + Environment.NewLine + Environment.NewLine);
 
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize * 2, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Asn1Reader" + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Managed ASN.1 Parsing library. Part of Asn1Net utilities." + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Copyright (c) 2014-2015 Peter Polacko" + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Author: Peter Polacko <peter.polacko+asn1net@gmail.com>" + Environment.NewLine + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.AppendText(@"Licensing for open source projects:" + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.AppendText(@"Asn1Reader is available under the terms of the GNU Affero General Public License version 3 as published by the Free Software Foundation. Please see < http://www.gnu.org/licenses/agpl-3.0.html> for more details." + Environment.NewLine + Environment.NewLine);
+
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize * 2, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Asn1Net.Forms.TreeView" + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"User control for visualizing ASN.1 objects. Part of Asn1Net utilities." + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Copyright (c) 2014-2015 Peter Polacko" + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Bold);
+            RichTextBoxLicenses.AppendText(@"Author: Peter Polacko <peter.polacko+asn1net@gmail.com>" + Environment.NewLine + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.AppendText(@"Licensing for open source projects:" + Environment.NewLine);
+            RichTextBoxLicenses.SelectionFont = new System.Drawing.Font(fontFamily, fontSize, FontStyle.Regular);
+            RichTextBoxLicenses.AppendText(@"Asn1Net.Forms.TreeView is available under the terms of the GNU Affero General Public License version 3 as published by the Free Software Foundation. Please see < http://www.gnu.org/licenses/agpl-3.0.html> for more details." + Environment.NewLine + Environment.NewLine);
+
             RichTextBoxLicenses.SelectionStart = 0;
             RichTextBoxLicenses.ScrollToCaret();
         }
