@@ -472,7 +472,6 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewBasicInfo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewBasicInfo.HideSelection = false;
             this.ListViewBasicInfo.Location = new System.Drawing.Point(13, 26);
-            this.ListViewBasicInfo.MultiSelect = false;
             this.ListViewBasicInfo.Name = "ListViewBasicInfo";
             this.ListViewBasicInfo.Size = new System.Drawing.Size(724, 295);
             this.ListViewBasicInfo.Sortable = true;

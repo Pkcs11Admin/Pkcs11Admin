@@ -1360,7 +1360,7 @@ namespace Net.Pkcs11Admin.WinForms
             X509Certificate2UI.DisplayCertificate(x509Cert, this.Handle);
         }
 
-        private void ExportListView(ListView listView, string fileName)
+        private void ExportListView(EnhancedListView listView, string fileName)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -1374,7 +1374,7 @@ namespace Net.Pkcs11Admin.WinForms
                 saveFileDialog.OverwritePrompt = true;
 
                 if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-                    WinFormsUtils.DumpListViewToCsvFile(listView, saveFileDialog.FileName);
+                    listView.ExportToCsvFile(saveFileDialog.FileName);
             }
         }
 

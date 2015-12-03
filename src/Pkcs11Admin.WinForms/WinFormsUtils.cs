@@ -17,8 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Net.Pkcs11Admin.WinForms
@@ -82,39 +80,6 @@ namespace Net.Pkcs11Admin.WinForms
                 selectedItems.Add(selectedItem);
 
             return selectedItems;
-        }
-
-        public static void DumpListViewToCsvFile(ListView listView, string filePath)
-        {
-            if (listView == null)
-                throw new ArgumentNullException("listView");
-
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException("filePath");
-
-            int rows = listView.Items.Count + 1;
-            int cols = listView.Columns.Count;
-
-            string value = null;
-            char[] eol = new char[] { (char)0x0d, (char)0x0a };
-
-            // Generate RFC4180 compliant CSV file
-            using (StreamWriter streamWriter = new StreamWriter(filePath, false, Encoding.UTF8))
-            {
-                for (int i = 0; i < rows; i++)
-                {
-                    for (int j = 0; j < cols; j++)
-                    {
-                        value = (i == 0) ? listView.Columns[j].Text : listView.Items[i - 1].SubItems[j].Text;
-                        value = value.Replace("\"", "\"\"");
-                        value = "\"" + value + "\"";
-                        value = (j == (cols - 1)) ? value : value + ", ";
-                        streamWriter.Write(value);
-                    }
-
-                    streamWriter.Write(eol);
-                }
-            }
         }
     }
 }

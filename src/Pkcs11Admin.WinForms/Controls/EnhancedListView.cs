@@ -16,6 +16,8 @@
  */
 
 using System;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Net.Pkcs11Admin.WinForms.Controls
@@ -48,7 +50,24 @@ namespace Net.Pkcs11Admin.WinForms.Controls
         public EnhancedListView()
             : base()
         {
-            
+            KeyUp += new KeyEventHandler(KeyUpHandler);
+        }
+
+        public void KeyUpHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                BeginUpdate();
+
+                foreach (ListViewItem item in Items)
+                    item.Selected = true;
+
+                EndUpdate();
+            }
+            else if (e.Control && e.KeyCode == Keys.C)
+            {
+                CopySelectedItemsToClipboard();
+            }
         }
 
         public ColumnHeader AddColumn(string text, ColumnType type, HorizontalAlignment align)
@@ -200,6 +219,92 @@ namespace Net.Pkcs11Admin.WinForms.Controls
                     rv = 0;
 
                 return (_order == SortOrder.Descending) ? rv * -1 : rv;
+            }
+        }
+
+        #endregion
+
+        #region CSV export
+
+        private void CopySelectedItemsToClipboard()
+        {
+            // Note: CSV should be RFC4180 compliant
+
+            int columnCount = 0;
+            string cellText = null;
+            char[] EOL = new char[] { (char)0x0d, (char)0x0a };
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                // Write data to stream
+                using (StreamWriter streamWriter = new StreamWriter(memoryStream, Encoding.UTF8, 4096, true))
+                {
+                    // Copy column headers
+                    columnCount = Columns.Count;
+                    for (int i = 0; i < columnCount; i++)
+                    {
+                        cellText = Columns[i].Text;
+                        cellText = cellText.Replace("\"", "\"\"");
+                        cellText = "\"" + cellText + "\"";
+                        cellText = (i == (columnCount - 1)) ? cellText : cellText + ", ";
+                        streamWriter.Write(cellText);
+                    }
+                    streamWriter.Write(EOL);
+
+                    // Copy selected rows
+                    for (int i = 0; i < SelectedItems.Count; i++)
+                    {
+                        columnCount = SelectedItems[i].SubItems.Count;
+                        for (int j = 0; j < columnCount; j++)
+                        {
+                            cellText = SelectedItems[i].SubItems[j].Text;
+                            cellText = cellText.Replace("\"", "\"\"");
+                            cellText = "\"" + cellText + "\"";
+                            cellText = (j == (columnCount - 1)) ? cellText : cellText + ", ";
+                            streamWriter.Write(cellText);
+                        }
+                        if (i < (SelectedItems.Count - 1))
+                            streamWriter.Write(EOL);
+                    }
+                }
+
+                // Jump at the beginning of the stream
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                // Copy data from stream to clipboard
+                using (StreamReader streamReader = new StreamReader(memoryStream, Encoding.UTF8))
+                    Clipboard.SetText(streamReader.ReadToEnd());
+            }
+        }
+
+        public void ExportToCsvFile(string filePath)
+        {
+            // Note: CSV should be RFC4180 compliant
+
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentNullException("filePath");
+
+            int rowCount = Items.Count + 1;
+            int columnCount = Columns.Count;
+            string cellText = null;
+            char[] EOL = new char[] { (char)0x0d, (char)0x0a };
+
+            
+            using (StreamWriter streamWriter = new StreamWriter(filePath, false, Encoding.UTF8))
+            {
+                for (int i = 0; i < rowCount; i++)
+                {
+                    for (int j = 0; j < columnCount; j++)
+                    {
+                        cellText = (i == 0) ? Columns[j].Text : Items[i - 1].SubItems[j].Text;
+                        cellText = cellText.Replace("\"", "\"\"");
+                        cellText = "\"" + cellText + "\"";
+                        cellText = (j == (columnCount - 1)) ? cellText : cellText + ", ";
+                        streamWriter.Write(cellText);
+                    }
+                    if (i < (rowCount - 1))
+                        streamWriter.Write(EOL);
+                }
             }
         }
 
