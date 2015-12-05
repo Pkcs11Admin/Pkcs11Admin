@@ -16,10 +16,8 @@ TODOs with HIGH PRIORITY:
 
 TODOs with LOW PRIORITY:
 - Log important events
-- Create certificate dialog that will work on non-windows platforms
 - Create log viewer dialog
 - Custom editors for ulong, bool, string, datetime attributes
-- ASN.1 view for attribute value
 - Display attribute description
 - Support for array attributes (already present in Pkcs11Interop)
 - HARD - Implement carets in HexBox on non-windows platforms
