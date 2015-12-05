@@ -74,8 +74,8 @@
       <HintPath>..\packages\Asn1Net.Forms.TreeView.1.1.0.0\lib\net40\Asn1Net.Forms.TreeView.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Asn1Net.Reader, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Asn1Net.Reader.1.0.0.1\lib\net40\Asn1Net.Reader.dll</HintPath>
+    <Reference Include="Asn1Net.Reader, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Asn1Net.Reader.1.1.0.1\lib\net40\Asn1Net.Reader.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Be.Windows.Forms.HexBox, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">

@@ -221,6 +221,29 @@
             <returns>Value converted to DateTimeOffset.</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Net.Asn1.Reader.Helpers.ParseEncodedOid(System.Byte[])" -->
+        <member name="M:Net.Asn1.Reader.Helpers.ExtractRealFromBinaryEncoding(System.Byte,System.Byte[])">
+            <summary>
+            Extract Real value from binary encoded data.
+            </summary>
+            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
+            <param name="rawValue">Raw encoded value.</param>
+            <returns>Extracted value.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.Helpers.ExtractRealFromDecimalEncoding(System.Byte[])">
+            <summary>
+            Extract Real value from decimal encoded data.
+            </summary>
+            <param name="rawValue">Raw encoded value.</param>
+            <returns>Extracted value.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.Helpers.ExtractRealFromSpecialValueEncoding(System.Byte,System.Byte[])">
+            <summary>
+            Extract Real value from special encoded data.
+            </summary>
+            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
+            <param name="rawValue">Raw encoded value.</param>
+            <returns>Extracted value.</returns>
+        </member>
         <member name="T:Net.Asn1.Reader.Identifier">
             <summary>
             Identifier Octet in ASN.1 object
@@ -269,6 +292,54 @@
             </summary>
             <returns>Value of the given node as string.</returns>
         </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsNumericString">
+            <summary>
+            Read the value of the given node as numeric string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsIA5String">
+            <summary>
+            Read the value of the given node as IA5string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsPrintableString">
+            <summary>
+            Read the value of the given node as Printable string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsT61String">
+            <summary>
+            Read the value of the given node as T61string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsGraphicString">
+            <summary>
+            Read the value of the given node as Graphic string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsGeneralString">
+            <summary>
+            Read the value of the given node as General string.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsBmpString">
+            <summary>
+            Read the value of the given node as BMPstring.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsUniversalString">
+            <summary>
+            Read the value of the given node as Universalstring.
+            </summary>
+            <returns>Value of the given node as string.</returns>
+        </member>
         <member name="M:Net.Asn1.Reader.InternalNode.ReadConventAsDateTimeOffset">
             <summary>
             Read the value of the given node as DateTimeOffset.
@@ -293,26 +364,11 @@
             </summary>
             <returns>>Value of the given node as Real (double).</returns>
         </member>
-        <member name="M:Net.Asn1.Reader.InternalNode.ExtractRealFromBinaryEncoding(System.Byte)">
+        <member name="M:Net.Asn1.Reader.InternalNode.ReadContentAsEnumerated``1(``0)">
             <summary>
-            Extract Real value from binary encoded data.
+            Read the value of the given node as Enumerated.
             </summary>
-            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
-            <returns>Extracted value.</returns>
-        </member>
-        <member name="M:Net.Asn1.Reader.InternalNode.ExtractRealFromDecimalEncoding">
-            <summary>
-            Extract Real value from decimal encoded data.
-            </summary>
-            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
-            <returns>Extracted value.</returns>
-        </member>
-        <member name="M:Net.Asn1.Reader.InternalNode.ExtractRealFromSpecialValueEncoding(System.Byte)">
-            <summary>
-            Extract Real value from special encoded data.
-            </summary>
-            <param name="firstOctet">Information octet with base, mantissa and exponent information.</param>
-            <returns>Extracted value.</returns>
+            <returns>Value of the given node as Enumerated value.</returns>
         </member>
         <member name="P:Net.Asn1.Reader.InternalNode.Identifier">
             <summary>
