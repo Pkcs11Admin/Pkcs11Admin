@@ -455,7 +455,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedLibrary == null) || (_selectedSlot == null)));
             TabPageBasicInfo.Enabled = controlsEnabled;
-            ListViewBasicInfo.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewBasicInfo.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewBasicInfo();
         }
 
@@ -582,7 +582,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedSlot == null) || (_selectedSlot.Mechanisms == null) || (_selectedSlot.MechanismsException != null)));
             TabPageMechanisms.Enabled = controlsEnabled;
-            ListViewMechanisms.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewMechanisms.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewMechanisms();
         }
 
@@ -693,7 +693,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedSlot == null) || (_selectedSlot.HwFeatures == null) || (_selectedSlot.HwFeaturesException != null)));
             TabPageHwFeatures.Enabled = controlsEnabled;
-            ListViewHwFeatures.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewHwFeatures.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewHwFeatures();
         }
 
@@ -764,7 +764,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedSlot == null) || (_selectedSlot.DataObjects == null) || (_selectedSlot.DataObjectsException != null)));
             TabPageDataObjects.Enabled = controlsEnabled;
-            ListViewDataObjects.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewDataObjects.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewDataObjects();
         }
 
@@ -864,7 +864,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedSlot == null) || (_selectedSlot.Certificates == null) || (_selectedSlot.CertificatesException != null)));
             TabPageCertificates.Enabled = controlsEnabled;
-            ListViewCertificates.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewCertificates.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewCertificates();
         }
 
@@ -963,7 +963,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedSlot == null) || (_selectedSlot.Keys == null) || (_selectedSlot.KeysException != null)));
             TabPageKeys.Enabled = controlsEnabled;
-            ListViewKeys.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewKeys.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewKeys();
         }
 
@@ -1065,7 +1065,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             bool controlsEnabled = (!((_selectedSlot == null) || (_selectedSlot.DomainParams == null) || (_selectedSlot.DomainParamsException != null)));
             TabPageDomainParams.Enabled = controlsEnabled;
-            ListViewDomainParams.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Nonclickable : ColumnHeaderStyle.None;
+            ListViewDomainParams.HeaderStyle = (controlsEnabled) ? ColumnHeaderStyle.Clickable : ColumnHeaderStyle.None;
             ReloadListViewDomainParams();
         }
 

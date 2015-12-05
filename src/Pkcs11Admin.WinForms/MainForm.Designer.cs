@@ -469,7 +469,6 @@ namespace Net.Pkcs11Admin.WinForms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewBasicInfo.FullRowSelect = true;
-            this.ListViewBasicInfo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewBasicInfo.HideSelection = false;
             this.ListViewBasicInfo.Location = new System.Drawing.Point(13, 26);
             this.ListViewBasicInfo.Name = "ListViewBasicInfo";
@@ -530,7 +529,6 @@ namespace Net.Pkcs11Admin.WinForms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewMechanisms.FullRowSelect = true;
-            this.ListViewMechanisms.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewMechanisms.HideSelection = false;
             this.ListViewMechanisms.Location = new System.Drawing.Point(13, 26);
             this.ListViewMechanisms.Name = "ListViewMechanisms";
@@ -591,7 +589,6 @@ namespace Net.Pkcs11Admin.WinForms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewHwFeatures.FullRowSelect = true;
-            this.ListViewHwFeatures.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewHwFeatures.HideSelection = false;
             this.ListViewHwFeatures.Location = new System.Drawing.Point(13, 26);
             this.ListViewHwFeatures.Name = "ListViewHwFeatures";
@@ -652,7 +649,6 @@ namespace Net.Pkcs11Admin.WinForms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewDataObjects.FullRowSelect = true;
-            this.ListViewDataObjects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewDataObjects.HideSelection = false;
             this.ListViewDataObjects.Location = new System.Drawing.Point(13, 26);
             this.ListViewDataObjects.Name = "ListViewDataObjects";
@@ -713,7 +709,6 @@ namespace Net.Pkcs11Admin.WinForms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewCertificates.FullRowSelect = true;
-            this.ListViewCertificates.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewCertificates.HideSelection = false;
             this.ListViewCertificates.Location = new System.Drawing.Point(13, 26);
             this.ListViewCertificates.Name = "ListViewCertificates";
@@ -774,7 +769,6 @@ namespace Net.Pkcs11Admin.WinForms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewKeys.FullRowSelect = true;
-            this.ListViewKeys.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewKeys.HideSelection = false;
             this.ListViewKeys.Location = new System.Drawing.Point(13, 26);
             this.ListViewKeys.Name = "ListViewKeys";
@@ -834,7 +828,6 @@ namespace Net.Pkcs11Admin.WinForms
             this.ListViewDomainParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewDomainParams.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewDomainParams.HideSelection = false;
             this.ListViewDomainParams.Location = new System.Drawing.Point(13, 26);
             this.ListViewDomainParams.Name = "ListViewDomainParams";
