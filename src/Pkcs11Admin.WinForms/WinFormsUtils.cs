@@ -44,6 +44,36 @@ namespace Net.Pkcs11Admin.WinForms
             return MessageBox.Show(owner, question, Pkcs11AdminInfo.AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
+        public static void AppendToListView(ListView listView, string listViewGroupName, List<KeyValuePair<object, string[]>> data)
+        {
+            if (listView == null)
+                throw new ArgumentNullException("listView");
+
+            ListViewGroup listViewGroup = null;
+            if (!string.IsNullOrEmpty(listViewGroupName))
+                listViewGroup = new ListViewGroup(listViewGroupName);
+
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            foreach (KeyValuePair<object, string[]> record in data)
+            {
+                ListViewItem listViewItem = new ListViewItem(record.Value[0]);
+                listViewItem.Tag = record.Key;
+
+                for (int i = 1; i < record.Value.Length; i++)
+                    listViewItem.SubItems.Add(record.Value[i]);
+
+                if (listViewGroup != null)
+                    listViewGroup.Items.Add(listViewItem);
+
+                listView.Items.Add(listViewItem);
+            }
+
+            if (listViewGroup != null)
+                listView.Groups.Add(listViewGroup);
+        }
+
         public static ListViewItem GetSingleSelectedItem(ListView listView)
         {
             if (listView == null)

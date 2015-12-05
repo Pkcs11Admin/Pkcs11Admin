@@ -943,10 +943,7 @@ namespace Net.Pkcs11Admin.WinForms
                     break;
 
                 case OperationType.Details:
-                    if (Platform.IsWindows)
-                        ShowCertificateDetails();
-                    else
-                        WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet"); // TODO - Implement custom dialog for certificate details
+                    ShowCertificateDetails();
                     break;
 
                 default:
@@ -1356,8 +1353,8 @@ namespace Net.Pkcs11Admin.WinForms
                 return;
 
             byte[] certData = ((Pkcs11CertificateInfo)selectedItem.Tag).CkaValue;
-            X509Certificate2 x509Cert = new X509Certificate2(certData);
-            X509Certificate2UI.DisplayCertificate(x509Cert, this.Handle);
+            using (CertificateDialog certificateDialog = new CertificateDialog(certData))
+                certificateDialog.ShowDialog(this);
         }
 
         private void ExportListView(EnhancedListView listView, string fileName)

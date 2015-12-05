@@ -107,6 +107,12 @@
     <Compile Include="Dialogs\Asn1Viewer.Designer.cs">
       <DependentUpon>Asn1Viewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CertificateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CertificateDialog.Designer.cs">
+      <DependentUpon>CertificateDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Operation.cs" />
     <Compile Include="OperationType.cs" />
     <Compile Include="Dialogs\AboutDialog.cs">
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Asn1Viewer.resx">
       <DependentUpon>Asn1Viewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CertificateDialog.resx">
+      <DependentUpon>CertificateDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ChangePinDialog.resx">
       <DependentUpon>ChangePinDialog.cs</DependentUpon>
