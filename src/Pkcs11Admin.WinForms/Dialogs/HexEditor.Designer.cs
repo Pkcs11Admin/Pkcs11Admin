@@ -51,6 +51,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelName = new System.Windows.Forms.Label();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.LabelValue = new System.Windows.Forms.Label();
+            this.ButtonLoad = new System.Windows.Forms.Button();
+            this.ButtonSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // HexBoxEditor
@@ -120,6 +122,28 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelValue.TabIndex = 5;
             this.LabelValue.Text = "Attribute value:";
             // 
+            // ButtonLoad
+            // 
+            this.ButtonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ButtonLoad.Location = new System.Drawing.Point(13, 315);
+            this.ButtonLoad.Name = "ButtonLoad";
+            this.ButtonLoad.Size = new System.Drawing.Size(75, 23);
+            this.ButtonLoad.TabIndex = 5;
+            this.ButtonLoad.Text = "Load";
+            this.ButtonLoad.UseVisualStyleBackColor = true;
+            this.ButtonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
+            // 
+            // ButtonSave
+            // 
+            this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ButtonSave.Location = new System.Drawing.Point(94, 315);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSave.TabIndex = 6;
+            this.ButtonSave.Text = "Save";
+            this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
             // HexEditor
             // 
             this.AcceptButton = this.ButtonOk;
@@ -127,6 +151,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonCancel;
             this.ClientSize = new System.Drawing.Size(497, 351);
+            this.Controls.Add(this.ButtonSave);
+            this.Controls.Add(this.ButtonLoad);
             this.Controls.Add(this.LabelValue);
             this.Controls.Add(this.TextBoxName);
             this.Controls.Add(this.LabelName);
@@ -150,5 +176,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.Label LabelName;
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label LabelValue;
+        private System.Windows.Forms.Button ButtonLoad;
+        private System.Windows.Forms.Button ButtonSave;
     }
 }

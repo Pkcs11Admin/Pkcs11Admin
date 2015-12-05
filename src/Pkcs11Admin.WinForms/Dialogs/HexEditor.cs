@@ -17,6 +17,7 @@
 
 using Be.Windows.Forms;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Net.Pkcs11Admin.WinForms.Dialogs
@@ -47,6 +48,43 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             _dynamicByteProvider = new DynamicByteProvider(bytes);
             HexBoxEditor.ByteProvider = _dynamicByteProvider;
+        }
+
+        private void ButtonLoad_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+
+                if (openFileDialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                byte[] bytes = File.ReadAllBytes(openFileDialog.FileName);
+                _dynamicByteProvider.DeleteBytes(0, _dynamicByteProvider.Bytes.Count);
+                _dynamicByteProvider.InsertBytes(0, bytes);
+                HexBoxEditor.Refresh();
+            }
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.FileName = TextBoxName.Text;
+
+                saveFileDialog.Filter = "All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 1;
+
+                saveFileDialog.CreatePrompt = false;
+                saveFileDialog.OverwritePrompt = true;
+
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, Bytes);
+                    WinFormsUtils.ShowInfo(this, "Attribute value was successfully saved");
+                }
+            }
         }
     }
 }
