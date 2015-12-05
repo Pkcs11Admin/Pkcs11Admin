@@ -470,80 +470,80 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewBasicInfo.AddColumn("Property name", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
             ListViewBasicInfo.AddColumn("Property value", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = null;
+            List<KeyValuePair<object, string[]>> data = null;
 
             // Library info
             if (_selectedLibrary != null)
             {
-                data = new List<KeyValuePair<Pkcs11Info, string[]>>();
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedLibrary.Info, new string[] { "Library path", _selectedLibrary.Info.LibraryPath }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedLibrary.Info, new string[] { "Cryptoki version", _selectedLibrary.Info.CryptokiVersion }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedLibrary.Info, new string[] { "Manufacturer", _selectedLibrary.Info.ManufacturerId }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedLibrary.Info, new string[] { "Flags", _selectedLibrary.Info.Flags.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedLibrary.Info, new string[] { "Library description", _selectedLibrary.Info.LibraryDescription }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedLibrary.Info, new string[] { "Library version", _selectedLibrary.Info.LibraryVersion }));
+                data = new List<KeyValuePair<object, string[]>>();
+                data.Add(new KeyValuePair<object, string[]>(_selectedLibrary.Info, new string[] { "Library path", _selectedLibrary.Info.LibraryPath }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedLibrary.Info, new string[] { "Cryptoki version", _selectedLibrary.Info.CryptokiVersion }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedLibrary.Info, new string[] { "Manufacturer", _selectedLibrary.Info.ManufacturerId }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedLibrary.Info, new string[] { "Flags", _selectedLibrary.Info.Flags.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedLibrary.Info, new string[] { "Library description", _selectedLibrary.Info.LibraryDescription }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedLibrary.Info, new string[] { "Library version", _selectedLibrary.Info.LibraryVersion }));
 
-                AppendToListView(ListViewBasicInfo, "Library info", data);
+                WinFormsUtils.AppendToListView(ListViewBasicInfo, "Library info", data);
             }
 
             // Slot info
             if ((_selectedSlot != null) && (_selectedSlot.SlotInfo != null))
             {
-                data = new List<KeyValuePair<Pkcs11Info, string[]>>();
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Slot description", _selectedSlot.SlotInfo.SlotDescription }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Manufacturer", _selectedSlot.SlotInfo.ManufacturerId }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Flags", _selectedSlot.SlotInfo.Flags.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Token present", _selectedSlot.SlotInfo.TokenPresent.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Removable device", _selectedSlot.SlotInfo.RemovableDevice.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Hardware slot", _selectedSlot.SlotInfo.HardwareSlot.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Hardware version", _selectedSlot.SlotInfo.HardwareVersion }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.SlotInfo, new string[] { "Firmware version", _selectedSlot.SlotInfo.FirmwareVersion }));
+                data = new List<KeyValuePair<object, string[]>>();
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Slot description", _selectedSlot.SlotInfo.SlotDescription }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Manufacturer", _selectedSlot.SlotInfo.ManufacturerId }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Flags", _selectedSlot.SlotInfo.Flags.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Token present", _selectedSlot.SlotInfo.TokenPresent.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Removable device", _selectedSlot.SlotInfo.RemovableDevice.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Hardware slot", _selectedSlot.SlotInfo.HardwareSlot.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Hardware version", _selectedSlot.SlotInfo.HardwareVersion }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.SlotInfo, new string[] { "Firmware version", _selectedSlot.SlotInfo.FirmwareVersion }));
 
-                AppendToListView(ListViewBasicInfo, "Slot info", data);
+                WinFormsUtils.AppendToListView(ListViewBasicInfo, "Slot info", data);
             }
 
             // Token info
             if ((_selectedSlot != null) && (_selectedSlot.TokenInfo != null))
             {
-                data = new List<KeyValuePair<Pkcs11Info, string[]>>();
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Label", _selectedSlot.TokenInfo.Label }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Manufacturer", _selectedSlot.TokenInfo.ManufacturerId }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Model", _selectedSlot.TokenInfo.Model }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Serial number", _selectedSlot.TokenInfo.SerialNumber }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Flags", _selectedSlot.TokenInfo.Flags.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "RNG", _selectedSlot.TokenInfo.Rng.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Write protected", _selectedSlot.TokenInfo.WriteProtected.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Login required", _selectedSlot.TokenInfo.LoginRequired.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN initialized", _selectedSlot.TokenInfo.UserPinInitialized.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Restore key not needed", _selectedSlot.TokenInfo.RestoreKeyNotNeeded.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Clock on token", _selectedSlot.TokenInfo.ClockOnToken.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Protected authentication path", _selectedSlot.TokenInfo.ProtectedAuthenticationPath.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Dual crypto operations", _selectedSlot.TokenInfo.DualCryptoOperations.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Token initialized", _selectedSlot.TokenInfo.TokenInitialized.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Secondary authentication", _selectedSlot.TokenInfo.SecondaryAuthentication.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN count low", _selectedSlot.TokenInfo.UserPinCountLow.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN final try", _selectedSlot.TokenInfo.UserPinFinalTry.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN locked", _selectedSlot.TokenInfo.UserPinLocked.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN to be changed", _selectedSlot.TokenInfo.UserPinToBeChanged.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN count low", _selectedSlot.TokenInfo.SoPinCountLow.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN final try", _selectedSlot.TokenInfo.SoPinFinalTry.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN locked", _selectedSlot.TokenInfo.SoPinLocked.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN to be changed", _selectedSlot.TokenInfo.SoPinToBeChanged.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Max session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.MaxSessionCount, true) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.SessionCount, false) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Max RW session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.MaxRwSessionCount, true) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "RW session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.RwSessionCount, false) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Max PIN length", _selectedSlot.TokenInfo.MaxPinLen.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Min PIN length", _selectedSlot.TokenInfo.MinPinLen.ToString() }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Total public memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.TotalPublicMemory, false) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Free public memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.FreePublicMemory, false) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Total private memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.TotalPrivateMemory, false) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Free private memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.FreePrivateMemory, false) }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Hardware version", _selectedSlot.TokenInfo.HardwareVersion }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "Firmware version", _selectedSlot.TokenInfo.FirmwareVersion }));
-                data.Add(new KeyValuePair<Pkcs11Info, string[]>(_selectedSlot.TokenInfo, new string[] { "UTC time", _selectedSlot.TokenInfo.UtcTime }));
+                data = new List<KeyValuePair<object, string[]>>();
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Label", _selectedSlot.TokenInfo.Label }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Manufacturer", _selectedSlot.TokenInfo.ManufacturerId }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Model", _selectedSlot.TokenInfo.Model }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Serial number", _selectedSlot.TokenInfo.SerialNumber }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Flags", _selectedSlot.TokenInfo.Flags.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "RNG", _selectedSlot.TokenInfo.Rng.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Write protected", _selectedSlot.TokenInfo.WriteProtected.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Login required", _selectedSlot.TokenInfo.LoginRequired.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN initialized", _selectedSlot.TokenInfo.UserPinInitialized.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Restore key not needed", _selectedSlot.TokenInfo.RestoreKeyNotNeeded.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Clock on token", _selectedSlot.TokenInfo.ClockOnToken.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Protected authentication path", _selectedSlot.TokenInfo.ProtectedAuthenticationPath.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Dual crypto operations", _selectedSlot.TokenInfo.DualCryptoOperations.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Token initialized", _selectedSlot.TokenInfo.TokenInitialized.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Secondary authentication", _selectedSlot.TokenInfo.SecondaryAuthentication.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN count low", _selectedSlot.TokenInfo.UserPinCountLow.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN final try", _selectedSlot.TokenInfo.UserPinFinalTry.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN locked", _selectedSlot.TokenInfo.UserPinLocked.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "User PIN to be changed", _selectedSlot.TokenInfo.UserPinToBeChanged.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN count low", _selectedSlot.TokenInfo.SoPinCountLow.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN final try", _selectedSlot.TokenInfo.SoPinFinalTry.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN locked", _selectedSlot.TokenInfo.SoPinLocked.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "SO PIN to be changed", _selectedSlot.TokenInfo.SoPinToBeChanged.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Max session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.MaxSessionCount, true) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.SessionCount, false) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Max RW session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.MaxRwSessionCount, true) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "RW session count", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.RwSessionCount, false) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Max PIN length", _selectedSlot.TokenInfo.MaxPinLen.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Min PIN length", _selectedSlot.TokenInfo.MinPinLen.ToString() }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Total public memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.TotalPublicMemory, false) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Free public memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.FreePublicMemory, false) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Total private memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.TotalPrivateMemory, false) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Free private memory", CheckSpecialTokenInfoValues(_selectedSlot.TokenInfo.FreePrivateMemory, false) }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Hardware version", _selectedSlot.TokenInfo.HardwareVersion }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "Firmware version", _selectedSlot.TokenInfo.FirmwareVersion }));
+                data.Add(new KeyValuePair<object, string[]>(_selectedSlot.TokenInfo, new string[] { "UTC time", _selectedSlot.TokenInfo.UtcTime }));
 
-                AppendToListView(ListViewBasicInfo, "Token info", data);
+                WinFormsUtils.AppendToListView(ListViewBasicInfo, "Token info", data);
             }
 
             ListViewBasicInfo.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -619,13 +619,13 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewMechanisms.AddColumn("EC point uncompressed", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
             ListViewMechanisms.AddColumn("EC point compressed", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
+            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.Mechanisms != null))
             {
                 foreach (Pkcs11MechanismInfo mechanism in _selectedSlot.Mechanisms)
                 {
-                    data.Add(new KeyValuePair<Pkcs11Info, string[]>(mechanism, new string[] {
+                    data.Add(new KeyValuePair<object, string[]>(mechanism, new string[] {
                         mechanism.Mechanism.ToString(),
                         mechanism.MinKeySize.ToString(),
                         mechanism.MaxKeySize.ToString(),
@@ -653,7 +653,7 @@ namespace Net.Pkcs11Admin.WinForms
                     }));
                 }
 
-                AppendToListView(ListViewMechanisms, null, data);
+                WinFormsUtils.AppendToListView(ListViewMechanisms, null, data);
             }
 
             ListViewMechanisms.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -708,19 +708,19 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewHwFeatures.AddColumn("HW feature type", EnhancedListView.ColumnType.String, HorizontalAlignment.Left);
             ListViewHwFeatures.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
+            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.HwFeatures != null))
             {
                 foreach (Pkcs11HwFeatureInfo hwFeature in _selectedSlot.HwFeatures)
                 {
-                    data.Add(new KeyValuePair<Pkcs11Info, string[]>(hwFeature, new string[] {
+                    data.Add(new KeyValuePair<object, string[]>(hwFeature, new string[] {
                         StringUtils.GetAttributeEnumValue((ulong)CKA.CKA_HW_FEATURE_TYPE, hwFeature.CkaHwFeatureType, true),
                         StorageSizeToString(hwFeature.StorageSize)
                     }));
                 }
 
-                AppendToListView(ListViewHwFeatures, null, data);
+                WinFormsUtils.AppendToListView(ListViewHwFeatures, null, data);
             }
 
             ListViewHwFeatures.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -781,13 +781,13 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDataObjects.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
             ListViewDataObjects.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
+            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.DataObjects != null))
             {
                 foreach (Pkcs11DataObjectInfo dataObject in _selectedSlot.DataObjects)
                 {
-                    data.Add(new KeyValuePair<Pkcs11Info, string[]>(dataObject, new string[] {
+                    data.Add(new KeyValuePair<object, string[]>(dataObject, new string[] {
                         dataObject.CkaLabel,
                         dataObject.CkaApplication,
                         dataObject.CkaPrivate.ToString(),
@@ -795,7 +795,7 @@ namespace Net.Pkcs11Admin.WinForms
                     }));
                 }
 
-                AppendToListView(ListViewDataObjects, null, data);
+                WinFormsUtils.AppendToListView(ListViewDataObjects, null, data);
             }
 
             ListViewDataObjects.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -882,13 +882,13 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewCertificates.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
             ListViewCertificates.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
+            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.Certificates != null))
             {
                 foreach (Pkcs11CertificateInfo certificate in _selectedSlot.Certificates)
                 {
-                    data.Add(new KeyValuePair<Pkcs11Info, string[]>(certificate, new string[] {
+                    data.Add(new KeyValuePair<object, string[]>(certificate, new string[] {
                         certificate.CkaLabel,
                         StringUtils.BytesToHexString(certificate.CkaId),
                         StringUtils.GetAttributeEnumValue((ulong)CKA.CKA_CERTIFICATE_TYPE, certificate.CkaCertificateType, true),
@@ -897,7 +897,7 @@ namespace Net.Pkcs11Admin.WinForms
                     }));
                 }
 
-                AppendToListView(ListViewCertificates, null, data);
+                WinFormsUtils.AppendToListView(ListViewCertificates, null, data);
             }
 
             ListViewCertificates.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -982,13 +982,13 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewKeys.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
             ListViewKeys.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
+            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.Keys != null))
             {
                 foreach (Pkcs11KeyInfo key in _selectedSlot.Keys)
                 {
-                    data.Add(new KeyValuePair<Pkcs11Info, string[]>(key, new string[] {
+                    data.Add(new KeyValuePair<object, string[]>(key, new string[] {
                         key.CkaLabel,
                         StringUtils.BytesToHexString(key.CkaId),
                         StringUtils.GetAttributeEnumValue((ulong)CKA.CKA_CLASS, key.CkaClass, true),
@@ -998,7 +998,7 @@ namespace Net.Pkcs11Admin.WinForms
                     }));
                 }
 
-                AppendToListView(ListViewKeys, null, data);
+                WinFormsUtils.AppendToListView(ListViewKeys, null, data);
             }
 
             ListViewKeys.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -1082,13 +1082,13 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDomainParams.AddColumn("Private", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Left);
             ListViewDomainParams.AddColumn("Storage size", EnhancedListView.ColumnType.ULong, HorizontalAlignment.Left);
 
-            List<KeyValuePair<Pkcs11Info, string[]>> data = new List<KeyValuePair<Pkcs11Info, string[]>>();
+            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.DomainParams != null))
             {
                 foreach (Pkcs11DomainParamsInfo domainParams in _selectedSlot.DomainParams)
                 {
-                    data.Add(new KeyValuePair<Pkcs11Info, string[]>(domainParams, new string[] {
+                    data.Add(new KeyValuePair<object, string[]>(domainParams, new string[] {
                         domainParams.CkaLabel,
                         StringUtils.GetAttributeEnumValue((ulong)CKA.CKA_KEY_TYPE, domainParams.CkaKeyType, true),
                         domainParams.CkaPrivate.ToString(),
@@ -1096,7 +1096,7 @@ namespace Net.Pkcs11Admin.WinForms
                     }));
                 }
 
-                AppendToListView(ListViewDomainParams, null, data);
+                WinFormsUtils.AppendToListView(ListViewDomainParams, null, data);
             }
 
             ListViewDomainParams.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -1441,36 +1441,6 @@ namespace Net.Pkcs11Admin.WinForms
         #endregion
 
         #region Utils
-
-        private void AppendToListView(ListView listView, string listViewGroupName, List<KeyValuePair<Pkcs11Info, string[]>> data)
-        {
-            if (listView == null)
-                throw new ArgumentNullException("listView");
-
-            ListViewGroup listViewGroup = null;
-            if (!string.IsNullOrEmpty(listViewGroupName))
-                listViewGroup = new ListViewGroup(listViewGroupName);
-
-            if (data == null)
-                throw new ArgumentNullException("data");
-
-            foreach (KeyValuePair<Pkcs11Info, string[]> record in data)
-            {
-                ListViewItem listViewItem = new ListViewItem(record.Value[0]);
-                listViewItem.Tag = record.Key;
-
-                for (int i = 1; i < record.Value.Length; i++)
-                    listViewItem.SubItems.Add(record.Value[i]);
-
-                if (listViewGroup != null)
-                    listViewGroup.Items.Add(listViewItem);
-
-                listView.Items.Add(listViewItem);
-            }
-
-            if (listViewGroup != null)
-                listView.Groups.Add(listViewGroup);
-        }
 
         private string CheckSpecialTokenInfoValues(ulong ul, bool checkInfinite)
         {
