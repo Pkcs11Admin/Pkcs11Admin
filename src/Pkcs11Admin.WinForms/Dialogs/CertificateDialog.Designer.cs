@@ -47,12 +47,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             this.CertificateTabControl = new System.Windows.Forms.TabControl();
             this.TabPageDetails = new System.Windows.Forms.TabPage();
+            this.LabelDetails = new System.Windows.Forms.Label();
+            this.ListViewDetails = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.TabPageAsn1 = new System.Windows.Forms.TabPage();
+            this.LabelAsn1 = new System.Windows.Forms.Label();
             this.TreeViewAsn1 = new Net.Asn1.Forms.TreeView.Asn1TreeView();
             this.ButtonClose = new System.Windows.Forms.Button();
-            this.LabelAsn1 = new System.Windows.Forms.Label();
-            this.ListViewDetails = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
-            this.LabelDetails = new System.Windows.Forms.Label();
             this.CertificateTabControl.SuspendLayout();
             this.TabPageDetails.SuspendLayout();
             this.TabPageAsn1.SuspendLayout();
@@ -83,6 +83,30 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TabPageDetails.Text = "Details";
             this.TabPageDetails.UseVisualStyleBackColor = true;
             // 
+            // LabelDetails
+            // 
+            this.LabelDetails.AutoSize = true;
+            this.LabelDetails.Location = new System.Drawing.Point(10, 10);
+            this.LabelDetails.Name = "LabelDetails";
+            this.LabelDetails.Size = new System.Drawing.Size(90, 13);
+            this.LabelDetails.TabIndex = 1;
+            this.LabelDetails.Text = "Certificate details:";
+            // 
+            // ListViewDetails
+            // 
+            this.ListViewDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewDetails.FullRowSelect = true;
+            this.ListViewDetails.HideSelection = false;
+            this.ListViewDetails.Location = new System.Drawing.Point(13, 26);
+            this.ListViewDetails.Name = "ListViewDetails";
+            this.ListViewDetails.Size = new System.Drawing.Size(437, 231);
+            this.ListViewDetails.Sortable = true;
+            this.ListViewDetails.TabIndex = 0;
+            this.ListViewDetails.UseCompatibleStateImageBehavior = false;
+            this.ListViewDetails.View = System.Windows.Forms.View.Details;
+            // 
             // TabPageAsn1
             // 
             this.TabPageAsn1.Controls.Add(this.LabelAsn1);
@@ -94,6 +118,15 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TabPageAsn1.TabIndex = 1;
             this.TabPageAsn1.Text = "ASN.1";
             this.TabPageAsn1.UseVisualStyleBackColor = true;
+            // 
+            // LabelAsn1
+            // 
+            this.LabelAsn1.AutoSize = true;
+            this.LabelAsn1.Location = new System.Drawing.Point(10, 10);
+            this.LabelAsn1.Name = "LabelAsn1";
+            this.LabelAsn1.Size = new System.Drawing.Size(101, 13);
+            this.LabelAsn1.TabIndex = 1;
+            this.LabelAsn1.Text = "Certificate structure:";
             // 
             // TreeViewAsn1
             // 
@@ -116,39 +149,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonClose.Text = "Close";
             this.ButtonClose.UseVisualStyleBackColor = true;
             // 
-            // LabelAsn1
-            // 
-            this.LabelAsn1.AutoSize = true;
-            this.LabelAsn1.Location = new System.Drawing.Point(10, 10);
-            this.LabelAsn1.Name = "LabelAsn1";
-            this.LabelAsn1.Size = new System.Drawing.Size(101, 13);
-            this.LabelAsn1.TabIndex = 1;
-            this.LabelAsn1.Text = "Certificate structure:";
-            // 
-            // ListViewDetails
-            // 
-            this.ListViewDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewDetails.FullRowSelect = true;
-            this.ListViewDetails.HideSelection = false;
-            this.ListViewDetails.Location = new System.Drawing.Point(13, 26);
-            this.ListViewDetails.Name = "ListViewDetails";
-            this.ListViewDetails.Size = new System.Drawing.Size(437, 231);
-            this.ListViewDetails.Sortable = true;
-            this.ListViewDetails.TabIndex = 0;
-            this.ListViewDetails.UseCompatibleStateImageBehavior = false;
-            this.ListViewDetails.View = System.Windows.Forms.View.Details;
-            // 
-            // LabelDetails
-            // 
-            this.LabelDetails.AutoSize = true;
-            this.LabelDetails.Location = new System.Drawing.Point(10, 10);
-            this.LabelDetails.Name = "LabelDetails";
-            this.LabelDetails.Size = new System.Drawing.Size(90, 13);
-            this.LabelDetails.TabIndex = 1;
-            this.LabelDetails.Text = "Certificate details:";
-            // 
             // CertificateDialog
             // 
             this.AcceptButton = this.ButtonClose;
@@ -159,6 +159,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.CertificateTabControl);
             this.Name = "CertificateDialog";
             this.Padding = new System.Windows.Forms.Padding(10);
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Certificate details";
             this.CertificateTabControl.ResumeLayout(false);

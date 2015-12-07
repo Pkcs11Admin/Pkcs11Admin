@@ -45,6 +45,7 @@ namespace Net.Pkcs11Admin.WinForms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormStatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainFormStatusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MenuItemApplication = new System.Windows.Forms.ToolStripMenuItem();
@@ -856,6 +857,7 @@ namespace Net.Pkcs11Admin.WinForms
             this.Controls.Add(this.MainFormStatusStrip);
             this.Controls.Add(this.MainFormMenuStrip);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

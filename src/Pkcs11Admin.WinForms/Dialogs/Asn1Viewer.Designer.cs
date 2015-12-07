@@ -116,6 +116,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.Asn1TreeViewer);
             this.Name = "Asn1Viewer";
             this.Padding = new System.Windows.Forms.Padding(10);
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ASN.1 Viewer";
             this.ResumeLayout(false);

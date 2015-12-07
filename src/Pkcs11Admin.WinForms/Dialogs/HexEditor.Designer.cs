@@ -161,6 +161,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.HexBoxEditor);
             this.Name = "HexEditor";
             this.Padding = new System.Windows.Forms.Padding(10);
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Hex Editor";
             this.ResumeLayout(false);
