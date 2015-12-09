@@ -52,9 +52,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TabPageLicense = new System.Windows.Forms.TabPage();
             this.TabPageLicenses = new System.Windows.Forms.TabPage();
             this.RichTextBoxLicenses = new System.Windows.Forms.RichTextBox();
+            this.TabPageContributors = new System.Windows.Forms.TabPage();
+            this.RichTextBoxContributors = new System.Windows.Forms.RichTextBox();
             this.TabControlAbout.SuspendLayout();
             this.TabPageLicense.SuspendLayout();
             this.TabPageLicenses.SuspendLayout();
+            this.TabPageContributors.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonClose
@@ -99,6 +102,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabControlAbout.Controls.Add(this.TabPageLicense);
             this.TabControlAbout.Controls.Add(this.TabPageLicenses);
+            this.TabControlAbout.Controls.Add(this.TabPageContributors);
             this.TabControlAbout.Location = new System.Drawing.Point(13, 13);
             this.TabControlAbout.Name = "TabControlAbout";
             this.TabControlAbout.SelectedIndex = 0;
@@ -140,6 +144,31 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.RichTextBoxLicenses.TabStop = false;
             this.RichTextBoxLicenses.Text = "";
             // 
+            // TabPageContributors
+            // 
+            this.TabPageContributors.Controls.Add(this.RichTextBoxContributors);
+            this.TabPageContributors.Location = new System.Drawing.Point(4, 22);
+            this.TabPageContributors.Name = "TabPageContributors";
+            this.TabPageContributors.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageContributors.Size = new System.Drawing.Size(400, 240);
+            this.TabPageContributors.TabIndex = 2;
+            this.TabPageContributors.Text = "Contributors";
+            this.TabPageContributors.UseVisualStyleBackColor = true;
+            // 
+            // RichTextBoxContributors
+            // 
+            this.RichTextBoxContributors.BackColor = System.Drawing.SystemColors.Control;
+            this.RichTextBoxContributors.DetectUrls = false;
+            this.RichTextBoxContributors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RichTextBoxContributors.Location = new System.Drawing.Point(3, 3);
+            this.RichTextBoxContributors.Name = "RichTextBoxContributors";
+            this.RichTextBoxContributors.ReadOnly = true;
+            this.RichTextBoxContributors.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.RichTextBoxContributors.Size = new System.Drawing.Size(394, 234);
+            this.RichTextBoxContributors.TabIndex = 0;
+            this.RichTextBoxContributors.TabStop = false;
+            this.RichTextBoxContributors.Text = "";
+            // 
             // AboutDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +190,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TabControlAbout.ResumeLayout(false);
             this.TabPageLicense.ResumeLayout(false);
             this.TabPageLicenses.ResumeLayout(false);
+            this.TabPageContributors.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -174,6 +204,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.TabPage TabPageLicense;
         private System.Windows.Forms.TabPage TabPageLicenses;
         private System.Windows.Forms.RichTextBox RichTextBoxLicenses;
-
+        private System.Windows.Forms.TabPage TabPageContributors;
+        private System.Windows.Forms.RichTextBox RichTextBoxContributors;
     }
 }

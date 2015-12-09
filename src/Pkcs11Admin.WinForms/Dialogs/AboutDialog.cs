@@ -31,6 +31,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             SetLicenseText();
             SetLicensesText();
+            SetContributorsText();
         }
 
         private void ButtonWebsite_Click(object sender, EventArgs e)
@@ -140,6 +141,17 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             RichTextBoxLicenses.SelectionStart = 0;
             RichTextBoxLicenses.ScrollToCaret();
+        }
+
+        private void SetContributorsText()
+        {
+            RichTextBoxContributors.AppendText(@"Following people have significantly contributed to Pkcs11Admin development:" + Environment.NewLine + Environment.NewLine);
+            RichTextBoxContributors.AppendText(@"Florent Deybach - testing" + Environment.NewLine);
+            RichTextBoxContributors.AppendText(@"Tomáš Haluška - application icon design" + Environment.NewLine + Environment.NewLine);
+            RichTextBoxContributors.AppendText(@"Numerous other people have contributed by reporting bugs, requesting new features or suggesting improvements. Thank you!");
+
+            RichTextBoxContributors.SelectionStart = 0;
+            RichTextBoxContributors.ScrollToCaret();
         }
     }
 }
