@@ -65,9 +65,28 @@ namespace Net.Pkcs11Admin.WinForms
             ReloadForm();
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
+        private async void MainForm_Shown(object sender, EventArgs e)
         {
-            ShowLibraryDialog();
+            string defaultLibrary = Properties.Settings.Default.DefaultPkcs11Library;
+            bool loadDefaultLibrary = Properties.Settings.Default.AutoLoadDefaultPkcs11Library;
+
+            if (!string.IsNullOrEmpty(defaultLibrary) && loadDefaultLibrary)
+            {
+                try
+                {
+                    await WaitDialog.Execute(this, () => Pkcs11Admin.Instance.LoadLibrary(defaultLibrary, null, null, false, false));
+                    SetupLoadedLibrary();
+                }
+                catch (Exception ex)
+                {
+                    WinFormsUtils.ShowError(this, ex);
+                    ShowLibraryDialog();
+                }
+            }
+            else
+            {
+                ShowLibraryDialog();
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
