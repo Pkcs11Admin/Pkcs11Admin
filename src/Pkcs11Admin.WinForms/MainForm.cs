@@ -67,9 +67,6 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-#if !DEBUG
-            WinFormsUtils.ShowInfo(this, "This version of application represents work in progress and therefore may miss important features or contain critical bugs." + Environment.NewLine + Environment.NewLine + "Please visit project website - www.pkcs11admin.net - for more information on how to report problems or request new features.");
-#endif
             ShowLibraryDialog();
         }
 
