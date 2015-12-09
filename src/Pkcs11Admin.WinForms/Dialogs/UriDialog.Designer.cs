@@ -45,6 +45,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UriDialog));
             this.PropertyGridPkcs11Uri = new System.Windows.Forms.PropertyGrid();
             this.ButtonCopy = new System.Windows.Forms.Button();
             this.ButtonRefresh = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.PropertyGridPkcs11Uri.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PropertyGridPkcs11Uri.CategoryForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.PropertyGridPkcs11Uri.HelpVisible = false;
             this.PropertyGridPkcs11Uri.Location = new System.Drawing.Point(13, 13);
             this.PropertyGridPkcs11Uri.Name = "PropertyGridPkcs11Uri";
@@ -120,10 +122,10 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.ButtonRefresh);
             this.Controls.Add(this.ButtonCopy);
             this.Controls.Add(this.PropertyGridPkcs11Uri);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(700, 400);
             this.Name = "UriDialog";
             this.Padding = new System.Windows.Forms.Padding(10);
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Build PKCS#11 URI";

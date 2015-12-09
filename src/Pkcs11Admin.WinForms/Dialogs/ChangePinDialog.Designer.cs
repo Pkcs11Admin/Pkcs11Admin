@@ -45,6 +45,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePinDialog));
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.NumLockLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.CapsLockLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -218,12 +219,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainStatusStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(416, 319);
             this.Name = "ChangePinDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
