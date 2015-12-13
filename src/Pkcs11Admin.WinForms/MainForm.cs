@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,14 +52,6 @@ namespace Net.Pkcs11Admin.WinForms
             property.SetValue(ListViewCertificates, true, null);
             property.SetValue(ListViewKeys, true, null);
             property.SetValue(ListViewDomainParams, true, null);
-
-            SetComboBoxBasicInfoItems();
-            SetComboBoxMechanismsItems();
-            SetComboBoxHwFeaturesItems();
-            SetComboBoxDataObjectsItems();
-            SetComboBoxCertificatesItems();
-            SetComboBoxKeysItems();
-            SetComboBoxDomainParamsItems();
 
             ReloadForm();
         }
@@ -412,6 +403,204 @@ namespace Net.Pkcs11Admin.WinForms
 
         #endregion
 
+        #region MenuItemObject
+
+        private void ReloadMenuItemObject()
+        {
+            bool enabled = ((_selectedSlot != null) && (_selectedSlot.SessionInfo != null));
+
+            MenuItemObject.Enabled = enabled;
+
+            MenuItemObjectNew.Enabled = enabled;
+            MenuItemObjectNewData.Enabled = enabled;
+            MenuItemObjectNewKey.Enabled = enabled;
+            MenuItemObjectNewCsr.Enabled = enabled;
+            MenuItemObjectNewCert.Enabled = enabled;
+
+            MenuItemObjectEdit.Enabled = enabled;
+            MenuItemObjectDelete.Enabled = enabled;
+
+            MenuItemObjectView.Enabled = enabled;
+            MenuItemObjectViewData.Enabled = enabled;
+            MenuItemObjectViewCert.Enabled = enabled;
+
+            MenuItemObjectImport.Enabled = enabled;
+            MenuItemObjectImportData.Enabled = enabled;
+            MenuItemObjectImportCert.Enabled = enabled;
+            MenuItemObjectImportKey.Enabled = enabled;
+
+            MenuItemObjectExport.Enabled = enabled;
+            MenuItemObjectExportData.Enabled = enabled;
+            MenuItemObjectExportCert.Enabled = enabled;
+            MenuItemObjectExportKey.Enabled = enabled;
+        }
+
+        private async void MenuItemObjectNewData_Click(object sender, EventArgs e)
+        {
+            if (CreatePkcs11Object())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void MenuItemObjectNewKey_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void MenuItemObjectNewCsr_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void MenuItemObjectNewCert_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private async void MenuItemObjectEdit_Click(object sender, EventArgs e)
+        {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return;
+            }
+
+            if (EditPkcs11ObjectAttributes(listView))
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void MenuItemObjectDelete_Click(object sender, EventArgs e)
+        {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return;
+            }
+
+            if (DeletePkcs11Object(listView))
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void MenuItemObjectViewData_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void MenuItemObjectViewCert_Click(object sender, EventArgs e)
+        {
+            if (MainFormTabControl.SelectedTab != TabPageCertificates)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select certificate first");
+                return;
+            }
+
+            ShowCertificateDetails();
+        }
+
+        private async void MenuItemObjectImportData_Click(object sender, EventArgs e)
+        {
+            if (ImportDataObject())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void MenuItemObjectImportCert_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void MenuItemObjectImportKey_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void MenuItemObjectExportData_Click(object sender, EventArgs e)
+        {
+            if (MainFormTabControl.SelectedTab != TabPageDataObjects)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return;
+            }
+
+            ExportDataObject();
+        }
+
+        private void MenuItemObjectExportCert_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void MenuItemObjectExportKey_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        #endregion
+
+        #region MenuItemTools
+
+        private void ReloadMenuItemTools()
+        {
+            // TODO - Think about when these should be enabled
+            MenuItemTools.Enabled = true;
+
+            MenuItemCsv.Enabled = true;
+            MenuItemCsvExportAll.Enabled = true;
+            MenuItemCsvExportSelected.Enabled = true;
+
+            MenuItemPkcs11Uri.Enabled = true;
+            MenuItemPkcs11UriEmpty.Enabled = true;
+            MenuItemPkcs11UriLibrary.Enabled = true;
+            MenuItemPkcs11UriSlot.Enabled = true;
+            MenuItemPkcs11UriToken.Enabled = true;
+            MenuItemPkcs11UriObject.Enabled = true;
+        }
+
+        private void MenuItemCsvExportAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void MenuItemCsvExportSelected_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            // TODO - ExportToCsv(true);
+        }
+
+        private void MenuItemPkcs11UriEmpty_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11Uri(); // TODO - Fix implementation
+        }
+
+        private void MenuItemPkcs11UriLibrary_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11Uri(); // TODO - Fix implementation
+        }
+
+        private void MenuItemPkcs11UriSlot_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11Uri(); // TODO - Fix implementation
+        }
+
+        private void MenuItemPkcs11UriToken_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11Uri(); // TODO - Fix implementation
+        }
+
+        private void MenuItemPkcs11UriObject_Click(object sender, EventArgs e)
+        {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return;
+            }
+
+            BuildPkcs11Uri(listView);
+        }
+
+        #endregion
+
         #region MenuItemHelp
 
         private async void MenuItemCheckUpdates_Click(object sender, EventArgs e)
@@ -568,28 +757,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewBasicInfo.EndUpdate();
         }
 
-        private void SetComboBoxBasicInfoItems()
-        {
-            ComboBoxBasicInfo.Items.Clear();
-            ComboBoxBasicInfo.Items.Add(new Operation(OperationType.BuildUri, "Build PKCS#11 URI..."));
-            ComboBoxBasicInfo.SelectedIndex = 0;
-        }
-
-        private void ButtonBasicInfo_Click(object sender, EventArgs e)
-        {
-            Operation selectedOperation = ComboBoxBasicInfo.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.BuildUri:
-                    BuildPkcs11Uri();
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-        }
-
         #endregion
 
         #region TabPageMechanisms
@@ -678,29 +845,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewMechanisms.EndUpdate();
         }
 
-        private void SetComboBoxMechanismsItems()
-        {
-            ComboBoxMechanisms.Items.Clear();
-            ComboBoxMechanisms.Items.Add(new Operation(OperationType.Export, "Export mechanisms to CSV file..."));
-            ComboBoxMechanisms.SelectedIndex = 0;
-        }
-
-        private void ButtonMechanisms_Click(object sender, EventArgs e)
-        {
-            Operation selectedOperation = ComboBoxMechanisms.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.Export:
-                    string csvFileName = Path.GetFileNameWithoutExtension(_selectedLibrary.Info.LibraryPath) + "_mechanisms.csv";
-                    ExportListView(ListViewMechanisms, csvFileName);
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-        }
-
         #endregion
 
         #region TabPageHwFeatures
@@ -743,33 +887,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewHwFeatures.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             ListViewHwFeatures.EndUpdate();
-        }
-
-        private void SetComboBoxHwFeaturesItems()
-        {
-            ComboBoxHwFeatures.Items.Clear();
-            ComboBoxHwFeatures.Items.Add(new Operation(OperationType.Edit, "Edit attributes of selected hardware feature..."));
-            ComboBoxHwFeatures.SelectedIndex = 0;
-        }
-
-        private async void ButtonHwFeatures_Click(object sender, EventArgs e)
-        {
-            bool formReloadNeeded = false;
-
-            Operation selectedOperation = ComboBoxHwFeatures.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.Edit:
-                    formReloadNeeded = EditPkcs11ObjectAttributes(ListViewHwFeatures);
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-
-            if (formReloadNeeded)
-                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -820,58 +937,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDataObjects.EndUpdate();
         }
 
-        private void SetComboBoxDataObjectsItems()
-        {
-            ComboBoxDataObjects.Items.Clear();
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Create, "Create new data object..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Edit, "Edit attributes of selected data object..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Delete, "Delete selected data objects..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Import, "Import file as a new data object..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.Export, "Export selected data object to the file..."));
-            ComboBoxDataObjects.Items.Add(new Operation(OperationType.BuildUri, "Build PKCS#11 URI for selected data object..."));
-            ComboBoxDataObjects.SelectedIndex = 0;
-        }
-
-        private async void ButtonDataObjects_Click(object sender, EventArgs e)
-        {
-            bool formReloadNeeded = false;
-
-            Operation selectedOperation = ComboBoxDataObjects.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.Create:
-                    formReloadNeeded = CreatePkcs11Object();
-                    break;
-
-                case OperationType.Edit:
-                    formReloadNeeded = EditPkcs11ObjectAttributes(ListViewDataObjects);
-                    break;
-
-                case OperationType.Delete:
-                    formReloadNeeded = DeletePkcs11Object(ListViewDataObjects);
-                    break;
-
-                case OperationType.Import:
-                    formReloadNeeded = ImportDataObject();
-                    break;
-
-                case OperationType.Export:
-                    ExportDataObject();
-                    break;
-
-                case OperationType.BuildUri:
-                    BuildPkcs11Uri(ListViewDataObjects);
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-
-            if (formReloadNeeded)
-                await ReloadFormAfter(_selectedSlot.Reload);
-        }
-
         #endregion
 
         #region TabPageCertificates;
@@ -920,55 +985,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewCertificates.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             ListViewCertificates.EndUpdate();
-        }
-
-        private void SetComboBoxCertificatesItems()
-        {
-            ComboBoxCertificates.Items.Clear();
-            ComboBoxCertificates.Items.Add(new Operation(OperationType.Edit, "Edit attributes of selected certificate..."));
-            ComboBoxCertificates.Items.Add(new Operation(OperationType.Delete, "Delete selected certificates..."));
-            ComboBoxCertificates.Items.Add(new Operation(OperationType.Import, "NOT IMPLEMENTED - Import certificate from file..."));
-            ComboBoxCertificates.Items.Add(new Operation(OperationType.Export, "NOT IMPLEMENTED - Export selected certificate to the file..."));
-            ComboBoxCertificates.Items.Add(new Operation(OperationType.BuildUri, "Build PKCS#11 URI for selected certificate..."));
-            ComboBoxCertificates.Items.Add(new Operation(OperationType.Details, (Platform.IsWindows) ? "Show certificate details..." : "NOT IMPLEMENTED - Show certificate details..."));
-            ComboBoxCertificates.SelectedIndex = 0;
-        }
-
-        private async void ButtonCertificates_Click(object sender, EventArgs e)
-        {
-            bool formReloadNeeded = false;
-
-            Operation selectedOperation = ComboBoxCertificates.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.Edit:
-                    formReloadNeeded = EditPkcs11ObjectAttributes(ListViewCertificates);
-                    break;
-
-                case OperationType.Delete:
-                    formReloadNeeded = DeletePkcs11Object(ListViewCertificates);
-                    break;
-
-                case OperationType.Import: // TODO
-                case OperationType.Export: // TODO
-                    WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
-                    break;
-
-                case OperationType.BuildUri:
-                    BuildPkcs11Uri(ListViewCertificates);
-                    break;
-
-                case OperationType.Details:
-                    ShowCertificateDetails();
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-
-            if (formReloadNeeded)
-                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -1023,56 +1039,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewKeys.EndUpdate();
         }
 
-        private void SetComboBoxKeysItems()
-        {
-            ComboBoxKeys.Items.Clear();
-            ComboBoxKeys.Items.Add(new Operation(OperationType.Generate, "NOT IMPLEMENTED - Generate new key or keypair..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.Edit, "Edit attributes of selected key..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.Delete, "Delete selected keys..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.Import, "NOT IMPLEMENTED - Import key from file..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.Export, "NOT IMPLEMENTED - Export selected key to the file..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.GenerateCSR, "NOT IMPLEMENTED - Generate certificate signing request for selected key..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.GenerateCertificate, "NOT IMPLEMENTED - Generate self-signed certificate for selected key..."));
-            ComboBoxKeys.Items.Add(new Operation(OperationType.BuildUri, "Build PKCS#11 URI for selected key..."));
-            ComboBoxKeys.SelectedIndex = 0;
-        }
-
-        private async void ButtonKeys_Click(object sender, EventArgs e)
-        {
-            bool formReloadNeeded = false;
-
-            Operation selectedOperation = ComboBoxKeys.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.Generate: // TODO
-                case OperationType.Import: // TODO
-                case OperationType.Export: // TODO
-                case OperationType.GenerateCSR: // TODO
-                case OperationType.GenerateCertificate: // TODO
-                    WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
-                    break;
-
-                case OperationType.Edit:
-                    formReloadNeeded = EditPkcs11ObjectAttributes(ListViewKeys);
-                    break;
-
-                case OperationType.Delete:
-                    formReloadNeeded = DeletePkcs11Object(ListViewKeys);
-                    break;
-
-                case OperationType.BuildUri:
-                    BuildPkcs11Uri(ListViewKeys);
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-
-            if (formReloadNeeded)
-                await ReloadFormAfter(_selectedSlot.Reload);
-        }
-
         #endregion
 
         #region TabPageDomainParams
@@ -1119,38 +1085,6 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDomainParams.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             ListViewDomainParams.EndUpdate();
-        }
-
-        private void SetComboBoxDomainParamsItems()
-        {
-            ComboBoxDomainParams.Items.Clear();
-            ComboBoxDomainParams.Items.Add(new Operation(OperationType.Edit, "Edit attributes of selected domain parameters..."));
-            ComboBoxDomainParams.Items.Add(new Operation(OperationType.Delete, "Delete selected domain parameters..."));
-            ComboBoxDomainParams.SelectedIndex = 0;
-        }
-
-        private async void ButtonDomainParams_Click(object sender, EventArgs e)
-        {
-            bool formReloadNeeded = false;
-
-            Operation selectedOperation = ComboBoxDomainParams.SelectedItem as Operation;
-            switch (selectedOperation.Type)
-            {
-                case OperationType.Edit:
-                    formReloadNeeded = EditPkcs11ObjectAttributes(ListViewDomainParams);
-                    break;
-
-                case OperationType.Delete:
-                    formReloadNeeded = DeletePkcs11Object(ListViewDomainParams);
-                    break;
-
-                default:
-                    WinFormsUtils.ShowError(this, "Selected operation is not implemented");
-                    break;
-            }
-
-            if (formReloadNeeded)
-                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         #endregion
@@ -1266,6 +1200,8 @@ namespace Net.Pkcs11Admin.WinForms
             ReloadMenuItemApplication();
             ReloadMenuItemSlot();
             ReloadMenuItemToken();
+            ReloadMenuItemObject();
+            ReloadMenuItemTools();
 
             ReloadTabPageBasicInfo();
             ReloadTabPageMechanisms();
@@ -1373,8 +1309,52 @@ namespace Net.Pkcs11Admin.WinForms
                 certificateDialog.ShowDialog(this);
         }
 
-        private void ExportListView(EnhancedListView listView, string fileName)
+        private void ExportToCsv(bool onlySelected)
         {
+            EnhancedListView listView = null;
+
+            string fileName = Path.GetFileNameWithoutExtension(_selectedLibrary.Info.LibraryPath);
+            if (onlySelected)
+                fileName += "_selected";
+
+            if (MainFormTabControl.SelectedTab == TabPageBasicInfo)
+            {
+                listView = ListViewBasicInfo;
+                fileName += "_info";
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageMechanisms)
+            {
+                listView = ListViewMechanisms;
+                fileName += "_mechanisms";
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageHwFeatures)
+            {
+                listView = ListViewHwFeatures;
+                fileName += "_hw_features";
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageDataObjects)
+            {
+                listView = ListViewDataObjects;
+                fileName += "_data_objects";
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageCertificates)
+            {
+                listView = ListViewCertificates;
+                fileName += "_certificates";
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageKeys)
+            {
+                listView = ListViewKeys;
+                fileName += "_keys";
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageDomainParams)
+            {
+                listView = ListViewDomainParams;
+                fileName += "_domain_params";
+            }
+
+            // TODO - Handle null and selection
+
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.FileName = fileName;
@@ -1452,6 +1432,34 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 WinFormsUtils.ShowError(this, ex);
             }
+        }
+
+        private ListView GetSelectedListViewWithPkcs11Objects()
+        {
+            ListView listView = null;
+
+            if (MainFormTabControl.SelectedTab == TabPageHwFeatures)
+            {
+                listView = ListViewHwFeatures;
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageDataObjects)
+            {
+                listView = ListViewDataObjects;
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageCertificates)
+            {
+                listView = ListViewCertificates;
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageKeys)
+            {
+                listView = ListViewKeys;
+            }
+            else if (MainFormTabControl.SelectedTab == TabPageDomainParams)
+            {
+                listView = ListViewDomainParams;
+            }
+
+            return listView;
         }
 
         #endregion
