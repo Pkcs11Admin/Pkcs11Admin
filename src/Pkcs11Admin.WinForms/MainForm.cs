@@ -560,8 +560,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemCsvExportSelected_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
-            // TODO - ExportToCsv(true);
+            ExportToCsv(true);
         }
 
         private void MenuItemPkcs11UriEmpty_Click(object sender, EventArgs e)
@@ -1305,48 +1304,45 @@ namespace Net.Pkcs11Admin.WinForms
         private void ExportToCsv(bool onlySelected)
         {
             EnhancedListView listView = null;
-
-            string fileName = Path.GetFileNameWithoutExtension(_selectedLibrary.Info.LibraryPath);
-            if (onlySelected)
-                fileName += "_selected";
+            string fileName = null;
 
             if (MainFormTabControl.SelectedTab == TabPageBasicInfo)
             {
                 listView = ListViewBasicInfo;
-                fileName += "_info";
+                fileName = "basic_info";
             }
             else if (MainFormTabControl.SelectedTab == TabPageMechanisms)
             {
                 listView = ListViewMechanisms;
-                fileName += "_mechanisms";
+                fileName = "mechanisms";
             }
             else if (MainFormTabControl.SelectedTab == TabPageHwFeatures)
             {
                 listView = ListViewHwFeatures;
-                fileName += "_hw_features";
+                fileName = "hw_features";
             }
             else if (MainFormTabControl.SelectedTab == TabPageDataObjects)
             {
                 listView = ListViewDataObjects;
-                fileName += "_data_objects";
+                fileName = "data_objects";
             }
             else if (MainFormTabControl.SelectedTab == TabPageCertificates)
             {
                 listView = ListViewCertificates;
-                fileName += "_certificates";
+                fileName = "certificates";
             }
             else if (MainFormTabControl.SelectedTab == TabPageKeys)
             {
                 listView = ListViewKeys;
-                fileName += "_keys";
+                fileName = "keys";
             }
             else if (MainFormTabControl.SelectedTab == TabPageDomainParams)
             {
                 listView = ListViewDomainParams;
-                fileName += "_domain_params";
+                fileName = "domain_params";
             }
 
-            // TODO - Handle null and selection
+            fileName += (onlySelected) ? "_selected_rows" : "_all_rows";
 
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -1360,7 +1356,7 @@ namespace Net.Pkcs11Admin.WinForms
                 saveFileDialog.OverwritePrompt = true;
 
                 if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-                    listView.ExportToCsvFile(saveFileDialog.FileName);
+                    listView.ExportToCsvFile(saveFileDialog.FileName, onlySelected);
             }
         }
 

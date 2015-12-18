@@ -226,77 +226,41 @@ namespace Net.Pkcs11Admin.WinForms.Controls
 
         #region CSV export
 
-        private void CopySelectedItemsToClipboard()
+        private void ExportToCsvStream(Stream stream, bool onlySelected)
         {
             // Note: CSV should be RFC4180 compliant
+
+            if (stream == null)
+                throw new ArgumentNullException("stream");
 
             int columnCount = 0;
+            int rowCount = 0;
             string cellText = null;
             char[] EOL = new char[] { (char)0x0d, (char)0x0a };
 
-            using (MemoryStream memoryStream = new MemoryStream())
+            // Write data to stream
+            using (StreamWriter streamWriter = new StreamWriter(stream, Encoding.UTF8, 4096, true))
             {
-                // Write data to stream
-                using (StreamWriter streamWriter = new StreamWriter(memoryStream, Encoding.UTF8, 4096, true))
+                // Copy column headers
+                columnCount = Columns.Count;
+                for (int i = 0; i < columnCount; i++)
                 {
-                    // Copy column headers
-                    columnCount = Columns.Count;
-                    for (int i = 0; i < columnCount; i++)
-                    {
-                        cellText = Columns[i].Text;
-                        cellText = cellText.Replace("\"", "\"\"");
-                        cellText = "\"" + cellText + "\"";
-                        cellText = (i == (columnCount - 1)) ? cellText : cellText + ", ";
-                        streamWriter.Write(cellText);
-                    }
-                    streamWriter.Write(EOL);
-
-                    // Copy selected rows
-                    for (int i = 0; i < SelectedItems.Count; i++)
-                    {
-                        columnCount = SelectedItems[i].SubItems.Count;
-                        for (int j = 0; j < columnCount; j++)
-                        {
-                            cellText = SelectedItems[i].SubItems[j].Text;
-                            cellText = cellText.Replace("\"", "\"\"");
-                            cellText = "\"" + cellText + "\"";
-                            cellText = (j == (columnCount - 1)) ? cellText : cellText + ", ";
-                            streamWriter.Write(cellText);
-                        }
-                        if (i < (SelectedItems.Count - 1))
-                            streamWriter.Write(EOL);
-                    }
+                    cellText = Columns[i].Text;
+                    cellText = cellText.Replace("\"", "\"\"");
+                    cellText = "\"" + cellText + "\"";
+                    cellText = (i == (columnCount - 1)) ? cellText : cellText + ", ";
+                    streamWriter.Write(cellText);
                 }
+                streamWriter.Write(EOL);
 
-                // Jump at the beginning of the stream
-                memoryStream.Seek(0, SeekOrigin.Begin);
-
-                // Copy data from stream to clipboard
-                using (StreamReader streamReader = new StreamReader(memoryStream, Encoding.UTF8))
-                    Clipboard.SetText(streamReader.ReadToEnd());
-            }
-        }
-
-        public void ExportToCsvFile(string filePath)
-        {
-            // Note: CSV should be RFC4180 compliant
-
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException("filePath");
-
-            int rowCount = Items.Count + 1;
-            int columnCount = Columns.Count;
-            string cellText = null;
-            char[] EOL = new char[] { (char)0x0d, (char)0x0a };
-
-            
-            using (StreamWriter streamWriter = new StreamWriter(filePath, false, Encoding.UTF8))
-            {
+                // Copy rows
+                rowCount = (onlySelected) ? SelectedItems.Count : Items.Count;
                 for (int i = 0; i < rowCount; i++)
                 {
+                    columnCount = (onlySelected) ? SelectedItems[i].SubItems.Count : Items[i].SubItems.Count;
                     for (int j = 0; j < columnCount; j++)
                     {
-                        cellText = (i == 0) ? Columns[j].Text : Items[i - 1].SubItems[j].Text;
+                        cellText = (onlySelected) ? SelectedItems[i].SubItems[j].Text : Items[i].SubItems[j].Text;
                         cellText = cellText.Replace("\"", "\"\"");
                         cellText = "\"" + cellText + "\"";
                         cellText = (j == (columnCount - 1)) ? cellText : cellText + ", ";
@@ -306,6 +270,28 @@ namespace Net.Pkcs11Admin.WinForms.Controls
                         streamWriter.Write(EOL);
                 }
             }
+        }
+
+        private void CopySelectedItemsToClipboard()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                ExportToCsvStream(memoryStream, true);
+
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader streamReader = new StreamReader(memoryStream, Encoding.UTF8))
+                    Clipboard.SetText(streamReader.ReadToEnd());
+            }
+        }
+
+        public void ExportToCsvFile(string filePath, bool onlySelected)
+        {
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentNullException("filePath");
+
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                ExportToCsvStream(fileStream, onlySelected);
         }
 
         #endregion
