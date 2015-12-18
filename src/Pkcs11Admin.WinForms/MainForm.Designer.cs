@@ -100,15 +100,13 @@ namespace Net.Pkcs11Admin.WinForms
             this.MenuItemObjectExportCert = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemObjectExportKey = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemCsv = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemCsvExport = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemCsvExportAll = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemCsvExportSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemPkcs11Uri = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemPkcs11UriEmpty = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemPkcs11UriLibrary = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemPkcs11UriSlot = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemPkcs11UriToken = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemPkcs11UriObject = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPkcs11UriWithObject = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPkcs11UriWithoutObject = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormPanel = new System.Windows.Forms.Panel();
             this.MainFormTabControl = new System.Windows.Forms.TabControl();
             this.TabPageBasicInfo = new System.Windows.Forms.TabPage();
@@ -570,81 +568,65 @@ namespace Net.Pkcs11Admin.WinForms
             // MenuItemTools
             // 
             this.MenuItemTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemCsv,
+            this.MenuItemCsvExport,
             this.MenuItemPkcs11Uri});
             this.MenuItemTools.Name = "MenuItemTools";
             this.MenuItemTools.Size = new System.Drawing.Size(48, 20);
             this.MenuItemTools.Text = "Tools";
             // 
-            // MenuItemCsv
+            // MenuItemCsvExport
             // 
-            this.MenuItemCsv.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemCsvExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItemCsvExportAll,
             this.MenuItemCsvExportSelected});
-            this.MenuItemCsv.Name = "MenuItemCsv";
-            this.MenuItemCsv.Size = new System.Drawing.Size(152, 22);
-            this.MenuItemCsv.Text = "CSV";
+            this.MenuItemCsvExport.Name = "MenuItemCsvExport";
+            this.MenuItemCsvExport.Size = new System.Drawing.Size(172, 22);
+            this.MenuItemCsvExport.Text = "Export to CSV";
             // 
             // MenuItemCsvExportAll
             // 
             this.MenuItemCsvExportAll.Name = "MenuItemCsvExportAll";
-            this.MenuItemCsvExportAll.Size = new System.Drawing.Size(194, 22);
-            this.MenuItemCsvExportAll.Text = "Export all items...";
+            this.MenuItemCsvExportAll.Size = new System.Drawing.Size(159, 22);
+            this.MenuItemCsvExportAll.Text = "All items...";
             this.MenuItemCsvExportAll.Click += new System.EventHandler(this.MenuItemCsvExportAll_Click);
             // 
             // MenuItemCsvExportSelected
             // 
             this.MenuItemCsvExportSelected.Name = "MenuItemCsvExportSelected";
-            this.MenuItemCsvExportSelected.Size = new System.Drawing.Size(194, 22);
-            this.MenuItemCsvExportSelected.Text = "Export selected items...";
+            this.MenuItemCsvExportSelected.Size = new System.Drawing.Size(159, 22);
+            this.MenuItemCsvExportSelected.Text = "Selected items...";
             this.MenuItemCsvExportSelected.Click += new System.EventHandler(this.MenuItemCsvExportSelected_Click);
             // 
             // MenuItemPkcs11Uri
             // 
             this.MenuItemPkcs11Uri.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItemPkcs11UriEmpty,
-            this.MenuItemPkcs11UriLibrary,
-            this.MenuItemPkcs11UriSlot,
-            this.MenuItemPkcs11UriToken,
-            this.MenuItemPkcs11UriObject});
+            this.MenuItemPkcs11UriWithObject,
+            this.MenuItemPkcs11UriWithoutObject});
             this.MenuItemPkcs11Uri.Name = "MenuItemPkcs11Uri";
-            this.MenuItemPkcs11Uri.Size = new System.Drawing.Size(152, 22);
-            this.MenuItemPkcs11Uri.Text = "PKCS#11 URI";
+            this.MenuItemPkcs11Uri.Size = new System.Drawing.Size(172, 22);
+            this.MenuItemPkcs11Uri.Text = "Build PKCS#11 URI";
             // 
             // MenuItemPkcs11UriEmpty
             // 
             this.MenuItemPkcs11UriEmpty.Name = "MenuItemPkcs11UriEmpty";
-            this.MenuItemPkcs11UriEmpty.Size = new System.Drawing.Size(164, 22);
-            this.MenuItemPkcs11UriEmpty.Text = "Build empty...";
+            this.MenuItemPkcs11UriEmpty.Size = new System.Drawing.Size(208, 22);
+            this.MenuItemPkcs11UriEmpty.Text = "Empty...";
             this.MenuItemPkcs11UriEmpty.Click += new System.EventHandler(this.MenuItemPkcs11UriEmpty_Click);
             // 
-            // MenuItemPkcs11UriLibrary
+            // MenuItemPkcs11UriWithObject
             // 
-            this.MenuItemPkcs11UriLibrary.Name = "MenuItemPkcs11UriLibrary";
-            this.MenuItemPkcs11UriLibrary.Size = new System.Drawing.Size(164, 22);
-            this.MenuItemPkcs11UriLibrary.Text = "Build for library...";
-            this.MenuItemPkcs11UriLibrary.Click += new System.EventHandler(this.MenuItemPkcs11UriLibrary_Click);
+            this.MenuItemPkcs11UriWithObject.Name = "MenuItemPkcs11UriWithObject";
+            this.MenuItemPkcs11UriWithObject.Size = new System.Drawing.Size(208, 22);
+            this.MenuItemPkcs11UriWithObject.Text = "With selected object...";
+            this.MenuItemPkcs11UriWithObject.Click += new System.EventHandler(this.MenuItemPkcs11UriWithObject_Click);
             // 
-            // MenuItemPkcs11UriSlot
+            // MenuItemPkcs11UriWithoutObject
             // 
-            this.MenuItemPkcs11UriSlot.Name = "MenuItemPkcs11UriSlot";
-            this.MenuItemPkcs11UriSlot.Size = new System.Drawing.Size(164, 22);
-            this.MenuItemPkcs11UriSlot.Text = "Build for slot...";
-            this.MenuItemPkcs11UriSlot.Click += new System.EventHandler(this.MenuItemPkcs11UriSlot_Click);
-            // 
-            // MenuItemPkcs11UriToken
-            // 
-            this.MenuItemPkcs11UriToken.Name = "MenuItemPkcs11UriToken";
-            this.MenuItemPkcs11UriToken.Size = new System.Drawing.Size(164, 22);
-            this.MenuItemPkcs11UriToken.Text = "Build for token...";
-            this.MenuItemPkcs11UriToken.Click += new System.EventHandler(this.MenuItemPkcs11UriToken_Click);
-            // 
-            // MenuItemPkcs11UriObject
-            // 
-            this.MenuItemPkcs11UriObject.Name = "MenuItemPkcs11UriObject";
-            this.MenuItemPkcs11UriObject.Size = new System.Drawing.Size(164, 22);
-            this.MenuItemPkcs11UriObject.Text = "Build for object...";
-            this.MenuItemPkcs11UriObject.Click += new System.EventHandler(this.MenuItemPkcs11UriObject_Click);
+            this.MenuItemPkcs11UriWithoutObject.Name = "MenuItemPkcs11UriWithoutObject";
+            this.MenuItemPkcs11UriWithoutObject.Size = new System.Drawing.Size(208, 22);
+            this.MenuItemPkcs11UriWithoutObject.Text = "Without selected object...";
+            this.MenuItemPkcs11UriWithoutObject.Click += new System.EventHandler(this.MenuItemPkcs11UriWithoutObject_Click);
             // 
             // MainFormPanel
             // 
@@ -1029,7 +1011,7 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ToolStripMenuItem MenuItemObject;
         private System.Windows.Forms.ToolStripMenuItem MenuItemTools;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11Uri;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemCsv;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemCsvExport;
         private System.Windows.Forms.ToolStripMenuItem MenuItemCsvExportSelected;
         private System.Windows.Forms.ToolStripMenuItem MenuItemCsvExportAll;
         private System.Windows.Forms.ToolStripMenuItem MenuItemObjectNew;
@@ -1051,9 +1033,7 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ToolStripMenuItem MenuItemObjectViewData;
         private System.Windows.Forms.ToolStripMenuItem MenuItemObjectViewCert;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriEmpty;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriLibrary;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriSlot;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriObject;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriToken;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriWithObject;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriWithoutObject;
     }
 }

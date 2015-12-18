@@ -323,22 +323,22 @@ namespace Net.Pkcs11Admin
 
         public Pkcs11Uri(Pkcs11Library pkcs11Library, Pkcs11Slot pkcs11Slot, Pkcs11ObjectInfo pkcs11ObjectInfo)
         {
-            if (pkcs11Library == null)
-                throw new ArgumentNullException("pkcs11Library");
+            if (pkcs11Library != null)
+            {
+                // Module definition
+                this.ModulePath = pkcs11Library.Info.LibraryPath;
+                this.ModulePathPresent = true;
+                this.ModuleName = null;
+                this.ModuleNamePresent = false;
 
-            // Module definition
-            this.ModulePath = pkcs11Library.Info.LibraryPath;
-            this.ModulePathPresent = true;
-            this.ModuleName = null;
-            this.ModuleNamePresent = false;
-
-            // Library definition
-            this.LibraryManufacturer = pkcs11Library.Info.ManufacturerId;
-            this.LibraryManufacturerPresent = false;
-            this.LibraryDescription = pkcs11Library.Info.LibraryDescription;
-            this.LibraryDescriptionPresent = false;
-            this.LibraryVersion = pkcs11Library.Info.LibraryVersion;
-            this.LibraryVersionPresent = false;
+                // Library definition
+                this.LibraryManufacturer = pkcs11Library.Info.ManufacturerId;
+                this.LibraryManufacturerPresent = false;
+                this.LibraryDescription = pkcs11Library.Info.LibraryDescription;
+                this.LibraryDescriptionPresent = false;
+                this.LibraryVersion = pkcs11Library.Info.LibraryVersion;
+                this.LibraryVersionPresent = false;
+            }
 
             if (pkcs11Slot != null)
             {

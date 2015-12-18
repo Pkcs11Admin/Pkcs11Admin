@@ -541,19 +541,16 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void ReloadMenuItemTools()
         {
-            // TODO - Think about when these should be enabled
             MenuItemTools.Enabled = true;
 
-            MenuItemCsv.Enabled = true;
-            MenuItemCsvExportAll.Enabled = true;
-            MenuItemCsvExportSelected.Enabled = true;
+            MenuItemCsvExport.Enabled = (_selectedLibrary != null);
+            MenuItemCsvExportAll.Enabled = (_selectedLibrary != null);
+            MenuItemCsvExportSelected.Enabled = (_selectedLibrary != null);
 
             MenuItemPkcs11Uri.Enabled = true;
             MenuItemPkcs11UriEmpty.Enabled = true;
-            MenuItemPkcs11UriLibrary.Enabled = true;
-            MenuItemPkcs11UriSlot.Enabled = true;
-            MenuItemPkcs11UriToken.Enabled = true;
-            MenuItemPkcs11UriObject.Enabled = true;
+            MenuItemPkcs11UriWithObject.Enabled = ((_selectedSlot != null) && (_selectedSlot.SessionInfo != null));
+            MenuItemPkcs11UriWithoutObject.Enabled = (_selectedLibrary != null);
         }
 
         private void MenuItemCsvExportAll_Click(object sender, EventArgs e)
@@ -569,34 +566,17 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemPkcs11UriEmpty_Click(object sender, EventArgs e)
         {
-            BuildPkcs11Uri(); // TODO - Fix implementation
+            BuildPkcs11UriEmpty();
         }
 
-        private void MenuItemPkcs11UriLibrary_Click(object sender, EventArgs e)
+        private void MenuItemPkcs11UriWithObject_Click(object sender, EventArgs e)
         {
-            BuildPkcs11Uri(); // TODO - Fix implementation
+            BuildPkcs11UriWithObject();
         }
 
-        private void MenuItemPkcs11UriSlot_Click(object sender, EventArgs e)
+        private void MenuItemPkcs11UriWithoutObject_Click(object sender, EventArgs e)
         {
-            BuildPkcs11Uri(); // TODO - Fix implementation
-        }
-
-        private void MenuItemPkcs11UriToken_Click(object sender, EventArgs e)
-        {
-            BuildPkcs11Uri(); // TODO - Fix implementation
-        }
-
-        private void MenuItemPkcs11UriObject_Click(object sender, EventArgs e)
-        {
-            ListView listView = GetSelectedListViewWithPkcs11Objects();
-            if (listView == null)
-            {
-                WinFormsUtils.ShowInfo(this, "Please select object first");
-                return;
-            }
-
-            BuildPkcs11Uri(listView);
+            BuildPkcs11UriWithoutObject();
         }
 
         #endregion
@@ -1282,14 +1262,27 @@ namespace Net.Pkcs11Admin.WinForms
                 return (createObjectDialog.ShowDialog() == DialogResult.OK);
         }
 
-        private void BuildPkcs11Uri()
+        private void BuildPkcs11UriEmpty()
+        {
+            using (UriDialog uriDialog = new UriDialog(null, null, null))
+                uriDialog.ShowDialog();
+        }
+
+        private void BuildPkcs11UriWithoutObject()
         {
             using (UriDialog uriDialog = new UriDialog(_selectedLibrary, _selectedSlot, null))
                 uriDialog.ShowDialog();
         }
 
-        private void BuildPkcs11Uri(ListView listView)
+        private void BuildPkcs11UriWithObject()
         {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return;
+            }
+
             ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(listView);
             if (selectedItem == null)
                 return;
