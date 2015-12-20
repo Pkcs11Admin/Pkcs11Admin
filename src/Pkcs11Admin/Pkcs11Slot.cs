@@ -829,7 +829,7 @@ namespace Net.Pkcs11Admin
             return objectAttributes;
         }
 
-        public void ExportDataObject(Pkcs11ObjectInfo objectInfo, out string fileName, out byte[] fileContent)
+        public void ExportDataObject(Pkcs11DataObjectInfo objectInfo, out string fileName, out byte[] fileContent)
         {
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
@@ -848,6 +848,18 @@ namespace Net.Pkcs11Admin
                 fileName = objectAttributes[0].GetValueAsString();
                 fileContent = objectAttributes[1].GetValueAsByteArray();
             }
+        }
+
+        public void ExportCertificate(Pkcs11CertificateInfo objectInfo, out string fileName, out byte[] fileContent)
+        {
+            if (this._disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
+
+            if (objectInfo == null)
+                throw new ArgumentNullException("objectInfo");
+
+            fileName = objectInfo.CkaLabel;
+            fileContent = objectInfo.CkaValue;
         }
 
         #region IDisposable

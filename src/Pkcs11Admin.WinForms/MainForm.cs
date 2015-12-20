@@ -501,7 +501,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemObjectExportCert_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            ExportCertificate();
         }
 
         private void MenuItemObjectExportKey_Click(object sender, EventArgs e)
@@ -1072,7 +1072,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void CtxMenuItemCertificatesExport_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            ExportCertificate();
         }
 
         private void CtxMenuItemCertificatesPkcs11Uri_Click(object sender, EventArgs e)
@@ -1648,6 +1648,48 @@ namespace Net.Pkcs11Admin.WinForms
                     {
                         File.WriteAllBytes(saveFileDialog.FileName, fileContent);
                         WinFormsUtils.ShowInfo(this, "Data object successfully exported");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtils.ShowError(this, ex);
+            }
+        }
+
+        private void ExportCertificate()
+        {
+            try
+            {
+                if (MainFormTabControl.SelectedTab != TabPageCertificates)
+                {
+                    WinFormsUtils.ShowInfo(this, "Please select object first");
+                    return;
+                }
+
+                ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewCertificates);
+                if (selectedItem == null)
+                    return;
+
+                string fileName = null;
+                byte[] fileContent = null;
+                _selectedSlot.ExportCertificate((Pkcs11CertificateInfo)selectedItem.Tag, out fileName, out fileContent);
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.FileName = fileName;
+
+                    saveFileDialog.Filter = "All files (*.*)|*.*|DER encoded X.509 certificate (*.cer)|*.cer";
+                    saveFileDialog.FilterIndex = 2;
+
+                    saveFileDialog.AddExtension = true;
+                    saveFileDialog.CreatePrompt = false;
+                    saveFileDialog.OverwritePrompt = true;
+
+                    if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        File.WriteAllBytes(saveFileDialog.FileName, fileContent);
+                        WinFormsUtils.ShowInfo(this, "Certificate successfully exported");
                     }
                 }
             }
