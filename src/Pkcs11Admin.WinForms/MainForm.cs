@@ -458,27 +458,13 @@ namespace Net.Pkcs11Admin.WinForms
 
         private async void MenuItemObjectEdit_Click(object sender, EventArgs e)
         {
-            ListView listView = GetSelectedListViewWithPkcs11Objects();
-            if (listView == null)
-            {
-                WinFormsUtils.ShowInfo(this, "Please select object first");
-                return;
-            }
-
-            if (EditPkcs11ObjectAttributes(listView))
+            if (EditPkcs11ObjectAttributes())
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private async void MenuItemObjectDelete_Click(object sender, EventArgs e)
         {
-            ListView listView = GetSelectedListViewWithPkcs11Objects();
-            if (listView == null)
-            {
-                WinFormsUtils.ShowInfo(this, "Please select object first");
-                return;
-            }
-
-            if (DeletePkcs11Object(listView))
+            if (DeletePkcs11Object())
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
@@ -489,12 +475,6 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemObjectViewCert_Click(object sender, EventArgs e)
         {
-            if (MainFormTabControl.SelectedTab != TabPageCertificates)
-            {
-                WinFormsUtils.ShowInfo(this, "Please select certificate first");
-                return;
-            }
-
             ShowCertificateDetails();
         }
 
@@ -516,12 +496,6 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemObjectExportData_Click(object sender, EventArgs e)
         {
-            if (MainFormTabControl.SelectedTab != TabPageDataObjects)
-            {
-                WinFormsUtils.ShowInfo(this, "Please select object first");
-                return;
-            }
-
             ExportDataObject();
         }
 
@@ -736,6 +710,25 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewBasicInfo.EndUpdate();
         }
 
+        #region ContextMenuBasicInfo
+
+        private void CtxMenuItemBasicInfoPkcs11Uri_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11UriWithoutObject();
+        }
+
+        private void CtxMenuItemBasicInfoCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemBasicInfoCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
+        #endregion
+
         #endregion
 
         #region TabPageMechanisms
@@ -824,6 +817,20 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewMechanisms.EndUpdate();
         }
 
+        #region ContextMenuMechanisms
+
+        private void CtxMenuItemMechanismsCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemMechanismsCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
+        #endregion
+
         #endregion
 
         #region TabPageHwFeatures
@@ -867,6 +874,26 @@ namespace Net.Pkcs11Admin.WinForms
 
             ListViewHwFeatures.EndUpdate();
         }
+
+        #region ContextMenuHwFeatures
+
+        private async void CtxMenuItemHwFeaturesEdit_Click(object sender, EventArgs e)
+        {
+            if (EditPkcs11ObjectAttributes())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void CtxMenuItemHwFeaturesCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemHwFeaturesCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
+        #endregion
 
         #endregion
 
@@ -916,9 +943,62 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewDataObjects.EndUpdate();
         }
 
+        #region ContextMenuDataObjects
+
+        private void CtxMenuItemDataObjectsView_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private async void CtxMenuItemDataObjectsNew_Click(object sender, EventArgs e)
+        {
+            if (CreatePkcs11Object())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void CtxMenuItemDataObjectsEdit_Click(object sender, EventArgs e)
+        {
+            if (EditPkcs11ObjectAttributes())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void CtxMenuItemDataObjectsDelete_Click(object sender, EventArgs e)
+        {
+            if (DeletePkcs11Object())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void CtxMenuItemDataObjectsImport_Click(object sender, EventArgs e)
+        {
+            if (ImportDataObject())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void CtxMenuItemDataObjectsExport_Click(object sender, EventArgs e)
+        {
+            ExportDataObject();
+        }
+
+        private void CtxMenuItemDataObjectsPkcs11Uri_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11UriWithObject();
+        }
+
+        private void CtxMenuItemDataObjectsCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemDataObjectsCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
         #endregion
 
-        #region TabPageCertificates;
+        #endregion
+
+        #region TabPageCertificates
 
         private void ReloadTabPageCertificates()
         {
@@ -965,6 +1045,52 @@ namespace Net.Pkcs11Admin.WinForms
 
             ListViewCertificates.EndUpdate();
         }
+
+        #region ContextMenuCertificates
+
+        private void CtxMenuItemCertificatesView_Click(object sender, EventArgs e)
+        {
+            ShowCertificateDetails();
+        }
+
+        private async void CtxMenuItemCertificatesEdit_Click(object sender, EventArgs e)
+        {
+            if (EditPkcs11ObjectAttributes())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void CtxMenuItemCertificatesDelete_Click(object sender, EventArgs e)
+        {
+            if (DeletePkcs11Object())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void CtxMenuItemCertificatesImport_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void CtxMenuItemCertificatesExport_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void CtxMenuItemCertificatesPkcs11Uri_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11UriWithObject();
+        }
+
+        private void CtxMenuItemCertificatesCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemCertificatesCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
+        #endregion
 
         #endregion
 
@@ -1018,6 +1144,62 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewKeys.EndUpdate();
         }
 
+        #region ContextMenuKeys
+
+        private void CtxMenuItemKeysNew_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private async void CtxMenuItemKeysEdit_Click(object sender, EventArgs e)
+        {
+            if (EditPkcs11ObjectAttributes())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void CtxMenuItemKeyDelete_Click(object sender, EventArgs e)
+        {
+            if (DeletePkcs11Object())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void CtxMenuItemKeysImport_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void CtxMenuItemKeysExport_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void CtxMenuItemKeysNewCsr_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void CtxMenuItemKeysNewCert_Click(object sender, EventArgs e)
+        {
+            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+        }
+
+        private void CtxMenuItemKeysPkcs11Uri_Click(object sender, EventArgs e)
+        {
+            BuildPkcs11UriWithObject();
+        }
+
+        private void CtxMenuItemKeysCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemKeysCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
+        #endregion
+
         #endregion
 
         #region TabPageDomainParams
@@ -1065,6 +1247,32 @@ namespace Net.Pkcs11Admin.WinForms
 
             ListViewDomainParams.EndUpdate();
         }
+
+        #region ContextMenuDomainParams
+
+        private async void CtxMenuItemDomainParamsEdit_Click(object sender, EventArgs e)
+        {
+            if (EditPkcs11ObjectAttributes())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private async void CtxMenuItemDomainParamsDelete_Click(object sender, EventArgs e)
+        {
+            if (DeletePkcs11Object())
+                await ReloadFormAfter(_selectedSlot.Reload);
+        }
+
+        private void CtxMenuItemDomainParamsCsvAll_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(false);
+        }
+
+        private void CtxMenuItemDomainParamsCsvSelected_Click(object sender, EventArgs e)
+        {
+            ExportToCsv(true);
+        }
+
+        #endregion
 
         #endregion
 
@@ -1218,8 +1426,15 @@ namespace Net.Pkcs11Admin.WinForms
             InitializeMenuItemSlot(_selectedLibrary.Slots);
         }
 
-        private bool EditPkcs11ObjectAttributes(ListView listView)
+        private bool EditPkcs11ObjectAttributes()
         {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return false;
+            }
+
             ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(listView);
             if (selectedItem == null)
                 return false;
@@ -1231,8 +1446,15 @@ namespace Net.Pkcs11Admin.WinForms
             }
         }
 
-        private bool DeletePkcs11Object(ListView listView)
+        private bool DeletePkcs11Object()
         {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select object first");
+                return false;
+            }
+
             List<ListViewItem> selectedItems = WinFormsUtils.GetSelectedItems(listView);
             if (selectedItems == null)
                 return false;
@@ -1292,6 +1514,12 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void ShowCertificateDetails()
         {
+            if (MainFormTabControl.SelectedTab != TabPageCertificates)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select certificate first");
+                return;
+            }
+
             ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewCertificates);
             if (selectedItem == null)
                 return;
@@ -1392,6 +1620,12 @@ namespace Net.Pkcs11Admin.WinForms
         {
             try
             {
+                if (MainFormTabControl.SelectedTab != TabPageDataObjects)
+                {
+                    WinFormsUtils.ShowInfo(this, "Please select object first");
+                    return;
+                }
+
                 ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewDataObjects);
                 if (selectedItem == null)
                     return;
@@ -1470,6 +1704,7 @@ namespace Net.Pkcs11Admin.WinForms
         {
             return (storageSize == null) ? "-" : storageSize.ToString();
         }
+
 
         #endregion
     }

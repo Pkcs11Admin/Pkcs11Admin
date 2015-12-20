@@ -45,6 +45,7 @@ namespace Net.Pkcs11Admin.WinForms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormStatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainFormStatusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -110,37 +111,90 @@ namespace Net.Pkcs11Admin.WinForms
             this.MainFormPanel = new System.Windows.Forms.Panel();
             this.MainFormTabControl = new System.Windows.Forms.TabControl();
             this.TabPageBasicInfo = new System.Windows.Forms.TabPage();
-            this.ListViewBasicInfo = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuBasicInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemBasicInfoPkcs11Uri = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemBasicInfoCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemBasicInfoCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelBasicInfo = new System.Windows.Forms.Label();
             this.TabPageMechanisms = new System.Windows.Forms.TabPage();
-            this.ListViewMechanisms = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuMechanisms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemMechanismsCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemMechanismsCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelMechanisms = new System.Windows.Forms.Label();
             this.TabPageHwFeatures = new System.Windows.Forms.TabPage();
-            this.ListViewHwFeatures = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuHwFeatures = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemHwFeaturesEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemHwFeaturesCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemHwFeaturesCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelHwFeatures = new System.Windows.Forms.Label();
             this.TabPageDataObjects = new System.Windows.Forms.TabPage();
-            this.ListViewDataObjects = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuDataObjects = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemDataObjectsView = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsPkcs11Uri = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDataObjectsCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelDataObjects = new System.Windows.Forms.Label();
             this.TabPageCertificates = new System.Windows.Forms.TabPage();
-            this.ListViewCertificates = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuCertificates = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemCertificatesView = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesPkcs11Uri = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemCertificatesCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelCertificates = new System.Windows.Forms.Label();
             this.TabPageKeys = new System.Windows.Forms.TabPage();
-            this.ListViewKeys = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuKeys = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemKeysNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeyDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysNewCsr = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysNewCert = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysPkcs11Uri = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemKeysCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelKeys = new System.Windows.Forms.Label();
             this.TabPageDomainParams = new System.Windows.Forms.TabPage();
-            this.ListViewDomainParams = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ContextMenuDomainParams = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuItemDomainParamsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDomainParamsDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDomainParamsCsvAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.CtxMenuItemDomainParamsCsvSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelDomainParams = new System.Windows.Forms.Label();
+            this.ListViewBasicInfo = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ListViewMechanisms = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ListViewHwFeatures = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ListViewDataObjects = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ListViewCertificates = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ListViewKeys = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
+            this.ListViewDomainParams = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
             this.MainFormStatusStrip.SuspendLayout();
             this.MainFormMenuStrip.SuspendLayout();
             this.MainFormPanel.SuspendLayout();
             this.MainFormTabControl.SuspendLayout();
             this.TabPageBasicInfo.SuspendLayout();
+            this.ContextMenuBasicInfo.SuspendLayout();
             this.TabPageMechanisms.SuspendLayout();
+            this.ContextMenuMechanisms.SuspendLayout();
             this.TabPageHwFeatures.SuspendLayout();
+            this.ContextMenuHwFeatures.SuspendLayout();
             this.TabPageDataObjects.SuspendLayout();
+            this.ContextMenuDataObjects.SuspendLayout();
             this.TabPageCertificates.SuspendLayout();
+            this.ContextMenuCertificates.SuspendLayout();
             this.TabPageKeys.SuspendLayout();
+            this.ContextMenuKeys.SuspendLayout();
             this.TabPageDomainParams.SuspendLayout();
+            this.ContextMenuDomainParams.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormStatusStrip
@@ -669,20 +723,37 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageBasicInfo.Text = "Basic info";
             this.TabPageBasicInfo.UseVisualStyleBackColor = true;
             // 
-            // ListViewBasicInfo
+            // ContextMenuBasicInfo
             // 
-            this.ListViewBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewBasicInfo.FullRowSelect = true;
-            this.ListViewBasicInfo.HideSelection = false;
-            this.ListViewBasicInfo.Location = new System.Drawing.Point(13, 26);
-            this.ListViewBasicInfo.Name = "ListViewBasicInfo";
-            this.ListViewBasicInfo.Size = new System.Drawing.Size(724, 324);
-            this.ListViewBasicInfo.Sortable = true;
-            this.ListViewBasicInfo.TabIndex = 1;
-            this.ListViewBasicInfo.UseCompatibleStateImageBehavior = false;
-            this.ListViewBasicInfo.View = System.Windows.Forms.View.Details;
+            this.ContextMenuBasicInfo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemBasicInfoPkcs11Uri,
+            this.CtxMenuItemBasicInfoCsvAll,
+            this.CtxMenuItemBasicInfoCsvSelected});
+            this.ContextMenuBasicInfo.Name = "ContextMenuBasicInfo";
+            this.ContextMenuBasicInfo.ShowImageMargin = false;
+            this.ContextMenuBasicInfo.ShowItemToolTips = false;
+            this.ContextMenuBasicInfo.Size = new System.Drawing.Size(208, 70);
+            // 
+            // CtxMenuItemBasicInfoPkcs11Uri
+            // 
+            this.CtxMenuItemBasicInfoPkcs11Uri.Name = "CtxMenuItemBasicInfoPkcs11Uri";
+            this.CtxMenuItemBasicInfoPkcs11Uri.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemBasicInfoPkcs11Uri.Text = "Build PKCS#11 URI...";
+            this.CtxMenuItemBasicInfoPkcs11Uri.Click += new System.EventHandler(this.CtxMenuItemBasicInfoPkcs11Uri_Click);
+            // 
+            // CtxMenuItemBasicInfoCsvAll
+            // 
+            this.CtxMenuItemBasicInfoCsvAll.Name = "CtxMenuItemBasicInfoCsvAll";
+            this.CtxMenuItemBasicInfoCsvAll.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemBasicInfoCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemBasicInfoCsvAll.Click += new System.EventHandler(this.CtxMenuItemBasicInfoCsvAll_Click);
+            // 
+            // CtxMenuItemBasicInfoCsvSelected
+            // 
+            this.CtxMenuItemBasicInfoCsvSelected.Name = "CtxMenuItemBasicInfoCsvSelected";
+            this.CtxMenuItemBasicInfoCsvSelected.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemBasicInfoCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemBasicInfoCsvSelected.Click += new System.EventHandler(this.CtxMenuItemBasicInfoCsvSelected_Click);
             // 
             // LabelBasicInfo
             // 
@@ -705,20 +776,29 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageMechanisms.Text = "Mechanisms";
             this.TabPageMechanisms.UseVisualStyleBackColor = true;
             // 
-            // ListViewMechanisms
+            // ContextMenuMechanisms
             // 
-            this.ListViewMechanisms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewMechanisms.FullRowSelect = true;
-            this.ListViewMechanisms.HideSelection = false;
-            this.ListViewMechanisms.Location = new System.Drawing.Point(13, 26);
-            this.ListViewMechanisms.Name = "ListViewMechanisms";
-            this.ListViewMechanisms.Size = new System.Drawing.Size(724, 324);
-            this.ListViewMechanisms.Sortable = true;
-            this.ListViewMechanisms.TabIndex = 0;
-            this.ListViewMechanisms.UseCompatibleStateImageBehavior = false;
-            this.ListViewMechanisms.View = System.Windows.Forms.View.Details;
+            this.ContextMenuMechanisms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemMechanismsCsvAll,
+            this.CtxMenuItemMechanismsCsvSelected});
+            this.ContextMenuMechanisms.Name = "ContextMenuMechanisms";
+            this.ContextMenuMechanisms.ShowImageMargin = false;
+            this.ContextMenuMechanisms.ShowItemToolTips = false;
+            this.ContextMenuMechanisms.Size = new System.Drawing.Size(208, 48);
+            // 
+            // CtxMenuItemMechanismsCsvAll
+            // 
+            this.CtxMenuItemMechanismsCsvAll.Name = "CtxMenuItemMechanismsCsvAll";
+            this.CtxMenuItemMechanismsCsvAll.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemMechanismsCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemMechanismsCsvAll.Click += new System.EventHandler(this.CtxMenuItemMechanismsCsvAll_Click);
+            // 
+            // CtxMenuItemMechanismsCsvSelected
+            // 
+            this.CtxMenuItemMechanismsCsvSelected.Name = "CtxMenuItemMechanismsCsvSelected";
+            this.CtxMenuItemMechanismsCsvSelected.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemMechanismsCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemMechanismsCsvSelected.Click += new System.EventHandler(this.CtxMenuItemMechanismsCsvSelected_Click);
             // 
             // LabelMechanisms
             // 
@@ -741,20 +821,37 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageHwFeatures.Text = "HW features";
             this.TabPageHwFeatures.UseVisualStyleBackColor = true;
             // 
-            // ListViewHwFeatures
+            // ContextMenuHwFeatures
             // 
-            this.ListViewHwFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewHwFeatures.FullRowSelect = true;
-            this.ListViewHwFeatures.HideSelection = false;
-            this.ListViewHwFeatures.Location = new System.Drawing.Point(13, 26);
-            this.ListViewHwFeatures.Name = "ListViewHwFeatures";
-            this.ListViewHwFeatures.Size = new System.Drawing.Size(724, 324);
-            this.ListViewHwFeatures.Sortable = true;
-            this.ListViewHwFeatures.TabIndex = 1;
-            this.ListViewHwFeatures.UseCompatibleStateImageBehavior = false;
-            this.ListViewHwFeatures.View = System.Windows.Forms.View.Details;
+            this.ContextMenuHwFeatures.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemHwFeaturesEdit,
+            this.CtxMenuItemHwFeaturesCsvAll,
+            this.CtxMenuItemHwFeaturesCsvSelected});
+            this.ContextMenuHwFeatures.Name = "ContextMenuHwFeatures";
+            this.ContextMenuHwFeatures.ShowImageMargin = false;
+            this.ContextMenuHwFeatures.ShowItemToolTips = false;
+            this.ContextMenuHwFeatures.Size = new System.Drawing.Size(208, 70);
+            // 
+            // CtxMenuItemHwFeaturesEdit
+            // 
+            this.CtxMenuItemHwFeaturesEdit.Name = "CtxMenuItemHwFeaturesEdit";
+            this.CtxMenuItemHwFeaturesEdit.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemHwFeaturesEdit.Text = "Edit attributes...";
+            this.CtxMenuItemHwFeaturesEdit.Click += new System.EventHandler(this.CtxMenuItemHwFeaturesEdit_Click);
+            // 
+            // CtxMenuItemHwFeaturesCsvAll
+            // 
+            this.CtxMenuItemHwFeaturesCsvAll.Name = "CtxMenuItemHwFeaturesCsvAll";
+            this.CtxMenuItemHwFeaturesCsvAll.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemHwFeaturesCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemHwFeaturesCsvAll.Click += new System.EventHandler(this.CtxMenuItemHwFeaturesCsvAll_Click);
+            // 
+            // CtxMenuItemHwFeaturesCsvSelected
+            // 
+            this.CtxMenuItemHwFeaturesCsvSelected.Name = "CtxMenuItemHwFeaturesCsvSelected";
+            this.CtxMenuItemHwFeaturesCsvSelected.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemHwFeaturesCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemHwFeaturesCsvSelected.Click += new System.EventHandler(this.CtxMenuItemHwFeaturesCsvSelected_Click);
             // 
             // LabelHwFeatures
             // 
@@ -777,20 +874,85 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageDataObjects.Text = "Data objects";
             this.TabPageDataObjects.UseVisualStyleBackColor = true;
             // 
-            // ListViewDataObjects
+            // ContextMenuDataObjects
             // 
-            this.ListViewDataObjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewDataObjects.FullRowSelect = true;
-            this.ListViewDataObjects.HideSelection = false;
-            this.ListViewDataObjects.Location = new System.Drawing.Point(13, 26);
-            this.ListViewDataObjects.Name = "ListViewDataObjects";
-            this.ListViewDataObjects.Size = new System.Drawing.Size(724, 324);
-            this.ListViewDataObjects.Sortable = true;
-            this.ListViewDataObjects.TabIndex = 1;
-            this.ListViewDataObjects.UseCompatibleStateImageBehavior = false;
-            this.ListViewDataObjects.View = System.Windows.Forms.View.Details;
+            this.ContextMenuDataObjects.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemDataObjectsView,
+            this.CtxMenuItemDataObjectsNew,
+            this.CtxMenuItemDataObjectsEdit,
+            this.CtxMenuItemDataObjectsDelete,
+            this.CtxMenuItemDataObjectsImport,
+            this.CtxMenuItemDataObjectsExport,
+            this.CtxMenuItemDataObjectsPkcs11Uri,
+            this.CtxMenuItemDataObjectsCsvAll,
+            this.CtxMenuItemDataObjectsCsvSelected});
+            this.ContextMenuDataObjects.Name = "ContextMenuDataObjects";
+            this.ContextMenuDataObjects.ShowImageMargin = false;
+            this.ContextMenuDataObjects.ShowItemToolTips = false;
+            this.ContextMenuDataObjects.Size = new System.Drawing.Size(208, 202);
+            // 
+            // CtxMenuItemDataObjectsView
+            // 
+            this.CtxMenuItemDataObjectsView.Name = "CtxMenuItemDataObjectsView";
+            this.CtxMenuItemDataObjectsView.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsView.Text = "View...";
+            this.CtxMenuItemDataObjectsView.Click += new System.EventHandler(this.CtxMenuItemDataObjectsView_Click);
+            // 
+            // CtxMenuItemDataObjectsNew
+            // 
+            this.CtxMenuItemDataObjectsNew.Name = "CtxMenuItemDataObjectsNew";
+            this.CtxMenuItemDataObjectsNew.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsNew.Text = "Create new...";
+            this.CtxMenuItemDataObjectsNew.Click += new System.EventHandler(this.CtxMenuItemDataObjectsNew_Click);
+            // 
+            // CtxMenuItemDataObjectsEdit
+            // 
+            this.CtxMenuItemDataObjectsEdit.Name = "CtxMenuItemDataObjectsEdit";
+            this.CtxMenuItemDataObjectsEdit.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsEdit.Text = "Edit attributes...";
+            this.CtxMenuItemDataObjectsEdit.Click += new System.EventHandler(this.CtxMenuItemDataObjectsEdit_Click);
+            // 
+            // CtxMenuItemDataObjectsDelete
+            // 
+            this.CtxMenuItemDataObjectsDelete.Name = "CtxMenuItemDataObjectsDelete";
+            this.CtxMenuItemDataObjectsDelete.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsDelete.Text = "Delete...";
+            this.CtxMenuItemDataObjectsDelete.Click += new System.EventHandler(this.CtxMenuItemDataObjectsDelete_Click);
+            // 
+            // CtxMenuItemDataObjectsImport
+            // 
+            this.CtxMenuItemDataObjectsImport.Name = "CtxMenuItemDataObjectsImport";
+            this.CtxMenuItemDataObjectsImport.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsImport.Text = "Import file...";
+            this.CtxMenuItemDataObjectsImport.Click += new System.EventHandler(this.CtxMenuItemDataObjectsImport_Click);
+            // 
+            // CtxMenuItemDataObjectsExport
+            // 
+            this.CtxMenuItemDataObjectsExport.Name = "CtxMenuItemDataObjectsExport";
+            this.CtxMenuItemDataObjectsExport.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsExport.Text = "Export to file...";
+            this.CtxMenuItemDataObjectsExport.Click += new System.EventHandler(this.CtxMenuItemDataObjectsExport_Click);
+            // 
+            // CtxMenuItemDataObjectsPkcs11Uri
+            // 
+            this.CtxMenuItemDataObjectsPkcs11Uri.Name = "CtxMenuItemDataObjectsPkcs11Uri";
+            this.CtxMenuItemDataObjectsPkcs11Uri.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsPkcs11Uri.Text = "Build PKCS#11 URI...";
+            this.CtxMenuItemDataObjectsPkcs11Uri.Click += new System.EventHandler(this.CtxMenuItemDataObjectsPkcs11Uri_Click);
+            // 
+            // CtxMenuItemDataObjectsCsvAll
+            // 
+            this.CtxMenuItemDataObjectsCsvAll.Name = "CtxMenuItemDataObjectsCsvAll";
+            this.CtxMenuItemDataObjectsCsvAll.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemDataObjectsCsvAll.Click += new System.EventHandler(this.CtxMenuItemDataObjectsCsvAll_Click);
+            // 
+            // CtxMenuItemDataObjectsCsvSelected
+            // 
+            this.CtxMenuItemDataObjectsCsvSelected.Name = "CtxMenuItemDataObjectsCsvSelected";
+            this.CtxMenuItemDataObjectsCsvSelected.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDataObjectsCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemDataObjectsCsvSelected.Click += new System.EventHandler(this.CtxMenuItemDataObjectsCsvSelected_Click);
             // 
             // LabelDataObjects
             // 
@@ -813,20 +975,77 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageCertificates.Text = "Certificates";
             this.TabPageCertificates.UseVisualStyleBackColor = true;
             // 
-            // ListViewCertificates
+            // ContextMenuCertificates
             // 
-            this.ListViewCertificates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewCertificates.FullRowSelect = true;
-            this.ListViewCertificates.HideSelection = false;
-            this.ListViewCertificates.Location = new System.Drawing.Point(13, 26);
-            this.ListViewCertificates.Name = "ListViewCertificates";
-            this.ListViewCertificates.Size = new System.Drawing.Size(724, 324);
-            this.ListViewCertificates.Sortable = true;
-            this.ListViewCertificates.TabIndex = 1;
-            this.ListViewCertificates.UseCompatibleStateImageBehavior = false;
-            this.ListViewCertificates.View = System.Windows.Forms.View.Details;
+            this.ContextMenuCertificates.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemCertificatesView,
+            this.CtxMenuItemCertificatesEdit,
+            this.CtxMenuItemCertificatesDelete,
+            this.CtxMenuItemCertificatesImport,
+            this.CtxMenuItemCertificatesExport,
+            this.CtxMenuItemCertificatesPkcs11Uri,
+            this.CtxMenuItemCertificatesCsvAll,
+            this.CtxMenuItemCertificatesCsvSelected});
+            this.ContextMenuCertificates.Name = "ContextMenuCertificates";
+            this.ContextMenuCertificates.ShowImageMargin = false;
+            this.ContextMenuCertificates.ShowItemToolTips = false;
+            this.ContextMenuCertificates.Size = new System.Drawing.Size(208, 180);
+            // 
+            // CtxMenuItemCertificatesView
+            // 
+            this.CtxMenuItemCertificatesView.Name = "CtxMenuItemCertificatesView";
+            this.CtxMenuItemCertificatesView.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesView.Text = "View...";
+            this.CtxMenuItemCertificatesView.Click += new System.EventHandler(this.CtxMenuItemCertificatesView_Click);
+            // 
+            // CtxMenuItemCertificatesEdit
+            // 
+            this.CtxMenuItemCertificatesEdit.Name = "CtxMenuItemCertificatesEdit";
+            this.CtxMenuItemCertificatesEdit.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesEdit.Text = "Edit attributes...";
+            this.CtxMenuItemCertificatesEdit.Click += new System.EventHandler(this.CtxMenuItemCertificatesEdit_Click);
+            // 
+            // CtxMenuItemCertificatesDelete
+            // 
+            this.CtxMenuItemCertificatesDelete.Name = "CtxMenuItemCertificatesDelete";
+            this.CtxMenuItemCertificatesDelete.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesDelete.Text = "Delete...";
+            this.CtxMenuItemCertificatesDelete.Click += new System.EventHandler(this.CtxMenuItemCertificatesDelete_Click);
+            // 
+            // CtxMenuItemCertificatesImport
+            // 
+            this.CtxMenuItemCertificatesImport.Name = "CtxMenuItemCertificatesImport";
+            this.CtxMenuItemCertificatesImport.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesImport.Text = "Import from file...";
+            this.CtxMenuItemCertificatesImport.Click += new System.EventHandler(this.CtxMenuItemCertificatesImport_Click);
+            // 
+            // CtxMenuItemCertificatesExport
+            // 
+            this.CtxMenuItemCertificatesExport.Name = "CtxMenuItemCertificatesExport";
+            this.CtxMenuItemCertificatesExport.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesExport.Text = "Export to file...";
+            this.CtxMenuItemCertificatesExport.Click += new System.EventHandler(this.CtxMenuItemCertificatesExport_Click);
+            // 
+            // CtxMenuItemCertificatesPkcs11Uri
+            // 
+            this.CtxMenuItemCertificatesPkcs11Uri.Name = "CtxMenuItemCertificatesPkcs11Uri";
+            this.CtxMenuItemCertificatesPkcs11Uri.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesPkcs11Uri.Text = "Build PKCS#11 URI...";
+            this.CtxMenuItemCertificatesPkcs11Uri.Click += new System.EventHandler(this.CtxMenuItemCertificatesPkcs11Uri_Click);
+            // 
+            // CtxMenuItemCertificatesCsvAll
+            // 
+            this.CtxMenuItemCertificatesCsvAll.Name = "CtxMenuItemCertificatesCsvAll";
+            this.CtxMenuItemCertificatesCsvAll.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemCertificatesCsvAll.Click += new System.EventHandler(this.CtxMenuItemCertificatesCsvAll_Click);
+            // 
+            // CtxMenuItemCertificatesCsvSelected
+            // 
+            this.CtxMenuItemCertificatesCsvSelected.Name = "CtxMenuItemCertificatesCsvSelected";
+            this.CtxMenuItemCertificatesCsvSelected.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemCertificatesCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemCertificatesCsvSelected.Click += new System.EventHandler(this.CtxMenuItemCertificatesCsvSelected_Click);
             // 
             // LabelCertificates
             // 
@@ -849,20 +1068,93 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageKeys.Text = "Keys";
             this.TabPageKeys.UseVisualStyleBackColor = true;
             // 
-            // ListViewKeys
+            // ContextMenuKeys
             // 
-            this.ListViewKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewKeys.FullRowSelect = true;
-            this.ListViewKeys.HideSelection = false;
-            this.ListViewKeys.Location = new System.Drawing.Point(13, 26);
-            this.ListViewKeys.Name = "ListViewKeys";
-            this.ListViewKeys.Size = new System.Drawing.Size(724, 324);
-            this.ListViewKeys.Sortable = true;
-            this.ListViewKeys.TabIndex = 1;
-            this.ListViewKeys.UseCompatibleStateImageBehavior = false;
-            this.ListViewKeys.View = System.Windows.Forms.View.Details;
+            this.ContextMenuKeys.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemKeysNew,
+            this.CtxMenuItemKeysEdit,
+            this.CtxMenuItemKeyDelete,
+            this.CtxMenuItemKeysImport,
+            this.CtxMenuItemKeysExport,
+            this.CtxMenuItemKeysNewCsr,
+            this.CtxMenuItemKeysNewCert,
+            this.CtxMenuItemKeysPkcs11Uri,
+            this.CtxMenuItemKeysCsvAll,
+            this.CtxMenuItemKeysCsvSelected});
+            this.ContextMenuKeys.Name = "ContextMenuKeys";
+            this.ContextMenuKeys.ShowImageMargin = false;
+            this.ContextMenuKeys.ShowItemToolTips = false;
+            this.ContextMenuKeys.Size = new System.Drawing.Size(245, 224);
+            // 
+            // CtxMenuItemKeysNew
+            // 
+            this.CtxMenuItemKeysNew.Name = "CtxMenuItemKeysNew";
+            this.CtxMenuItemKeysNew.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysNew.Text = "Generate new...";
+            this.CtxMenuItemKeysNew.Click += new System.EventHandler(this.CtxMenuItemKeysNew_Click);
+            // 
+            // CtxMenuItemKeysEdit
+            // 
+            this.CtxMenuItemKeysEdit.Name = "CtxMenuItemKeysEdit";
+            this.CtxMenuItemKeysEdit.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysEdit.Text = "Edit attributes...";
+            this.CtxMenuItemKeysEdit.Click += new System.EventHandler(this.CtxMenuItemKeysEdit_Click);
+            // 
+            // CtxMenuItemKeyDelete
+            // 
+            this.CtxMenuItemKeyDelete.Name = "CtxMenuItemKeyDelete";
+            this.CtxMenuItemKeyDelete.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeyDelete.Text = "Delete...";
+            this.CtxMenuItemKeyDelete.Click += new System.EventHandler(this.CtxMenuItemKeyDelete_Click);
+            // 
+            // CtxMenuItemKeysImport
+            // 
+            this.CtxMenuItemKeysImport.Name = "CtxMenuItemKeysImport";
+            this.CtxMenuItemKeysImport.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysImport.Text = "Import from file...";
+            this.CtxMenuItemKeysImport.Click += new System.EventHandler(this.CtxMenuItemKeysImport_Click);
+            // 
+            // CtxMenuItemKeysExport
+            // 
+            this.CtxMenuItemKeysExport.Name = "CtxMenuItemKeysExport";
+            this.CtxMenuItemKeysExport.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysExport.Text = "Export to file...";
+            this.CtxMenuItemKeysExport.Click += new System.EventHandler(this.CtxMenuItemKeysExport_Click);
+            // 
+            // CtxMenuItemKeysNewCsr
+            // 
+            this.CtxMenuItemKeysNewCsr.Name = "CtxMenuItemKeysNewCsr";
+            this.CtxMenuItemKeysNewCsr.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysNewCsr.Text = "Generate certificate signing request...";
+            this.CtxMenuItemKeysNewCsr.Click += new System.EventHandler(this.CtxMenuItemKeysNewCsr_Click);
+            // 
+            // CtxMenuItemKeysNewCert
+            // 
+            this.CtxMenuItemKeysNewCert.Name = "CtxMenuItemKeysNewCert";
+            this.CtxMenuItemKeysNewCert.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysNewCert.Text = "Generate self-signed certificate...";
+            this.CtxMenuItemKeysNewCert.Click += new System.EventHandler(this.CtxMenuItemKeysNewCert_Click);
+            // 
+            // CtxMenuItemKeysPkcs11Uri
+            // 
+            this.CtxMenuItemKeysPkcs11Uri.Name = "CtxMenuItemKeysPkcs11Uri";
+            this.CtxMenuItemKeysPkcs11Uri.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysPkcs11Uri.Text = "Build PKCS#11 URI...";
+            this.CtxMenuItemKeysPkcs11Uri.Click += new System.EventHandler(this.CtxMenuItemKeysPkcs11Uri_Click);
+            // 
+            // CtxMenuItemKeysCsvAll
+            // 
+            this.CtxMenuItemKeysCsvAll.Name = "CtxMenuItemKeysCsvAll";
+            this.CtxMenuItemKeysCsvAll.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemKeysCsvAll.Click += new System.EventHandler(this.CtxMenuItemKeysCsvAll_Click);
+            // 
+            // CtxMenuItemKeysCsvSelected
+            // 
+            this.CtxMenuItemKeysCsvSelected.Name = "CtxMenuItemKeysCsvSelected";
+            this.CtxMenuItemKeysCsvSelected.Size = new System.Drawing.Size(244, 22);
+            this.CtxMenuItemKeysCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemKeysCsvSelected.Click += new System.EventHandler(this.CtxMenuItemKeysCsvSelected_Click);
             // 
             // LabelKeys
             // 
@@ -885,19 +1177,45 @@ namespace Net.Pkcs11Admin.WinForms
             this.TabPageDomainParams.Text = "Domain params";
             this.TabPageDomainParams.UseVisualStyleBackColor = true;
             // 
-            // ListViewDomainParams
+            // ContextMenuDomainParams
             // 
-            this.ListViewDomainParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewDomainParams.HideSelection = false;
-            this.ListViewDomainParams.Location = new System.Drawing.Point(13, 26);
-            this.ListViewDomainParams.Name = "ListViewDomainParams";
-            this.ListViewDomainParams.Size = new System.Drawing.Size(724, 324);
-            this.ListViewDomainParams.Sortable = true;
-            this.ListViewDomainParams.TabIndex = 1;
-            this.ListViewDomainParams.UseCompatibleStateImageBehavior = false;
-            this.ListViewDomainParams.View = System.Windows.Forms.View.Details;
+            this.ContextMenuDomainParams.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuItemDomainParamsEdit,
+            this.CtxMenuItemDomainParamsDelete,
+            this.CtxMenuItemDomainParamsCsvAll,
+            this.CtxMenuItemDomainParamsCsvSelected});
+            this.ContextMenuDomainParams.Name = "ContextMenuDomainParams";
+            this.ContextMenuDomainParams.ShowImageMargin = false;
+            this.ContextMenuDomainParams.ShowItemToolTips = false;
+            this.ContextMenuDomainParams.Size = new System.Drawing.Size(208, 114);
+            // 
+            // CtxMenuItemDomainParamsEdit
+            // 
+            this.CtxMenuItemDomainParamsEdit.Name = "CtxMenuItemDomainParamsEdit";
+            this.CtxMenuItemDomainParamsEdit.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDomainParamsEdit.Text = "Edit attributes...";
+            this.CtxMenuItemDomainParamsEdit.Click += new System.EventHandler(this.CtxMenuItemDomainParamsEdit_Click);
+            // 
+            // CtxMenuItemDomainParamsDelete
+            // 
+            this.CtxMenuItemDomainParamsDelete.Name = "CtxMenuItemDomainParamsDelete";
+            this.CtxMenuItemDomainParamsDelete.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDomainParamsDelete.Text = "Delete...";
+            this.CtxMenuItemDomainParamsDelete.Click += new System.EventHandler(this.CtxMenuItemDomainParamsDelete_Click);
+            // 
+            // CtxMenuItemDomainParamsCsvAll
+            // 
+            this.CtxMenuItemDomainParamsCsvAll.Name = "CtxMenuItemDomainParamsCsvAll";
+            this.CtxMenuItemDomainParamsCsvAll.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDomainParamsCsvAll.Text = "Export all items to CSV...";
+            this.CtxMenuItemDomainParamsCsvAll.Click += new System.EventHandler(this.CtxMenuItemDomainParamsCsvAll_Click);
+            // 
+            // CtxMenuItemDomainParamsCsvSelected
+            // 
+            this.CtxMenuItemDomainParamsCsvSelected.Name = "CtxMenuItemDomainParamsCsvSelected";
+            this.CtxMenuItemDomainParamsCsvSelected.Size = new System.Drawing.Size(207, 22);
+            this.CtxMenuItemDomainParamsCsvSelected.Text = "Export selected items to CSV...";
+            this.CtxMenuItemDomainParamsCsvSelected.Click += new System.EventHandler(this.CtxMenuItemDomainParamsCsvSelected_Click);
             // 
             // LabelDomainParams
             // 
@@ -907,6 +1225,117 @@ namespace Net.Pkcs11Admin.WinForms
             this.LabelDomainParams.Size = new System.Drawing.Size(225, 13);
             this.LabelDomainParams.TabIndex = 0;
             this.LabelDomainParams.Text = "These domain parameters objects were found:";
+            // 
+            // ListViewBasicInfo
+            // 
+            this.ListViewBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewBasicInfo.ContextMenuStrip = this.ContextMenuBasicInfo;
+            this.ListViewBasicInfo.FullRowSelect = true;
+            this.ListViewBasicInfo.HideSelection = false;
+            this.ListViewBasicInfo.Location = new System.Drawing.Point(13, 26);
+            this.ListViewBasicInfo.Name = "ListViewBasicInfo";
+            this.ListViewBasicInfo.Size = new System.Drawing.Size(724, 324);
+            this.ListViewBasicInfo.Sortable = true;
+            this.ListViewBasicInfo.TabIndex = 1;
+            this.ListViewBasicInfo.UseCompatibleStateImageBehavior = false;
+            this.ListViewBasicInfo.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewMechanisms
+            // 
+            this.ListViewMechanisms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewMechanisms.ContextMenuStrip = this.ContextMenuMechanisms;
+            this.ListViewMechanisms.FullRowSelect = true;
+            this.ListViewMechanisms.HideSelection = false;
+            this.ListViewMechanisms.Location = new System.Drawing.Point(13, 26);
+            this.ListViewMechanisms.Name = "ListViewMechanisms";
+            this.ListViewMechanisms.Size = new System.Drawing.Size(724, 324);
+            this.ListViewMechanisms.Sortable = true;
+            this.ListViewMechanisms.TabIndex = 0;
+            this.ListViewMechanisms.UseCompatibleStateImageBehavior = false;
+            this.ListViewMechanisms.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewHwFeatures
+            // 
+            this.ListViewHwFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewHwFeatures.ContextMenuStrip = this.ContextMenuHwFeatures;
+            this.ListViewHwFeatures.FullRowSelect = true;
+            this.ListViewHwFeatures.HideSelection = false;
+            this.ListViewHwFeatures.Location = new System.Drawing.Point(13, 26);
+            this.ListViewHwFeatures.Name = "ListViewHwFeatures";
+            this.ListViewHwFeatures.Size = new System.Drawing.Size(724, 324);
+            this.ListViewHwFeatures.Sortable = true;
+            this.ListViewHwFeatures.TabIndex = 1;
+            this.ListViewHwFeatures.UseCompatibleStateImageBehavior = false;
+            this.ListViewHwFeatures.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewDataObjects
+            // 
+            this.ListViewDataObjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewDataObjects.ContextMenuStrip = this.ContextMenuDataObjects;
+            this.ListViewDataObjects.FullRowSelect = true;
+            this.ListViewDataObjects.HideSelection = false;
+            this.ListViewDataObjects.Location = new System.Drawing.Point(13, 26);
+            this.ListViewDataObjects.Name = "ListViewDataObjects";
+            this.ListViewDataObjects.Size = new System.Drawing.Size(724, 324);
+            this.ListViewDataObjects.Sortable = true;
+            this.ListViewDataObjects.TabIndex = 1;
+            this.ListViewDataObjects.UseCompatibleStateImageBehavior = false;
+            this.ListViewDataObjects.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewCertificates
+            // 
+            this.ListViewCertificates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewCertificates.ContextMenuStrip = this.ContextMenuCertificates;
+            this.ListViewCertificates.FullRowSelect = true;
+            this.ListViewCertificates.HideSelection = false;
+            this.ListViewCertificates.Location = new System.Drawing.Point(13, 26);
+            this.ListViewCertificates.Name = "ListViewCertificates";
+            this.ListViewCertificates.Size = new System.Drawing.Size(724, 324);
+            this.ListViewCertificates.Sortable = true;
+            this.ListViewCertificates.TabIndex = 1;
+            this.ListViewCertificates.UseCompatibleStateImageBehavior = false;
+            this.ListViewCertificates.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewKeys
+            // 
+            this.ListViewKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewKeys.ContextMenuStrip = this.ContextMenuKeys;
+            this.ListViewKeys.FullRowSelect = true;
+            this.ListViewKeys.HideSelection = false;
+            this.ListViewKeys.Location = new System.Drawing.Point(13, 26);
+            this.ListViewKeys.Name = "ListViewKeys";
+            this.ListViewKeys.Size = new System.Drawing.Size(724, 324);
+            this.ListViewKeys.Sortable = true;
+            this.ListViewKeys.TabIndex = 1;
+            this.ListViewKeys.UseCompatibleStateImageBehavior = false;
+            this.ListViewKeys.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewDomainParams
+            // 
+            this.ListViewDomainParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewDomainParams.ContextMenuStrip = this.ContextMenuDomainParams;
+            this.ListViewDomainParams.HideSelection = false;
+            this.ListViewDomainParams.Location = new System.Drawing.Point(13, 26);
+            this.ListViewDomainParams.Name = "ListViewDomainParams";
+            this.ListViewDomainParams.Size = new System.Drawing.Size(724, 324);
+            this.ListViewDomainParams.Sortable = true;
+            this.ListViewDomainParams.TabIndex = 1;
+            this.ListViewDomainParams.UseCompatibleStateImageBehavior = false;
+            this.ListViewDomainParams.View = System.Windows.Forms.View.Details;
             // 
             // MainForm
             // 
@@ -932,18 +1361,25 @@ namespace Net.Pkcs11Admin.WinForms
             this.MainFormTabControl.ResumeLayout(false);
             this.TabPageBasicInfo.ResumeLayout(false);
             this.TabPageBasicInfo.PerformLayout();
+            this.ContextMenuBasicInfo.ResumeLayout(false);
             this.TabPageMechanisms.ResumeLayout(false);
             this.TabPageMechanisms.PerformLayout();
+            this.ContextMenuMechanisms.ResumeLayout(false);
             this.TabPageHwFeatures.ResumeLayout(false);
             this.TabPageHwFeatures.PerformLayout();
+            this.ContextMenuHwFeatures.ResumeLayout(false);
             this.TabPageDataObjects.ResumeLayout(false);
             this.TabPageDataObjects.PerformLayout();
+            this.ContextMenuDataObjects.ResumeLayout(false);
             this.TabPageCertificates.ResumeLayout(false);
             this.TabPageCertificates.PerformLayout();
+            this.ContextMenuCertificates.ResumeLayout(false);
             this.TabPageKeys.ResumeLayout(false);
             this.TabPageKeys.PerformLayout();
+            this.ContextMenuKeys.ResumeLayout(false);
             this.TabPageDomainParams.ResumeLayout(false);
             this.TabPageDomainParams.PerformLayout();
+            this.ContextMenuDomainParams.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1035,5 +1471,51 @@ namespace Net.Pkcs11Admin.WinForms
         private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriEmpty;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriWithObject;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPkcs11UriWithoutObject;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuBasicInfo;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuMechanisms;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuHwFeatures;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuDataObjects;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuCertificates;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuKeys;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuDomainParams;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemBasicInfoPkcs11Uri;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemBasicInfoCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemBasicInfoCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemMechanismsCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemMechanismsCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemHwFeaturesEdit;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemHwFeaturesCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemHwFeaturesCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsNew;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsEdit;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsDelete;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsImport;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsExport;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsPkcs11Uri;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDataObjectsView;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesPkcs11Uri;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysPkcs11Uri;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDomainParamsCsvAll;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDomainParamsCsvSelected;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesView;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesEdit;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesDelete;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesImport;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemCertificatesExport;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysNew;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysEdit;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeyDelete;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysImport;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysExport;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysNewCsr;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemKeysNewCert;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDomainParamsEdit;
+        private System.Windows.Forms.ToolStripMenuItem CtxMenuItemDomainParamsDelete;
     }
 }
