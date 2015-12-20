@@ -846,6 +846,7 @@ namespace Net.Pkcs11Admin
                 List<ObjectAttribute> objectAttributes = session.GetAttributeValue(objectInfo.ObjectHandle, attributes);
 
                 fileName = objectAttributes[0].GetValueAsString();
+                fileName = (!string.IsNullOrEmpty(fileName)) ? Utils.NormalizeFileName(fileName) : "data_object";
                 fileContent = objectAttributes[1].GetValueAsByteArray();
             }
         }
@@ -858,7 +859,7 @@ namespace Net.Pkcs11Admin
             if (objectInfo == null)
                 throw new ArgumentNullException("objectInfo");
 
-            fileName = objectInfo.CkaLabel;
+            fileName = (!string.IsNullOrEmpty(objectInfo.CkaLabel)) ? Utils.NormalizeFileName(objectInfo.CkaLabel) : "certificate.cer";
             fileContent = objectInfo.CkaValue;
         }
 
