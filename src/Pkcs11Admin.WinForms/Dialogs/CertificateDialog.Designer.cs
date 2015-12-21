@@ -54,6 +54,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.LabelAsn1 = new System.Windows.Forms.Label();
             this.TreeViewAsn1 = new Net.Asn1.Forms.TreeView.Asn1TreeView();
             this.ButtonClose = new System.Windows.Forms.Button();
+            this.ButtonSave = new System.Windows.Forms.Button();
             this.CertificateTabControl.SuspendLayout();
             this.TabPageDetails.SuspendLayout();
             this.TabPageAsn1.SuspendLayout();
@@ -150,12 +151,24 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonClose.Text = "Close";
             this.ButtonClose.UseVisualStyleBackColor = true;
             // 
+            // ButtonSave
+            // 
+            this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ButtonSave.Location = new System.Drawing.Point(13, 315);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSave.TabIndex = 2;
+            this.ButtonSave.Text = "Save";
+            this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
             // CertificateDialog
             // 
             this.AcceptButton = this.ButtonClose;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(497, 351);
+            this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonClose);
             this.Controls.Add(this.CertificateTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -183,5 +196,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.Label LabelAsn1;
         private System.Windows.Forms.Label LabelDetails;
         private Controls.EnhancedListView ListViewDetails;
+        private System.Windows.Forms.Button ButtonSave;
     }
 }

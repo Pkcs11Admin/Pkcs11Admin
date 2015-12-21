@@ -78,5 +78,26 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             using (MemoryStream memoryStream = new MemoryStream(_bytes))
                 TreeViewAsn1.LoadContent(memoryStream);
         }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.FileName = "certificate.cer";
+
+                saveFileDialog.Filter = "All files (*.*)|*.*|DER encoded X.509 certificate (*.cer)|*.cer";
+                saveFileDialog.FilterIndex = 2;
+
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.CreatePrompt = false;
+                saveFileDialog.OverwritePrompt = true;
+
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, _bytes);
+                    WinFormsUtils.ShowInfo(this, "Certificate successfully exported");
+                }
+            }
+        }
     }
 }
