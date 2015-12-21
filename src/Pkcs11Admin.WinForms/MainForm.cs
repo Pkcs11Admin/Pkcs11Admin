@@ -470,7 +470,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemObjectViewData_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            ShowDataObjectContent();
         }
 
         private void MenuItemObjectViewCert_Click(object sender, EventArgs e)
@@ -947,7 +947,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void CtxMenuItemDataObjectsView_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            ShowDataObjectContent();
         }
 
         private async void CtxMenuItemDataObjectsNew_Click(object sender, EventArgs e)
@@ -1527,6 +1527,26 @@ namespace Net.Pkcs11Admin.WinForms
             byte[] certData = ((Pkcs11CertificateInfo)selectedItem.Tag).CkaValue;
             using (CertificateDialog certificateDialog = new CertificateDialog(certData))
                 certificateDialog.ShowDialog(this);
+        }
+
+        private void ShowDataObjectContent()
+        {
+            if (MainFormTabControl.SelectedTab != TabPageDataObjects)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select certificate first");
+                return;
+            }
+
+            ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewDataObjects);
+            if (selectedItem == null)
+                return;
+
+            string name = null;
+            byte[] content = null;
+            _selectedSlot.ExportDataObject((Pkcs11DataObjectInfo)selectedItem.Tag, out name, out content);
+
+            using (DataObjectDialog dataObjectDialog = new DataObjectDialog(name, content))
+                dataObjectDialog.ShowDialog(this);
         }
 
         private void ExportToCsv(bool onlySelected)
