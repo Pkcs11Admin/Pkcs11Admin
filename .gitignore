@@ -6,3 +6,4 @@ TestResults/
 *.suo
 *.user
 Pkcs11Admin-Release/
+**/packages/*
