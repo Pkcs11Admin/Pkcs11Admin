@@ -74,20 +74,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Asn1Net.Forms.TreeView, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Asn1Net.Forms.TreeView.1.1.0.0\lib\net40\Asn1Net.Forms.TreeView.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Asn1Net.Forms.TreeView\Asn1Net.Forms.TreeView.dll</HintPath>
     </Reference>
     <Reference Include="Asn1Net.Reader, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Asn1Net.Reader.1.1.0.1\lib\net40\Asn1Net.Reader.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Asn1Net.Reader\Asn1Net.Reader.dll</HintPath>
     </Reference>
     <Reference Include="Be.Windows.Forms.HexBox, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Be.Windows.Forms.HexBox.1.6.1\lib\net40\Be.Windows.Forms.HexBox.dll</HintPath>
+      <HintPath>..\lib\Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
     <Reference Include="Pkcs11Interop, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pkcs11Interop.3.0.0\lib\net40\Pkcs11Interop.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Pkcs11Interop\Pkcs11Interop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -270,7 +270,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
