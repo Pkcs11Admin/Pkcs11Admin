@@ -603,32 +603,56 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.CertificateAttributes = new ClassAttributesDefinition();
             cfg.CertificateAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_TYPE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_CATEGORY, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_JAVA_MIDP_SECURITY_DOMAIN, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OWNER, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_AC_ISSUER, DefaultValue = "TODO" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ATTR_TYPES, DefaultValue = "TODO" });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "ULONG:1", SetByDefault = true });
+
+            // Common Storage Object Attributes
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "BOOL:TRUE", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "BOOL:FALSE", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "BOOL:TRUE", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = null, SetByDefault = true });
+
+            // TODO - Review
+            // Common Certificate Object Attributes
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_TYPE, DefaultValue = "ULONG:0", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "BOOL:FALSE", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_CATEGORY, DefaultValue = "ULONG:0" });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, DefaultValue = null });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = null });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = null });
 
             cfg.CertificateAttributes.TypeSpecificAttributes = new TypeAttributes();
-            // TODO 
+
+            // TODO - Review
+            // X.509 public key certificate objects
+            cfg.CertificateAttributes.TypeSpecificAttributes.Add((ulong)CKC.CKC_X_509, new ClassAttributes());
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_JAVA_MIDP_SECURITY_DOMAIN, DefaultValue = "ULONG:0" });
+
+            // TODO - Review
+            // WTLS Certificate Object Attributes
+            cfg.CertificateAttributes.TypeSpecificAttributes.Add((ulong)CKC.CKC_WTLS, new ClassAttributes());
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, DefaultValue = null });
+
+            // TODO - Review
+            // X.509 Attribute Certificate Object Attributes
+            cfg.CertificateAttributes.TypeSpecificAttributes.Add((ulong)CKC.CKC_X_509_ATTR_CERT, new ClassAttributes());
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OWNER, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_AC_ISSUER, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ATTR_TYPES, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
 
             #endregion
 

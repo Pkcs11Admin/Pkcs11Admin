@@ -484,9 +484,10 @@ namespace Net.Pkcs11Admin.WinForms
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
-        private void MenuItemObjectImportCert_Click(object sender, EventArgs e)
+        private async void MenuItemObjectImportCert_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            if (ImportCertificate())
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void MenuItemObjectImportKey_Click(object sender, EventArgs e)
@@ -1065,9 +1066,10 @@ namespace Net.Pkcs11Admin.WinForms
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
-        private void CtxMenuItemCertificatesImport_Click(object sender, EventArgs e)
+        private async void CtxMenuItemCertificatesImport_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            if (ImportCertificate())
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void CtxMenuItemCertificatesExport_Click(object sender, EventArgs e)
@@ -1675,6 +1677,34 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 WinFormsUtils.ShowError(this, ex);
             }
+        }
+
+        private bool ImportCertificate()
+        {
+            // Let user select a file
+            string filePath = null;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "All files (*.*)|*.*|X.509 certificate (*.cer;*.crt;*.pem;*.der)|*.cer;*.crt;*.pem;*.der";
+                openFileDialog.FilterIndex = 2;
+
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                    filePath = openFileDialog.FileName;
+            }
+
+            if (string.IsNullOrEmpty(filePath))
+                return false;
+
+            // Read file content
+            string fileName = Path.GetFileName(filePath);
+            byte[] fileContent = File.ReadAllBytes(filePath);
+
+            // Construct new object attributes
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = _selectedSlot.ImportCertificate(fileName, fileContent);
+
+            // Let user modify object attributes before the object is created
+            return CreatePkcs11Object(objectAttributes);
         }
 
         private void ExportCertificate()

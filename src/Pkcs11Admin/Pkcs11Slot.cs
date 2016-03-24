@@ -18,8 +18,12 @@
 using Net.Pkcs11Admin.Configuration;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
+using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.X509;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Net.Pkcs11Admin
 {
@@ -849,6 +853,64 @@ namespace Net.Pkcs11Admin
                 fileName = (!string.IsNullOrEmpty(fileName)) ? Utils.NormalizeFileName(fileName) : "data_object";
                 fileContent = objectAttributes[1].GetValueAsByteArray();
             }
+        }
+
+        public List<Tuple<ObjectAttribute, ClassAttribute>> ImportCertificate(string fileName, byte[] fileContent)
+        {
+            X509CertificateParser x509CertificateParser = new X509CertificateParser();
+            X509Certificate x509Certificate = x509CertificateParser.ReadCertificate(fileContent);
+
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetDefaultAttributes(Pkcs11Admin.Instance.Config.CertificateAttributes, (ulong)CKC.CKC_X_509);
+
+            for (int i = 0; i < objectAttributes.Count; i++)
+            {
+                ObjectAttribute objectAttribute = objectAttributes[i].Item1;
+                ClassAttribute classAttribute = objectAttributes[i].Item2;
+
+                if (objectAttribute.Type == (ulong)CKA.CKA_LABEL)
+                {
+                    string label = fileName;
+                    Dictionary<string, List<string>> subject = Utils.ParseX509Name(x509Certificate.SubjectDN);
+                    if (subject.ContainsKey(X509ObjectIdentifiers.CommonName.Id) && (subject[X509ObjectIdentifiers.CommonName.Id].Count > 0))
+                        label = subject[X509ObjectIdentifiers.CommonName.Id][0];
+
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_LABEL, label), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_START_DATE)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_START_DATE, x509Certificate.NotBefore), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_END_DATE)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_END_DATE, x509Certificate.NotAfter), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_SUBJECT)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_SUBJECT, x509Certificate.SubjectDN.GetDerEncoded()), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_ID)
+                {
+                    byte[] thumbPrint = null;
+                    using (SHA1Managed sha1Managed = new SHA1Managed())
+                        thumbPrint = sha1Managed.ComputeHash(x509Certificate.GetEncoded());
+
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_ID, thumbPrint), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_ISSUER)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_ISSUER, x509Certificate.IssuerDN.GetDerEncoded()), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_SERIAL_NUMBER)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_SERIAL_NUMBER, new DerInteger(x509Certificate.SerialNumber).GetDerEncoded()), classAttribute);
+                }
+                else if (objectAttribute.Type == (ulong)CKA.CKA_VALUE)
+                {
+                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_VALUE, x509Certificate.GetEncoded()), classAttribute);
+                }
+            }
+
+            return objectAttributes;
         }
 
         public void ExportCertificate(Pkcs11CertificateInfo objectInfo, out string fileName, out byte[] fileContent)
