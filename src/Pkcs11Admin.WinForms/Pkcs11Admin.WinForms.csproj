@@ -85,6 +85,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\lib\Portable.BouncyCastle\crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Pkcs11Interop, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Pkcs11Interop\Pkcs11Interop.dll</HintPath>

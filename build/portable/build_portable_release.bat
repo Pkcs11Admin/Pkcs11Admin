@@ -32,30 +32,22 @@ copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Asn1Net.Reader.dll %OUTDI
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Be.Windows.Forms.HexBox.dll %OUTDIR% || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.dll %OUTDIR% || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Interop.dll %OUTDIR% || exit /b 1
-pushd ..\..\src\packages\Pkcs11Interop.* || exit /b 1
-copy lib\net40\Pkcs11Interop.dll.config ..\..\..\build\portable\%OUTDIR%\ || exit /b 1
-popd || exit /b 1
+copy ..\..\src\lib\Pkcs11Interop\Pkcs11Interop.dll.config %OUTDIR% || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x86\Release\Pkcs11Admin.WinForms.exe %OUTDIR%\Pkcs11Admin-x86.exe || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x86\Release\Pkcs11Admin.WinForms.exe.config %OUTDIR%\Pkcs11Admin-x86.exe.config || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x64\Release\Pkcs11Admin.WinForms.exe %OUTDIR%\Pkcs11Admin-x64.exe || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x64\Release\Pkcs11Admin.WinForms.exe.config %OUTDIR%\Pkcs11Admin-x64.exe.config || exit /b 1
 copy ..\..\src\lib\pkcs11-logger\pkcs11-logger-*.* %OUTDIR%\pkcs11-logger\ || exit /b 1
+copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\crypto.dll %OUTDIR% || exit /b 1
 
 @rem Copy licenses to the output directory
-pushd ..\..\src\packages\Asn1Net.Forms.TreeView.* || exit /b 1
-copy license.txt ..\..\..\build\portable\%OUTDIR%\license\Asn1Net.Forms.TreeView.txt || exit /b 1
-popd || exit /b 1
-pushd ..\..\src\packages\Asn1Net.Reader.* || exit /b 1
-copy license.txt ..\..\..\build\portable\%OUTDIR%\license\Asn1Net.Reader.txt || exit /b 1
-popd || exit /b 1
-pushd ..\..\src\packages\Be.Windows.Forms.HexBox.* || exit /b 1
-copy LICENSE.txt ..\..\..\build\portable\%OUTDIR%\license\Be.Windows.Forms.HexBox.txt || exit /b 1
-popd || exit /b 1
+copy ..\..\src\lib\Asn1Net.Forms.TreeView\license.txt %OUTDIR%\license\Asn1Net.Forms.TreeView.txt || exit /b 1
+copy ..\..\src\lib\Asn1Net.Reader\license.txt %OUTDIR%\license\Asn1Net.Reader.txt || exit /b 1
+copy ..\..\src\lib\Be.Windows.Forms.HexBox\LICENSE.txt %OUTDIR%\license\Be.Windows.Forms.HexBox.txt || exit /b 1
 copy ..\..\src\LICENSE.txt %OUTDIR%\license\Pkcs11Admin.txt || exit /b 1
-pushd ..\..\src\packages\Pkcs11Interop.* || exit /b 1
-copy license.txt ..\..\..\build\portable\%OUTDIR%\license\Pkcs11Interop.txt || exit /b 1
-popd || exit /b 1
+copy ..\..\src\lib\Pkcs11Interop\license.txt %OUTDIR%\license\Pkcs11Interop.txt || exit /b 1
 copy ..\..\src\lib\pkcs11-logger\license.txt %OUTDIR%\license\pkcs11-logger.txt || exit /b 1
+copy ..\..\src\lib\Portable.BouncyCastle\license.txt %OUTDIR%\license\crypto.txt || exit /b 1
 
 endlocal
 
