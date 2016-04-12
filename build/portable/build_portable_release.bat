@@ -45,8 +45,10 @@ copy ..\..\src\lib\Asn1Net.Forms.TreeView\license.txt %OUTDIR%\license\Asn1Net.F
 copy ..\..\src\lib\Asn1Net.Reader\license.txt %OUTDIR%\license\Asn1Net.Reader.txt || exit /b 1
 copy ..\..\src\lib\Be.Windows.Forms.HexBox\LICENSE.txt %OUTDIR%\license\Be.Windows.Forms.HexBox.txt || exit /b 1
 copy ..\..\src\LICENSE.txt %OUTDIR%\license\Pkcs11Admin.txt || exit /b 1
-copy ..\..\src\lib\Pkcs11Interop\license.txt %OUTDIR%\license\Pkcs11Interop.txt || exit /b 1
+copy ..\..\src\lib\Pkcs11Interop\LICENSE.txt %OUTDIR%\license\Pkcs11Interop.txt || exit /b 1
+copy ..\..\src\lib\Pkcs11Interop\NOTICE.txt %OUTDIR%\license\Pkcs11Interop-notice.txt || exit /b 1
 copy ..\..\src\lib\pkcs11-logger\license.txt %OUTDIR%\license\pkcs11-logger.txt || exit /b 1
+copy ..\..\src\lib\pkcs11-logger\NOTICE.txt %OUTDIR%\license\pkcs11-logger-notice.txt || exit /b 1
 copy ..\..\src\lib\Portable.BouncyCastle\license.txt %OUTDIR%\license\crypto.txt || exit /b 1
 
 endlocal

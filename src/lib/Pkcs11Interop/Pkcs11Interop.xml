@@ -28,6 +28,8 @@
             <summary>
             Checks whether provided number has value of CK_UNAVAILABLE_INFORMATION constant
             </summary>
+            <param name="value">Number to be checked</param>
+            <returns>True if number has value of CK_UNAVAILABLE_INFORMATION constant false otherwise</returns>
         </member>
         <member name="F:Net.Pkcs11Interop.Common.CK.CK_EFFECTIVELY_INFINITE">
             <summary>
@@ -3585,16 +3587,14 @@
         <member name="T:Net.Pkcs11Interop.Common.Pkcs11UriBuilder">
             <summary>
             PKCS#11 URI builder
-            
-            Implementation notes:
-            - As recommended by PKCS#11 URI specification Pkcs11UriBuilder class 
+            <para>Implementation note: As recommended by PKCS#11 URI specification Pkcs11UriBuilder class 
               percent-encodes the whole value of the "id" attribute which is supposed 
               to be handled as arbitrary binary data. Therefore it is not possible to 
-              construct URIs with arbitrary string value of the "id" attribute.
-            - Validation of each individual attribute value is performed by the setter 
+              construct URIs with arbitrary string value of the "id" attribute.</para>
+            <para>Implementation note: Validation of each individual attribute value is performed by the setter 
               of corresponding Pkcs11UriBuilder class property with the exception to 
               UnknownPathAttributes and UnknownQueryAttributes properties whose values 
-              are validated when ToString() or ToPkcs11Uri() method is called.
+              are validated when ToString() or ToPkcs11Uri() method is called.</para>
             </summary>
         </member>
         <member name="M:Net.Pkcs11Interop.Common.Pkcs11UriBuilder.#ctor">
@@ -7524,8 +7524,8 @@
             <param name="encryptionMechanism">Encryption mechanism</param>
             <param name="keyHandle">Handle of the encryption key</param>
             <param name="data">Data to be processed</param>
-            <param name="encryptedData">Encrypted data</param>
             <param name="digest">Digest</param>
+            <param name="encryptedData">Encrypted data</param>
         </member>
         <member name="M:Net.Pkcs11Interop.HighLevelAPI40.Session.DigestEncrypt(Net.Pkcs11Interop.HighLevelAPI40.Mechanism,Net.Pkcs11Interop.HighLevelAPI40.Mechanism,Net.Pkcs11Interop.HighLevelAPI40.ObjectHandle,System.IO.Stream,System.IO.Stream)">
             <summary>
@@ -11391,8 +11391,8 @@
             <param name="encryptionMechanism">Encryption mechanism</param>
             <param name="keyHandle">Handle of the encryption key</param>
             <param name="data">Data to be processed</param>
-            <param name="encryptedData">Encrypted data</param>
             <param name="digest">Digest</param>
+            <param name="encryptedData">Encrypted data</param>
         </member>
         <member name="M:Net.Pkcs11Interop.HighLevelAPI41.Session.DigestEncrypt(Net.Pkcs11Interop.HighLevelAPI41.Mechanism,Net.Pkcs11Interop.HighLevelAPI41.Mechanism,Net.Pkcs11Interop.HighLevelAPI41.ObjectHandle,System.IO.Stream,System.IO.Stream)">
             <summary>
@@ -15258,8 +15258,8 @@
             <param name="encryptionMechanism">Encryption mechanism</param>
             <param name="keyHandle">Handle of the encryption key</param>
             <param name="data">Data to be processed</param>
-            <param name="encryptedData">Encrypted data</param>
             <param name="digest">Digest</param>
+            <param name="encryptedData">Encrypted data</param>
         </member>
         <member name="M:Net.Pkcs11Interop.HighLevelAPI80.Session.DigestEncrypt(Net.Pkcs11Interop.HighLevelAPI80.Mechanism,Net.Pkcs11Interop.HighLevelAPI80.Mechanism,Net.Pkcs11Interop.HighLevelAPI80.ObjectHandle,System.IO.Stream,System.IO.Stream)">
             <summary>
@@ -19125,8 +19125,8 @@
             <param name="encryptionMechanism">Encryption mechanism</param>
             <param name="keyHandle">Handle of the encryption key</param>
             <param name="data">Data to be processed</param>
-            <param name="encryptedData">Encrypted data</param>
             <param name="digest">Digest</param>
+            <param name="encryptedData">Encrypted data</param>
         </member>
         <member name="M:Net.Pkcs11Interop.HighLevelAPI81.Session.DigestEncrypt(Net.Pkcs11Interop.HighLevelAPI81.Mechanism,Net.Pkcs11Interop.HighLevelAPI81.Mechanism,Net.Pkcs11Interop.HighLevelAPI81.ObjectHandle,System.IO.Stream,System.IO.Stream)">
             <summary>
@@ -24143,8 +24143,8 @@
             <param name="encryptionMechanism">Encryption mechanism</param>
             <param name="keyHandle">Handle of the encryption key</param>
             <param name="data">Data to be processed</param>
-            <param name="encryptedData">Encrypted data</param>
             <param name="digest">Digest</param>
+            <param name="encryptedData">Encrypted data</param>
         </member>
         <member name="M:Net.Pkcs11Interop.HighLevelAPI.Session.DigestEncrypt(Net.Pkcs11Interop.HighLevelAPI.Mechanism,Net.Pkcs11Interop.HighLevelAPI.Mechanism,Net.Pkcs11Interop.HighLevelAPI.ObjectHandle,System.IO.Stream,System.IO.Stream)">
             <summary>
