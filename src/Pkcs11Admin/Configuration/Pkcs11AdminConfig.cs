@@ -614,7 +614,7 @@ namespace Net.Pkcs11Admin.Configuration
             // TODO - Review
             // Common Certificate Object Attributes
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_TYPE, DefaultValue = "ULONG:0", SetByDefault = true });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "BOOL:FALSE", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "BOOL:FALSE", SetByDefault = false });
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_CATEGORY, DefaultValue = "ULONG:0" });
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, DefaultValue = null });
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = null });
