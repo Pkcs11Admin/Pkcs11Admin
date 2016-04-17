@@ -52,6 +52,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonEdit = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonCreate = new System.Windows.Forms.Button();
+            this.ButtonAsn1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ListViewAttributes
@@ -117,6 +118,17 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonCreate.UseVisualStyleBackColor = true;
             this.ButtonCreate.Click += new System.EventHandler(this.ButtonCreate_Click);
             // 
+            // ButtonAsn1
+            // 
+            this.ButtonAsn1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ButtonAsn1.Location = new System.Drawing.Point(93, 325);
+            this.ButtonAsn1.Name = "ButtonAsn1";
+            this.ButtonAsn1.Size = new System.Drawing.Size(75, 23);
+            this.ButtonAsn1.TabIndex = 5;
+            this.ButtonAsn1.Text = "ASN.1";
+            this.ButtonAsn1.UseVisualStyleBackColor = true;
+            this.ButtonAsn1.Click += new System.EventHandler(this.ButtonAsn1_Click);
+            // 
             // CreateObjectDialog
             // 
             this.AcceptButton = this.ButtonCreate;
@@ -124,6 +136,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonCancel;
             this.ClientSize = new System.Drawing.Size(684, 361);
+            this.Controls.Add(this.ButtonAsn1);
             this.Controls.Add(this.ButtonCreate);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonEdit);
@@ -147,6 +160,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.Button ButtonCreate;
         private System.Windows.Forms.ColumnHeader ColumnHeaderType;
         private System.Windows.Forms.ColumnHeader ColumnHeaderValue;
-
+        private System.Windows.Forms.Button ButtonAsn1;
     }
 }

@@ -117,5 +117,20 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 }
             }
         }
+
+        private void ButtonAsn1_Click(object sender, EventArgs e)
+        {
+            ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewAttributes);
+            if (selectedItem == null)
+                return;
+
+            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+
+            string attributeName = selectedItem.Text;
+            byte[] attributeValue = (objectAttribute.CannotBeRead) ? new byte[0] : objectAttribute.GetValueAsByteArray();
+
+            using (Asn1Viewer asn1Viewer = new Asn1Viewer(attributeName, attributeValue))
+                asn1Viewer.ShowDialog();
+        }
     }
 }
