@@ -15,6 +15,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Net.Pkcs11Interop.Common;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -23,6 +24,11 @@ namespace Net.Pkcs11Admin.Configuration
     [CollectionDataContract(Namespace = Pkcs11AdminConfig.Namespace, ItemName = "ClassAttribute")]
     public class ClassAttributes : List<ClassAttribute>
     {
-
+        [DataMember(Order = 1, IsRequired = false)]
+        public CKM? KeyGenerationMechanism
+        {
+            get;
+            set;
+        }
     }
 }

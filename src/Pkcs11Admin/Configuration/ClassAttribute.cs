@@ -30,14 +30,28 @@ namespace Net.Pkcs11Admin.Configuration
         }
 
         [DataMember(Order = 2, IsRequired = true)]
-        public string DefaultValue
+        public string CreateDefaultValue
         {
             get;
             set;
         }
 
         [DataMember(Order = 3, IsRequired = true)]
-        public bool SetByDefault
+        public bool CreateSetByDefault
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 4, IsRequired = true)]
+        public string GenerateDefaultValue
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 5, IsRequired = true)]
+        public bool GenerateSetByDefault
         {
             get;
             set;

@@ -441,9 +441,10 @@ namespace Net.Pkcs11Admin.WinForms
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
-        private void MenuItemObjectNewKey_Click(object sender, EventArgs e)
+        private async void MenuItemObjectNewKey_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            if (GenerateKeyObjects())
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void MenuItemObjectNewCsr_Click(object sender, EventArgs e)
@@ -1148,9 +1149,10 @@ namespace Net.Pkcs11Admin.WinForms
 
         #region ContextMenuKeys
 
-        private void CtxMenuItemKeysNew_Click(object sender, EventArgs e)
+        private async void CtxMenuItemKeysNew_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            if (GenerateKeyObjects())
+                await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private async void CtxMenuItemKeysEdit_Click(object sender, EventArgs e)
@@ -1470,10 +1472,16 @@ namespace Net.Pkcs11Admin.WinForms
             return true;
         }
 
+        private bool GenerateKeyObjects()
+        {
+            using (GenerateKeysDialog generateKeysDialog = new GenerateKeysDialog(_selectedSlot))
+                return (generateKeysDialog.ShowDialog() == DialogResult.OK);
+        }
+
         private bool CreatePkcs11Object()
         {
             // TODO - Customize for each object type
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
 
             using (CreateObjectDialog createObjectDialog = new CreateObjectDialog(_selectedSlot, objectAttributes))
                 return (createObjectDialog.ShowDialog() == DialogResult.OK);

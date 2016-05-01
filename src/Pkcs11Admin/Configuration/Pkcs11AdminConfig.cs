@@ -576,7 +576,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.HwFeatureAttributes = new ClassAttributesDefinition();
             cfg.HwFeatureAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.HwFeatureAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HW_FEATURE_TYPE, DefaultValue = "TODO" });
+            cfg.HwFeatureAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HW_FEATURE_TYPE, CreateDefaultValue = "TODO" });
             // TODO - No label no nothing ???
 
             cfg.HwFeatureAttributes.TypeSpecificAttributes = new TypeAttributes();
@@ -587,14 +587,14 @@ namespace Net.Pkcs11Admin.Configuration
 
             cfg.DataObjectAttributes = new ClassAttributesDefinition();
             cfg.DataObjectAttributes.CommonAttributes = new ClassAttributes();
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "ULONG:0", SetByDefault = true });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "BOOL:TRUE", SetByDefault = true });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "BOOL:FALSE", SetByDefault = true });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "BOOL:TRUE", SetByDefault = true });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = null, SetByDefault = true });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_APPLICATION, DefaultValue = null });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OBJECT_ID, DefaultValue = null });
-            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "ULONG:0", CreateSetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_APPLICATION, CreateDefaultValue = null });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OBJECT_ID, CreateDefaultValue = null });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
             #endregion
 
@@ -603,56 +603,56 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.CertificateAttributes = new ClassAttributesDefinition();
             cfg.CertificateAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "ULONG:1", SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "ULONG:1", CreateSetByDefault = true });
 
             // Common Storage Object Attributes
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "BOOL:TRUE", SetByDefault = true });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "BOOL:FALSE", SetByDefault = true });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "BOOL:TRUE", SetByDefault = true });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true });
 
             // TODO - Review
             // Common Certificate Object Attributes
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_TYPE, DefaultValue = "ULONG:0", SetByDefault = true });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "BOOL:FALSE", SetByDefault = false });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_CATEGORY, DefaultValue = "ULONG:0" });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, DefaultValue = null });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = null });
-            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = null });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_TYPE, CreateDefaultValue = "ULONG:0", CreateSetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CERTIFICATE_CATEGORY, CreateDefaultValue = "ULONG:0" });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, CreateDefaultValue = null });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, CreateDefaultValue = null });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, CreateDefaultValue = null });
 
             cfg.CertificateAttributes.TypeSpecificAttributes = new TypeAttributes();
 
             // TODO - Review
             // X.509 public key certificate objects
             cfg.CertificateAttributes.TypeSpecificAttributes.Add((ulong)CKC.CKC_X_509, new ClassAttributes());
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_JAVA_MIDP_SECURITY_DOMAIN, DefaultValue = "ULONG:0" });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_JAVA_MIDP_SECURITY_DOMAIN, CreateDefaultValue = "ULONG:0" });
 
             // TODO - Review
             // WTLS Certificate Object Attributes
             cfg.CertificateAttributes.TypeSpecificAttributes.Add((ulong)CKC.CKC_WTLS, new ClassAttributes());
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, DefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ISSUER, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_URL, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_SUBJECT_PUBLIC_KEY, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_WTLS].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_HASH_OF_ISSUER_PUBLIC_KEY, CreateDefaultValue = null });
 
             // TODO - Review
             // X.509 Attribute Certificate Object Attributes
             cfg.CertificateAttributes.TypeSpecificAttributes.Add((ulong)CKC.CKC_X_509_ATTR_CERT, new ClassAttributes());
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OWNER, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_AC_ISSUER, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, DefaultValue = null, SetByDefault = true });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ATTR_TYPES, DefaultValue = null });
-            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = null, SetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OWNER, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_AC_ISSUER, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SERIAL_NUMBER, CreateDefaultValue = null, CreateSetByDefault = true });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ATTR_TYPES, CreateDefaultValue = null });
+            cfg.CertificateAttributes.TypeSpecificAttributes[(ulong)CKC.CKC_X_509_ATTR_CERT].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
             #endregion
 
@@ -660,50 +660,53 @@ namespace Net.Pkcs11Admin.Configuration
 
             cfg.PrivateKeyAttributes = new ClassAttributesDefinition();
             cfg.PrivateKeyAttributes.CommonAttributes = new ClassAttributes();
-            
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SENSITIVE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DECRYPT, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN_RECOVER, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXTRACTABLE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_NEVER_EXTRACTABLE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_WITH_TRUSTED, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP_TEMPLATE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_AUTHENTICATE, DefaultValue = "TODO" });
+
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "ULONG:" + (ulong)CKO.CKO_PRIVATE_KEY, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKO.CKO_PRIVATE_KEY, GenerateSetByDefault = true });
+
+            // Common Storage Object Attributes
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
+
+            // Common Key Attributes
+            // Note: CKA_KEY_TYPE moved to TypeSpecificAttributes
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            // Note: CKA_KEY_GEN_MECHANISM moved to TypeSpecificAttributes
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+
+            // Common Private Key Attributes
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SENSITIVE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DECRYPT, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN_RECOVER, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXTRACTABLE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_NEVER_EXTRACTABLE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_WITH_TRUSTED, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP_TEMPLATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_AUTHENTICATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
 
             cfg.PrivateKeyAttributes.TypeSpecificAttributes = new TypeAttributes();
 
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_RSA, new ClassAttributes());
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE_EXPONENT, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIME_1, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIME_2, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_1, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_2, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_COEFFICIENT, DefaultValue = "TODO" });
-
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_DSA, new ClassAttributes());
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_DSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIME, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_DSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBPRIME, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_DSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_BASE, DefaultValue = "TODO" });
-            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_DSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, DefaultValue = "TODO" });
+            // RSA Private Key Object Attributes
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_RSA, new ClassAttributes() { KeyGenerationMechanism = CKM.CKM_RSA_PKCS_KEY_PAIR_GEN });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_RSA, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_RSA, GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_RSA_PKCS_KEY_PAIR_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_RSA_PKCS_KEY_PAIR_GEN, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIME_1, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIME_2, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_1, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_2, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_COEFFICIENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
             #endregion
 
@@ -712,29 +715,42 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PublicKeyAttributes = new ClassAttributesDefinition();
             cfg.PublicKeyAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ENCRYPT, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY_RECOVER, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "TODO" });
-            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_TEMPLATE, DefaultValue = "TODO" });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "ULONG:" + (ulong)CKO.CKO_PUBLIC_KEY, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKO.CKO_PUBLIC_KEY, GenerateSetByDefault = true });
+
+            // Common Storage Object Attributes
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
+
+            // Common Key Attributes
+            // Note: CKA_KEY_TYPE moved to TypeSpecificAttributes
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            // Note: CKA_KEY_GEN_MECHANISM moved to TypeSpecificAttributes
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+
+            // Common Public Key Attributes
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SUBJECT, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ENCRYPT, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY_RECOVER, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_TEMPLATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
             cfg.PublicKeyAttributes.TypeSpecificAttributes = new TypeAttributes();
-            // TODO 
+
+            // RSA Public Key Object Attributes
+            cfg.PublicKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_RSA, new ClassAttributes());
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_RSA, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_RSA, GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_RSA_PKCS_KEY_PAIR_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_RSA_PKCS_KEY_PAIR_GEN, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS_BITS, CreateDefaultValue = "ULONG:2048", CreateSetByDefault = false, GenerateDefaultValue = "ULONG:2048", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
 
             #endregion
 
@@ -743,37 +759,51 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.SecretKeyAttributes = new ClassAttributesDefinition();
             cfg.SecretKeyAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SENSITIVE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ENCRYPT, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DECRYPT, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXTRACTABLE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_NEVER_EXTRACTABLE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_WITH_TRUSTED, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_TEMPLATE, DefaultValue = "TODO" });
-            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP_TEMPLATE, DefaultValue = "TODO" });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "ULONG:" + (ulong)CKO.CKO_SECRET_KEY, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKO.CKO_SECRET_KEY, GenerateSetByDefault = true });
+
+            // Common Storage Object Attributes
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
+
+            // Common Key Attributes
+            // Note: CKA_KEY_TYPE moved to TypeSpecificAttributes
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            // Note: CKA_KEY_GEN_MECHANISM moved to TypeSpecificAttributes
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+
+            // Common Secret Key Attributes
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SENSITIVE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ENCRYPT, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DECRYPT, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXTRACTABLE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_NEVER_EXTRACTABLE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_WITH_TRUSTED, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_TEMPLATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP_TEMPLATE, CreateDefaultValue = null, CreateSetByDefault = false, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
             cfg.SecretKeyAttributes.TypeSpecificAttributes = new TypeAttributes();
-            // TODO 
+
+            // AES Secret Key Object Attributes
+            cfg.SecretKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_AES, new ClassAttributes() { KeyGenerationMechanism = CKM.CKM_AES_KEY_GEN });
+            cfg.SecretKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_AES].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_AES, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_AES, GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_AES].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_AES_KEY_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_AES_KEY_GEN, GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_AES].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.SecretKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_AES].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE_LEN, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:32", GenerateSetByDefault = true });
+
+            // TODO - Add more TypeSpecificAttributes
 
             #endregion
 
@@ -782,36 +812,36 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.OtpKeyAttributes = new ClassAttributesDefinition();
             cfg.OtpKeyAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SENSITIVE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ENCRYPT, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DECRYPT, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXTRACTABLE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_NEVER_EXTRACTABLE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_WITH_TRUSTED, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_TEMPLATE, DefaultValue = "TODO" });
-            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP_TEMPLATE, DefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_START_DATE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_END_DATE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DERIVE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALLOWED_MECHANISMS, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SENSITIVE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ENCRYPT, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DECRYPT, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_SIGN, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VERIFY, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXTRACTABLE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_NEVER_EXTRACTABLE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CHECK_VALUE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_WITH_TRUSTED, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TRUSTED, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_WRAP_TEMPLATE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_UNWRAP_TEMPLATE, CreateDefaultValue = "TODO" });
 
-            cfg.SecretKeyAttributes.TypeSpecificAttributes = new TypeAttributes();
+            cfg.OtpKeyAttributes.TypeSpecificAttributes = new TypeAttributes();
             // TODO 
 
             #endregion
@@ -821,14 +851,14 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.DomainParamsAttributes = new ClassAttributesDefinition();
             cfg.DomainParamsAttributes.CommonAttributes = new ClassAttributes();
 
-            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, DefaultValue = "TODO" });
-            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, DefaultValue = "TODO" });
-            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, DefaultValue = "TODO" });
-            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, DefaultValue = "TODO" });
-            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, DefaultValue = "TODO" });
-            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, DefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_CLASS, CreateDefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, CreateDefaultValue = "TODO" });
 
-            cfg.HwFeatureAttributes.TypeSpecificAttributes = new TypeAttributes();
+            cfg.DomainParamsAttributes.TypeSpecificAttributes = new TypeAttributes();
             // TODO 
 
             #endregion

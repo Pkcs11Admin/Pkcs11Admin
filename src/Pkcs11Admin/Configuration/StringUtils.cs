@@ -180,28 +180,25 @@ namespace Net.Pkcs11Admin.Configuration
             return strValue;
         }
 
-        public static ObjectAttribute GetDefaultAttribute(ClassAttribute classAttribute)
+        private static ObjectAttribute GetDefaultAttribute(ulong type, string defaultValue)
         {
-            if (classAttribute == null)
-                throw new ArgumentNullException("classAttribute");
-
             ObjectAttribute objectAttribute = null;
 
-            if (classAttribute.DefaultValue == null)
+            if (defaultValue == null)
             {
-                objectAttribute = new ObjectAttribute(classAttribute.Value);
+                objectAttribute = new ObjectAttribute(type);
             }
             else
             {
-                if (classAttribute.DefaultValue.StartsWith("ULONG:"))
+                if (defaultValue.StartsWith("ULONG:"))
                 {
-                    string ulongString = classAttribute.DefaultValue.Substring("ULONG:".Length);
+                    string ulongString = defaultValue.Substring("ULONG:".Length);
                     ulong ulongValue = Convert.ToUInt64(ulongString);
-                    objectAttribute = new ObjectAttribute(classAttribute.Value, ulongValue);
+                    objectAttribute = new ObjectAttribute(type, ulongValue);
                 }
-                else if (classAttribute.DefaultValue.StartsWith("BOOL:"))
+                else if (defaultValue.StartsWith("BOOL:"))
                 {
-                    string boolString = classAttribute.DefaultValue.Substring("BOOL:".Length);
+                    string boolString = defaultValue.Substring("BOOL:".Length);
                     
                     bool boolValue = false;
                     if (0 == string.Compare(boolString, "TRUE", true))
@@ -211,20 +208,20 @@ namespace Net.Pkcs11Admin.Configuration
                     else
                         throw new Exception("Unable to parse default value of class attribute");
                     
-                    objectAttribute = new ObjectAttribute(classAttribute.Value, boolValue);
+                    objectAttribute = new ObjectAttribute(type, boolValue);
                 }
-                else if (classAttribute.DefaultValue.StartsWith("STRING:"))
+                else if (defaultValue.StartsWith("STRING:"))
                 {
-                    string strValue = classAttribute.DefaultValue.Substring("STRING:".Length);
-                    objectAttribute = new ObjectAttribute(classAttribute.Value, strValue);
+                    string strValue = defaultValue.Substring("STRING:".Length);
+                    objectAttribute = new ObjectAttribute(type, strValue);
                 }
-                else if (classAttribute.DefaultValue.StartsWith("BYTES:"))
+                else if (defaultValue.StartsWith("BYTES:"))
                 {
-                    string hexString = classAttribute.DefaultValue.Substring("BYTES:".Length);
+                    string hexString = defaultValue.Substring("BYTES:".Length);
                     byte[] bytes = ConvertUtils.HexStringToBytes(hexString);
-                    objectAttribute = new ObjectAttribute(classAttribute.Value, bytes);
+                    objectAttribute = new ObjectAttribute(type, bytes);
                 }
-                else if (classAttribute.DefaultValue.StartsWith("DATE:"))
+                else if (defaultValue.StartsWith("DATE:"))
                 {
                     // TODO
                     throw new NotImplementedException();
@@ -238,7 +235,7 @@ namespace Net.Pkcs11Admin.Configuration
             return objectAttribute;
         }
 
-        public static List<Tuple<ObjectAttribute, ClassAttribute>> GetDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
+        private static List<Tuple<ObjectAttribute, ClassAttribute>> GetDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType, bool createObject)
         {
             if (classAttributes == null)
                 throw new ArgumentNullException("classAttributes");
@@ -246,13 +243,37 @@ namespace Net.Pkcs11Admin.Configuration
             List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = new List<Tuple<ObjectAttribute, ClassAttribute>>();
 
             foreach (ClassAttribute classAttribute in classAttributes.CommonAttributes)
-                objectAttributes.Add(new Tuple<ObjectAttribute, ClassAttribute>(GetDefaultAttribute(classAttribute), classAttribute));
+            {
+                ObjectAttribute objectAttribute = (createObject) ? GetDefaultAttribute(classAttribute.Value, classAttribute.CreateDefaultValue) : GetDefaultAttribute(classAttribute.Value, classAttribute.GenerateDefaultValue);
+                objectAttributes.Add(new Tuple<ObjectAttribute, ClassAttribute>(objectAttribute, classAttribute));
+            }
 
             if ((objectType != null) && (classAttributes.TypeSpecificAttributes.ContainsKey(objectType.Value)))
+            {
                 foreach (ClassAttribute classAttribute in classAttributes.TypeSpecificAttributes[objectType.Value])
-                    objectAttributes.Add(new Tuple<ObjectAttribute, ClassAttribute>(GetDefaultAttribute(classAttribute), classAttribute));
+                {
+                    ObjectAttribute objectAttribute = (createObject) ? GetDefaultAttribute(classAttribute.Value, classAttribute.CreateDefaultValue) : GetDefaultAttribute(classAttribute.Value, classAttribute.GenerateDefaultValue);
+                    objectAttributes.Add(new Tuple<ObjectAttribute, ClassAttribute>(objectAttribute, classAttribute));
+                }
+            }
 
             return objectAttributes;
+        }
+
+        public static List<Tuple<ObjectAttribute, ClassAttribute>> GetCreateDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
+        {
+            if (classAttributes == null)
+                throw new ArgumentNullException("classAttributes");
+
+            return GetDefaultAttributes(classAttributes, objectType, true);
+        }
+
+        public static List<Tuple<ObjectAttribute, ClassAttribute>> GetGenerateDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
+        {
+            if (classAttributes == null)
+                throw new ArgumentNullException("classAttributes");
+
+            return GetDefaultAttributes(classAttributes, objectType, false);
         }
     }
 }

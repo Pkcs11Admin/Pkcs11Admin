@@ -671,6 +671,68 @@ namespace Net.Pkcs11Admin
             return size;
         }
 
+        private Dictionary<CKM, List<CKK>> GetKnownKeyGenerationMechanisms(TypeAttributes typeSpecificAttributes)
+        {
+            Dictionary<CKM, List<CKK>> knownMechanisms = new Dictionary<CKM, List<CKK>>();
+
+            foreach (KeyValuePair<ulong, ClassAttributes> typeAttributes in typeSpecificAttributes)
+            {
+                CKK keyType = (CKK)typeAttributes.Key;
+                CKM? mechanism = typeAttributes.Value.KeyGenerationMechanism;
+                if (mechanism != null)
+                {
+                    if (!knownMechanisms.ContainsKey(mechanism.Value))
+                        knownMechanisms.Add(mechanism.Value, new List<CKK>() { keyType });
+                    else
+                        knownMechanisms[mechanism.Value].Add(keyType);
+                }
+            }
+
+            return knownMechanisms;
+        }
+
+        public List<CKK> GetGeneratableAsymmetricKeyTypes()
+        {
+            HashSet<CKK> keyTypes = new HashSet<CKK>();
+
+            Dictionary<CKM, List<CKK>> knownMechanisms = GetKnownKeyGenerationMechanisms(Pkcs11Admin.Instance.Config.PrivateKeyAttributes.TypeSpecificAttributes);
+            
+            foreach (Pkcs11MechanismInfo mechanismInfo in Mechanisms)
+            {
+                if (mechanismInfo.GenerateKeyPair && knownMechanisms.ContainsKey(mechanismInfo.Mechanism))
+                {
+                    foreach (CKK keyType in knownMechanisms[mechanismInfo.Mechanism])
+                    {
+                        if (!keyTypes.Contains(keyType))
+                            keyTypes.Add(keyType);
+                    }
+                }
+            }
+
+            return new List<CKK>(keyTypes);
+        }
+
+        public List<CKK> GetGeneratableSymmetricKeyTypes()
+        {
+            HashSet<CKK> keyTypes = new HashSet<CKK>();
+
+            Dictionary<CKM, List<CKK>> knownMechanisms = GetKnownKeyGenerationMechanisms(Pkcs11Admin.Instance.Config.SecretKeyAttributes.TypeSpecificAttributes);
+
+            foreach (Pkcs11MechanismInfo mechanismInfo in Mechanisms)
+            {
+                if (mechanismInfo.Generate && knownMechanisms.ContainsKey(mechanismInfo.Mechanism))
+                {
+                    foreach (CKK keyType in knownMechanisms[mechanismInfo.Mechanism])
+                    {
+                        if (!keyTypes.Contains(keyType))
+                            keyTypes.Add(keyType);
+                    }
+                }
+            }
+
+            return new List<CKK>(keyTypes);
+        }
+
         #endregion
 
         public void InitToken(string soPin, string label)
@@ -802,7 +864,7 @@ namespace Net.Pkcs11Admin
 
         public List<Tuple<ObjectAttribute, ClassAttribute>> ImportDataObject(string fileName, byte[] fileContent)
         {
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
 
             bool ckaLabelFound = false;
             bool ckaValueFound = false;
@@ -860,7 +922,7 @@ namespace Net.Pkcs11Admin
             X509CertificateParser x509CertificateParser = new X509CertificateParser();
             X509Certificate x509Certificate = x509CertificateParser.ReadCertificate(fileContent);
 
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetDefaultAttributes(Pkcs11Admin.Instance.Config.CertificateAttributes, (ulong)CKC.CKC_X_509);
+            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.CertificateAttributes, (ulong)CKC.CKC_X_509);
 
             for (int i = 0; i < objectAttributes.Count; i++)
             {
@@ -923,6 +985,46 @@ namespace Net.Pkcs11Admin
 
             fileName = (!string.IsNullOrEmpty(objectInfo.CkaLabel)) ? Utils.NormalizeFileName(objectInfo.CkaLabel) : "certificate.cer";
             fileContent = objectInfo.CkaValue;
+        }
+
+        public void GenerateSymmetricKey(CKK keyType, List<ObjectAttribute> objectAttributes)
+        {
+            if (objectAttributes == null)
+                throw new ArgumentNullException("objectAttributes");
+
+            if (!Pkcs11Admin.Instance.Config.SecretKeyAttributes.TypeSpecificAttributes.ContainsKey((ulong)keyType))
+                throw new Exception("Unsupported key type");
+
+            CKM? mechanismType = Pkcs11Admin.Instance.Config.SecretKeyAttributes.TypeSpecificAttributes[(ulong)keyType].KeyGenerationMechanism;
+            if (mechanismType == null)
+                throw new Exception("Key generation mechanism not specified");
+
+            using (Session session = _slot.OpenSession(false))
+            using (Mechanism mechanism = new Mechanism(mechanismType.Value))
+                session.GenerateKey(mechanism, objectAttributes);
+        }
+
+        public void GenerateAsymmetricKeyPair(CKK keyType, List<ObjectAttribute> privateKeyObjectAttributes, List<ObjectAttribute> publicKeyObjectAttributes)
+        {
+            if (privateKeyObjectAttributes == null)
+                throw new ArgumentNullException("privateKeyObjectAttributes");
+
+            if (publicKeyObjectAttributes == null)
+                throw new ArgumentNullException("publicKeyObjectAttributes");
+
+            if (!Pkcs11Admin.Instance.Config.PrivateKeyAttributes.TypeSpecificAttributes.ContainsKey((ulong)keyType))
+                throw new Exception("Unsupported key type");
+
+            CKM? mechanismType = Pkcs11Admin.Instance.Config.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)keyType].KeyGenerationMechanism;
+            if (mechanismType == null)
+                throw new Exception("Key generation mechanism not specified");
+
+            ObjectHandle privateKeyHandle = null;
+            ObjectHandle publicKeyHandle = null;
+
+            using (Session session = _slot.OpenSession(false))
+            using (Mechanism mechanism = new Mechanism(mechanismType.Value))
+                session.GenerateKeyPair(mechanism, publicKeyObjectAttributes, privateKeyObjectAttributes, out publicKeyHandle, out privateKeyHandle);
         }
 
         #region IDisposable

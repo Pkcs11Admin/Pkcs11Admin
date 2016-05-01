@@ -149,6 +149,12 @@
     <Compile Include="Dialogs\CreateObjectDialog.Designer.cs">
       <DependentUpon>CreateObjectDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\GenerateKeysDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GenerateKeysDialog.Designer.cs">
+      <DependentUpon>GenerateKeysDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\HexEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateObjectDialog.resx">
       <DependentUpon>CreateObjectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GenerateKeysDialog.resx">
+      <DependentUpon>GenerateKeysDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HexEditor.resx">
       <DependentUpon>HexEditor.cs</DependentUpon>

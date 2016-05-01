@@ -44,7 +44,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             {
                 ListViewItem listViewItem = new ListViewItem();
                 listViewItem.Tag = objectAttribute.Item1;
-                listViewItem.Checked = objectAttribute.Item2.SetByDefault;
+                listViewItem.Checked = objectAttribute.Item2.CreateSetByDefault;
                 ListViewAttributes.Items.Add(listViewItem);
             }
 
