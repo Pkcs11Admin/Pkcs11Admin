@@ -1792,7 +1792,7 @@ namespace Net.Pkcs11Admin.WinForms
         private string CheckSpecialTokenInfoValues(ulong ul, bool checkInfinite)
         {
             if (CK.IsCkInformationUnavailable(ul))
-                return "information unavailable";
+                return "unavailable";
 
             if (checkInfinite && (ul == CK.CK_EFFECTIVELY_INFINITE))
                 return "unlimited";
@@ -1802,9 +1802,15 @@ namespace Net.Pkcs11Admin.WinForms
 
         private string StorageSizeToString(ulong? storageSize)
         {
-            return (storageSize == null) ? "-" : storageSize.ToString();
-        }
+            if (storageSize == null)
+                return "-";
 
+            // Note: Not mentioned in PKCS#11 specification but used by SoftHSMv2
+            if (CK.IsCkInformationUnavailable(storageSize.Value))
+                return "unavailable";
+
+            return storageSize.Value.ToString();
+        }
 
         #endregion
     }
