@@ -40,6 +40,10 @@ copy ..\..\src\Pkcs11Admin.WinForms\bin\x64\Release\Pkcs11Admin.WinForms.exe.con
 copy ..\..\src\lib\pkcs11-logger\pkcs11-logger-*.* %OUTDIR%\pkcs11-logger\ || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\crypto.dll %OUTDIR% || exit /b 1
 
+@rem Copy scripts to the output directory
+copy Pkcs11Admin-x86.sh %OUTDIR%\Pkcs11Admin-x86.sh || exit /b 1
+copy Pkcs11Admin-x64.sh %OUTDIR%\Pkcs11Admin-x64.sh || exit /b 1
+
 @rem Copy licenses to the output directory
 copy ..\..\src\lib\Asn1Net.Forms.TreeView\license.txt %OUTDIR%\license\Asn1Net.Forms.TreeView.txt || exit /b 1
 copy ..\..\src\lib\Asn1Net.Reader\license.txt %OUTDIR%\license\Asn1Net.Reader.txt || exit /b 1
