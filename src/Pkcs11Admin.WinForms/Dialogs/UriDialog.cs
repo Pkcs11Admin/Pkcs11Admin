@@ -33,6 +33,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public UriDialog(Pkcs11Library pkcs11Library, Pkcs11Slot pkcs11Slot, Pkcs11ObjectInfo pkcs11ObjectInfo)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             _pkcs11Library = pkcs11Library;
             _pkcs11Slot = pkcs11Slot;

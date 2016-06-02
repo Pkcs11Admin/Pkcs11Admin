@@ -37,6 +37,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public HexEditor(string name, byte[] bytes)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name");

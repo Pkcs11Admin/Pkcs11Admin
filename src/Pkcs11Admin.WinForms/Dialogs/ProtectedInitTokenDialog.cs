@@ -28,6 +28,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public ProtectedInitTokenDialog(Pkcs11Slot slot)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             _slot = slot;
 

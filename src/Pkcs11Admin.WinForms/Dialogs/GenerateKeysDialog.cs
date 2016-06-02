@@ -31,6 +31,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public GenerateKeysDialog(Pkcs11Slot pkcs11Slot)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             if (pkcs11Slot == null)
                 throw new ArgumentNullException("pkcs11Slot");

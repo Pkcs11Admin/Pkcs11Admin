@@ -28,6 +28,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public LibraryDialog()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             EnableLoggingControls();
 

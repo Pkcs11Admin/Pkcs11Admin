@@ -26,6 +26,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public AboutDialog()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             Text = string.Format("About {0}", Pkcs11AdminInfo.AppTitle);
 

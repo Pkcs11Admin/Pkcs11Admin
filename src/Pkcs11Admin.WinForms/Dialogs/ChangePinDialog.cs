@@ -30,6 +30,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public ChangePinDialog(Pkcs11Slot slot, CKU userType)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             _slot = slot;
             _userType = userType;

@@ -33,6 +33,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         public CertificateDialog(byte[] bytes)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             if (bytes == null)
                 throw new ArgumentNullException("bytes");

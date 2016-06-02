@@ -40,6 +40,7 @@ namespace Net.Pkcs11Admin.WinForms
         public MainForm()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.Pkcs11Admin;
 
             Text = string.Format("{0} {1} {2} on {3}", Pkcs11AdminInfo.AppTitle, Pkcs11AdminInfo.AppVersion, Pkcs11AdminInfo.RuntimeBitness, Pkcs11AdminInfo.OperatingSystem);
 
