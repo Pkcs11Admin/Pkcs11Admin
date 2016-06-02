@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Asn1Viewer));
             this.Asn1TreeViewer = new Net.Asn1.Forms.TreeView.Asn1TreeView();
             this.ButtonClose = new System.Windows.Forms.Button();
             this.LabelName = new System.Windows.Forms.Label();
@@ -115,7 +114,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.LabelName);
             this.Controls.Add(this.ButtonClose);
             this.Controls.Add(this.Asn1TreeViewer);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Asn1Viewer";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.ShowInTaskbar = false;

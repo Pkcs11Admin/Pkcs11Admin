@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginDialog));
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.NumLockLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.CapsLockLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -169,7 +168,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainStatusStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

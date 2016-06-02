@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataObjectDialog));
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonClose = new System.Windows.Forms.Button();
             this.DataObjectTabControl = new System.Windows.Forms.TabControl();
@@ -196,7 +195,6 @@
             this.Controls.Add(this.DataObjectTabControl);
             this.Controls.Add(this.ButtonClose);
             this.Controls.Add(this.ButtonSave);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DataObjectDialog";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.ShowInTaskbar = false;

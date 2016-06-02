@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditObjectDialog));
             this.ButtonEdit = new System.Windows.Forms.Button();
             this.ButtonRefresh = new System.Windows.Forms.Button();
             this.ListViewAttributes = new Net.Pkcs11Admin.WinForms.Controls.EnhancedListView();
@@ -139,7 +138,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.ButtonRefresh);
             this.Controls.Add(this.ButtonEdit);
             this.Controls.Add(this.ListViewAttributes);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(700, 400);
             this.Name = "EditObjectDialog";
             this.Padding = new System.Windows.Forms.Padding(10);

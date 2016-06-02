@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutDialog));
             this.ButtonClose = new System.Windows.Forms.Button();
             this.RichTextBoxLicense = new System.Windows.Forms.RichTextBox();
             this.ButtonWebsite = new System.Windows.Forms.Button();
@@ -179,7 +178,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.ButtonWebsite);
             this.Controls.Add(this.ButtonClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(450, 360);

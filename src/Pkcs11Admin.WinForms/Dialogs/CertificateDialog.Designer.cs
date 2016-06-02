@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CertificateDialog));
             this.CertificateTabControl = new System.Windows.Forms.TabControl();
             this.TabPageDetails = new System.Windows.Forms.TabPage();
             this.LabelDetails = new System.Windows.Forms.Label();
@@ -171,7 +170,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonClose);
             this.Controls.Add(this.CertificateTabControl);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CertificateDialog";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.ShowInTaskbar = false;

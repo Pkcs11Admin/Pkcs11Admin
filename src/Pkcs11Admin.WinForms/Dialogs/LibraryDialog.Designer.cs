@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibraryDialog));
             this.LabelPkcs11Library = new System.Windows.Forms.Label();
             this.TextBoxPkcs11Library = new System.Windows.Forms.TextBox();
             this.ButtonBrowsePkcs11Library = new System.Windows.Forms.Button();
@@ -237,7 +236,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.ButtonOk);
             this.Controls.Add(this.ButtonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LibraryDialog";

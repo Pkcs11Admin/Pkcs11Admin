@@ -45,7 +45,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenerateKeysDialog));
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonGenerate = new System.Windows.Forms.Button();
             this.ButtonEdit = new System.Windows.Forms.Button();
@@ -281,7 +280,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.Controls.Add(this.ButtonEdit);
             this.Controls.Add(this.ButtonGenerate);
             this.Controls.Add(this.ButtonCancel);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(700, 400);
             this.Name = "GenerateKeysDialog";
             this.Padding = new System.Windows.Forms.Padding(10);
