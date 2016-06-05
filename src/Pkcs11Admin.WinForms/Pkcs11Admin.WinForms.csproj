@@ -131,6 +131,12 @@
     <Compile Include="Dialogs\ChangePinDialog.Designer.cs">
       <DependentUpon>ChangePinDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CsrDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CsrDialog.Designer.cs">
+      <DependentUpon>CsrDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\DataObjectDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ChangePinDialog.resx">
       <DependentUpon>ChangePinDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CsrDialog.resx">
+      <DependentUpon>CsrDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DataObjectDialog.resx">
       <DependentUpon>DataObjectDialog.cs</DependentUpon>

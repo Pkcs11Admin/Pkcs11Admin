@@ -20,10 +20,16 @@ using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.X509;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Net.Pkcs11Admin
 {
@@ -983,7 +989,7 @@ namespace Net.Pkcs11Admin
             if (objectInfo == null)
                 throw new ArgumentNullException("objectInfo");
 
-            fileName = (!string.IsNullOrEmpty(objectInfo.CkaLabel)) ? Utils.NormalizeFileName(objectInfo.CkaLabel) : "certificate.cer";
+            fileName = (!string.IsNullOrEmpty(objectInfo.CkaLabel)) ? Utils.NormalizeFileName(objectInfo.CkaLabel + ".cer") : "certificate.cer";
             fileContent = objectInfo.CkaValue;
         }
 
@@ -1025,6 +1031,44 @@ namespace Net.Pkcs11Admin
             using (Session session = _slot.OpenSession(false))
             using (Mechanism mechanism = new Mechanism(mechanismType.Value))
                 session.GenerateKeyPair(mechanism, publicKeyObjectAttributes, privateKeyObjectAttributes, out publicKeyHandle, out privateKeyHandle);
+        }
+
+        private AsymmetricKeyParameter GetPubKeyParams(Pkcs11KeyInfo privKeyInfo, Pkcs11KeyInfo pubKeyInfo)
+        {
+            if (privKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
+                throw new Exception("Unsupported key type");
+
+            using (Session session = _slot.OpenSession(true))
+            {
+                List<ObjectAttribute> attributes = session.GetAttributeValue(privKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
+                BigInteger modulus = new BigInteger(1, attributes[0].GetValueAsByteArray());
+                BigInteger publicExponent = new BigInteger(1, attributes[1].GetValueAsByteArray());
+                return new RsaKeyParameters(false, modulus, publicExponent);
+            }
+        }
+
+        public void GenerateCsr(Pkcs11KeyInfo privKeyInfo, Pkcs11KeyInfo pubKeyInfo, DnEntry[] dnEntries, HashAlgorithm hashAlgorithm, out string fileName, out byte[] fileContent)
+        {
+            string signatureAlgorithmOid = hashAlgorithm.SignatureAlgorithmOid[(CKK)privKeyInfo.CkaKeyType];
+            X509Name x509Name = Utils.CreateX509Name(dnEntries);
+            AsymmetricKeyParameter publicKeyParameters = GetPubKeyParams(privKeyInfo, pubKeyInfo);
+
+            Pkcs10CertificationRequestDelaySigned pkcs10 = new Pkcs10CertificationRequestDelaySigned(signatureAlgorithmOid, x509Name, publicKeyParameters, null);
+
+            byte[] dataToSign = pkcs10.GetDataToSign();
+            byte[] digest = hashAlgorithm.ComputeDigest(dataToSign);
+            byte[] digestInfo = Utils.CreateDigestInfo(digest, hashAlgorithm.Oid);
+            byte[] signature = null;
+
+            using (Session session = _slot.OpenSession(true))
+            using (Mechanism mechanism = new Mechanism(CKM.CKM_RSA_PKCS))
+                signature = session.Sign(mechanism, privKeyInfo.ObjectHandle, digestInfo);
+
+            pkcs10.SignRequest(new DerBitString(signature));
+            byte[] csr = pkcs10.GetDerEncoded();
+
+            fileName = (!string.IsNullOrEmpty(privKeyInfo.CkaLabel)) ? Utils.NormalizeFileName(privKeyInfo.CkaLabel + ".csr") : "pkcs10.csr";
+            fileContent = csr;
         }
 
         #region IDisposable

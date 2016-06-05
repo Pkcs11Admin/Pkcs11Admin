@@ -110,6 +110,36 @@ namespace Net.Pkcs11Admin.WinForms.Controls
             _lastSortedColumn = e.Column;
         }
 
+        public bool MoveItemUp(int index)
+        {
+            if (index > 0)
+            {
+                ListViewItem item = this.Items[index];
+
+                this.Items.RemoveAt(index);
+                this.Items.Insert(index - 1, item);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool MoveItemDown(int index)
+        {
+            if (index < this.Items.Count - 1)
+            {
+                ListViewItem item = this.Items[index];
+
+                this.Items.RemoveAt(index);
+                this.Items.Insert(index + 1, item);
+
+                return true;
+            }
+
+            return false;
+        }
+
         #region Enums
 
         public enum ColumnType

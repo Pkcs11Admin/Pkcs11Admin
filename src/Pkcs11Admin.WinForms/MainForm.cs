@@ -450,7 +450,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void MenuItemObjectNewCsr_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            GenerateCsr();
         }
 
         private void MenuItemObjectNewCert_Click(object sender, EventArgs e)
@@ -1180,7 +1180,7 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void CtxMenuItemKeysNewCsr_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            GenerateCsr();
         }
 
         private void CtxMenuItemKeysNewCert_Click(object sender, EventArgs e)
@@ -1477,6 +1477,34 @@ namespace Net.Pkcs11Admin.WinForms
         {
             using (GenerateKeysDialog generateKeysDialog = new GenerateKeysDialog(_selectedSlot))
                 return (generateKeysDialog.ShowDialog() == DialogResult.OK);
+        }
+
+        private void GenerateCsr()
+        {
+            if (MainFormTabControl.SelectedTab != TabPageKeys)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select key first");
+                return;
+            }
+
+            ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(ListViewKeys);
+            if (selectedItem == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select key first");
+                return;
+            }
+
+            Pkcs11KeyInfo privKeyInfo = selectedItem.Tag as Pkcs11KeyInfo;
+            if (privKeyInfo == null || privKeyInfo.CkaClass != (ulong)CKO.CKO_PRIVATE_KEY)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select private key");
+                return;
+            }
+
+            Pkcs11KeyInfo pubKeyInfo = null; // TODO - Public key is needed for ECC
+
+            using (CsrDialog csrDialog = new CsrDialog(_selectedSlot, privKeyInfo, pubKeyInfo))
+                csrDialog.ShowDialog();
         }
 
         private bool CreatePkcs11Object()

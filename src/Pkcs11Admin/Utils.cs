@@ -15,12 +15,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Net.Pkcs11Admin.Configuration;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Net.Pkcs11Admin
 {
@@ -56,6 +58,56 @@ namespace Net.Pkcs11Admin
             }
 
             return parts;
+        }
+
+        private static Asn1Encodable EncodeDnEntry(DnEntry dnEntry)
+        {
+            DerObjectIdentifier type = new DerObjectIdentifier(dnEntry.Definition.Oid);
+            Asn1Encodable value = null;
+
+            switch (dnEntry.Definition.ValueType)
+            {
+                case DnEntryValueType.PrintableString:
+                    value = new DerPrintableString(Encoding.UTF8.GetBytes(dnEntry.Value));
+                    break;
+
+                case DnEntryValueType.UniversalString:
+                    value = new DerUniversalString(Encoding.UTF8.GetBytes(dnEntry.Value));
+                    break;
+
+                case DnEntryValueType.Utf8String:
+                    value = new DerUtf8String(Encoding.UTF8.GetBytes(dnEntry.Value));
+                    break;
+
+                case DnEntryValueType.BmpString:
+                    value = new DerBmpString(Encoding.UTF8.GetBytes(dnEntry.Value));
+                    break;
+
+                default:
+                    // TODO - Does BC support DnEntryValueType.TeletexString ???
+                    throw new Exception("Unsupported type of DnEntry value");
+            }
+
+            return new DerSequence(type, value);
+        }
+
+        public static X509Name CreateX509Name(DnEntry[] dnEntries)
+        {
+            Asn1EncodableVector vector = new Asn1EncodableVector();
+            for (int i = 0; i != dnEntries.Length; i++)
+                vector.Add(EncodeDnEntry(dnEntries[i]));
+
+            DerSet set = new DerSet(vector);
+            DerSequence sequence = new DerSequence(set);
+            return X509Name.GetInstance(sequence);
+        }
+
+        public static byte[] CreateDigestInfo(byte[] hash, string hashOid)
+        {
+            DerObjectIdentifier derObjectIdentifier = new DerObjectIdentifier(hashOid);
+            AlgorithmIdentifier algorithmIdentifier = new AlgorithmIdentifier(derObjectIdentifier, null);
+            DigestInfo digestInfo = new DigestInfo(algorithmIdentifier, hash);
+            return digestInfo.GetDerEncoded();
         }
     }
 }

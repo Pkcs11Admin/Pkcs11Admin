@@ -19,8 +19,6 @@ using Net.Pkcs11Interop.Common;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
 
 namespace Net.Pkcs11Admin.Configuration
 {
@@ -94,6 +92,13 @@ namespace Net.Pkcs11Admin.Configuration
 
         [DataMember(Order = 10, IsRequired = true)]
         public ClassAttributesDefinition DomainParamsAttributes
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 11, IsRequired = true)]
+        public DnEntryDefinitions DnEntryDefinitions
         {
             get;
             set;
@@ -862,6 +867,22 @@ namespace Net.Pkcs11Admin.Configuration
             // TODO 
 
             #endregion
+
+            #endregion
+
+            #region DnEntries
+
+            cfg.DnEntryDefinitions = new DnEntryDefinitions();
+            cfg.DnEntryDefinitions.Add("2.5.4.3", new DnEntryDefinition() { Name = "commonName", Oid = "2.5.4.3", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.4", new DnEntryDefinition() { Name = "surname", Oid = "2.5.4.4", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.5", new DnEntryDefinition() { Name = "serialNumber", Oid = "2.5.4.5", ValueType = DnEntryValueType.PrintableString });
+            cfg.DnEntryDefinitions.Add("2.5.4.6", new DnEntryDefinition() { Name = "countryName", Oid = "2.5.4.6", ValueType = DnEntryValueType.PrintableString });
+            cfg.DnEntryDefinitions.Add("2.5.4.7", new DnEntryDefinition() { Name = "localityName", Oid = "2.5.4.7", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.8", new DnEntryDefinition() { Name = "stateOrProvinceName", Oid = "2.5.4.8", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.9", new DnEntryDefinition() { Name = "streetAddress", Oid = "2.5.4.9", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.10", new DnEntryDefinition() { Name = "organizationName", Oid = "2.5.4.10", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.11", new DnEntryDefinition() { Name = "organizationUnitName", Oid = "2.5.4.11", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.42", new DnEntryDefinition() { Name = "givenName", Oid = "2.5.4.42", ValueType = DnEntryValueType.Utf8String });
 
             #endregion
 

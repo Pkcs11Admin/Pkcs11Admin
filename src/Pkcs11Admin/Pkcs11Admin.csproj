@@ -88,6 +88,8 @@
   <ItemGroup>
     <Compile Include="Configuration\ClassAttribute.cs" />
     <Compile Include="Configuration\ClassAttributes.cs" />
+    <Compile Include="Configuration\DnEntryDefinitions.cs" />
+    <Compile Include="Configuration\DnEntryDefinition.cs" />
     <Compile Include="Configuration\EnumDefinition.cs" />
     <Compile Include="Configuration\EnumMember.cs" />
     <Compile Include="Configuration\EnumDefinitions.cs" />
@@ -97,6 +99,8 @@
     <Compile Include="Configuration\Pkcs11AdminConfig.cs" />
     <Compile Include="Configuration\AttributeDefinition.cs" />
     <Compile Include="Configuration\AttributeType.cs" />
+    <Compile Include="Configuration\DnEntryValueType.cs" />
+    <Compile Include="HashAlgorithm.cs" />
     <Compile Include="Pkcs11Admin.cs" />
     <Compile Include="Pkcs11AdminInfo.cs" />
     <Compile Include="CurrentVersionInfo.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\StringUtils.cs" />
     <Compile Include="Pkcs11Uri.cs" />
+    <Compile Include="DnEntry.cs" />
     <Compile Include="TokenNotPresentException.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="XmlSerializer.cs" />
