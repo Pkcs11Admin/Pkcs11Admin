@@ -3182,9 +3182,50 @@
             </summary>
             <returns>A managed object holding the data to be marshaled. This object must be an instance of a formatted class.</returns>
         </member>
+        <member name="T:Net.Pkcs11Interop.Common.LibraryArchitectureException">
+            <summary>
+            Exception indicating an attempt to load unmanaged PKCS#11 library designated for a different architecture
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.LibraryArchitectureException.#ctor">
+            <summary>
+            Initializes new instance of LibraryArchitectureException class
+            </summary>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.LibraryArchitectureException.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of LibraryArchitectureException class with a specified error message and a reference to the inner exception that is the cause of this exception
+            </summary>
+            <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.LibraryArchitectureException.#ctor(System.String)">
+            <summary>
+            Initializes new instance of LibraryArchitectureException class
+            </summary>
+            <param name="message">Message that describes the error</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.LibraryArchitectureException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of LibraryArchitectureException class with a specified error message and a reference to the inner exception that is the cause of this exception
+            </summary>
+            <param name="message">The message that describes the error</param>
+            <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.LibraryArchitectureException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes new instance of LibraryArchitectureException class with serialized data
+            </summary>
+            <param name="info">SerializationInfo that holds the serialized object data about the exception being thrown</param>
+            <param name="context">StreamingContext that contains contextual information about the source or destination</param>
+        </member>
         <member name="T:Net.Pkcs11Interop.Common.NativeMethods">
             <summary>
             Imported native methods
+            </summary>
+        </member>
+        <member name="F:Net.Pkcs11Interop.Common.NativeMethods.ERROR_BAD_EXE_FORMAT">
+            <summary>
+            Error indicating an attempt to load unmanaged library designated for a different architecture
             </summary>
         </member>
         <member name="M:Net.Pkcs11Interop.Common.NativeMethods.LoadLibrary(System.String)">
@@ -3242,6 +3283,13 @@
             <param name='filename'>Library filename.</param>
             <param name='flag'>RTLD_LAZY for lazy function call binding or RTLD_NOW immediate function call binding.</param>
             <returns>Handle for the dynamic library if successful, IntPtr.Zero otherwise.</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.NativeMethods.dlopen_preflight(System.String)">
+            <summary>
+            Checks if the library (mach-o file) is compatible with the current process
+            </summary>
+            <param name="path">Library path.</param>
+            <returns>True if library is compatible.  If library is not compatible, it returns false and sets an error string that can be examined with dlerror.</returns>
         </member>
         <member name="M:Net.Pkcs11Interop.Common.NativeMethods.dlclose(System.IntPtr)">
             <summary>
@@ -4269,11 +4317,6 @@
             Name of "module-path" query attribute
             </summary>
         </member>
-        <member name="M:Net.Pkcs11Interop.Common.Pkcs11UriSpec.#cctor">
-            <summary>
-            Static constructor for Net.Pkcs11Interop.URI.Pkcs11UriSpec class
-            </summary>
-        </member>
         <member name="T:Net.Pkcs11Interop.Common.Platform">
             <summary>
             Utility class for runtime platform detection
@@ -4326,7 +4369,9 @@
         </member>
         <member name="P:Net.Pkcs11Interop.Common.Platform.UnmanagedLongSize">
             <summary>
-            Size of unmanaged long type
+            Size of unmanaged long type.
+            This property is used by HighLevelAPI to choose correct set of LowLevelAPIs.
+            Value of this property can be changed if needed.
             </summary>
         </member>
         <member name="F:Net.Pkcs11Interop.Common.Platform._structPackingSize">
@@ -4336,7 +4381,9 @@
         </member>
         <member name="P:Net.Pkcs11Interop.Common.Platform.StructPackingSize">
             <summary>
-            Controls the alignment of unmanaged struct fields
+            Controls the alignment of unmanaged struct fields.
+            This property is used by HighLevelAPI to choose correct set of LowLevelAPIs.
+            Value of this property can be changed if needed.
             </summary>
         </member>
         <member name="M:Net.Pkcs11Interop.Common.Platform.DetectPlatform">
@@ -4411,6 +4458,14 @@
             <param name='libraryHandle'>Dynamic library handle</param>
             <param name='function'>Function name</param>
             <returns>The function pointer</returns>
+        </member>
+        <member name="M:Net.Pkcs11Interop.Common.UnmanagedLibrary.GetDelegateForFunctionPointer``1(System.IntPtr)">
+            <summary>
+            Converts function pointer to a delegate
+            </summary>
+            <typeparam name="T">Type of delegate</typeparam>
+            <param name="functionPointer">Function pointer</param>
+            <returns>Delegate</returns>
         </member>
         <member name="T:Net.Pkcs11Interop.Common.UnmanagedMemory">
             <summary>
