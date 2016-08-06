@@ -1,3 +1,27 @@
+Pkcs11Admin 0.3.0 (2016-??-??)
+- Added starting shell scripts for non-windows platforms
+- New application icon contributed by Tomas Haluska
+- Removed welcome screen
+- Library loading dialog is automatically opened when application is started
+- Added DefaultPkcs11Library and AutoLoadDefaultPkcs11Library app.config settings which can instruct application to automatically load predefined PKCS#11 library at startup
+- Added AES and RSA key generation
+- Added PKCS#10 CSR generation for RSA keys
+- Added certificate and data object viewers
+- Certificates can be imported and exported
+- Action combobox replaced by Object and Tools submenus and context menus
+- Items in ListViews can be sorted
+- Selected items can be copied into clipboard
+- Selected items can be exported to CSV
+- Added ASN.1 viewer for object attributes
+- Object attributes can be loaded from and saved to file
+- Updated support for final PKCS#11 URI scheme defined in RFC 7512
+- Updated to Pkcs11Interop 3.2.0 and dropped dependency on Pkcs11Interop.URI
+- Updated to PKCS11-LOGGER 2.2.0
+- Added dependency on BouncyCastle 1.8.1
+- Added dependency on Asn1Net.Reader 1.1.0
+- Added dependency on Asn1Net.Forms.TreeView 1.1.0
+- Many other smaller bug fixes and improvements
+
 Pkcs11Admin 0.2.0 (2015-01-19)
 - Fixed library loading dialog to be more foolproof and user friendly
 - Added support for PKCS#11 libraries that do not support native OS locking
