@@ -32,7 +32,6 @@ copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Asn1Net.Reader.dll %OUTDI
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Be.Windows.Forms.HexBox.dll %OUTDIR% || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Admin.dll %OUTDIR% || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\AnyCPU\Release\Pkcs11Interop.dll %OUTDIR% || exit /b 1
-copy ..\..\src\lib\Pkcs11Interop\Pkcs11Interop.dll.config %OUTDIR% || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x86\Release\Pkcs11Admin.WinForms.exe %OUTDIR%\Pkcs11Admin-x86.exe || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x86\Release\Pkcs11Admin.WinForms.exe.config %OUTDIR%\Pkcs11Admin-x86.exe.config || exit /b 1
 copy ..\..\src\Pkcs11Admin.WinForms\bin\x64\Release\Pkcs11Admin.WinForms.exe %OUTDIR%\Pkcs11Admin-x64.exe || exit /b 1
