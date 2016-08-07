@@ -1,4 +1,4 @@
-Pkcs11Admin 0.3.0 (2016-??-??)
+Pkcs11Admin 0.3.0 (2016-08-07)
 - Added starting shell scripts for non-windows platforms
 - New application icon contributed by Tomas Haluska
 - Removed welcome screen
