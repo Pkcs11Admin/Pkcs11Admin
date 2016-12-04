@@ -22,6 +22,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace Net.Pkcs11Admin
@@ -97,7 +98,9 @@ namespace Net.Pkcs11Admin
             for (int i = 0; i != dnEntries.Length; i++)
                 vector.Add(EncodeDnEntry(dnEntries[i]));
 
-            DerSet set = new DerSet(vector);
+            ConstructorInfo internalDerSetConstructor = typeof(DerSet).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { typeof(Asn1EncodableVector), typeof(bool) }, null);
+            DerSet set = (DerSet)internalDerSetConstructor.Invoke(new object[] { vector, false });
+
             DerSequence sequence = new DerSequence(set);
             return X509Name.GetInstance(sequence);
         }
