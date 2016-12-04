@@ -16,6 +16,7 @@
  */
 
 using Net.Pkcs11Admin.WinForms.Controls;
+using Net.Pkcs11Interop.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,6 +41,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             _bytes = bytes;
             _cert = new X509Certificate2(bytes);
+
+            ButtonMore.Visible = Platform.IsWindows;
 
             LoadListViewDetails();
             LoadTreeViewAsn1();
@@ -99,6 +102,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                     WinFormsUtils.ShowInfo(this, "Certificate successfully exported");
                 }
             }
+        }
+
+        private void ButtonMore_Click(object sender, EventArgs e)
+        {
+            X509Certificate2 x509Cert = new X509Certificate2(_bytes);
+            X509Certificate2UI.DisplayCertificate(x509Cert, this.Handle);
         }
     }
 }

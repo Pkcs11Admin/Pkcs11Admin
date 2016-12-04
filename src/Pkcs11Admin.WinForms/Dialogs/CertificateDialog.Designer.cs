@@ -54,6 +54,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.TreeViewAsn1 = new Net.Asn1.Forms.TreeView.Asn1TreeView();
             this.ButtonClose = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
+            this.ButtonMore = new System.Windows.Forms.Button();
             this.CertificateTabControl.SuspendLayout();
             this.TabPageDetails.SuspendLayout();
             this.TabPageAsn1.SuspendLayout();
@@ -161,12 +162,24 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // ButtonMore
+            // 
+            this.ButtonMore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ButtonMore.Location = new System.Drawing.Point(94, 315);
+            this.ButtonMore.Name = "ButtonMore";
+            this.ButtonMore.Size = new System.Drawing.Size(75, 23);
+            this.ButtonMore.TabIndex = 3;
+            this.ButtonMore.Text = "More";
+            this.ButtonMore.UseVisualStyleBackColor = true;
+            this.ButtonMore.Click += new System.EventHandler(this.ButtonMore_Click);
+            // 
             // CertificateDialog
             // 
             this.AcceptButton = this.ButtonClose;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(497, 351);
+            this.Controls.Add(this.ButtonMore);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonClose);
             this.Controls.Add(this.CertificateTabControl);
@@ -195,5 +208,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.Label LabelDetails;
         private Controls.EnhancedListView ListViewDetails;
         private System.Windows.Forms.Button ButtonSave;
+        private System.Windows.Forms.Button ButtonMore;
     }
 }
