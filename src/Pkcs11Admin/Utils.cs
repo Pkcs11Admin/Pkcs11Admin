@@ -89,7 +89,7 @@ namespace Net.Pkcs11Admin
                     throw new Exception("Unsupported type of DnEntry value");
             }
 
-            return new DerSequence(type, value);
+            return new DerSet(new DerSequence(type, value));
         }
 
         public static X509Name CreateX509Name(DnEntry[] dnEntries)
@@ -98,10 +98,7 @@ namespace Net.Pkcs11Admin
             for (int i = 0; i != dnEntries.Length; i++)
                 vector.Add(EncodeDnEntry(dnEntries[i]));
 
-            ConstructorInfo internalDerSetConstructor = typeof(DerSet).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { typeof(Asn1EncodableVector), typeof(bool) }, null);
-            DerSet set = (DerSet)internalDerSetConstructor.Invoke(new object[] { vector, false });
-
-            DerSequence sequence = new DerSequence(set);
+            DerSequence sequence = new DerSequence(vector);
             return X509Name.GetInstance(sequence);
         }
 
