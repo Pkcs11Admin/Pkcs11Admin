@@ -48,12 +48,12 @@ namespace Net.Pkcs11Admin
 
             try
             {
-                _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, true);
+                _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, AppType.MultiThreaded);
             }
             catch (Pkcs11Exception ex)
             {
                 if (ex.RV == CKR.CKR_CANT_LOCK)
-                    _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, false);
+                    _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, AppType.SingleThreaded);
                 else
                     throw;
             }
@@ -71,7 +71,7 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11Slot> slots = new List<Pkcs11Slot>();
 
-            foreach (Slot slot in _pkcs11.GetSlotList(false))
+            foreach (Slot slot in _pkcs11.GetSlotList(SlotsType.WithOrWithoutTokenPresent))
                 slots.Add(new Pkcs11Slot(slot));
 
             return slots;

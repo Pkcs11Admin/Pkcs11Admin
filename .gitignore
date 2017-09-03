@@ -7,3 +7,4 @@ TestResults/
 *.user
 Pkcs11Admin-Release/
 **/packages/*
+.vs/

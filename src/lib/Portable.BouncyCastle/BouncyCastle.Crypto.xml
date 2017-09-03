@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>crypto</name>
+        <name>BouncyCastle.Crypto</name>
     </assembly>
     <members>
         <member name="M:Org.BouncyCastle.Asn1.Anssi.AnssiNamedCurves.GetByOid(Org.BouncyCastle.Asn1.DerObjectIdentifier)">
@@ -56,7 +56,9 @@
             <summary>Create a base ASN.1 object from a byte array.</summary>
             <param name="data">The byte array to parse.</param>
             <returns>The base ASN.1 object represented by the byte array.</returns>
-            <exception cref="T:System.IO.IOException">If there is a problem parsing the data.</exception>
+            <exception cref="T:System.IO.IOException">
+            If there is a problem parsing the data, or parsing an object did not exhaust the available data.
+            </exception>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Asn1Object.FromStream(System.IO.Stream)">
             <summary>Read a base ASN.1 object from a stream.</summary>
@@ -2894,6 +2896,28 @@
                member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
                smime(16) id-aa(2) 47 }
         </member>
+        <member name="M:Org.BouncyCastle.Asn1.GM.GMNamedCurves.GetByOid(Org.BouncyCastle.Asn1.DerObjectIdentifier)">
+             return the X9ECParameters object for the named curve represented by
+             the passed in object identifier. Null if the curve isn't present.
+            
+             @param oid an object identifier representing a named curve, if present.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.GM.GMNamedCurves.GetOid(System.String)">
+             return the object identifier signified by the passed in name. Null
+             if there is no object identifier associated with name.
+            
+             @return the object identifier associated with name, if present.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.GM.GMNamedCurves.GetName(Org.BouncyCastle.Asn1.DerObjectIdentifier)">
+            return the named curve name represented by the given object identifier.
+        </member>
+        <member name="P:Org.BouncyCastle.Asn1.GM.GMNamedCurves.Names">
+            returns an enumeration containing the name strings for curves
+            contained in this structure.
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Gnu.GnuObjectIdentifiers.EllipticCurve">
+            1.3.6.1.4.1.11591.15 - ellipticCurve 
+        </member>
         <member name="T:Org.BouncyCastle.Asn1.IAsn1Choice">
             Marker interface for CHOICE objects - if you implement this in a roll-your-own
             object, any attempt to tag the object implicitly will convert the tag to an
@@ -4252,6 +4276,27 @@
         </member>
         <member name="T:Org.BouncyCastle.Asn1.Pkcs.Pfx">
             the infamous Pfx from Pkcs12
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.Sha512_224WithRSAEncryption">
+            PKCS#1: 1.2.840.113549.1.1.15 
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.Sha512_256WithRSAEncryption">
+            PKCS#1: 1.2.840.113549.1.1.16 
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.IdAADecryptKeyID">
+            PKCS#9: 1.2.840.113549.1.9.16.6.2.37 - <a href="https://tools.ietf.org/html/rfc4108#section-2.2.5">RFC 4108</a> 
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.IdAAImplCryptoAlgs">
+            PKCS#9: 1.2.840.113549.1.9.16.6.2.38 - <a href="https://tools.ietf.org/html/rfc4108#section-2.2.6">RFC 4108</a> 
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.IdAAAsymmDecryptKeyID">
+            PKCS#9: 1.2.840.113549.1.9.16.2.54 <a href="https://tools.ietf.org/html/rfc7030">RFC7030</a>
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.IdAAImplCompressAlgs">
+            PKCS#9: 1.2.840.113549.1.9.16.2.43   <a href="https://tools.ietf.org/html/rfc7030">RFC7030</a>
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Pkcs.PkcsObjectIdentifiers.IdAACommunityIdentifiers">
+            PKCS#9: 1.2.840.113549.1.9.16.2.40   <a href="https://tools.ietf.org/html/rfc7030">RFC7030</a>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Pkcs.PrivateKeyInfo.ToAsn1Object">
              write out an RSA private key with its associated information
@@ -6491,6 +6536,9 @@
         <member name="F:Org.BouncyCastle.Asn1.X509.X509Extensions.TargetInformation">
             TargetInformation extension in attribute certificates.
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.X509.X509Extensions.ExpiredCertsOnCrl">
+            Expired Certificates on CRL extension
+        </member>
         <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(Org.BouncyCastle.Asn1.Asn1Sequence)">
              Constructor from Asn1Sequence.
             
@@ -6507,6 +6555,22 @@
             It's is assumed the table contains Oid/string pairs.</p>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.IList,System.Collections.IList)">
+             Constructor from two vectors
+            
+             @param objectIDs an ArrayList of the object identifiers.
+             @param values an ArrayList of the extension values.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.Hashtable)">
+            constructor from a table of extensions.
+            <p>
+            it's is assumed the table contains Oid/string pairs.</p>
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.ArrayList,System.Collections.Hashtable)">
+            Constructor from a table of extensions with ordering.
+            <p>
+            It's is assumed the table contains Oid/string pairs.</p>
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.ArrayList,System.Collections.ArrayList)">
              Constructor from two vectors
             
              @param objectIDs an ArrayList of the object identifiers.
@@ -7128,19 +7192,19 @@
             encode the input data producing a base 64 encoded byte array.
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.SetHeader(System.String,System.String)">
-             Set an additional header entry.
+             Set an additional header entry. A null value will clear the entry for name.
             
              @param name the name of the header entry.
              @param v the value of the header entry.
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.ResetHeaders">
-            Reset the headers to only contain a Version string.
+            Reset the headers to only contain a Version string (if one is present).
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.BeginClearText(Org.BouncyCastle.Bcpg.HashAlgorithmTag)">
             Start a clear text signed message.
             @param hashAlgorithm
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.Dispose(System.Boolean)">
+        <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.Close">
             <b>Note</b>: Close() does not close the underlying stream. So it is possible to write
             multiple objects using armoring to a single stream.
         </member>
@@ -8047,6 +8111,22 @@
             <param name="modificationTime">The time of last modification we want stored.</param>
             <param name="buffer">The buffer to use for collecting data to put into chunks.</param>
         </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpLiteralDataGenerator.Open(System.IO.Stream,System.Char,System.IO.FileInfo)">
+            <summary>
+            <p>
+            Open a literal data packet for the passed in <c>FileInfo</c> object, returning
+            an output stream for saving the file contents.
+            </p>
+            <p>
+            The stream created can be closed off by either calling Close()
+            on the stream or Close() on the generator. Closing the returned
+            stream does not close off the Stream parameter <c>outStr</c>.
+            </p>
+            </summary>
+            <param name="outStr">The stream we want the packet in.</param>
+            <param name="format">The format we are using.</param>
+            <param name="file">The <c>FileInfo</c> object containg the packet details.</param>
+        </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpLiteralDataGenerator.Close">
             <summary>
             Close the literal data packet - this is equivalent to calling Close()
@@ -8772,6 +8852,9 @@
         <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignature.HashAlgorithm">
             <summary>The hash algorithm associated with this signature.</summary>
         </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignature.IsCertification">
+            <summary>Return true if this signature represents a certification.</summary>
+        </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignature.VerifyCertification(Org.BouncyCastle.Bcpg.OpenPgp.PgpUserAttributeSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
             <summary>
             Verify the signature as certifying the passed in public key as associated
@@ -8811,6 +8894,13 @@
             <summary>
             Return true if the signature has either hashed or unhashed subpackets.
             </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignature.IsCertification(System.Int32)">
+            <summary>
+            Return true if the passed in signature type represents a certification, false if the signature type is not.
+            </summary>
+            <param name="signatureType"></param>
+            <returns>true if signatureType is a certification, false otherwise.</returns>
         </member>
         <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureGenerator">
             <remarks>Generator for PGP signatures.</remarks>
@@ -8959,6 +9049,12 @@
             <remarks>
             Allows the caller to handle the encoding of the passphrase to bytes.
             </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.WriteFileToLiteralData(System.IO.Stream,System.Char,System.IO.FileInfo)">
+            <summary>Write out the passed in file as a literal data packet.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.WriteFileToLiteralData(System.IO.Stream,System.Char,System.IO.FileInfo,System.Byte[])">
+            <summary>Write out the passed in file as a literal data packet in partial packet format.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.GetDecoderStream(System.IO.Stream)">
             <summary>
@@ -9456,6 +9552,12 @@
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsProcessableByteArray.GetContent">
             <returns>A clone of the byte array</returns>
+        </member>
+        <member name="T:Org.BouncyCastle.Cms.CmsProcessableFile">
+            a holding class for a file of data to be processed.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsProcessableFile.GetContent">
+            <returns>The file handle</returns>
         </member>
         <member name="T:Org.BouncyCastle.Cms.CmsSignedData">
              general class for handling a pkcs7-signature message.
@@ -10277,6 +10379,21 @@
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Agreement.DHStandardGroups">
             <summary>Standard Diffie-Hellman groups from various IETF specifications.</summary>
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Agreement.DHStandardGroups.rfc5114_1024_160">
+            <remarks>
+            Existence of a "hidden SNFS" backdoor cannot be ruled out. see https://eprint.iacr.org/2016/961.pdf .
+            </remarks>
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Agreement.DHStandardGroups.rfc5114_2048_224">
+            <remarks>
+            Existence of a "hidden SNFS" backdoor cannot be ruled out. see https://eprint.iacr.org/2016/961.pdf .
+            </remarks>
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Agreement.DHStandardGroups.rfc5114_2048_256">
+            <remarks>
+            Existence of a "hidden SNFS" backdoor cannot be ruled out. see https://eprint.iacr.org/2016/961.pdf .
+            </remarks>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Agreement.ECDHBasicAgreement">
              P1363 7.2.1 ECSVDP-DH
@@ -11217,6 +11334,9 @@
             
              @param message the message to be carried with the exception.
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Digests.Dstu7564Digest">
+            implementation of Ukrainian DSTU 7564 hash function
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Digests.GeneralDigest">
             base implementation of MD4 family style digest as outlined in
             "Handbook of Applied Cryptography", pages 344 - 347.
@@ -11854,8 +11974,9 @@
             </p>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.#ctor(Org.BouncyCastle.Crypto.IAsymmetricBlockCipher)">
-            Basic constructor.
-            @param cipher
+             Basic constructor.
+            
+             @param cipher
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.#ctor(Org.BouncyCastle.Crypto.IAsymmetricBlockCipher,System.Int32)">
             Constructor for decryption with a fixed plaintext length.
@@ -11888,7 +12009,6 @@
             @param inLen Length of the encrypted block.
             @param pLen Length of the desired output.
             @return The plaintext without padding, or a random value if the padding was incorrect.
-            
             @throws InvalidCipherTextException
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.DecodeBlock(System.Byte[],System.Int32,System.Int32)">
@@ -11958,6 +12078,10 @@
              <p>
              This file contains the fast version with 8Kbytes of static tables for round precomputation
              </p>
+            <remarks>
+            Unfortunately this class has a few side channel issues.
+            In an environment where encryption/decryption may be closely observed it should not be used.
+            </remarks>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.AesFastEngine.GenerateWorkingKey(System.Byte[],System.Boolean)">
             Calculate the necessary round keys
@@ -12182,6 +12306,16 @@
              @param D    the 96-127 bits of the ciphertext block
              @param result the resulting plaintext
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.ChaCha7539Engine">
+            <summary>
+            Implementation of Daniel J. Bernstein's ChaCha stream cipher.
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.ChaCha7539Engine.#ctor">
+            <summary>
+            Creates a 20 rounds ChaCha engine.
+            </summary>
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.ChaChaEngine">
             <summary>
             Implementation of Daniel J. Bernstein's ChaCha stream cipher.
@@ -12200,7 +12334,7 @@
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.ChaChaEngine.ChachaCore(System.Int32,System.UInt32[],System.UInt32[])">
             <summary>
-            ChacCha function.
+            ChaCha function.
             </summary>
             <param name="rounds">The number of ChaCha rounds to execute</param>
             <param name="input">The input words.</param>
@@ -12321,6 +12455,9 @@
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.DesEngine.DesFunc(System.Int32[],System.Byte[],System.Int32,System.Byte[],System.Int32)">
             the DES engine.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.Dstu7624Engine">
+            implementation of DSTU 7624 (Kalyna)
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.ElGamalEngine">
             this does your basic ElGamal algorithm.
@@ -13523,6 +13660,60 @@
              @throws ArgumentException if the size of the request will cause an overflow.
              @throws DataLengthException if the out buffer is too small.
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Generators.BCrypt">
+            Core of password hashing scheme Bcrypt,
+            designed by Niels Provos and David Mazières,
+            corresponds to the C reference implementation.
+            <p>
+            This implementation does not correspondent to the 1999 published paper
+            "A Future-Adaptable Password Scheme" of Niels Provos and David Mazières,
+            see: https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html.
+            In contrast to the paper, the order of key setup and salt setup is reversed:
+            state &lt;- ExpandKey(state, 0, key)
+            state %lt;- ExpandKey(state, 0, salt)
+            This corresponds to the OpenBSD reference implementation of Bcrypt. 
+            </p><p>
+            Note: 
+            There is no successful cryptanalysis (status 2015), but
+            the amount of memory and the band width of Bcrypt
+            may be insufficient to effectively prevent attacks 
+            with custom hardware like FPGAs, ASICs
+            </p><p>
+            This implementation uses some parts of Bouncy Castle's BlowfishEngine.
+            </p>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.BCrypt.DeriveRawKey(System.Int32,System.Byte[],System.Byte[])">
+             Derives a raw 192 bit Bcrypt key
+            
+             @param cost the cost factor, treated as an exponent of 2
+             @param salt a 16 byte salt
+             @param psw  the password
+             @return a 192 bit key
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Generators.BCrypt.SALT_SIZE_BYTES">
+            Size of the salt parameter in bytes
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Generators.BCrypt.MIN_COST">
+            Minimum value of cost parameter, equal to log2(bytes of salt)
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Generators.BCrypt.MAX_COST">
+            Maximum value of cost parameter (31 == 2,147,483,648)
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Generators.BCrypt.MAX_PASSWORD_BYTES">
+            Maximum size of password == max (unrestricted) size of Blowfish key
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.BCrypt.Generate(System.Byte[],System.Byte[],System.Int32)">
+            Calculates the <b>bcrypt</b> hash of a password.
+            <p>
+            This implements the raw <b>bcrypt</b> function as defined in the bcrypt specification, not
+            the crypt encoded version implemented in OpenBSD.
+            </p>
+            @param password the password bytes (up to 72 bytes) to use for this invocation.
+            @param salt     the 128 bit salt to use for this invocation.
+            @param cost     the bcrypt cost parameter. The cost of the bcrypt function grows as
+                            <code>2^cost</code>. Legal values are 4..31 inclusive.
+            @return the output of the raw bcrypt operation: a 192 bit (24 byte) hash.
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Generators.DesEdeKeyGenerator.engineInit(Org.BouncyCastle.Crypto.KeyGenerationParameters)">
              initialise the key generator - if strength is set to zero
              the key Generated will be 192 bits in size, otherwise
@@ -13627,6 +13818,32 @@
             which generates the p , q and a values from the given parameters,
             returning the Gost3410Parameters object.
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Generators.HkdfBytesGenerator">
+            HMAC-based Extract-and-Expand Key Derivation Function (HKDF) implemented
+            according to IETF RFC 5869, May 2010 as specified by H. Krawczyk, IBM
+            Research &amp; P. Eronen, Nokia. It uses a HMac internally to compute de OKM
+            (output keying material) and is likely to have better security properties
+            than KDF's based on just a hash function.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.HkdfBytesGenerator.#ctor(Org.BouncyCastle.Crypto.IDigest)">
+             Creates a HKDFBytesGenerator based on the given hash function.
+            
+             @param hash the digest to be used as the source of generatedBytes bytes
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.HkdfBytesGenerator.Extract(System.Byte[],System.Byte[])">
+             Performs the extract part of the key derivation function.
+            
+             @param salt the salt to use
+             @param ikm  the input keying material
+             @return the PRK as KeyParameter
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.HkdfBytesGenerator.ExpandNext">
+             Performs the expand part of the key derivation function, using currentT
+             as input and output buffer.
+            
+             @throws DataLengthException if the total number of bytes generated is larger than the one
+             specified by RFC 5869 (255 * HashLen)
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Generators.Kdf1BytesGenerator">
             KFD2 generator for derived keys and ivs as defined by IEEE P1363a/ISO 18033
             <br/>
@@ -13687,6 +13904,40 @@
              @param count
                         the number of primes to find
              @return a vector containing the found primes as Integer
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Generators.OpenBsdBCrypt">
+            Password hashing scheme BCrypt,
+            designed by Niels Provos and David Mazières, using the
+            String format and the Base64 encoding
+            of the reference implementation on OpenBSD
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.OpenBsdBCrypt.CreateBcryptString(System.Byte[],System.Byte[],System.Int32)">
+             Creates a 60 character Bcrypt String, including
+             version, cost factor, salt and hash, separated by '$'
+            
+             @param cost     the cost factor, treated as an exponent of 2
+             @param salt     a 16 byte salt
+             @param password the password
+             @return a 60 character Bcrypt String
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.OpenBsdBCrypt.Generate(System.Char[],System.Byte[],System.Int32)">
+             Creates a 60 character Bcrypt String, including
+             version, cost factor, salt and hash, separated by '$'
+            
+             @param cost     the cost factor, treated as an exponent of 2
+             @param salt     a 16 byte salt
+             @param password the password
+             @return a 60 character Bcrypt String
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.OpenBsdBCrypt.CheckPassword(System.String,System.Char[])">
+             Checks if a password corresponds to a 60 character Bcrypt String
+            
+             @param bcryptString a 60 character Bcrypt String, including
+                                 version, cost factor, salt and hash,
+                                 separated by '$'
+             @param password     the password as an array of chars
+             @return true if the password corresponds to the
+             Bcrypt String, otherwise false
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Generators.OpenSslPbeParametersGenerator">
             Generator for PBE derived keys and ivs as usd by OpenSSL.
@@ -14406,12 +14657,23 @@
             </remarks>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.IXof.DoFinal(System.Byte[],System.Int32,System.Int32)">
-             Output the results of the final calculation for this digest to outLen number of bytes.
-            
-             @param out output array to write the output bytes to.
-             @param outOff offset to start writing the bytes at.
-             @param outLen the number of output bytes requested.
-             @return the number of bytes written
+            <summary>
+            Output the results of the final calculation for this digest to outLen number of bytes.
+            </summary>
+            <param name="output">output array to write the output bytes to.</param>
+            <param name="outOff">offset to start writing the bytes at.</param>
+            <param name="outLen">the number of output bytes requested.</param>
+            <returns>the number of bytes written</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.IXof.DoOutput(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Start outputting the results of the final calculation for this digest. Unlike DoFinal, this method
+            will continue producing output until the Xof is explicitly reset, or signals otherwise.
+            </summary>
+            <param name="output">output array to write the output bytes to.</param>
+            <param name="outOff">offset to start writing the bytes at.</param>
+            <param name="outLen">the number of output bytes requested.</param>
+            <returns>the number of bytes written</returns>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.KeyGenerationParameters">
             The base class for parameters to key generators.
@@ -14615,6 +14877,14 @@
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Macs.CMac.Reset">
             Reset the mac generator.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Macs.Dstu7564Mac">
+            <summary>
+            Implementation of DSTU7564 mac mode
+            </summary>
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Macs.Dstu7624Mac">
+            implementation of DSTU 7624 MAC
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Macs.GMac">
             <summary>
@@ -15301,6 +15571,78 @@
             Reset the cipher to the same state as it was after the last init (if there was one).
             </summary>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCcmBlockCipher.#ctor(Org.BouncyCastle.Crypto.IBlockCipher)">
+            <summary>
+            Base constructor. Nb value is set to 4.
+            </summary>
+            <param name="engine">base cipher to use under CCM.</param>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCcmBlockCipher.#ctor(Org.BouncyCastle.Crypto.IBlockCipher,System.Int32)">
+            <summary>
+            Constructor allowing Nb configuration.
+            
+            Nb is a parameter specified in CCM mode of DSTU7624 standard.
+            This parameter specifies maximum possible length of input.It should
+            be calculated as follows: Nb = 1 / 8 * (-3 + log[2]Nmax) + 1,
+            where Nmax - length of input message in bits.For practical reasons
+            Nmax usually less than 4Gb, e.g. for Nmax = 2^32 - 1, Nb = 4.
+            </summary>
+            <param name="engine">base cipher to use under CCM.</param>
+            <param name="Nb">Nb value to use.</param>
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher">
+            Implements a Gamming or Counter (CTR) mode on top of a DSTU 7624 block cipher.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.#ctor(Org.BouncyCastle.Crypto.IBlockCipher)">
+             Basic constructor.
+            
+             @param cipher the block cipher to be used as the basis of the
+             feedback mode.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.GetUnderlyingCipher">
+             return the underlying block cipher that we are wrapping.
+            
+             @return the underlying block cipher that we are wrapping.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
+             Initialise the cipher and, possibly, the initialisation vector (IV).
+             If an IV isn't passed as part of the parameter, the IV will be all zeros.
+             An IV which is too short is handled in FIPS compliant fashion.
+            
+             @param forEncryption if true the cipher is initialised for
+              encryption, if false for decryption.
+             @param param the key and other data required by the cipher.
+             @exception ArgumentException if the parameters argument is
+             inappropriate.
+        </member>
+        <member name="P:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.AlgorithmName">
+             return the algorithm name and mode.
+            
+             @return the name of the underlying algorithm followed by "/KCTR"
+             and the block size in bits.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.GetBlockSize">
+             return the block size we are operating at.
+            
+             @return the block size we are operating at (in bytes).
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.ProcessBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+             Process one block of input from the array in and write it to
+             the out array.
+            
+             @param input the array containing the input data.
+             @param inOff offset into the in array the data starts at.
+             @param output the array the output data will be copied into.
+             @param outOff the offset into the out array the output will start at.
+             @exception DataLengthException if there isn't enough data in in, or
+             space in out.
+             @exception InvalidOperationException if the cipher isn't initialised.
+             @return the number of bytes processed and produced.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Modes.KCtrBlockCipher.Reset">
+            reset the chaining vector back to the IV and reset the underlying
+            cipher.
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Modes.OcbBlockCipher">
             An implementation of <a href="http://tools.ietf.org/html/rfc7253">RFC 7253 on The OCB
             Authenticated-Encryption Algorithm</a>, licensed per:
@@ -15870,6 +16212,47 @@
         <member name="P:Org.BouncyCastle.Crypto.Parameters.ElGamalParameters.L">
             return private value limit - l
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Parameters.HkdfParameters">
+            Parameter class for the HkdfBytesGenerator class.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Parameters.HkdfParameters.#ctor(System.Byte[],System.Byte[],System.Byte[])">
+             Generates parameters for HKDF, specifying both the optional salt and
+             optional info. Step 1: Extract won't be skipped.
+            
+             @param ikm  the input keying material or seed
+             @param salt the salt to use, may be null for a salt for hashLen zeros
+             @param info the info to use, may be null for an info field of zero bytes
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Parameters.HkdfParameters.SkipExtractParameters(System.Byte[],System.Byte[])">
+             Factory method that makes the HKDF skip the extract part of the key
+             derivation function.
+            
+             @param ikm  the input keying material or seed, directly used for step 2:
+                         Expand
+             @param info the info to use, may be null for an info field of zero bytes
+             @return HKDFParameters that makes the implementation skip step 1
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Parameters.HkdfParameters.GetIkm">
+             Returns the input keying material or seed.
+            
+             @return the keying material
+        </member>
+        <member name="P:Org.BouncyCastle.Crypto.Parameters.HkdfParameters.SkipExtract">
+             Returns if step 1: extract has to be skipped or not
+            
+             @return true for skipping, false for no skipping of step 1
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Parameters.HkdfParameters.GetSalt">
+             Returns the salt, or null if the salt should be generated as a byte array
+             of HashLen zeros.
+            
+             @return the salt, or null
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Parameters.HkdfParameters.GetInfo">
+             Returns the info field, which may be empty (null is converted to empty).
+            
+             @return the info field, never null
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Parameters.IesParameters">
             parameters for using an integrated cipher in stream mode.
         </member>
@@ -16241,6 +16624,11 @@
              @param bitsRequired size (in bits) of entropy to be created by the provided source.
              @return an EntropySource that generates bitsRequired bits of entropy on each call to its getEntropy() method.
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Prng.CryptoApiRandomGenerator">
+            <summary>
+            Uses Microsoft's RNGCryptoServiceProvider
+            </summary>
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Prng.DigestRandomGenerator">
             Random generation based on the digest with counter. Calling AddSeedMaterial will
             always increase the entropy of the hash.
@@ -16435,6 +16823,10 @@
             <param name="bytes">Array to receive bytes.</param>
             <param name="start">Index to start filling at.</param>
             <param name="len">Length of segment to fill.</param>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Prng.SP800SecureRandom.Reseed(System.Byte[])">
+            <summary>Force a reseed of the DRBG.</summary>
+            <param name="additionalInput">optional additional input</param>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Prng.SP800SecureRandomBuilder">
             Builder class for making SecureRandom objects based on SP 800-90A Deterministic Random Bit Generators (DRBG).
@@ -17252,7 +17644,7 @@
         <member name="F:Org.BouncyCastle.Crypto.Tls.AlertDescription.inappropriate_fallback">
             If TLS_FALLBACK_SCSV appears in ClientHello.cipher_suites and the highest protocol version
             supported by the server is higher than the version indicated in ClientHello.client_version,
-            the server MUST respond with an inappropriate_fallback alert.
+            the server MUST respond with a fatal inappropriate_fallback alert [..].
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Tls.AlertLevel">
             <summary>
@@ -17289,6 +17681,22 @@
         <member name="F:Org.BouncyCastle.Crypto.Tls.ByteQueue.available">
             How many bytes in the buffer are valid data.
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.ByteQueue.AddData(System.Byte[],System.Int32,System.Int32)">
+            <summary>Add some data to our buffer.</summary>
+            <param name="data">A byte-array to read data from.</param>
+            <param name="offset">How many bytes to skip at the beginning of the array.</param>
+            <param name="len">How many bytes to read from the array.</param>
+        </member>
+        <member name="P:Org.BouncyCastle.Crypto.Tls.ByteQueue.Available">
+            <summary>The number of bytes which are available in this buffer.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.ByteQueue.CopyTo(System.IO.Stream,System.Int32)">
+            <summary>Copy some bytes from the beginning of the data to the provided <c cref="T:System.IO.Stream">Stream</c>.</summary>
+            <param name="output">The <c cref="T:System.IO.Stream">Stream</c> to copy the bytes to.</param>
+            <param name="length">How many bytes to copy.</param>
+            <exception cref="T:System.InvalidOperationException">If insufficient data is available.</exception>
+            <exception cref="T:System.IO.IOException">If there is a problem copying the data.</exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.ByteQueue.Read(System.Byte[],System.Int32,System.Int32,System.Int32)">
             <summary>Read data from the buffer.</summary>
             <param name="buf">The buffer where the read data will be copied to.</param>
@@ -17296,18 +17704,15 @@
             <param name="len">How many bytes to read at all.</param>
             <param name="skip">How many bytes from our data to skip.</param>
         </member>
-        <member name="M:Org.BouncyCastle.Crypto.Tls.ByteQueue.AddData(System.Byte[],System.Int32,System.Int32)">
-            <summary>Add some data to our buffer.</summary>
-            <param name="data">A byte-array to read data from.</param>
-            <param name="offset">How many bytes to skip at the beginning of the array.</param>
-            <param name="len">How many bytes to read from the array.</param>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.ByteQueue.ReadFrom(System.Int32)">
+            <summary>Return a <c cref="T:System.IO.MemoryStream">MemoryStream</c> over some bytes at the beginning of the data.</summary>
+            <param name="length">How many bytes will be readable.</param>
+            <returns>A <c cref="T:System.IO.MemoryStream">MemoryStream</c> over the data.</returns>
+            <exception cref="T:System.InvalidOperationException">If insufficient data is available.</exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.ByteQueue.RemoveData(System.Int32)">
             <summary>Remove some bytes from our data from the beginning.</summary>
             <param name="i">How many bytes to remove.</param>
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.Tls.ByteQueue.Available">
-            <summary>The number of bytes which are available in this buffer.</summary>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Tls.Certificate">
              Parsing and encoding of a <i>Certificate</i> struct from RFC 4346.
@@ -17419,6 +17824,9 @@
             @return a {@link CertificateStatusRequest} object.
             @throws IOException
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Tls.CertificateType">
+            RFC 6091 
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.CertificateUrl.#ctor(System.Byte,System.Collections.IList)">
             @param type
                        see {@link CertChainType} for valid constants.
@@ -17446,6 +17854,9 @@
                        the {@link Stream} to parse from.
             @return a {@link CertificateUrl} object.
             @throws IOException
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Tls.Chacha20Poly1305">
+            draft-ietf-tls-chacha20-poly1305-04
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.Chacha20Poly1305.#ctor(Org.BouncyCastle.Crypto.Tls.TlsContext)">
             <exception cref="T:System.IO.IOException"></exception>
@@ -17534,6 +17945,9 @@
         <member name="M:Org.BouncyCastle.Crypto.Tls.DefaultTlsCipherFactory.CreateCipher_Aes_Gcm(Org.BouncyCastle.Crypto.Tls.TlsContext,System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.DefaultTlsCipherFactory.CreateCipher_Aes_Ocb(Org.BouncyCastle.Crypto.Tls.TlsContext,System.Int32,System.Int32)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.DefaultTlsCipherFactory.CreateCipher_Camellia_Gcm(Org.BouncyCastle.Crypto.Tls.TlsContext,System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
@@ -17544,9 +17958,6 @@
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.DefaultTlsCipherFactory.CreateRC4Cipher(Org.BouncyCastle.Crypto.Tls.TlsContext,System.Int32,System.Int32)">
-            <exception cref="T:System.IO.IOException"></exception>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Tls.DefaultTlsCipherFactory.CreateSalsa20Cipher(Org.BouncyCastle.Crypto.Tls.TlsContext,System.Int32,System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.DefaultTlsCipherFactory.CreateSeedCipher(Org.BouncyCastle.Crypto.Tls.TlsContext,System.Int32)">
@@ -17934,6 +18345,9 @@
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsAeadCipher.#ctor(Org.BouncyCastle.Crypto.Tls.TlsContext,Org.BouncyCastle.Crypto.Modes.IAeadBlockCipher,Org.BouncyCastle.Crypto.Modes.IAeadBlockCipher,System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsAeadCipher.#ctor(Org.BouncyCastle.Crypto.Tls.TlsContext,Org.BouncyCastle.Crypto.Modes.IAeadBlockCipher,Org.BouncyCastle.Crypto.Modes.IAeadBlockCipher,System.Int32,System.Int32,System.Int32)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsAeadCipher.EncodePlaintext(System.Int64,System.Byte,System.Byte[],System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
@@ -18188,10 +18602,25 @@
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsEncryptionCredentials.DecryptPreMasterSecret(System.Byte[])">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddClientCertificateTypeExtensionClient(System.Collections.IDictionary,System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddClientCertificateTypeExtensionServer(System.Collections.IDictionary,System.Byte)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddHeartbeatExtension(System.Collections.IDictionary,Org.BouncyCastle.Crypto.Tls.HeartbeatExtension)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddMaxFragmentLengthExtension(System.Collections.IDictionary,System.Byte)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddPaddingExtension(System.Collections.IDictionary,System.Int32)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddServerCertificateTypeExtensionClient(System.Collections.IDictionary,System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddServerCertificateTypeExtensionServer(System.Collections.IDictionary,System.Byte)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddServerNameExtension(System.Collections.IDictionary,Org.BouncyCastle.Crypto.Tls.ServerNameList)">
@@ -18200,10 +18629,25 @@
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.AddStatusRequestExtension(System.Collections.IDictionary,Org.BouncyCastle.Crypto.Tls.CertificateStatusRequest)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetClientCertificateTypeExtensionClient(System.Collections.IDictionary)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetClientCertificateTypeExtensionServer(System.Collections.IDictionary)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetHeartbeatExtension(System.Collections.IDictionary)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetMaxFragmentLengthExtension(System.Collections.IDictionary)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetPaddingExtension(System.Collections.IDictionary)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetServerCertificateTypeExtensionClient(System.Collections.IDictionary)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetServerCertificateTypeExtensionServer(System.Collections.IDictionary)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.GetServerNameExtension(System.Collections.IDictionary)">
@@ -18221,10 +18665,19 @@
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.HasTruncatedHMacExtension(System.Collections.IDictionary)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.CreateCertificateTypeExtensionClient(System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.CreateCertificateTypeExtensionServer(System.Byte)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.CreateHeartbeatExtension(Org.BouncyCastle.Crypto.Tls.HeartbeatExtension)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.CreateMaxFragmentLengthExtension(System.Byte)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.CreatePaddingExtension(System.Int32)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.CreateServerNameExtension(Org.BouncyCastle.Crypto.Tls.ServerNameList)">
@@ -18234,6 +18687,12 @@
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadEmptyExtensionData(System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadCertificateTypeExtensionClient(System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadCertificateTypeExtensionServer(System.Byte[])">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadEncryptThenMacExtension(System.Byte[])">
@@ -18246,6 +18705,9 @@
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadMaxFragmentLengthExtension(System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadPaddingExtension(System.Byte[])">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsExtensionsUtilities.ReadServerNameExtension(System.Byte[])">
@@ -18329,6 +18791,17 @@
              @param offset  The number of bytes to skip, before the message starts.
              @param length  The length of the message.
              @return A new byte-buffer containing the MAC value.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Tls.TlsNoCloseNotifyException">
+            <summary>
+            This exception will be thrown(only) when the connection is closed by the peer without sending a
+            <code cref="F:Org.BouncyCastle.Crypto.Tls.AlertDescription.close_notify">close_notify</code> warning alert.
+            </summary>
+            <remarks>
+            If this happens, the TLS protocol cannot rule out truncation of the connection data (potentially
+            malicious). It may be possible to check for truncation via some property of a higher level protocol
+            built upon TLS, e.g.the Content-Length header for HTTPS.
+            </remarks>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Tls.TlsNullCipher">
             <summary>
@@ -18428,6 +18901,9 @@
             <summary>The secure bidirectional stream for this connection</summary>
             <remarks>Only allowed in blocking mode.</remarks>
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsProtocol.CloseInput">
+            Should be called in non-blocking mode when the input data reaches EOF.
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsProtocol.OfferInput(System.Byte[])">
             Offer input from an arbitrary source. Only allowed in non-blocking mode.<br/>
             <br/>
@@ -18500,16 +18976,6 @@
             @param length The maximum number of bytes to read
             @return The total number of bytes copied to the buffer. May be less than the
                      length specified if the length was greater than the amount of available data.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsProtocol.FailWithError(System.Byte,System.Byte,System.String,System.Exception)">
-            Terminate this connection with an alert. Can be used for normal closure too.
-            
-            @param alertLevel
-                       See {@link AlertLevel} for values.
-            @param alertDescription
-                       See {@link AlertDescription} for values.
-            @throws IOException
-                        If alert was fatal.
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Tls.TlsProtocol.Close">
              Closes this connection.
@@ -19095,6 +19561,37 @@
             @param withCompression if true encode with point compression
             
             @deprecated per-point compression property will be removed, refer {@link #getEncoded(bool)}
+        </member>
+        <member name="M:Org.BouncyCastle.Math.EC.Custom.GM.SM2P256V1FieldElement.Sqrt">
+            return a sqrt root - the routine verifies that the calculation returns the right value - if
+            none exists it returns null.
+        </member>
+        <member name="M:Org.BouncyCastle.Math.EC.Custom.GM.SM2P256V1Point.#ctor(Org.BouncyCastle.Math.EC.ECCurve,Org.BouncyCastle.Math.EC.ECFieldElement,Org.BouncyCastle.Math.EC.ECFieldElement)">
+            Create a point which encodes with point compression.
+            
+            @param curve
+                       the curve to use
+            @param x
+                       affine x co-ordinate
+            @param y
+                       affine y co-ordinate
+            
+            @deprecated Use ECCurve.createPoint to construct points
+        </member>
+        <member name="M:Org.BouncyCastle.Math.EC.Custom.GM.SM2P256V1Point.#ctor(Org.BouncyCastle.Math.EC.ECCurve,Org.BouncyCastle.Math.EC.ECFieldElement,Org.BouncyCastle.Math.EC.ECFieldElement,System.Boolean)">
+            Create a point that encodes with or without point compresion.
+            
+            @param curve
+                       the curve to use
+            @param x
+                       affine x co-ordinate
+            @param y
+                       affine y co-ordinate
+            @param withCompression
+                       if true encode with point compression
+            
+            @deprecated per-point compression property will be removed, refer
+                        {@link #getEncoded(bool)}
         </member>
         <member name="M:Org.BouncyCastle.Math.EC.Custom.Sec.SecP128R1FieldElement.Sqrt">
             return a sqrt root - the routine verifies that the calculation returns the right value - if
@@ -20448,6 +20945,18 @@
             </summary>
             <param name="mechanism">A string representation of the digest meanism.</param>
             <returns>A DerObjectIdentifier, null if the Oid is not available.</returns>
+        </member>
+        <member name="T:Org.BouncyCastle.Security.DotNetUtilities">
+            <summary>
+            A class containing methods to interface the BouncyCastle world to the .NET Crypto world.
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Security.DotNetUtilities.ToX509Certificate(Org.BouncyCastle.Asn1.X509.X509CertificateStructure)">
+            <summary>
+            Create an System.Security.Cryptography.X509Certificate from an X509Certificate Structure.
+            </summary>
+            <param name="x509Struct"></param>
+            <returns>A System.Security.Cryptography.X509Certificate.</returns>
         </member>
         <member name="T:Org.BouncyCastle.Security.MacUtilities">
             <remarks>
@@ -22842,6 +23351,9 @@
             A <see cref="T:System.IO.Stream"/>
             </param>
             <returns>The number of bytes actually transferred, if not greater than <c>limit</c></returns>
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Utilities.IO.Streams.WriteBufTo(System.IO.MemoryStream,System.IO.Stream)">
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="T:Org.BouncyCastle.Utilities.MemoableResetException">

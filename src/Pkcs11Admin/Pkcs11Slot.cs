@@ -386,7 +386,7 @@ namespace Net.Pkcs11Admin
 
         private Pkcs11SessionInfo ReadSessionInfo()
         {
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
                 return new Pkcs11SessionInfo(session.GetSessionInfo(), TokenInfo.ProtectedAuthenticationPath);
         }
 
@@ -406,7 +406,7 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11HwFeatureInfo> infos = new List<Pkcs11HwFeatureInfo>();
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
                 searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_HW_FEATURE));
@@ -451,7 +451,7 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11DataObjectInfo> infos = new List<Pkcs11DataObjectInfo>();
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
                 searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_DATA));
@@ -497,7 +497,7 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11CertificateInfo> infos = new List<Pkcs11CertificateInfo>();
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
                 searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_CERTIFICATE));
@@ -550,7 +550,7 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11KeyInfo> infos = new List<Pkcs11KeyInfo>();
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
                 searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, objectClass));
@@ -616,7 +616,7 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11DomainParamsInfo> infos = new List<Pkcs11DomainParamsInfo>();
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
                 searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_DOMAIN_PARAMETERS));
@@ -760,7 +760,7 @@ namespace Net.Pkcs11Admin
             if (_authenticatedSession != null)
                 throw new Exception("Authenticated session already exists");
 
-            _authenticatedSession = _slot.OpenSession(false);
+            _authenticatedSession = _slot.OpenSession(SessionType.ReadWrite);
 
             try
             {
@@ -782,7 +782,7 @@ namespace Net.Pkcs11Admin
             if (_authenticatedSession == null)
                 throw new Exception("Authenticated session does not exist");
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
                 session.SetPin(oldPin, newPin);
         }
 
@@ -794,7 +794,7 @@ namespace Net.Pkcs11Admin
             if (_authenticatedSession == null)
                 throw new Exception("Authenticated session does not exist");
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
                 session.InitPin(pin);
         }
 
@@ -828,7 +828,7 @@ namespace Net.Pkcs11Admin
             if (objectAttributes == null)
                 throw new ArgumentNullException("objectAttributes");
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
                 session.SetAttributeValue(objectInfo.ObjectHandle, objectAttributes);
         }
 
@@ -843,7 +843,7 @@ namespace Net.Pkcs11Admin
             if (attributes == null)
                 throw new ArgumentNullException("objectAttributes");
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
                 return session.GetAttributeValue(objectInfo.ObjectHandle, attributes);
         }
 
@@ -855,7 +855,7 @@ namespace Net.Pkcs11Admin
             if (objectInfo == null)
                 throw new ArgumentNullException("objectInfo");
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
                 session.DestroyObject(objectInfo.ObjectHandle);
         }
 
@@ -864,7 +864,7 @@ namespace Net.Pkcs11Admin
             if (objectAttributes == null)
                 throw new ArgumentNullException("objectAttributes");
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
                 session.CreateObject(objectAttributes);
         }
 
@@ -909,7 +909,7 @@ namespace Net.Pkcs11Admin
             if (objectInfo == null)
                 throw new ArgumentNullException("objectInfo");
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ulong> attributes = new List<ulong>();
                 attributes.Add((ulong)CKA.CKA_LABEL);
@@ -1005,7 +1005,7 @@ namespace Net.Pkcs11Admin
             if (mechanismType == null)
                 throw new Exception("Key generation mechanism not specified");
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
             using (Mechanism mechanism = new Mechanism(mechanismType.Value))
                 session.GenerateKey(mechanism, objectAttributes);
         }
@@ -1028,7 +1028,7 @@ namespace Net.Pkcs11Admin
             ObjectHandle privateKeyHandle = null;
             ObjectHandle publicKeyHandle = null;
 
-            using (Session session = _slot.OpenSession(false))
+            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
             using (Mechanism mechanism = new Mechanism(mechanismType.Value))
                 session.GenerateKeyPair(mechanism, publicKeyObjectAttributes, privateKeyObjectAttributes, out publicKeyHandle, out privateKeyHandle);
         }
@@ -1038,7 +1038,7 @@ namespace Net.Pkcs11Admin
             if (privKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
                 throw new Exception("Unsupported key type");
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
                 List<ObjectAttribute> attributes = session.GetAttributeValue(privKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
                 BigInteger modulus = new BigInteger(1, attributes[0].GetValueAsByteArray());
@@ -1060,7 +1060,7 @@ namespace Net.Pkcs11Admin
             byte[] digestInfo = Utils.CreateDigestInfo(digest, hashAlgorithm.Oid);
             byte[] signature = null;
 
-            using (Session session = _slot.OpenSession(true))
+            using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             using (Mechanism mechanism = new Mechanism(CKM.CKM_RSA_PKCS))
                 signature = session.Sign(mechanism, privKeyInfo.ObjectHandle, digestInfo);
 
