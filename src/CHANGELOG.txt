@@ -1,3 +1,10 @@
+Pkcs11Admin 0.4.0 (2017-10-16)
+- Added ROCA (CVE-2017-15361) vulnerability testing
+- Updated to Pkcs11Interop 4.0.0
+- Updated to Portable.BouncyCastle 1.8.1.3
+- Added button for built-in windows cert dialog
+- Fixed CSR DN sorting and encoding
+
 Pkcs11Admin 0.3.0 (2016-08-07)
 - Added starting shell scripts for non-windows platforms
 - New application icon contributed by Tomas Haluska
