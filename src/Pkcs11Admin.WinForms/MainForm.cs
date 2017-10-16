@@ -1094,6 +1094,11 @@ namespace Net.Pkcs11Admin.WinForms
             ExportToCsv(true);
         }
 
+        private void CtxMenuItemCertificatesCheckRoca_Click(object sender, EventArgs e)
+        {
+            CheckRocaVulnerability();
+        }
+
         #endregion
 
         #endregion
@@ -1201,6 +1206,11 @@ namespace Net.Pkcs11Admin.WinForms
         private void CtxMenuItemKeysCsvSelected_Click(object sender, EventArgs e)
         {
             ExportToCsv(true);
+        }
+
+        private void CtxMenuItemKeysCheckRoca_Click(object sender, EventArgs e)
+        {
+            CheckRocaVulnerability();
         }
 
         #endregion
@@ -1812,6 +1822,46 @@ namespace Net.Pkcs11Admin.WinForms
             }
 
             return listView;
+        }
+
+        private void CheckRocaVulnerability()
+        {
+            ListView listView = GetSelectedListViewWithPkcs11Objects();
+            if (listView == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select certificate or RSA key first");
+                return;
+            }
+
+            ListViewItem selectedItem = WinFormsUtils.GetSingleSelectedItem(listView);
+            if (selectedItem == null)
+            {
+                WinFormsUtils.ShowInfo(this, "Please select certificate or RSA key first");
+                return;
+            }
+
+            Pkcs11CertificateInfo certificateInfo = selectedItem.Tag as Pkcs11CertificateInfo;
+            Pkcs11KeyInfo keyInfo = selectedItem.Tag as Pkcs11KeyInfo;
+
+            if (certificateInfo != null)
+            {
+                if (_selectedSlot.IsVulnerableToROCA(certificateInfo))
+                    WinFormsUtils.ShowInfo(this, "Selected certificate contains RSA public key vulnerable to ROCA (CVE-2017-15361)");
+                else
+                    WinFormsUtils.ShowInfo(this, "Selected certificate does not contain RSA public key vulnerable to ROCA (CVE-2017-15361)");
+            }
+            else if (keyInfo != null && keyInfo.CkaKeyType == (ulong)CKK.CKK_RSA)
+            {
+                if (_selectedSlot.IsVulnerableToROCA(keyInfo))
+                    WinFormsUtils.ShowInfo(this, "Selected RSA key is vulnerable to ROCA (CVE-2017-15361)");
+                else
+                    WinFormsUtils.ShowInfo(this, "Selected RSA key is not vulnerable to ROCA (CVE-2017-15361)");
+            }
+            else
+            {
+                WinFormsUtils.ShowInfo(this, "Please select certificate or RSA key first");
+                return;
+            }
         }
 
         #endregion

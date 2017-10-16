@@ -122,6 +122,7 @@
     <Compile Include="Configuration\StringUtils.cs" />
     <Compile Include="Pkcs11Uri.cs" />
     <Compile Include="DnEntry.cs" />
+    <Compile Include="RocaVulnerabilityTester.cs" />
     <Compile Include="TokenNotPresentException.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="XmlSerializer.cs" />

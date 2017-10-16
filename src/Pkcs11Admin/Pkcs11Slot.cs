@@ -1035,12 +1035,17 @@ namespace Net.Pkcs11Admin
 
         private AsymmetricKeyParameter GetPubKeyParams(Pkcs11KeyInfo privKeyInfo, Pkcs11KeyInfo pubKeyInfo)
         {
-            if (privKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
+            if (privKeyInfo != null && privKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
                 throw new Exception("Unsupported key type");
+
+            if (pubKeyInfo != null && pubKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
+                throw new Exception("Unsupported key type");
+
+            Pkcs11KeyInfo rsaKeyInfo = (privKeyInfo != null) ? privKeyInfo : pubKeyInfo;
 
             using (Session session = _slot.OpenSession(SessionType.ReadOnly))
             {
-                List<ObjectAttribute> attributes = session.GetAttributeValue(privKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
+                List<ObjectAttribute> attributes = session.GetAttributeValue(rsaKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
                 BigInteger modulus = new BigInteger(1, attributes[0].GetValueAsByteArray());
                 BigInteger publicExponent = new BigInteger(1, attributes[1].GetValueAsByteArray());
                 return new RsaKeyParameters(false, modulus, publicExponent);
@@ -1069,6 +1074,28 @@ namespace Net.Pkcs11Admin
 
             fileName = (!string.IsNullOrEmpty(privKeyInfo.CkaLabel)) ? Utils.NormalizeFileName(privKeyInfo.CkaLabel + ".csr") : "pkcs10.csr";
             fileContent = csr;
+        }
+
+        public bool IsVulnerableToROCA(Pkcs11CertificateInfo certificateInfo)
+        {
+            X509CertificateParser x509CertificateParser = new X509CertificateParser();
+            X509Certificate x509Certificate = x509CertificateParser.ReadCertificate(certificateInfo.CkaValue);
+            RsaKeyParameters rsaKeyParameters = x509Certificate.GetPublicKey() as RsaKeyParameters;
+            return RocaVulnerabilityTester.IsVulnerable(rsaKeyParameters);
+        }
+
+        public bool IsVulnerableToROCA(Pkcs11KeyInfo keyInfo)
+        {
+            RsaKeyParameters rsaKeyParameters = null;
+
+            if (keyInfo.CkaClass == (ulong)CKO.CKO_PRIVATE_KEY && keyInfo.CkaKeyType == (ulong)CKK.CKK_RSA)
+                rsaKeyParameters = GetPubKeyParams(keyInfo, null) as RsaKeyParameters;
+            else if (keyInfo.CkaClass == (ulong)CKO.CKO_PUBLIC_KEY && keyInfo.CkaKeyType == (ulong)CKK.CKK_RSA)
+                rsaKeyParameters = GetPubKeyParams(null, keyInfo) as RsaKeyParameters;
+            else
+                throw new Exception("Unsupported key type");
+
+            return RocaVulnerabilityTester.IsVulnerable(rsaKeyParameters);
         }
 
         #region IDisposable
