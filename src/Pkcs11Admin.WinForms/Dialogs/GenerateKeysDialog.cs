@@ -90,43 +90,55 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             if (!ListViewPrivateKeyAttributes.Enabled)
             {
+                ListViewPrivateKeyAttributes.BeginUpdate();
                 ListViewPrivateKeyAttributes.HeaderStyle = ColumnHeaderStyle.None;
                 ListViewPrivateKeyAttributes.Items.Clear();
+                ListViewPrivateKeyAttributes.EndUpdate();
             }
             else
             {
+                ListViewPrivateKeyAttributes.BeginUpdate();
                 ListViewPrivateKeyAttributes.HeaderStyle = ColumnHeaderStyle.Clickable;
-
+                ListViewPrivateKeyAttributes.Items.Clear();
                 List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.PrivateKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
                 PutAttributesIntoListView(ListViewPrivateKeyAttributes, objectAttributes);
+                ListViewPrivateKeyAttributes.EndUpdate();
 
                 GenerateKeysTabControl.SelectedTab = TabPagePrivateKey;
             }
 
             if (!ListViewPublicKeyAttributes.Enabled)
             {
+                ListViewPublicKeyAttributes.BeginUpdate();
                 ListViewPublicKeyAttributes.HeaderStyle = ColumnHeaderStyle.None;
                 ListViewPublicKeyAttributes.Items.Clear();
+                ListViewPublicKeyAttributes.EndUpdate();
             }
             else
             {
+                ListViewPublicKeyAttributes.BeginUpdate();
                 ListViewPublicKeyAttributes.HeaderStyle = ColumnHeaderStyle.Clickable;
-
+                ListViewPublicKeyAttributes.Items.Clear();
                 List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.PublicKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
                 PutAttributesIntoListView(ListViewPublicKeyAttributes, objectAttributes);
+                ListViewPublicKeyAttributes.EndUpdate();
             }
 
             if (!ListViewSecretKeyAttributes.Enabled)
             {
+                ListViewSecretKeyAttributes.BeginUpdate();
                 ListViewSecretKeyAttributes.HeaderStyle = ColumnHeaderStyle.None;
                 ListViewSecretKeyAttributes.Items.Clear();
+                ListViewSecretKeyAttributes.EndUpdate();
             }
             else
             {
+                ListViewSecretKeyAttributes.BeginUpdate();
                 ListViewSecretKeyAttributes.HeaderStyle = ColumnHeaderStyle.Clickable;
-
+                ListViewSecretKeyAttributes.Items.Clear();
                 List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.SecretKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
                 PutAttributesIntoListView(ListViewSecretKeyAttributes, objectAttributes);
+                ListViewSecretKeyAttributes.EndUpdate();
 
                 GenerateKeysTabControl.SelectedTab = TabPageSecretKey;
             }
