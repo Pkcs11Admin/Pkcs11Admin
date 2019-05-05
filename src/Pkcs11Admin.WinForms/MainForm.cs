@@ -1520,13 +1520,13 @@ namespace Net.Pkcs11Admin.WinForms
         private bool CreatePkcs11Object()
         {
             // TODO - Customize for each object type
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
+            List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
 
             using (CreateObjectDialog createObjectDialog = new CreateObjectDialog(_selectedSlot, objectAttributes))
                 return (createObjectDialog.ShowDialog() == DialogResult.OK);
         }
 
-        private bool CreatePkcs11Object(List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes)
+        private bool CreatePkcs11Object(List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes)
         {
             using (CreateObjectDialog createObjectDialog = new CreateObjectDialog(_selectedSlot, objectAttributes))
                 return (createObjectDialog.ShowDialog() == DialogResult.OK);
@@ -1679,7 +1679,7 @@ namespace Net.Pkcs11Admin.WinForms
             byte[] fileContent = File.ReadAllBytes(filePath);
 
             // Construct new object attributes
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = _selectedSlot.ImportDataObject(fileName, fileContent);
+            List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = _selectedSlot.ImportDataObject(fileName, fileContent);
 
             // Let user modify object attributes before the object is created
             return CreatePkcs11Object(objectAttributes);
@@ -1748,7 +1748,7 @@ namespace Net.Pkcs11Admin.WinForms
             byte[] fileContent = File.ReadAllBytes(filePath);
 
             // Construct new object attributes
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = _selectedSlot.ImportCertificate(fileName, fileContent);
+            List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = _selectedSlot.ImportCertificate(fileName, fileContent);
 
             // Let user modify object attributes before the object is created
             return CreatePkcs11Object(objectAttributes);

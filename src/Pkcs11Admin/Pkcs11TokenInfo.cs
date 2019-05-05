@@ -237,7 +237,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11TokenInfo(TokenInfo tokenInfo)
+        internal Pkcs11TokenInfo(ITokenInfo tokenInfo)
         {
             Label = tokenInfo.Label;
             ManufacturerId = tokenInfo.ManufacturerId;

@@ -40,7 +40,7 @@ namespace Net.Pkcs11Admin
             internal set;
         }
 
-        internal Pkcs11DomainParamsInfo(ObjectHandle objectHandle, List<ObjectAttribute> objectAttributes, ulong? storageSize)
+        internal Pkcs11DomainParamsInfo(IObjectHandle objectHandle, List<IObjectAttribute> objectAttributes, ulong? storageSize)
         {
             ObjectHandle = objectHandle;
             ObjectAttributes = objectAttributes;

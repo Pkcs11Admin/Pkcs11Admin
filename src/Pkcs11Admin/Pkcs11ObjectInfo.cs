@@ -22,13 +22,13 @@ namespace Net.Pkcs11Admin
 {
     public abstract class Pkcs11ObjectInfo : Pkcs11Info
     {
-        public ObjectHandle ObjectHandle
+        public IObjectHandle ObjectHandle
         {
             get;
             internal set;
         }
 
-        public List<ObjectAttribute> ObjectAttributes
+        public List<IObjectAttribute> ObjectAttributes
         {
             get;
             internal set;

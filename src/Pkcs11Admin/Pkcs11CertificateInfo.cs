@@ -52,7 +52,7 @@ namespace Net.Pkcs11Admin
             internal set;
         }
 
-        internal Pkcs11CertificateInfo(ObjectHandle objectHandle, List<ObjectAttribute> objectAttributes, ulong? storageSize)
+        internal Pkcs11CertificateInfo(IObjectHandle objectHandle, List<IObjectAttribute> objectAttributes, ulong? storageSize)
         {
             ObjectHandle = objectHandle;
             ObjectAttributes = objectAttributes;

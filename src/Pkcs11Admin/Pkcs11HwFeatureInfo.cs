@@ -28,7 +28,7 @@ namespace Net.Pkcs11Admin
             internal set;
         }
 
-        internal Pkcs11HwFeatureInfo(ObjectHandle objectHandle, List<ObjectAttribute> objectAttributes, ulong? storageSize)
+        internal Pkcs11HwFeatureInfo(IObjectHandle objectHandle, List<IObjectAttribute> objectAttributes, ulong? storageSize)
         {
             ObjectHandle = objectHandle;
             ObjectAttributes = objectAttributes;

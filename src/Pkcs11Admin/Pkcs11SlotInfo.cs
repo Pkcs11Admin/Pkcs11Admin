@@ -75,7 +75,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11SlotInfo(SlotInfo slotInfo)
+        internal Pkcs11SlotInfo(ISlotInfo slotInfo)
         {
             SlotId = slotInfo.SlotId;
             SlotDescription = slotInfo.SlotDescription;

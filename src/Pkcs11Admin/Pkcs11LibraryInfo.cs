@@ -57,7 +57,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11LibraryInfo(string libraryPath, LibraryInfo libraryInfo)
+        internal Pkcs11LibraryInfo(string libraryPath, ILibraryInfo libraryInfo)
         {
             LibraryPath = libraryPath;
             CryptokiVersion = libraryInfo.CryptokiVersion;

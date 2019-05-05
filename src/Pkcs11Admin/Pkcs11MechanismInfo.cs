@@ -166,7 +166,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11MechanismInfo(CKM mechanism, MechanismInfo mechanismInfo)
+        internal Pkcs11MechanismInfo(CKM mechanism, IMechanismInfo mechanismInfo)
         {
             Mechanism = mechanism;
             MinKeySize = mechanismInfo.MinKeySize;

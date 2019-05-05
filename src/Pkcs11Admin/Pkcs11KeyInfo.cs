@@ -52,7 +52,7 @@ namespace Net.Pkcs11Admin
             internal set;
         }
 
-        internal Pkcs11KeyInfo(ObjectHandle objectHandle, List<ObjectAttribute> objectAttributes, ulong? storageSize)
+        internal Pkcs11KeyInfo(IObjectHandle objectHandle, List<IObjectAttribute> objectAttributes, ulong? storageSize)
         {
             ObjectHandle = objectHandle;
             ObjectAttributes = objectAttributes;

@@ -23,7 +23,7 @@ namespace Net.Pkcs11Admin
 {
     public class Pkcs11SessionInfo
     {
-        private Slot _slot = null;
+        private ISlot _slot = null;
 
         public bool UserLoggedIn
         {
@@ -115,7 +115,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11SessionInfo(SessionInfo sessionInfo, bool protectedAuthenticationPath)
+        internal Pkcs11SessionInfo(ISessionInfo sessionInfo, bool protectedAuthenticationPath)
         {
             if (sessionInfo == null)
                 throw new ArgumentNullException("sessionInfo");
