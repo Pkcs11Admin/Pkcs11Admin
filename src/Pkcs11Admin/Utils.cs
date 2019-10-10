@@ -105,7 +105,7 @@ namespace Net.Pkcs11Admin
         public static byte[] CreateDigestInfo(byte[] hash, string hashOid)
         {
             DerObjectIdentifier derObjectIdentifier = new DerObjectIdentifier(hashOid);
-            AlgorithmIdentifier algorithmIdentifier = new AlgorithmIdentifier(derObjectIdentifier, null);
+            AlgorithmIdentifier algorithmIdentifier = new AlgorithmIdentifier(derObjectIdentifier, DerNull.Instance);
             DigestInfo digestInfo = new DigestInfo(algorithmIdentifier, hash);
             return digestInfo.GetDerEncoded();
         }
