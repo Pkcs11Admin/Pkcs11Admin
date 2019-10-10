@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -100,7 +100,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 ListViewPrivateKeyAttributes.BeginUpdate();
                 ListViewPrivateKeyAttributes.HeaderStyle = ColumnHeaderStyle.Clickable;
                 ListViewPrivateKeyAttributes.Items.Clear();
-                List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.PrivateKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
+                List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.PrivateKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
                 PutAttributesIntoListView(ListViewPrivateKeyAttributes, objectAttributes);
                 ListViewPrivateKeyAttributes.EndUpdate();
 
@@ -119,7 +119,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 ListViewPublicKeyAttributes.BeginUpdate();
                 ListViewPublicKeyAttributes.HeaderStyle = ColumnHeaderStyle.Clickable;
                 ListViewPublicKeyAttributes.Items.Clear();
-                List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.PublicKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
+                List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.PublicKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
                 PutAttributesIntoListView(ListViewPublicKeyAttributes, objectAttributes);
                 ListViewPublicKeyAttributes.EndUpdate();
             }
@@ -136,7 +136,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 ListViewSecretKeyAttributes.BeginUpdate();
                 ListViewSecretKeyAttributes.HeaderStyle = ColumnHeaderStyle.Clickable;
                 ListViewSecretKeyAttributes.Items.Clear();
-                List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.SecretKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
+                List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetGenerateDefaultAttributes(Pkcs11Admin.Instance.Config.SecretKeyAttributes, (ulong)selectedKeyTypeItem.KeyType);
                 PutAttributesIntoListView(ListViewSecretKeyAttributes, objectAttributes);
                 ListViewSecretKeyAttributes.EndUpdate();
 
@@ -146,10 +146,10 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             ReloadListViews();
         }
 
-        private void PutAttributesIntoListView(ListView listView, List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes)
+        private void PutAttributesIntoListView(ListView listView, List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes)
         {
             // Add items to ListView and set the tags
-            foreach (Tuple<ObjectAttribute, ClassAttribute> objectAttribute in objectAttributes)
+            foreach (Tuple<IObjectAttribute, ClassAttribute> objectAttribute in objectAttributes)
             {
                 ListViewItem listViewItem = new ListViewItem();
                 listViewItem.Tag = objectAttribute.Item1;
@@ -174,7 +174,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 listViewItem.SubItems.Clear();
 
                 // Parse tag
-                ObjectAttribute objectAttribute = (ObjectAttribute)listViewItem.Tag;
+                IObjectAttribute objectAttribute = (IObjectAttribute)listViewItem.Tag;
 
                 // Determine viewable values
                 string attributeName = null;
@@ -209,7 +209,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             if (selectedItem == null)
                 return;
 
-            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+            IObjectAttribute objectAttribute = (IObjectAttribute)selectedItem.Tag;
 
             string attributeName = selectedItem.Text;
             byte[] attributeValue = objectAttribute.GetValueAsByteArray() ?? new byte[0];
@@ -218,7 +218,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             {
                 if (hexEditor.ShowDialog() == DialogResult.OK)
                 {
-                    ObjectAttribute updatedObjectAttribute = new ObjectAttribute(objectAttribute.Type, hexEditor.Bytes);
+                    IObjectAttribute updatedObjectAttribute = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory.Create(objectAttribute.Type, hexEditor.Bytes);
                     selectedItem.Tag = updatedObjectAttribute;
                     ReloadListView(activeListView);
                 }
@@ -238,7 +238,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             if (selectedItem == null)
                 return;
 
-            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+            IObjectAttribute objectAttribute = (IObjectAttribute)selectedItem.Tag;
 
             string attributeName = selectedItem.Text;
             byte[] attributeValue = (objectAttribute.CannotBeRead) ? new byte[0] : objectAttribute.GetValueAsByteArray();
@@ -252,12 +252,12 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             ViewAsn1AttributeValue();
         }
 
-        private List<ObjectAttribute> GetObjectAttributesFromListView(ListView listView)
+        private List<IObjectAttribute> GetObjectAttributesFromListView(ListView listView)
         {
-            List<ObjectAttribute> objectAttributes = new List<ObjectAttribute>();
+            List<IObjectAttribute> objectAttributes = new List<IObjectAttribute>();
 
             foreach (ListViewItem listViewItem in listView.CheckedItems)
-                objectAttributes.Add((ObjectAttribute)listViewItem.Tag);
+                objectAttributes.Add((IObjectAttribute)listViewItem.Tag);
 
             return objectAttributes;
         }
@@ -270,8 +270,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
                 if (selectedKeyTypeItem.Kind == ComboBoxKeyTypeItem.Kinds.Asymmetric)
                 {
-                    List<ObjectAttribute> privateKeyObjectAttributes = GetObjectAttributesFromListView(ListViewPrivateKeyAttributes);
-                    List<ObjectAttribute> publicKeyObjectAttributes = GetObjectAttributesFromListView(ListViewPublicKeyAttributes);
+                    List<IObjectAttribute> privateKeyObjectAttributes = GetObjectAttributesFromListView(ListViewPrivateKeyAttributes);
+                    List<IObjectAttribute> publicKeyObjectAttributes = GetObjectAttributesFromListView(ListViewPublicKeyAttributes);
 
                     await WaitDialog.Execute(
                         this,
@@ -280,7 +280,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 }
                 else
                 {
-                    List<ObjectAttribute> secretKeyObjectAttributes = GetObjectAttributesFromListView(ListViewSecretKeyAttributes);
+                    List<IObjectAttribute> secretKeyObjectAttributes = GetObjectAttributesFromListView(ListViewSecretKeyAttributes);
 
                     await WaitDialog.Execute(
                         this,

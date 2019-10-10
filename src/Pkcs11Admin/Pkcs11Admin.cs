@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -17,6 +17,7 @@
 
 using Net.Pkcs11Admin.Configuration;
 using Net.Pkcs11Interop.Common;
+using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.IO;
 using System.Net;
@@ -51,6 +52,12 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
+        public Pkcs11InteropFactories Factories
+        {
+            get;
+            private set;
+        }
+
         public Pkcs11Library Library
         {
             get;
@@ -62,6 +69,7 @@ namespace Net.Pkcs11Admin
         private Pkcs11Admin()
         {
             Config = Pkcs11AdminConfig.GetDefault();
+            Factories = new Pkcs11InteropFactories();
         }
 
         public void LoadLibrary(string pkcs11Library, string pkcs11Logger, string logFile, bool enableLogging, bool overwriteLogFile)

@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -75,7 +75,7 @@ namespace Net.Pkcs11Admin
             private set;
         }
 
-        internal Pkcs11SlotInfo(SlotInfo slotInfo)
+        internal Pkcs11SlotInfo(ISlotInfo slotInfo)
         {
             SlotId = slotInfo.SlotId;
             SlotDescription = slotInfo.SlotDescription;

@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -18,6 +18,7 @@
 using Net.Pkcs11Admin.Configuration;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
+using Net.Pkcs11Interop.HighLevelAPI.Factories;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
@@ -37,9 +38,9 @@ namespace Net.Pkcs11Admin
     {
         private bool _disposed = false;
 
-        private Slot _slot = null;
+        private ISlot _slot = null;
 
-        private Session _authenticatedSession = null;
+        private ISession _authenticatedSession = null;
 
         #region Properties
 
@@ -155,7 +156,7 @@ namespace Net.Pkcs11Admin
 
         #region Constructor
 
-        public Pkcs11Slot(Slot slot)
+        public Pkcs11Slot(ISlot slot)
         {
             _slot = slot;
 
@@ -386,7 +387,7 @@ namespace Net.Pkcs11Admin
 
         private Pkcs11SessionInfo ReadSessionInfo()
         {
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 return new Pkcs11SessionInfo(session.GetSessionInfo(), TokenInfo.ProtectedAuthenticationPath);
         }
 
@@ -395,7 +396,7 @@ namespace Net.Pkcs11Admin
             List<Pkcs11MechanismInfo> mechanisms = new List<Pkcs11MechanismInfo>();
             foreach (CKM mechanism in _slot.GetMechanismList())
             {
-                MechanismInfo mechanismInfo = _slot.GetMechanismInfo(mechanism);
+                IMechanismInfo mechanismInfo = _slot.GetMechanismInfo(mechanism);
                 mechanisms.Add(new Pkcs11MechanismInfo(mechanism, mechanismInfo));
             }
 
@@ -406,19 +407,19 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11HwFeatureInfo> infos = new List<Pkcs11HwFeatureInfo>();
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
-                List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
-                searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_HW_FEATURE));
+                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_HW_FEATURE));
 
-                List<ObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (ObjectHandle foundObject in foundObjects)
+                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                foreach (IObjectHandle foundObject in foundObjects)
                 {
                     // Read attributes required for sane object presentation
                     List<ulong> attributes = new List<ulong>();
                     attributes.Add((ulong)CKA.CKA_HW_FEATURE_TYPE);
 
-                    List<ObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read attributes configured for specific object class and type
                     attributes = new List<ulong>();
@@ -429,7 +430,7 @@ namespace Net.Pkcs11Admin
                         foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.HwFeatureAttributes.TypeSpecificAttributes[featureType])
                             attributes.Add(classAttribute.Value);
 
-                    List<ObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read object storage size
                     ulong? storageSize = ReadObjectSize(session, foundObject);
@@ -451,13 +452,13 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11DataObjectInfo> infos = new List<Pkcs11DataObjectInfo>();
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
-                List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
-                searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_DATA));
+                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
 
-                List<ObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (ObjectHandle foundObject in foundObjects)
+                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                foreach (IObjectHandle foundObject in foundObjects)
                 {
                     // Read attributes required for sane object presentation
                     List<ulong> attributes = new List<ulong>();
@@ -465,14 +466,14 @@ namespace Net.Pkcs11Admin
                     attributes.Add((ulong)CKA.CKA_LABEL);
                     attributes.Add((ulong)CKA.CKA_APPLICATION);
 
-                    List<ObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read attributes configured for specific object class
                     attributes = new List<ulong>();
                     foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.DataObjectAttributes.CommonAttributes)
                         attributes.Add(classAttribute.Value);
 
-                    List<ObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read object storage size
                     ulong? storageSize = ReadObjectSize(session, foundObject);
@@ -497,13 +498,13 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11CertificateInfo> infos = new List<Pkcs11CertificateInfo>();
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
-                List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
-                searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_CERTIFICATE));
+                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_CERTIFICATE));
 
-                List<ObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (ObjectHandle foundObject in foundObjects)
+                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                foreach (IObjectHandle foundObject in foundObjects)
                 {
                     // Read attributes required for sane object presentation
                     List<ulong> attributes = new List<ulong>();
@@ -513,7 +514,7 @@ namespace Net.Pkcs11Admin
                     attributes.Add((ulong)CKA.CKA_ID);
                     attributes.Add((ulong)CKA.CKA_VALUE);
 
-                    List<ObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read attributes configured for specific object class and type
                     attributes = new List<ulong>();
@@ -524,7 +525,7 @@ namespace Net.Pkcs11Admin
                         foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.CertificateAttributes.TypeSpecificAttributes[certType])
                             attributes.Add(classAttribute.Value);
 
-                    List<ObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read object storage size
                     ulong? storageSize = ReadObjectSize(session, foundObject);
@@ -550,13 +551,13 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11KeyInfo> infos = new List<Pkcs11KeyInfo>();
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
-                List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
-                searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, objectClass));
+                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, objectClass));
 
-                List<ObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (ObjectHandle foundObject in foundObjects)
+                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                foreach (IObjectHandle foundObject in foundObjects)
                 {
                     // Read attributes required for sane object presentation
                     List<ulong> attributes = new List<ulong>();
@@ -565,7 +566,7 @@ namespace Net.Pkcs11Admin
                     attributes.Add((ulong)CKA.CKA_LABEL);
                     attributes.Add((ulong)CKA.CKA_ID);
 
-                    List<ObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read attributes configured for specific object class and type
                     attributes = new List<ulong>();
@@ -576,7 +577,7 @@ namespace Net.Pkcs11Admin
                         foreach (ClassAttribute classAttribute in keyAttributes.TypeSpecificAttributes[keyType])
                             attributes.Add(classAttribute.Value);
 
-                    List<ObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read object storage size
                     ulong? storageSize = ReadObjectSize(session, foundObject);
@@ -616,13 +617,13 @@ namespace Net.Pkcs11Admin
         {
             List<Pkcs11DomainParamsInfo> infos = new List<Pkcs11DomainParamsInfo>();
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
-                List<ObjectAttribute> searchTemplate = new List<ObjectAttribute>();
-                searchTemplate.Add(new ObjectAttribute(CKA.CKA_CLASS, CKO.CKO_DOMAIN_PARAMETERS));
+                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DOMAIN_PARAMETERS));
 
-                List<ObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (ObjectHandle foundObject in foundObjects)
+                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                foreach (IObjectHandle foundObject in foundObjects)
                 {
                     // Read attributes required for sane object presentation
                     List<ulong> attributes = new List<ulong>();
@@ -630,7 +631,7 @@ namespace Net.Pkcs11Admin
                     attributes.Add((ulong)CKA.CKA_KEY_TYPE);
                     attributes.Add((ulong)CKA.CKA_LABEL);
 
-                    List<ObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read attributes configured for specific object class and type
                     attributes = new List<ulong>();
@@ -641,7 +642,7 @@ namespace Net.Pkcs11Admin
                         foreach (ClassAttribute classAttribute in Pkcs11Admin.Instance.Config.DomainParamsAttributes.TypeSpecificAttributes[keyType])
                             attributes.Add(classAttribute.Value);
 
-                    List<ObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
+                    List<IObjectAttribute> configuredAttributes = session.GetAttributeValue(foundObject, attributes);
 
                     // Read object storage size
                     ulong? storageSize = ReadObjectSize(session, foundObject);
@@ -661,7 +662,7 @@ namespace Net.Pkcs11Admin
             return infos;
         }
 
-        private ulong? ReadObjectSize(Session session, ObjectHandle objectHandle)
+        private ulong? ReadObjectSize(ISession session, IObjectHandle objectHandle)
         {
             ulong? size = null;
 
@@ -782,7 +783,7 @@ namespace Net.Pkcs11Admin
             if (_authenticatedSession == null)
                 throw new Exception("Authenticated session does not exist");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.SetPin(oldPin, newPin);
         }
 
@@ -794,7 +795,7 @@ namespace Net.Pkcs11Admin
             if (_authenticatedSession == null)
                 throw new Exception("Authenticated session does not exist");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.InitPin(pin);
         }
 
@@ -817,7 +818,7 @@ namespace Net.Pkcs11Admin
             }
         }
 
-        public void SaveObjectAttributes(Pkcs11ObjectInfo objectInfo, List<ObjectAttribute> objectAttributes)
+        public void SaveObjectAttributes(Pkcs11ObjectInfo objectInfo, List<IObjectAttribute> objectAttributes)
         {
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
@@ -828,11 +829,11 @@ namespace Net.Pkcs11Admin
             if (objectAttributes == null)
                 throw new ArgumentNullException("objectAttributes");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.SetAttributeValue(objectInfo.ObjectHandle, objectAttributes);
         }
 
-        public List<ObjectAttribute> LoadObjectAttributes(Pkcs11ObjectInfo objectInfo, List<ulong> attributes)
+        public List<IObjectAttribute> LoadObjectAttributes(Pkcs11ObjectInfo objectInfo, List<ulong> attributes)
         {
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
@@ -843,7 +844,7 @@ namespace Net.Pkcs11Admin
             if (attributes == null)
                 throw new ArgumentNullException("objectAttributes");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 return session.GetAttributeValue(objectInfo.ObjectHandle, attributes);
         }
 
@@ -855,39 +856,41 @@ namespace Net.Pkcs11Admin
             if (objectInfo == null)
                 throw new ArgumentNullException("objectInfo");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.DestroyObject(objectInfo.ObjectHandle);
         }
 
-        public void CreateObject(List<ObjectAttribute> objectAttributes)
+        public void CreateObject(List<IObjectAttribute> objectAttributes)
         {
             if (objectAttributes == null)
                 throw new ArgumentNullException("objectAttributes");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.CreateObject(objectAttributes);
         }
 
-        public List<Tuple<ObjectAttribute, ClassAttribute>> ImportDataObject(string fileName, byte[] fileContent)
+        public List<Tuple<IObjectAttribute, ClassAttribute>> ImportDataObject(string fileName, byte[] fileContent)
         {
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
+            IObjectAttributeFactory objectAttributeFactory = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory;
+
+            List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.DataObjectAttributes, null);
 
             bool ckaLabelFound = false;
             bool ckaValueFound = false;
 
             for (int i = 0; i < objectAttributes.Count; i++)
             {
-                ObjectAttribute objectAttribute = objectAttributes[i].Item1;
+                IObjectAttribute objectAttribute = objectAttributes[i].Item1;
                 ClassAttribute classAttribute = objectAttributes[i].Item2;
 
                 if (objectAttribute.Type == (ulong)CKA.CKA_LABEL)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_LABEL, fileName), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_LABEL, fileName), classAttribute);
                     ckaLabelFound = true;
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_VALUE)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_VALUE, fileContent), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_VALUE, fileContent), classAttribute);
                     ckaValueFound = true;
                 }
             }
@@ -909,13 +912,13 @@ namespace Net.Pkcs11Admin
             if (objectInfo == null)
                 throw new ArgumentNullException("objectInfo");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
                 List<ulong> attributes = new List<ulong>();
                 attributes.Add((ulong)CKA.CKA_LABEL);
                 attributes.Add((ulong)CKA.CKA_VALUE);
 
-                List<ObjectAttribute> objectAttributes = session.GetAttributeValue(objectInfo.ObjectHandle, attributes);
+                List<IObjectAttribute> objectAttributes = session.GetAttributeValue(objectInfo.ObjectHandle, attributes);
 
                 fileName = objectAttributes[0].GetValueAsString();
                 fileName = (!string.IsNullOrEmpty(fileName)) ? Utils.NormalizeFileName(fileName) : "data_object";
@@ -923,16 +926,18 @@ namespace Net.Pkcs11Admin
             }
         }
 
-        public List<Tuple<ObjectAttribute, ClassAttribute>> ImportCertificate(string fileName, byte[] fileContent)
+        public List<Tuple<IObjectAttribute, ClassAttribute>> ImportCertificate(string fileName, byte[] fileContent)
         {
+            IObjectAttributeFactory objectAttributeFactory = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory;
+
             X509CertificateParser x509CertificateParser = new X509CertificateParser();
             X509Certificate x509Certificate = x509CertificateParser.ReadCertificate(fileContent);
 
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.CertificateAttributes, (ulong)CKC.CKC_X_509);
+            List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = StringUtils.GetCreateDefaultAttributes(Pkcs11Admin.Instance.Config.CertificateAttributes, (ulong)CKC.CKC_X_509);
 
             for (int i = 0; i < objectAttributes.Count; i++)
             {
-                ObjectAttribute objectAttribute = objectAttributes[i].Item1;
+                IObjectAttribute objectAttribute = objectAttributes[i].Item1;
                 ClassAttribute classAttribute = objectAttributes[i].Item2;
 
                 if (objectAttribute.Type == (ulong)CKA.CKA_LABEL)
@@ -942,19 +947,19 @@ namespace Net.Pkcs11Admin
                     if (subject.ContainsKey(X509ObjectIdentifiers.CommonName.Id) && (subject[X509ObjectIdentifiers.CommonName.Id].Count > 0))
                         label = subject[X509ObjectIdentifiers.CommonName.Id][0];
 
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_LABEL, label), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_LABEL, label), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_START_DATE)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_START_DATE, x509Certificate.NotBefore), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_START_DATE, x509Certificate.NotBefore), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_END_DATE)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_END_DATE, x509Certificate.NotAfter), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_END_DATE, x509Certificate.NotAfter), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_SUBJECT)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_SUBJECT, x509Certificate.SubjectDN.GetDerEncoded()), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_SUBJECT, x509Certificate.SubjectDN.GetDerEncoded()), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_ID)
                 {
@@ -962,19 +967,19 @@ namespace Net.Pkcs11Admin
                     using (SHA1Managed sha1Managed = new SHA1Managed())
                         thumbPrint = sha1Managed.ComputeHash(x509Certificate.GetEncoded());
 
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_ID, thumbPrint), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_ID, thumbPrint), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_ISSUER)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_ISSUER, x509Certificate.IssuerDN.GetDerEncoded()), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_ISSUER, x509Certificate.IssuerDN.GetDerEncoded()), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_SERIAL_NUMBER)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_SERIAL_NUMBER, new DerInteger(x509Certificate.SerialNumber).GetDerEncoded()), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_SERIAL_NUMBER, new DerInteger(x509Certificate.SerialNumber).GetDerEncoded()), classAttribute);
                 }
                 else if (objectAttribute.Type == (ulong)CKA.CKA_VALUE)
                 {
-                    objectAttributes[i] = new Tuple<ObjectAttribute, ClassAttribute>(new ObjectAttribute(CKA.CKA_VALUE, x509Certificate.GetEncoded()), classAttribute);
+                    objectAttributes[i] = new Tuple<IObjectAttribute, ClassAttribute>(objectAttributeFactory.Create(CKA.CKA_VALUE, x509Certificate.GetEncoded()), classAttribute);
                 }
             }
 
@@ -993,7 +998,7 @@ namespace Net.Pkcs11Admin
             fileContent = objectInfo.CkaValue;
         }
 
-        public void GenerateSymmetricKey(CKK keyType, List<ObjectAttribute> objectAttributes)
+        public void GenerateSymmetricKey(CKK keyType, List<IObjectAttribute> objectAttributes)
         {
             if (objectAttributes == null)
                 throw new ArgumentNullException("objectAttributes");
@@ -1005,12 +1010,12 @@ namespace Net.Pkcs11Admin
             if (mechanismType == null)
                 throw new Exception("Key generation mechanism not specified");
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
-            using (Mechanism mechanism = new Mechanism(mechanismType.Value))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
+            using (IMechanism mechanism = session.Factories.MechanismFactory.Create(mechanismType.Value))
                 session.GenerateKey(mechanism, objectAttributes);
         }
 
-        public void GenerateAsymmetricKeyPair(CKK keyType, List<ObjectAttribute> privateKeyObjectAttributes, List<ObjectAttribute> publicKeyObjectAttributes)
+        public void GenerateAsymmetricKeyPair(CKK keyType, List<IObjectAttribute> privateKeyObjectAttributes, List<IObjectAttribute> publicKeyObjectAttributes)
         {
             if (privateKeyObjectAttributes == null)
                 throw new ArgumentNullException("privateKeyObjectAttributes");
@@ -1025,11 +1030,11 @@ namespace Net.Pkcs11Admin
             if (mechanismType == null)
                 throw new Exception("Key generation mechanism not specified");
 
-            ObjectHandle privateKeyHandle = null;
-            ObjectHandle publicKeyHandle = null;
+            IObjectHandle privateKeyHandle = null;
+            IObjectHandle publicKeyHandle = null;
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
-            using (Mechanism mechanism = new Mechanism(mechanismType.Value))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
+            using (IMechanism mechanism = session.Factories.MechanismFactory.Create(mechanismType.Value))
                 session.GenerateKeyPair(mechanism, publicKeyObjectAttributes, privateKeyObjectAttributes, out publicKeyHandle, out privateKeyHandle);
         }
 
@@ -1043,9 +1048,9 @@ namespace Net.Pkcs11Admin
 
             Pkcs11KeyInfo rsaKeyInfo = (privKeyInfo != null) ? privKeyInfo : pubKeyInfo;
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
-                List<ObjectAttribute> attributes = session.GetAttributeValue(rsaKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
+                List<IObjectAttribute> attributes = session.GetAttributeValue(rsaKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
                 BigInteger modulus = new BigInteger(1, attributes[0].GetValueAsByteArray());
                 BigInteger publicExponent = new BigInteger(1, attributes[1].GetValueAsByteArray());
                 return new RsaKeyParameters(false, modulus, publicExponent);
@@ -1065,8 +1070,8 @@ namespace Net.Pkcs11Admin
             byte[] digestInfo = Utils.CreateDigestInfo(digest, hashAlgorithm.Oid);
             byte[] signature = null;
 
-            using (Session session = _slot.OpenSession(SessionType.ReadWrite))
-            using (Mechanism mechanism = new Mechanism(CKM.CKM_RSA_PKCS))
+            using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
+            using (IMechanism mechanism = session.Factories.MechanismFactory.Create(CKM.CKM_RSA_PKCS))
                 signature = session.Sign(mechanism, privKeyInfo.ObjectHandle, digestInfo);
 
             pkcs10.SignRequest(new DerBitString(signature));

@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -51,7 +51,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             AttributeModified = false;
 
             // Add items to ListView and set the tags
-            foreach (ObjectAttribute objectAttribute in _pkcs11ObjectInfo.ObjectAttributes)
+            foreach (IObjectAttribute objectAttribute in _pkcs11ObjectInfo.ObjectAttributes)
             {
                 ListViewItem listViewItem = new ListViewItem();
                 listViewItem.Tag = objectAttribute;
@@ -70,7 +70,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 listViewItem.SubItems.Clear();
 
                 // Parse tag
-                ObjectAttribute objectAttribute = (ObjectAttribute)listViewItem.Tag;
+                IObjectAttribute objectAttribute = (IObjectAttribute)listViewItem.Tag;
 
                 // Determine viewable values
                 string attributeName = null;
@@ -94,7 +94,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             if (selectedItem == null)
                 return;
 
-            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+            IObjectAttribute objectAttribute = (IObjectAttribute)selectedItem.Tag;
 
             string attributeName = selectedItem.Text;
             byte[] attributeValue = (objectAttribute.CannotBeRead) ? new byte[0] : objectAttribute.GetValueAsByteArray();
@@ -104,8 +104,8 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 if (hexEditor.ShowDialog() == DialogResult.OK)
                 {
                     AttributeModified = true;
-                    ObjectAttribute updatedObjectAttribute = new ObjectAttribute(objectAttribute.Type, hexEditor.Bytes);
-                    _pkcs11Slot.SaveObjectAttributes(_pkcs11ObjectInfo, new List<ObjectAttribute>() { updatedObjectAttribute });
+                    IObjectAttribute updatedObjectAttribute = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory.Create(objectAttribute.Type, hexEditor.Bytes);
+                    _pkcs11Slot.SaveObjectAttributes(_pkcs11ObjectInfo, new List<IObjectAttribute>() { updatedObjectAttribute });
                     selectedItem.Tag = updatedObjectAttribute;
                     ReloadListView();
                 }
@@ -118,11 +118,11 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
             for (int i = 0; i < ListViewAttributes.Items.Count; i++)
             {
-                ObjectAttribute objectAttribute = (ObjectAttribute)ListViewAttributes.Items[i].Tag;
+                IObjectAttribute objectAttribute = (IObjectAttribute)ListViewAttributes.Items[i].Tag;
                 attributes.Add(objectAttribute.Type);
             }
 
-            List<ObjectAttribute> objectAttributes = _pkcs11Slot.LoadObjectAttributes(_pkcs11ObjectInfo, attributes);
+            List<IObjectAttribute> objectAttributes = _pkcs11Slot.LoadObjectAttributes(_pkcs11ObjectInfo, attributes);
 
             for (int i = 0; i < ListViewAttributes.Items.Count; i++)
             {
@@ -138,7 +138,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             if (selectedItem == null)
                 return;
 
-            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+            IObjectAttribute objectAttribute = (IObjectAttribute)selectedItem.Tag;
 
             string attributeName = selectedItem.Text;
             byte[] attributeValue = (objectAttribute.CannotBeRead) ? new byte[0] : objectAttribute.GetValueAsByteArray();

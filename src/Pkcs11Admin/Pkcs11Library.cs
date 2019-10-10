@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -28,7 +28,7 @@ namespace Net.Pkcs11Admin
 
         private string _path = null;
 
-        private Pkcs11 _pkcs11 = null;
+        private IPkcs11Library _pkcs11Library = null;
 
         public Pkcs11LibraryInfo Info
         {
@@ -46,14 +46,16 @@ namespace Net.Pkcs11Admin
         {
             _path = libraryPath;
 
+            Pkcs11InteropFactories factories = Pkcs11Admin.Instance.Factories;
+
             try
             {
-                _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, AppType.MultiThreaded);
+                _pkcs11Library = factories.Pkcs11LibraryFactory.LoadPkcs11Library(factories, loggerPath ?? libraryPath, AppType.MultiThreaded);
             }
             catch (Pkcs11Exception ex)
             {
                 if (ex.RV == CKR.CKR_CANT_LOCK)
-                    _pkcs11 = new Pkcs11(loggerPath ?? libraryPath, AppType.SingleThreaded);
+                    _pkcs11Library = factories.Pkcs11LibraryFactory.LoadPkcs11Library(factories, loggerPath ?? libraryPath, AppType.SingleThreaded);
                 else
                     throw;
             }
@@ -64,14 +66,14 @@ namespace Net.Pkcs11Admin
 
         private Pkcs11LibraryInfo GetPkcs11LibraryInfo()
         {
-            return new Pkcs11LibraryInfo(_path, _pkcs11.GetInfo());
+            return new Pkcs11LibraryInfo(_path, _pkcs11Library.GetInfo());
         }
 
         private List<Pkcs11Slot> GetPkcs11Slots()
         {
             List<Pkcs11Slot> slots = new List<Pkcs11Slot>();
 
-            foreach (Slot slot in _pkcs11.GetSlotList(SlotsType.WithOrWithoutTokenPresent))
+            foreach (ISlot slot in _pkcs11Library.GetSlotList(SlotsType.WithOrWithoutTokenPresent))
                 slots.Add(new Pkcs11Slot(slot));
 
             return slots;
@@ -102,10 +104,10 @@ namespace Net.Pkcs11Admin
                         }
                     }
 
-                    if (_pkcs11 != null)
+                    if (_pkcs11Library != null)
                     {
-                        _pkcs11.Dispose();
-                        _pkcs11 = null;
+                        _pkcs11Library.Dispose();
+                        _pkcs11Library = null;
                     }
                 }
 

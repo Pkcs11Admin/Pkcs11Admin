@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -17,6 +17,7 @@
 
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
+using Net.Pkcs11Interop.HighLevelAPI.Factories;
 using System;
 using System.Collections.Generic;
 
@@ -45,7 +46,7 @@ namespace Net.Pkcs11Admin.Configuration
             return string.Compare(versionA, versionB);
         }
 
-        public static void GetAttributeNameAndValue(ObjectAttribute objectAttribute, out string name, out string value)
+        public static void GetAttributeNameAndValue(IObjectAttribute objectAttribute, out string name, out string value)
         {
             if (objectAttribute == null)
                 throw new ArgumentNullException("objectAttribute");
@@ -180,13 +181,15 @@ namespace Net.Pkcs11Admin.Configuration
             return strValue;
         }
 
-        private static ObjectAttribute GetDefaultAttribute(ulong type, string defaultValue)
+        private static IObjectAttribute GetDefaultAttribute(ulong type, string defaultValue)
         {
-            ObjectAttribute objectAttribute = null;
+            IObjectAttribute objectAttribute = null;
+
+            IObjectAttributeFactory objectAttributeFactory = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory;
 
             if (defaultValue == null)
             {
-                objectAttribute = new ObjectAttribute(type);
+                objectAttribute = objectAttributeFactory.Create(type);
             }
             else
             {
@@ -194,7 +197,7 @@ namespace Net.Pkcs11Admin.Configuration
                 {
                     string ulongString = defaultValue.Substring("ULONG:".Length);
                     ulong ulongValue = Convert.ToUInt64(ulongString);
-                    objectAttribute = new ObjectAttribute(type, ulongValue);
+                    objectAttribute = objectAttributeFactory.Create(type, ulongValue);
                 }
                 else if (defaultValue.StartsWith("BOOL:"))
                 {
@@ -208,18 +211,18 @@ namespace Net.Pkcs11Admin.Configuration
                     else
                         throw new Exception("Unable to parse default value of class attribute");
                     
-                    objectAttribute = new ObjectAttribute(type, boolValue);
+                    objectAttribute = objectAttributeFactory.Create(type, boolValue);
                 }
                 else if (defaultValue.StartsWith("STRING:"))
                 {
                     string strValue = defaultValue.Substring("STRING:".Length);
-                    objectAttribute = new ObjectAttribute(type, strValue);
+                    objectAttribute = objectAttributeFactory.Create(type, strValue);
                 }
                 else if (defaultValue.StartsWith("BYTES:"))
                 {
                     string hexString = defaultValue.Substring("BYTES:".Length);
                     byte[] bytes = ConvertUtils.HexStringToBytes(hexString);
-                    objectAttribute = new ObjectAttribute(type, bytes);
+                    objectAttribute = objectAttributeFactory.Create(type, bytes);
                 }
                 else if (defaultValue.StartsWith("DATE:"))
                 {
@@ -235,32 +238,32 @@ namespace Net.Pkcs11Admin.Configuration
             return objectAttribute;
         }
 
-        private static List<Tuple<ObjectAttribute, ClassAttribute>> GetDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType, bool createObject)
+        private static List<Tuple<IObjectAttribute, ClassAttribute>> GetDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType, bool createObject)
         {
             if (classAttributes == null)
                 throw new ArgumentNullException("classAttributes");
 
-            List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes = new List<Tuple<ObjectAttribute, ClassAttribute>>();
+            List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes = new List<Tuple<IObjectAttribute, ClassAttribute>>();
 
             foreach (ClassAttribute classAttribute in classAttributes.CommonAttributes)
             {
-                ObjectAttribute objectAttribute = (createObject) ? GetDefaultAttribute(classAttribute.Value, classAttribute.CreateDefaultValue) : GetDefaultAttribute(classAttribute.Value, classAttribute.GenerateDefaultValue);
-                objectAttributes.Add(new Tuple<ObjectAttribute, ClassAttribute>(objectAttribute, classAttribute));
+                IObjectAttribute objectAttribute = (createObject) ? GetDefaultAttribute(classAttribute.Value, classAttribute.CreateDefaultValue) : GetDefaultAttribute(classAttribute.Value, classAttribute.GenerateDefaultValue);
+                objectAttributes.Add(new Tuple<IObjectAttribute, ClassAttribute>(objectAttribute, classAttribute));
             }
 
             if ((objectType != null) && (classAttributes.TypeSpecificAttributes.ContainsKey(objectType.Value)))
             {
                 foreach (ClassAttribute classAttribute in classAttributes.TypeSpecificAttributes[objectType.Value])
                 {
-                    ObjectAttribute objectAttribute = (createObject) ? GetDefaultAttribute(classAttribute.Value, classAttribute.CreateDefaultValue) : GetDefaultAttribute(classAttribute.Value, classAttribute.GenerateDefaultValue);
-                    objectAttributes.Add(new Tuple<ObjectAttribute, ClassAttribute>(objectAttribute, classAttribute));
+                    IObjectAttribute objectAttribute = (createObject) ? GetDefaultAttribute(classAttribute.Value, classAttribute.CreateDefaultValue) : GetDefaultAttribute(classAttribute.Value, classAttribute.GenerateDefaultValue);
+                    objectAttributes.Add(new Tuple<IObjectAttribute, ClassAttribute>(objectAttribute, classAttribute));
                 }
             }
 
             return objectAttributes;
         }
 
-        public static List<Tuple<ObjectAttribute, ClassAttribute>> GetCreateDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
+        public static List<Tuple<IObjectAttribute, ClassAttribute>> GetCreateDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
         {
             if (classAttributes == null)
                 throw new ArgumentNullException("classAttributes");
@@ -268,7 +271,7 @@ namespace Net.Pkcs11Admin.Configuration
             return GetDefaultAttributes(classAttributes, objectType, true);
         }
 
-        public static List<Tuple<ObjectAttribute, ClassAttribute>> GetGenerateDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
+        public static List<Tuple<IObjectAttribute, ClassAttribute>> GetGenerateDefaultAttributes(ClassAttributesDefinition classAttributes, ulong? objectType)
         {
             if (classAttributes == null)
                 throw new ArgumentNullException("classAttributes");

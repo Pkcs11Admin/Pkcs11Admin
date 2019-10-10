@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -52,7 +52,7 @@ namespace Net.Pkcs11Admin
             internal set;
         }
 
-        internal Pkcs11CertificateInfo(ObjectHandle objectHandle, List<ObjectAttribute> objectAttributes, ulong? storageSize)
+        internal Pkcs11CertificateInfo(IObjectHandle objectHandle, List<IObjectAttribute> objectAttributes, ulong? storageSize)
         {
             ObjectHandle = objectHandle;
             ObjectAttributes = objectAttributes;

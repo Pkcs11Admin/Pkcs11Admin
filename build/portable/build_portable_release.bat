@@ -53,15 +53,7 @@ copy Pkcs11Admin-x86.sh %OUTDIR%\Pkcs11Admin-x86.sh || goto :error
 copy Pkcs11Admin-x64.sh %OUTDIR%\Pkcs11Admin-x64.sh || goto :error
 
 @rem Copy licenses to the output directory
-copy ..\..\src\lib\Asn1Net.Forms.TreeView\license.txt %OUTDIR%\license\Asn1Net.Forms.TreeView.txt || goto :error
-copy ..\..\src\lib\Asn1Net.Reader\license.txt %OUTDIR%\license\Asn1Net.Reader.txt || goto :error
-copy ..\..\src\lib\Be.Windows.Forms.HexBox\LICENSE.txt %OUTDIR%\license\Be.Windows.Forms.HexBox.txt || goto :error
-copy ..\..\src\LICENSE.txt %OUTDIR%\license\Pkcs11Admin.txt || goto :error
-copy ..\..\src\lib\Pkcs11Interop\LICENSE.txt %OUTDIR%\license\Pkcs11Interop.txt || goto :error
-copy ..\..\src\lib\Pkcs11Interop\NOTICE.txt %OUTDIR%\license\Pkcs11Interop-notice.txt || goto :error
-copy ..\..\src\lib\pkcs11-logger\license.txt %OUTDIR%\license\pkcs11-logger.txt || goto :error
-copy ..\..\src\lib\pkcs11-logger\NOTICE.txt %OUTDIR%\license\pkcs11-logger-notice.txt || goto :error
-copy ..\..\src\lib\Portable.BouncyCastle\license.txt %OUTDIR%\license\BouncyCastle.Crypto.txt || goto :error
+copy license\*.* %OUTDIR%\license\ || goto :error
 
 @endlocal
 

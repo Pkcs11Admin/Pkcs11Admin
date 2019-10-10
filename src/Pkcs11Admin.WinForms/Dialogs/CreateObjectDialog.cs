@@ -1,6 +1,6 @@
 ﻿/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
- *  Copyright (c) 2014-2017 Jaroslav Imrich <jimrich@jimrich.sk>
+ *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 3 
@@ -27,7 +27,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
     {
         private Pkcs11Slot _pkcs11Slot = null;
 
-        public CreateObjectDialog(Pkcs11Slot pkcs11Slot, List<Tuple<ObjectAttribute, ClassAttribute>> objectAttributes)
+        public CreateObjectDialog(Pkcs11Slot pkcs11Slot, List<Tuple<IObjectAttribute, ClassAttribute>> objectAttributes)
         {
             InitializeComponent();
             this.Icon = Properties.Resources.Pkcs11Admin;
@@ -41,7 +41,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             _pkcs11Slot = pkcs11Slot;
 
             // Add items to ListView and set the tags
-            foreach (Tuple<ObjectAttribute, ClassAttribute> objectAttribute in objectAttributes)
+            foreach (Tuple<IObjectAttribute, ClassAttribute> objectAttribute in objectAttributes)
             {
                 ListViewItem listViewItem = new ListViewItem();
                 listViewItem.Tag = objectAttribute.Item1;
@@ -61,7 +61,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                 listViewItem.SubItems.Clear();
 
                 // Parse tag
-                ObjectAttribute objectAttribute = (ObjectAttribute)listViewItem.Tag;
+                IObjectAttribute objectAttribute = (IObjectAttribute)listViewItem.Tag;
 
                 // Determine viewable values
                 string attributeName = null;
@@ -83,9 +83,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             try
             {
-                List<ObjectAttribute> objectAttributes = new List<ObjectAttribute>();
+                List<IObjectAttribute> objectAttributes = new List<IObjectAttribute>();
                 foreach (ListViewItem listViewItem in ListViewAttributes.CheckedItems)
-                    objectAttributes.Add((ObjectAttribute)listViewItem.Tag);
+                    objectAttributes.Add((IObjectAttribute)listViewItem.Tag);
 
                 _pkcs11Slot.CreateObject(objectAttributes);
 
@@ -103,7 +103,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             if (selectedItem == null)
                 return;
 
-            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+            IObjectAttribute objectAttribute = (IObjectAttribute)selectedItem.Tag;
 
             string attributeName = selectedItem.Text;
             byte[] attributeValue = objectAttribute.GetValueAsByteArray() ?? new byte[0];
@@ -112,7 +112,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             {
                 if (hexEditor.ShowDialog() == DialogResult.OK)
                 {
-                    ObjectAttribute updatedObjectAttribute = new ObjectAttribute(objectAttribute.Type, hexEditor.Bytes);
+                    IObjectAttribute updatedObjectAttribute = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory.Create(objectAttribute.Type, hexEditor.Bytes);
                     selectedItem.Tag = updatedObjectAttribute;
                     ReloadListView();
                 }
@@ -125,7 +125,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             if (selectedItem == null)
                 return;
 
-            ObjectAttribute objectAttribute = (ObjectAttribute)selectedItem.Tag;
+            IObjectAttribute objectAttribute = (IObjectAttribute)selectedItem.Tag;
 
             string attributeName = selectedItem.Text;
             byte[] attributeValue = (objectAttribute.CannotBeRead) ? new byte[0] : objectAttribute.GetValueAsByteArray();
