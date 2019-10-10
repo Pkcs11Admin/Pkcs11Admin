@@ -23,8 +23,6 @@ namespace Net.Pkcs11Admin
 {
     public class Pkcs11SessionInfo
     {
-        private ISlot _slot = null;
-
         public bool UserLoggedIn
         {
             get;
