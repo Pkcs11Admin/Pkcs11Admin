@@ -1,3 +1,12 @@
+Pkcs11Admin 0.5.0 (2019-10-30)
+- Fixed attribute duplication bug in key generation dialog
+- #12 - RO sessions won't be opened after SO login
+- #15 - PIN code can be entered as HEX string
+- #21 - Fixed value of PKCS#1 DigestInfo algorihtm params
+  (Patch from Paulo Cunha)
+- #22 - Updated to Pkcs11Interop 5.0.0
+- Updated to Portable.BouncyCastle 1.8.5
+
 Pkcs11Admin 0.4.0 (2017-10-16)
 - Added ROCA (CVE-2017-15361) vulnerability testing
 - Updated to Pkcs11Interop 4.0.0
