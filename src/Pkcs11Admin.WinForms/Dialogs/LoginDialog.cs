@@ -70,7 +70,34 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         {
             try
             {
-                _slot.Login(_userType, TextBoxPin.Text);
+                byte[] pin = null;
+
+                if (CheckBoxHexString.Checked)
+                {
+                    try
+                    {
+                        pin = ConvertUtils.HexStringToBytes(TextBoxPin.Text);
+                    }
+                    catch (Exception)
+                    {
+                        WinFormsUtils.ShowError(this, "Unable to decode HEX string");
+                        return;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        pin = ConvertUtils.Utf8StringToBytes(TextBoxPin.Text);
+                    }
+                    catch (Exception)
+                    {
+                        WinFormsUtils.ShowError(this, "Unable to decode UTF-8 string");
+                        return;
+                    }
+                }
+                
+                _slot.Login(_userType, pin);
                 DialogResult = DialogResult.OK;
             }
             catch (Exception ex)

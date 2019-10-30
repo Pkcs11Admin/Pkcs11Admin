@@ -55,6 +55,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.CheckBoxDisplayPin = new System.Windows.Forms.CheckBox();
             this.LabelPin = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.CheckBoxHexString = new System.Windows.Forms.CheckBox();
             this.MainStatusStrip.SuspendLayout();
             this.MainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -146,6 +147,7 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.CheckBoxHexString);
             this.MainPanel.Controls.Add(this.ButtonOk);
             this.MainPanel.Controls.Add(this.ButtonCancel);
             this.MainPanel.Controls.Add(this.TextBoxPin);
@@ -157,6 +159,17 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             this.MainPanel.Padding = new System.Windows.Forms.Padding(10, 30, 10, 30);
             this.MainPanel.Size = new System.Drawing.Size(400, 146);
             this.MainPanel.TabIndex = 6;
+            // 
+            // CheckBoxHexString
+            // 
+            this.CheckBoxHexString.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.CheckBoxHexString.AutoSize = true;
+            this.CheckBoxHexString.Location = new System.Drawing.Point(13, 112);
+            this.CheckBoxHexString.Name = "CheckBoxHexString";
+            this.CheckBoxHexString.Size = new System.Drawing.Size(93, 17);
+            this.CheckBoxHexString.TabIndex = 6;
+            this.CheckBoxHexString.Text = "HEX encoded";
+            this.CheckBoxHexString.UseVisualStyleBackColor = true;
             // 
             // LoginDialog
             // 
@@ -199,5 +212,6 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
         private System.Windows.Forms.CheckBox CheckBoxDisplayPin;
         private System.Windows.Forms.Label LabelPin;
         private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.CheckBox CheckBoxHexString;
     }
 }

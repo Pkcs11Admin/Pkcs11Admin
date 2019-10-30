@@ -753,7 +753,7 @@ namespace Net.Pkcs11Admin
             _slot.InitToken(soPin, label);
         }
 
-        public void Login(CKU userType, string pin)
+        public void Login(CKU userType, byte[] pin)
         {
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
