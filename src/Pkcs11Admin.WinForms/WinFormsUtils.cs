@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Net.Pkcs11Admin.WinForms
@@ -44,7 +45,15 @@ namespace Net.Pkcs11Admin.WinForms
             return MessageBox.Show(owner, question, Pkcs11AdminInfo.AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
-        public static void AppendToListView(ListView listView, string listViewGroupName, List<KeyValuePair<object, string[]>> data)
+        /// <param name="data">
+        /// A collection of rows.
+        /// Each row has a key, and cells.
+        /// Each cell is a pair of the original cell value as an object, and a string representation that can be displayed.</param>
+        public static void AppendToListView(
+            ListView listView,
+            string listViewGroupName,
+            IEnumerable<KeyValuePair<object, IEnumerable<KeyValuePair<object, string>>>> data,
+            Action<KeyValuePair<object, string>, ListViewItem.ListViewSubItem> postProcessSubItem)
         {
             if (listView == null)
                 throw new ArgumentNullException("listView");
@@ -56,13 +65,17 @@ namespace Net.Pkcs11Admin.WinForms
             if (data == null)
                 throw new ArgumentNullException("data");
 
-            foreach (KeyValuePair<object, string[]> record in data)
+            foreach (var record in data)
             {
-                ListViewItem listViewItem = new ListViewItem(record.Value[0]);
+                ListViewItem listViewItem = new ListViewItem(record.Value.First().Value);
                 listViewItem.Tag = record.Key;
+                listViewItem.UseItemStyleForSubItems = false; // Essential to allow sub-processing to set a style for each cell.
 
-                for (int i = 1; i < record.Value.Length; i++)
-                    listViewItem.SubItems.Add(record.Value[i]);
+                foreach (var subRecord in record.Value.Skip(1))
+                {
+                    var subItem = listViewItem.SubItems.Add(subRecord.Value);
+                    postProcessSubItem?.Invoke(subRecord, subItem);
+                }
 
                 if (listViewGroup != null)
                     listViewGroup.Items.Add(listViewItem);
@@ -72,6 +85,15 @@ namespace Net.Pkcs11Admin.WinForms
 
             if (listViewGroup != null)
                 listView.Groups.Add(listViewGroup);
+        }
+
+        public static void AppendToListView(ListView listView, string listViewGroupName, List<KeyValuePair<object, string[]>> data)
+        {
+            var adaptedData = from record in data
+                              let subRecords = from subRecord in record.Value
+                                               select new KeyValuePair<object, string>(subRecord, subRecord)
+                              select new KeyValuePair<object, IEnumerable<KeyValuePair<object, string>>>(record.Key, subRecords);
+            AppendToListView(listView, listViewGroupName, adaptedData, null);
         }
 
         public static ListViewItem GetSingleSelectedItem(ListView listView)

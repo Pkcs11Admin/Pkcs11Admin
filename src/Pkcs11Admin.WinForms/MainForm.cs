@@ -22,7 +22,9 @@ using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -165,7 +167,7 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 menuItem.Text = (slots[i].SlotInfo != null) ? slots[i].SlotInfo.SlotDescription : "Unknown slot";
-                menuItem.Tag  = slots[i];
+                menuItem.Tag = slots[i];
                 menuItem.CheckOnClick = true;
                 menuItem.Click += new EventHandler(MenuItemSlot_Click);
 
@@ -777,41 +779,53 @@ namespace Net.Pkcs11Admin.WinForms
             ListViewMechanisms.AddColumn("EC point uncompressed", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
             ListViewMechanisms.AddColumn("EC point compressed", EnhancedListView.ColumnType.Bool, HorizontalAlignment.Center);
 
-            List<KeyValuePair<object, string[]>> data = new List<KeyValuePair<object, string[]>>();
+            var data = Enumerable.Empty<KeyValuePair<object, IEnumerable<KeyValuePair<object, string>>>>();
 
             if ((_selectedSlot != null) && (_selectedSlot.Mechanisms != null))
             {
-                foreach (Pkcs11MechanismInfo mechanism in _selectedSlot.Mechanisms)
-                {
-                    data.Add(new KeyValuePair<object, string[]>(mechanism, new string[] {
-                        mechanism.Mechanism.ToString(),
-                        mechanism.MinKeySize.ToString(),
-                        mechanism.MaxKeySize.ToString(),
-                        mechanism.Flags.ToString(),
-                        mechanism.Hw.ToString(),
-                        mechanism.Encrypt.ToString(),
-                        mechanism.Decrypt.ToString(),
-                        mechanism.Digest.ToString(),
-                        mechanism.Sign.ToString(),
-                        mechanism.SignRecover.ToString(),
-                        mechanism.Verify.ToString(),
-                        mechanism.VerifyRecover.ToString(),
-                        mechanism.Generate.ToString(),
-                        mechanism.GenerateKeyPair.ToString(),
-                        mechanism.Wrap.ToString(),
-                        mechanism.Unwrap.ToString(),
-                        mechanism.Derive.ToString(),
-                        mechanism.Extension.ToString(),
-                        mechanism.EcFp.ToString(),
-                        mechanism.EcF2m.ToString(),
-                        mechanism.EcEcParameters.ToString(),
-                        mechanism.EcNamedCurve.ToString(),
-                        mechanism.EcUncompress.ToString(),
-                        mechanism.EcCompress.ToString()
-                    }));
-                }
+                data = from mechanism in _selectedSlot.Mechanisms
+                       let values = new object[]
+                       {
+                            mechanism.Mechanism,
+                            mechanism.MinKeySize,
+                            mechanism.MaxKeySize,
+                            mechanism.Flags,
+                            mechanism.Hw,
+                            mechanism.Encrypt,
+                            mechanism.Decrypt,
+                            mechanism.Digest,
+                            mechanism.Sign,
+                            mechanism.SignRecover,
+                            mechanism.Verify,
+                            mechanism.VerifyRecover,
+                            mechanism.Generate,
+                            mechanism.GenerateKeyPair,
+                            mechanism.Wrap,
+                            mechanism.Unwrap,
+                            mechanism.Derive,
+                            mechanism.Extension,
+                            mechanism.EcFp,
+                            mechanism.EcF2m,
+                            mechanism.EcEcParameters,
+                            mechanism.EcNamedCurve,
+                            mechanism.EcUncompress,
+                            mechanism.EcCompress
+                       }
+                       let cells = from value in values
+                                   select new KeyValuePair<object, string>(value, value.ToString())
+                       select new KeyValuePair<object, IEnumerable<KeyValuePair<object, string>>>(mechanism, cells);
 
-                WinFormsUtils.AppendToListView(ListViewMechanisms, null, data);
+                WinFormsUtils.AppendToListView(
+                    ListViewMechanisms,
+                    null,
+                    data,
+                    (subRecord, subItem) =>
+                    {
+                        if (subRecord.Key is bool originalBool)
+                        {
+                            subItem.BackColor = originalBool ? Color.LightGreen : Color.LightPink;
+                        }
+                    });
             }
 
             ListViewMechanisms.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
