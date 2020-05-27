@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Pkcs11Admin - GUI tool for administration of PKCS#11 enabled devices
  *  Copyright (c) 2014-2019 Jaroslav Imrich <jimrich@jimrich.sk>
  *
@@ -495,6 +495,29 @@ namespace Net.Pkcs11Admin.Configuration
             ckmEnum.Add((ulong)CKM.CKM_DH_PKCS_PARAMETER_GEN, new EnumMember() { Name = "CKM_DH_PKCS_PARAMETER_GEN", Value = (ulong)CKM.CKM_DH_PKCS_PARAMETER_GEN, FriendlyName = "", Description = "TODO" });
             ckmEnum.Add((ulong)CKM.CKM_X9_42_DH_PARAMETER_GEN, new EnumMember() { Name = "CKM_X9_42_DH_PARAMETER_GEN", Value = (ulong)CKM.CKM_X9_42_DH_PARAMETER_GEN, FriendlyName = "", Description = "TODO" });
 
+            // CKM_EC_EDWARDS_KEY_PAIR_GEN
+            ckmEnum.Add(4181ul, new EnumMember() { Name = "CKM_EC_EDWARDS_KEY_PAIR_GEN", Value = 4181ul, FriendlyName = "CKM_EC_EDWARDS_KEY_PAIR_GEN", Description = "TODO" });
+            // CKM_EC_MONTGOMERY_KEY_PAIR_GEN
+            ckmEnum.Add(4182ul, new EnumMember() { Name = "CKM_EC_MONTGOMERY_KEY_PAIR_GEN", Value = 4182ul, FriendlyName = "CKM_EC_MONTGOMERY_KEY_PAIR_GEN", Description = "TODO" });
+            // CKM_EDDSA
+            ckmEnum.Add(4183ul, new EnumMember() { Name = "CKM_EDDSA", Value = 4183ul, FriendlyName = "CKM_EDDSA", Description = "TODO" });
+
+            // nCipher NFCK_VENDOR_NCIPHER 0xde436972UL (3728959858)
+            ckmEnum.Add(3728959859ul, new EnumMember() { Name = "CKM_WRAP_RSA_CRT_COMPONENTS", Value = 3728959859ul, FriendlyName = "nCipher CKM_WRAP_RSA_CRT_COMPONENTS", Description = "TODO" });
+            ckmEnum.Add(3728959860ul, new EnumMember() { Name = "CKM_CAC_TK_DERIVATION", Value = 3728959860ul, FriendlyName = "nCipher CKM_CAC_TK_DERIVATION", Description = "TODO" });
+            ckmEnum.Add(3728959861ul, new EnumMember() { Name = "CKM_SHA_1_HMAC_KEY_GEN", Value = 3728959861ul, FriendlyName = "nCipher CKM_SHA_1_HMAC_KEY_GEN", Description = "TODO" });
+            ckmEnum.Add(3728959883ul, new EnumMember() { Name = "CKM_SEED_CBC_ENCRYPT_DATA", Value = 3728959883ul, FriendlyName = "nCipher CKM_SEED_CBC_ENCRYPT_DATA", Description = "TODO" });
+            ckmEnum.Add(3728959890ul, new EnumMember() { Name = "CKM_SEED_ECB_ENCRYPT_DATA", Value = 3728959890ul, FriendlyName = "nCipher CKM_SEED_ECB_ENCRYPT_DATA", Description = "TODO" });
+            ckmEnum.Add(3728959894ul, new EnumMember() { Name = "CKM_NC_SHA224_HMAC_KEY_GEN", Value = 3728959894ul, FriendlyName = "nCipher CKM_NC_SHA224_HMAC_KEY_GEN", Description = "TODO" });
+            ckmEnum.Add(3728959895ul, new EnumMember() { Name = "CKM_NC_SHA256_HMAC_KEY_GEN", Value = 3728959895ul, FriendlyName = "nCipher CKM_NC_SHA256_HMAC_KEY_GEN", Description = "TODO" });
+            ckmEnum.Add(3728959896ul, new EnumMember() { Name = "CKM_NC_SHA384_HMAC_KEY_GEN", Value = 3728959896ul, FriendlyName = "nCipher CKM_NC_SHA384_HMAC_KEY_GEN", Description = "TODO" });
+            ckmEnum.Add(3728959897ul, new EnumMember() { Name = "CKM_NC_SHA512_HMAC_KEY_GEN", Value = 3728959897ul, FriendlyName = "nCipher CKM_NC_SHA512_HMAC_KEY_GEN", Description = "TODO" });
+            ckmEnum.Add(3728960626ul, new EnumMember() { Name = "CKM_NC_AES_CMAC_KEY_DERIVATION", Value = 3728960626ul, FriendlyName = "nCipher CKM_NC_AES_CMAC_KEY_DERIVATION", Description = "TODO" });
+            ckmEnum.Add(3728960627ul, new EnumMember() { Name = "CKM_NC_AES_CMAC_KEY_DERIVATION_SCP03", Value = 3728960627ul, FriendlyName = "nCipher CKM_NC_AES_CMAC_KEY_DERIVATION_SCP03", Description = "TODO" });
+            ckmEnum.Add(3728961410ul, new EnumMember() { Name = "CKM_NC_ECKDF_HYPERLEDGER", Value = 3728961410ul, FriendlyName = "nCipher CKM_NC_ECKDF_HYPERLEDGER", Description = "TODO" });
+            ckmEnum.Add(3728964089ul, new EnumMember() { Name = "CKM_NC_AES_CMAC", Value = 3728964089ul, FriendlyName = "nCipher CKM_NC_AES_CMAC", Description = "TODO" });
+            ckmEnum.Add(3728968306ul, new EnumMember() { Name = "CKM_PUBLIC_FROM_PRIVATE", Value = 3728968306ul, FriendlyName = "nCipher CKM_PUBLIC_FROM_PRIVATE", Description = "TODO" });
+
             #endregion
 
             #region CKO
@@ -553,6 +576,12 @@ namespace Net.Pkcs11Admin.Configuration
             ckkEnum.Add((ulong)CKK.CKK_ACTI, new EnumMember() { Name = "CKK_ACTI", Value = (ulong)CKK.CKK_ACTI, FriendlyName = "ACTI", Description = "TODO" });
             ckkEnum.Add((ulong)CKK.CKK_CAMELLIA, new EnumMember() { Name = "CKK_CAMELLIA", Value = (ulong)CKK.CKK_CAMELLIA, FriendlyName = "CAMELLIA", Description = "TODO" });
             ckkEnum.Add((ulong)CKK.CKK_ARIA, new EnumMember() { Name = "CKK_ARIA", Value = (ulong)CKK.CKK_ARIA, FriendlyName = "ARIA", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_MD5_HMAC, new EnumMember() { Name = "CKK_MD5_HMAC", Value = (ulong)CKK.CKK_MD5_HMAC, FriendlyName = "MD5 HMAC", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_SHA_1_HMAC, new EnumMember() { Name = "CKK_SHA_1_HMAC", Value = (ulong)CKK.CKK_SHA_1_HMAC, FriendlyName = "SHA-1 HMAC", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_SHA256_HMAC, new EnumMember() { Name = "CKK_SHA256_HMAC", Value = (ulong)CKK.CKK_SHA256_HMAC, FriendlyName = "SHA-256 HMAC", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_SHA384_HMAC, new EnumMember() { Name = "CKK_SHA384_HMAC", Value = (ulong)CKK.CKK_SHA384_HMAC, FriendlyName = "SHA-384 HMAC", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_SHA512_HMAC, new EnumMember() { Name = "CKK_SHA512_HMAC", Value = (ulong)CKK.CKK_SHA512_HMAC, FriendlyName = "SHA-512 HMAC", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_SHA224_HMAC, new EnumMember() { Name = "CKK_SHA224_HMAC", Value = (ulong)CKK.CKK_SHA224_HMAC, FriendlyName = "SHA-224 HMAC", Description = "TODO" });
 
             #endregion
 
@@ -713,6 +742,10 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_2, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
             cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_COEFFICIENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_EC, new ClassAttributes() { KeyGenerationMechanism = CKM.CKM_EC_KEY_PAIR_GEN });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_POINT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_PARAMS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+
             #endregion
 
             #region Public key attributes
@@ -756,6 +789,10 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS_BITS, CreateDefaultValue = "ULONG:2048", CreateSetByDefault = false, GenerateDefaultValue = "ULONG:2048", GenerateSetByDefault = true });
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
+
+            cfg.PublicKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_EC, new ClassAttributes());
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_POINT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_PARAMS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
             #endregion
 
