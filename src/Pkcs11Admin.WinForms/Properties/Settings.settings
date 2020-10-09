@@ -2,11 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Net.Pkcs11Admin.WinForms.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="AutoLoadDefaultPkcs11Library" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="DefaultPkcs11Library" Type="System.String" Scope="Application">
       <Value Profile="(Default)">softhsm2</Value>
     </Setting>
-    <Setting Name="AutoLoadDefaultPkcs11Library" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="UserPkcs11Library" Type="System.String" Scope="User">
+      <Value Profile="(Default)">bit4xpki.dll</Value>
     </Setting>
   </Settings>
 </SettingsFile>

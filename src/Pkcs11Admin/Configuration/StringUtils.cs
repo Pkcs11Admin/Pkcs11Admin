@@ -98,7 +98,15 @@ namespace Net.Pkcs11Admin.Configuration
 
                         case AttributeType.DateTime:
 
-                            DateTime? dateTime = objectAttribute.GetValueAsDateTime();
+                            DateTime? dateTime = null;
+
+                            try
+                            {
+                                dateTime = objectAttribute.GetValueAsDateTime();
+                            }
+                            catch (Exception)
+                            {
+                            }
                             tmpValue = (dateTime == null) ? null : dateTime.Value.ToShortDateString();
 
                             break;
