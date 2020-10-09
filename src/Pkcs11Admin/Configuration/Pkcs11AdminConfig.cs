@@ -189,6 +189,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.AttributeDefinitions.Add((ulong)CKA.CKA_ALWAYS_SENSITIVE, new AttributeDefinition() { Name = "CKA_ALWAYS_SENSITIVE", Value = (ulong)CKA.CKA_ALWAYS_SENSITIVE, Description = "True if key has always had the CKA_SENSITIVE attribute set to true", Type = AttributeType.Bool });
             cfg.AttributeDefinitions.Add((ulong)CKA.CKA_KEY_GEN_MECHANISM, new AttributeDefinition() { Name = "CKA_KEY_GEN_MECHANISM", Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, Description = "Identifier of the mechanism used to generate the key material", Type = AttributeType.ULong, Enum = "CKM" });
             cfg.AttributeDefinitions.Add((ulong)CKA.CKA_MODIFIABLE, new AttributeDefinition() { Name = "CKA_MODIFIABLE", Value = (ulong)CKA.CKA_MODIFIABLE, Description = "True if object can be modified", Type = AttributeType.Bool });
+            cfg.AttributeDefinitions.Add((ulong)CKA.CKA_DESTROYABLE, new AttributeDefinition() { Name = "CKA_DESTROYABLE", Value = (ulong)CKA.CKA_MODIFIABLE, Description = "True if object can be destroyed", Type = AttributeType.Bool });
             // Note: CKA_ECDSA_PARAMS is deprecated in v2.11, CKA_EC_PARAMS is preferred.
             cfg.AttributeDefinitions.Add((ulong)CKA.CKA_EC_PARAMS, new AttributeDefinition() { Name = "CKA_EC_PARAMS", Value = (ulong)CKA.CKA_EC_PARAMS, Description = "DER-encoding of an ANSI X9.62 Parameters value", Type = AttributeType.ByteArray });
             cfg.AttributeDefinitions.Add((ulong)CKA.CKA_EC_POINT, new AttributeDefinition() { Name = "CKA_EC_POINT", Value = (ulong)CKA.CKA_EC_POINT, Description = "DER-encoding of ANSI X9.62 ECPoint value Q", Type = AttributeType.ByteArray });
@@ -596,6 +597,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
             cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = true });
             cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
+            cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false });
             cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true });
             cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_APPLICATION, CreateDefaultValue = null });
             cfg.DataObjectAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_OBJECT_ID, CreateDefaultValue = null });
@@ -614,6 +616,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = true });
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true });
+            cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false });
             cfg.CertificateAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true });
 
             // TODO - Review
@@ -672,6 +675,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
             cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
             cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
             cfg.PrivateKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
 
             // Common Key Attributes
@@ -726,6 +730,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
             cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:FALSE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:FALSE", GenerateSetByDefault = true });
             cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
             cfg.PublicKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
 
             // Common Key Attributes
@@ -770,6 +775,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
             cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
             cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = true, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = true });
+            cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "BOOL:TRUE", CreateSetByDefault = false, GenerateDefaultValue = "BOOL:TRUE", GenerateSetByDefault = false });
             cfg.SecretKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = true });
 
             // Common Key Attributes
@@ -821,6 +827,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "TODO" });
             cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "TODO" });
             cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "TODO" });
+            cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "TODO" });
             cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LABEL, CreateDefaultValue = "TODO" });
             cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "TODO" });
             cfg.OtpKeyAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_ID, CreateDefaultValue = "TODO" });
@@ -860,6 +867,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_TOKEN, CreateDefaultValue = "TODO" });
             cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE, CreateDefaultValue = "TODO" });
             cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODIFIABLE, CreateDefaultValue = "TODO" });
+            cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_DESTROYABLE, CreateDefaultValue = "TODO" });
             cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "TODO" });
             cfg.DomainParamsAttributes.CommonAttributes.Add(new ClassAttribute() { Value = (ulong)CKA.CKA_LOCAL, CreateDefaultValue = "TODO" });
 
