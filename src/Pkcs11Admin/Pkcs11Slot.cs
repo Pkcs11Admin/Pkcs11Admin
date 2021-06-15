@@ -1040,21 +1040,55 @@ namespace Net.Pkcs11Admin
 
         private AsymmetricKeyParameter GetPubKeyParams(Pkcs11KeyInfo privKeyInfo, Pkcs11KeyInfo pubKeyInfo)
         {
-            if (privKeyInfo != null && privKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
+            if (privKeyInfo != null && ( privKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA && privKeyInfo.CkaKeyType != (ulong)CKK.CKK_ECDSA))
                 throw new Exception("Unsupported key type");
 
-            if (pubKeyInfo != null && pubKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA)
+            if (pubKeyInfo != null && ( pubKeyInfo.CkaKeyType != (ulong)CKK.CKK_RSA && pubKeyInfo.CkaKeyType != (ulong)CKK.CKK_ECDSA))
                 throw new Exception("Unsupported key type");
 
             Pkcs11KeyInfo rsaKeyInfo = (privKeyInfo != null) ? privKeyInfo : pubKeyInfo;
 
             using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
             {
+                if (privKeyInfo.CkaKeyType == (ulong)CKK.CKK_RSA) { 
                 List<IObjectAttribute> attributes = session.GetAttributeValue(rsaKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_MODULUS, CKA.CKA_PUBLIC_EXPONENT });
                 BigInteger modulus = new BigInteger(1, attributes[0].GetValueAsByteArray());
                 BigInteger publicExponent = new BigInteger(1, attributes[1].GetValueAsByteArray());
                 return new RsaKeyParameters(false, modulus, publicExponent);
+                } else {
+                    List<IObjectAttribute> attributes = session.GetAttributeValue(rsaKeyInfo.ObjectHandle, new List<CKA> { CKA.CKA_EC_POINT, CKA.CKA_EC_PARAMS });
+                    BigInteger modulus = new BigInteger(1, attributes[0].GetValueAsByteArray());
+
+                    DerObjectIdentifier oid = DerObjectIdentifier.GetInstance(DerObjectIdentifier.FromByteArray(attributes[1].GetValueAsByteArray()));
+                    Org.BouncyCastle.Asn1.X9.X9ECParameters ecParams = Org.BouncyCastle.Asn1.Sec.SecNamedCurves.GetByOid(oid);
+                    byte[] ecPointArray1 = null;
+                    byte[] ecPointArray = attributes[0].GetValueAsByteArray();
+
+                    if (ecPointArray[1] > 127) {
+                        ecPointArray1 = new byte[ecPointArray.Length - 3];
+                        Array.Copy(ecPointArray, 3, ecPointArray1, 0, ecPointArray1.Length);
+                    }
+                    else {
+                        ecPointArray1 = new byte[ecPointArray.Length - 2];
+                        Array.Copy(ecPointArray, 2, ecPointArray1, 0, ecPointArray1.Length);
+                    }
+
+                    byte[] ecPointX = new byte[(ecPointArray1.Length - 1) / 2];
+                    byte[] ecPointY = new byte[(ecPointArray1.Length - 1) / 2];
+
+                    Array.Copy(ecPointArray1, 1, ecPointX, 0, ecPointX.Length);
+                    Array.Copy(ecPointArray1, 1+ ecPointX.Length, ecPointY, 0, ecPointY.Length);
+
+                    Org.BouncyCastle.Math.EC.ECPoint point = ecParams.Curve.CreatePoint(new BigInteger(1, ecPointX), new BigInteger(1, ecPointY));
+
+                    ECDomainParameters ecDomainParams = new ECDomainParameters(ecParams.Curve, ecParams.G, ecParams.N, ecParams.H);
+                    ECPublicKeyParameters ecPubKeyParams = new ECPublicKeyParameters(point, ecDomainParams);
+
+                    return ecPubKeyParams;
+
+                }
             }
+            
         }
 
         public void GenerateCsr(Pkcs11KeyInfo privKeyInfo, Pkcs11KeyInfo pubKeyInfo, DnEntry[] dnEntries, HashAlgorithm hashAlgorithm, out string fileName, out byte[] fileContent)
@@ -1063,15 +1097,25 @@ namespace Net.Pkcs11Admin
             X509Name x509Name = Utils.CreateX509Name(dnEntries);
             AsymmetricKeyParameter publicKeyParameters = GetPubKeyParams(privKeyInfo, pubKeyInfo);
 
+            if (signatureAlgorithmOid.Length == 0) {
+                signatureAlgorithmOid = "SHA256withECDSA";
+            }
             Pkcs10CertificationRequestDelaySigned pkcs10 = new Pkcs10CertificationRequestDelaySigned(signatureAlgorithmOid, x509Name, publicKeyParameters, null);
 
             byte[] dataToSign = pkcs10.GetDataToSign();
             byte[] digest = hashAlgorithm.ComputeDigest(dataToSign);
-            byte[] digestInfo = Utils.CreateDigestInfo(digest, hashAlgorithm.Oid);
+            byte[] digestInfo = digest;
+            CKM mecha = CKM.CKM_ECDSA;
+
+            if ((CKK)privKeyInfo.CkaKeyType == CKK.CKK_RSA) { 
+                digestInfo = Utils.CreateDigestInfo(digest, hashAlgorithm.Oid);
+                mecha = CKM.CKM_RSA_PKCS;
+            }
+
             byte[] signature = null;
 
             using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
-            using (IMechanism mechanism = session.Factories.MechanismFactory.Create(CKM.CKM_RSA_PKCS))
+            using (IMechanism mechanism = session.Factories.MechanismFactory.Create(mecha))
                 signature = session.Sign(mechanism, privKeyInfo.ObjectHandle, digestInfo);
 
             pkcs10.SignRequest(new DerBitString(signature));

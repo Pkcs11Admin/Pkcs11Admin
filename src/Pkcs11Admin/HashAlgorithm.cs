@@ -28,25 +28,25 @@ namespace Net.Pkcs11Admin
         public static readonly HashAlgorithm SHA1 = new HashAlgorithm(
             "SHA1",
             "1.3.14.3.2.26",
-            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.5" } },
+            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.5" }, { CKK.CKK_ECDSA, "SHA1withECDSA" } },
             typeof(Sha1Digest));
 
         public static readonly HashAlgorithm SHA256 = new HashAlgorithm(
             "SHA256",
             "2.16.840.1.101.3.4.2.1",
-            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.11" } },
+            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.11" }, { CKK.CKK_ECDSA, "SHA256withECDSA" } },
             typeof(Sha256Digest));
 
         public static readonly HashAlgorithm SHA384 = new HashAlgorithm(
             "SHA384",
             "2.16.840.1.101.3.4.2.2",
-            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.12" } },
+            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.12" }, { CKK.CKK_ECDSA, "SHA384withECDSA" } },
             typeof(Sha384Digest));
 
         public static readonly HashAlgorithm SHA512 = new HashAlgorithm(
             "SHA512",
             "2.16.840.1.101.3.4.2.3",
-            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.13" } },
+            new Dictionary<CKK, string>() { { CKK.CKK_RSA, "1.2.840.113549.1.1.13" }, { CKK.CKK_ECDSA, "SHA512withECDSA" } },
             typeof(Sha512Digest));
 
         public static readonly HashAlgorithm[] SupportedAlgorithms = new HashAlgorithm[]
