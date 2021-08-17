@@ -36,6 +36,13 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
             LabelPkcs11Logger.Text = string.Format(LabelPkcs11Logger.Text, Pkcs11AdminInfo.RuntimeBitness);
             TextBoxPkcs11Logger.Text = Pkcs11Admin.Instance.GetDefaultLoggerPath();
             TextBoxLogFile.Text = Pkcs11Admin.Instance.GetDefaultLogPath();
+
+
+            string userPkcs11Library = Properties.Settings.Default.UserPkcs11Library;
+            if (!string.IsNullOrEmpty(userPkcs11Library))
+            {
+                TextBoxPkcs11Library.Text = userPkcs11Library;
+            }
         }
 
         private void LibraryDialog_Shown(object sender, EventArgs e)
@@ -102,6 +109,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
                     )
                 );
                 DialogResult = DialogResult.OK;
+                Properties.Settings d = Properties.Settings.Default;
+                d.UserPkcs11Library = TextBoxPkcs11Library.Text;
+                d.Save();
             }
             catch (Exception ex)
             {
