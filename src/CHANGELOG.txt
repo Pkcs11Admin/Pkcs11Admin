@@ -1,3 +1,11 @@
+Pkcs11Admin 0.6.0 (2022-01-15)
+- Upgraded to .NET Framework 4.8
+- Master session is always being kept open to ensure that all object identifiers are valid across other sessions
+- Added support pseudonym and organizationIdentifier DN entries
+- Value of DefaultPkcs11Library setting from app.config file is displayed in library loading dialog
+- Updated to Pkcs11Interop 5.1.2
+- Updated to Portable.BouncyCastle 1.9.0
+
 Pkcs11Admin 0.5.0 (2019-10-30)
 - Fixed attribute duplication bug in key generation dialog
 - #12 - RO sessions won't be opened after SO login
