@@ -81,7 +81,7 @@ namespace Net.Pkcs11Admin
                     break;
 
                 case DnEntryValueType.BmpString:
-                    value = new DerBmpString(Encoding.UTF8.GetBytes(dnEntry.Value));
+                    value = new DerBmpString(dnEntry.Value);
                     break;
 
                 default:
