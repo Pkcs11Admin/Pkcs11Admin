@@ -40,6 +40,9 @@ namespace Net.Pkcs11Admin.WinForms.Dialogs
 
         private void LibraryDialog_Shown(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.DefaultPkcs11Library))
+                TextBoxPkcs11Library.Text = Properties.Settings.Default.DefaultPkcs11Library;
+
             TextBoxPkcs11Library.Focus();
         }
 
