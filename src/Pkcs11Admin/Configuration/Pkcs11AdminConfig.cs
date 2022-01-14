@@ -883,6 +883,7 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.DnEntryDefinitions.Add("2.5.4.10", new DnEntryDefinition() { Name = "organizationName", Oid = "2.5.4.10", ValueType = DnEntryValueType.Utf8String });
             cfg.DnEntryDefinitions.Add("2.5.4.11", new DnEntryDefinition() { Name = "organizationUnitName", Oid = "2.5.4.11", ValueType = DnEntryValueType.Utf8String });
             cfg.DnEntryDefinitions.Add("2.5.4.42", new DnEntryDefinition() { Name = "givenName", Oid = "2.5.4.42", ValueType = DnEntryValueType.Utf8String });
+            cfg.DnEntryDefinitions.Add("2.5.4.65", new DnEntryDefinition() { Name = "pseudonym ", Oid = "2.5.4.65", ValueType = DnEntryValueType.Utf8String });
             cfg.DnEntryDefinitions.Add("2.5.4.97", new DnEntryDefinition() { Name = "organizationIdentifier ", Oid = "2.5.4.97", ValueType = DnEntryValueType.Utf8String });
 
             #endregion
