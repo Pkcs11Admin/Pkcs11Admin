@@ -40,7 +40,7 @@ namespace Net.Pkcs11Admin
 
         private ISlot _slot = null;
 
-        private ISession _authenticatedSession = null;
+        private ISession _masterSession = null;
 
         #region Properties
 
@@ -160,7 +160,33 @@ namespace Net.Pkcs11Admin
         {
             _slot = slot;
 
-            Reload(true);
+            try
+            {
+                // It is crucial to keep master session always open to ensure
+                // that all object identifiers are valid across other sessions
+                // and that login state is preserved.
+                _masterSession = _slot.OpenSession(SessionType.ReadWrite);
+            }
+            catch
+            {
+                // It is not possible to open session on some slots
+                // and especially those without tokens :)
+            }
+
+            try
+            {
+                Reload(true);
+            }
+            catch
+            {
+                if (_masterSession != null)
+                {
+                    _masterSession.Dispose();
+                    _masterSession = null;
+                }
+
+                throw;
+            }
         }
 
         #endregion
@@ -747,9 +773,6 @@ namespace Net.Pkcs11Admin
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            if (_authenticatedSession != null)
-                throw new Exception("Authenticated session exists");
-
             _slot.InitToken(soPin, label);
         }
 
@@ -758,30 +781,16 @@ namespace Net.Pkcs11Admin
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            if (_authenticatedSession != null)
-                throw new Exception("Authenticated session already exists");
+            if (_masterSession == null)
+                throw new Exception("Master session does not exist");
 
-            _authenticatedSession = _slot.OpenSession(SessionType.ReadWrite);
-
-            try
-            {
-                _authenticatedSession.Login(userType, pin);
-            }
-            catch (Exception)
-            {
-                _authenticatedSession.Dispose();
-                _authenticatedSession = null;
-                throw;
-            }
+            _masterSession.Login(userType, pin);
         }
 
         public void ChangePin(string oldPin, string newPin)
         {
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
-
-            if (_authenticatedSession == null)
-                throw new Exception("Authenticated session does not exist");
 
             using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.SetPin(oldPin, newPin);
@@ -792,9 +801,6 @@ namespace Net.Pkcs11Admin
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            if (_authenticatedSession == null)
-                throw new Exception("Authenticated session does not exist");
-
             using (ISession session = _slot.OpenSession(SessionType.ReadWrite))
                 session.InitPin(pin);
         }
@@ -804,18 +810,10 @@ namespace Net.Pkcs11Admin
             if (this._disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            if (_authenticatedSession == null)
-                throw new Exception("Authenticated session does not exist");
+            if (_masterSession == null)
+                throw new Exception("Master session does not exist");
 
-            try
-            {
-                _authenticatedSession.Logout();
-            }
-            finally
-            {
-                _authenticatedSession.Dispose();
-                _authenticatedSession = null;
-            }
+            _masterSession.Logout();
         }
 
         public void SaveObjectAttributes(Pkcs11ObjectInfo objectInfo, List<IObjectAttribute> objectAttributes)
@@ -1119,10 +1117,10 @@ namespace Net.Pkcs11Admin
                 {
                     // Dispose managed objects
 
-                    if (_authenticatedSession != null)
+                    if (_masterSession != null)
                     {
-                        _authenticatedSession.Dispose();
-                        _authenticatedSession = null;
+                        _masterSession.Dispose();
+                        _masterSession = null;
                     }
                 }
 
