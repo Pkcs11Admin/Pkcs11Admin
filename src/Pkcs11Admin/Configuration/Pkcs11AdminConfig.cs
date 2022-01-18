@@ -553,6 +553,10 @@ namespace Net.Pkcs11Admin.Configuration
             ckkEnum.Add((ulong)CKK.CKK_ACTI, new EnumMember() { Name = "CKK_ACTI", Value = (ulong)CKK.CKK_ACTI, FriendlyName = "ACTI", Description = "TODO" });
             ckkEnum.Add((ulong)CKK.CKK_CAMELLIA, new EnumMember() { Name = "CKK_CAMELLIA", Value = (ulong)CKK.CKK_CAMELLIA, FriendlyName = "CAMELLIA", Description = "TODO" });
             ckkEnum.Add((ulong)CKK.CKK_ARIA, new EnumMember() { Name = "CKK_ARIA", Value = (ulong)CKK.CKK_ARIA, FriendlyName = "ARIA", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_GOSTR3410, new EnumMember() { Name = "CKK_GOSTR3410", Value = (ulong)CKK.CKK_GOSTR3410, FriendlyName = "GOST R 34.10-2001 key", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_GOSTR3411, new EnumMember() { Name = "CKK_GOSTR3411", Value = (ulong)CKK.CKK_GOSTR3411, FriendlyName = "GOST R 34.11-94 key or domain parameter", Description = "TODO" });
+            ckkEnum.Add((ulong)CKK.CKK_GOST28147, new EnumMember() { Name = "CKK_GOST28147", Value = (ulong)CKK.CKK_GOST28147, FriendlyName = "GOST 28147-89 key or domain parameter", Description = "TODO" });
+            ckkEnum.Add((ulong)0xD4321003, new EnumMember() { Name = "CKK_GOSTR3410_512", Value = (ulong)0xD4321003, FriendlyName = "GOST R 34.10-2012 512 bit key", Description = "TODO" });
 
             #endregion
 
