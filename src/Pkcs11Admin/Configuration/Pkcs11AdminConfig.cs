@@ -587,6 +587,26 @@ namespace Net.Pkcs11Admin.Configuration
 
             cfg.HwFeatureAttributes.TypeSpecificAttributes = new TypeAttributes();
 
+            // BIT4id custom attributes:
+
+            // PIN_INFO:
+            // 4 bytes: pinRetry, pinRetryMax, pukRetry, pukRetryMax
+            cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000001), new ClassAttributes());
+            cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000001)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+
+            // RFU
+            cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000002), new ClassAttributes());
+            cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000002)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+
+            cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000003), new ClassAttributes());
+            cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000003)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+
+            cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000004), new ClassAttributes());
+            cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000004)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+
+            cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000005), new ClassAttributes());
+            cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000005)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+
             #endregion
 
             #region Data object attributes
@@ -717,6 +737,13 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_2, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
             cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_COEFFICIENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
+            // EC Private Key Object Attributes
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_EC, new ClassAttributes() { KeyGenerationMechanism = CKM.CKM_ECDSA_KEY_PAIR_GEN });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_EC, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_EC, GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_POINT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_PARAMS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:06082A8648CE3D030107", GenerateSetByDefault = false });
+
             #endregion
 
             #region Public key attributes
@@ -761,6 +788,13 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS_BITS, CreateDefaultValue = "ULONG:2048", CreateSetByDefault = false, GenerateDefaultValue = "ULONG:2048", GenerateSetByDefault = true });
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
+
+            // ECC Public Key Object Attributes
+            cfg.PublicKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_EC, new ClassAttributes());
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_EC, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_EC, GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_RSA_PKCS_KEY_PAIR_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_POINT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_EC].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EC_PARAMS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:06082A8648CE3D030107", GenerateSetByDefault = true });
 
             #endregion
 
