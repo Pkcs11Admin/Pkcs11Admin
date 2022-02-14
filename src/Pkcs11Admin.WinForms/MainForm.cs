@@ -1173,10 +1173,11 @@ namespace Net.Pkcs11Admin.WinForms
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
-        private void CtxMenuItemKeysImport_Click(object sender, EventArgs e)
+        private async void CtxMenuItemKeysImport_Click(object sender, EventArgs e)
         {
             if (!ImportKeyPairFile())
                 WinFormsUtils.ShowInfo(this, "Failed to import file ");
+            else await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void CtxMenuItemKeysExport_Click(object sender, EventArgs e)
@@ -1769,7 +1770,7 @@ namespace Net.Pkcs11Admin.WinForms
             }
             using (PasswordDialog frm = new PasswordDialog())
             {
-                if (frm.ShowDialog(this) == DialogResult.OK) 
+                if (frm.ShowDialog(this) == DialogResult.OK)
                 {
                     password = frm.Password;
                 }
@@ -1781,7 +1782,7 @@ namespace Net.Pkcs11Admin.WinForms
             // Read file content
             string fileName = Path.GetFileName(filePath);
             // Construct new object attributes
-            _selectedSlot.GenerateAsymmetricKeyPairFromPfxFIle(filePath,password, fileName);
+            _selectedSlot.GenerateAsymmetricKeyPairFromPfxFIle(filePath, password, fileName);
             return true;
         }
         private void ExportCertificate()

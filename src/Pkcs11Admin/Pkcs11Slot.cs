@@ -955,43 +955,46 @@ namespace Net.Pkcs11Admin
             IObjectAttributeFactory objectAttributeFactory = Pkcs11Admin.Instance.Factories.ObjectAttributeFactory;
             List<IObjectAttribute> privateKeyObjectAttributes = new List<IObjectAttribute>();
             List<IObjectAttribute> publicKeyObjectAttributes = new List<IObjectAttribute>();
-            var pkcs = new Pkcs12Store(File.Open(fileNme, FileMode.Open), password.ToCharArray());
-            foreach (string alias in pkcs.Aliases)
+            using (var filestrem = File.Open(fileNme, FileMode.Open))
             {
-                var certificate = pkcs.GetCertificate(alias);
-                switch (certificate.Certificate.SigAlgName)
+                var pkcs = new Pkcs12Store(filestrem, password.ToCharArray());
+                foreach (string alias in pkcs.Aliases)
                 {
-                    case "SHA-256withECDSA":
-                        {
-                            ECPrivateKeyParameters cer = (ECPrivateKeyParameters)pkcs.GetKey(alias).Key;
-                            var keys = GetKeyPairFromPrivateKey(cer);
-                            ECPublicKeyParameters pubkey = (ECPublicKeyParameters)keys.Public;
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_KEY_TYPE, CKK.CKK_ECDSA));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_TOKEN, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_MODIFIABLE, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_LABEL, label));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_ENCRYPT, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VERIFY, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VERIFY_RECOVER, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_WRAP, true));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VALUE_LEN, 256));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PUBLIC_EXPONENT, new byte[] { 0x01, 0x00, 0x01 }));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_ECDSA_PARAMS, new byte[] { 0x06, 0x05, 0x2B, 0x81, 0x04, 0x00, 0x22 }));
-                            publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VALUE, pubkey.Q.GetEncoded()));
+                    var key = pkcs.GetKey(alias).Key;
+                    string keyType = key.GetType().Name;
+                    switch (keyType)
+                    {
+                        case "ECPrivateKeyParameters":
+                            {
+                                var keys = GetKeyPairFromPrivateKey(key);
+                                ECPublicKeyParameters pubkey = (ECPublicKeyParameters)keys.Public;
+                                ECPrivateKeyParameters privkey = (ECPrivateKeyParameters)keys.Private;
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_TOKEN, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_MODIFIABLE, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_LABEL, label));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_ENCRYPT, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VERIFY, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VERIFY_RECOVER, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_WRAP, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VALUE_LEN, 256));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PUBLIC_EXPONENT, new byte[] { 0x01, 0x00, 0x01 }));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_ECDSA_PARAMS, pubkey.PublicKeyParamSet.GetEncoded()));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VALUE, pubkey.Q.GetEncoded()));
 
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_TOKEN, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_LABEL, "EC Private Key"));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SENSITIVE, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_DECRYPT, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SIGN, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SIGN_RECOVER, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_UNWRAP, true));
-                            privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VALUE, cer.D.ToByteArray()));
-                            GenerateAsymmetricKeyPair(CKK.CKK_ECDSA, privateKeyObjectAttributes, publicKeyObjectAttributes);
-                            break;
-                        }
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_TOKEN, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_LABEL, "EC Private Key"));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SENSITIVE, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_DECRYPT, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SIGN, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SIGN_RECOVER, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_UNWRAP, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VALUE, privkey.D.ToByteArray()));
+                                GenerateAsymmetricKeyPair(CKK.CKK_ECDSA, privateKeyObjectAttributes, publicKeyObjectAttributes);
+                                break;
+                            }
+                    }
                 }
             }
         }
