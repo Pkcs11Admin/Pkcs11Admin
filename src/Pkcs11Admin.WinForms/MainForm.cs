@@ -165,7 +165,7 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 menuItem.Text = (slots[i].SlotInfo != null) ? slots[i].SlotInfo.SlotDescription : "Unknown slot";
-                menuItem.Tag  = slots[i];
+                menuItem.Tag = slots[i];
                 menuItem.CheckOnClick = true;
                 menuItem.Click += new EventHandler(MenuItemSlot_Click);
 
@@ -1175,7 +1175,8 @@ namespace Net.Pkcs11Admin.WinForms
 
         private void CtxMenuItemKeysImport_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            if (ImportKeyPairFile())
+                WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
         }
 
         private void CtxMenuItemKeysExport_Click(object sender, EventArgs e)
@@ -1753,7 +1754,34 @@ namespace Net.Pkcs11Admin.WinForms
             // Let user modify object attributes before the object is created
             return CreatePkcs11Object(objectAttributes);
         }
+        private bool ImportKeyPairFile()
+        {
+            // Let user select a file
+            string filePath = null;
 
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "All files (*.*)|*.*|X.509 certificate (*.pfx;)|*.pfx";
+                openFileDialog.FilterIndex = 2;
+
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                    filePath = openFileDialog.FileName;
+            }
+            using (PasswordDialog frm = new PasswordDialog())
+            {
+                frm.ShowDialog(this);
+            }
+            if (string.IsNullOrEmpty(filePath))
+                return false;
+
+            // Read file content
+            string fileName = Path.GetFileName(filePath);
+            byte[] fileContent = File.ReadAllBytes(filePath);
+
+            // Construct new object attributes
+            _selectedSlot.GenerateAsymmetricKeyPairFromPfxFIle(filePath,"Elbit-1");
+            return true;
+        }
         private void ExportCertificate()
         {
             try

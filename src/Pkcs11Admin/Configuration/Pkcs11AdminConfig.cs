@@ -713,6 +713,14 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_EXPONENT_2, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
             cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_COEFFICIENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
 
+
+            // ECDSA Private Key Object Attributes
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_ECDSA, new ClassAttributes() { KeyGenerationMechanism = CKM.CKM_ECDSA_KEY_PAIR_GEN });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_ECDSA, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_ECDSA, GenerateSetByDefault = true });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
+            cfg.PrivateKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PRIVATE_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
+
             #endregion
 
             #region Public key attributes
@@ -756,6 +764,13 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = null, GenerateSetByDefault = false });
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_MODULUS_BITS, CreateDefaultValue = "ULONG:2048", CreateSetByDefault = false, GenerateDefaultValue = "ULONG:2048", GenerateSetByDefault = true });
             cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_RSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
+
+            // ECDSA Public Key Object Attributes
+            cfg.PublicKeyAttributes.TypeSpecificAttributes.Add((ulong)CKK.CKK_ECDSA, new ClassAttributes());
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_ECDSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_TYPE, CreateDefaultValue = "ULONG:" + (ulong)CKK.CKK_ECDSA, CreateSetByDefault = true, GenerateDefaultValue = "ULONG:" + (ulong)CKK.CKK_ECDSA, GenerateSetByDefault = true });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_ECDSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_KEY_GEN_MECHANISM, CreateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, CreateSetByDefault = false, GenerateDefaultValue = "ULONG:" + (ulong)CKM.CKM_ECDSA_KEY_PAIR_GEN, GenerateSetByDefault = false });
+            cfg.PublicKeyAttributes.TypeSpecificAttributes[(ulong)CKK.CKK_ECDSA].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_PUBLIC_EXPONENT, CreateDefaultValue = null, CreateSetByDefault = true, GenerateDefaultValue = "BYTES:010001", GenerateSetByDefault = false });
+
 
             #endregion
 
