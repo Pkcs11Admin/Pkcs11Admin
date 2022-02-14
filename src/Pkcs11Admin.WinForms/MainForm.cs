@@ -165,7 +165,7 @@ namespace Net.Pkcs11Admin.WinForms
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 menuItem.Text = (slots[i].SlotInfo != null) ? slots[i].SlotInfo.SlotDescription : "Unknown slot";
-                menuItem.Tag  = slots[i];
+                menuItem.Tag = slots[i];
                 menuItem.CheckOnClick = true;
                 menuItem.Click += new EventHandler(MenuItemSlot_Click);
 
@@ -1173,9 +1173,11 @@ namespace Net.Pkcs11Admin.WinForms
                 await ReloadFormAfter(_selectedSlot.Reload);
         }
 
-        private void CtxMenuItemKeysImport_Click(object sender, EventArgs e)
+        private async void CtxMenuItemKeysImport_Click(object sender, EventArgs e)
         {
-            WinFormsUtils.ShowInfo(this, "Selected operation has not been implemented yet");
+            if (!ImportKeyPairFile())
+                WinFormsUtils.ShowInfo(this, "Failed to import file Please check Password and try again");
+            else await ReloadFormAfter(_selectedSlot.Reload);
         }
 
         private void CtxMenuItemKeysExport_Click(object sender, EventArgs e)
@@ -1753,7 +1755,43 @@ namespace Net.Pkcs11Admin.WinForms
             // Let user modify object attributes before the object is created
             return CreatePkcs11Object(objectAttributes);
         }
+        private bool ImportKeyPairFile()
+        {
+            try
+            {
+                // Let user select a file
+                string filePath = null;
+                string password = null;
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "All files (*.*)|*.*|X.509 certificate (*.pfx;)|*.pfx";
+                    openFileDialog.FilterIndex = 2;
 
+                    if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                        filePath = openFileDialog.FileName;
+                }
+                using (PasswordDialog frm = new PasswordDialog())
+                {
+                    if (frm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        password = frm.Password;
+                    }
+                }
+                if (string.IsNullOrEmpty(filePath))
+                    return false;
+                if (string.IsNullOrEmpty(password))
+                    return false;
+                // Read file content
+                string fileName = Path.GetFileName(filePath);
+                // Construct new object attributes
+                _selectedSlot.GenerateAsymmetricKeyPairFromPfxFIle(filePath, password, fileName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         private void ExportCertificate()
         {
             try
