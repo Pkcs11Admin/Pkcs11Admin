@@ -994,6 +994,35 @@ namespace Net.Pkcs11Admin
                                 GenerateAsymmetricKeyPair(CKK.CKK_ECDSA, privateKeyObjectAttributes, publicKeyObjectAttributes);
                                 break;
                             }
+                        case "RsaPrivateCrtKeyParameters":
+                            {
+                                var keys = GetKeyPairFromPrivateKey(key);
+                                RsaPrivateCrtKeyParameters pubkey = (RsaPrivateCrtKeyParameters)keys.Private;
+                                RsaKeyParameters privkey = (RsaKeyParameters)keys.Public;
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_TOKEN, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_MODIFIABLE, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_LABEL, label));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_ENCRYPT, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VERIFY, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_VERIFY_RECOVER, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_WRAP, true));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PUBLIC_EXPONENT, pubkey.PublicExponent.ToByteArray()));
+                                publicKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_MODULUS, pubkey.Modulus.ToByteArray()));
+
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_TOKEN, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SENSITIVE, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_DECRYPT, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SIGN, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_SIGN_RECOVER, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_UNWRAP, true));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_MODULUS, privkey.Modulus.ToByteArray()));
+                                privateKeyObjectAttributes.Add(objectAttributeFactory.Create(CKA.CKA_EXPONENT_1, privkey.Exponent.ToByteArray()));
+                                GenerateAsymmetricKeyPair(CKK.CKK_RSA, privateKeyObjectAttributes, publicKeyObjectAttributes);
+
+                                break;
+                            }
                     }
                 }
             }
