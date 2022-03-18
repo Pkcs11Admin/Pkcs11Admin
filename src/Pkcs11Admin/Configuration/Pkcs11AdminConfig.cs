@@ -564,6 +564,13 @@ namespace Net.Pkcs11Admin.Configuration
             ckhEnum.Add((ulong)CKH.CKH_CLOCK, new EnumMember() { Name = "CKH_CLOCK", Value = (ulong)CKH.CKH_CLOCK, FriendlyName = "", Description = "TODO" });
             ckhEnum.Add((ulong)CKH.CKH_USER_INTERFACE, new EnumMember() { Name = "CKH_USER_INTERFACE", Value = (ulong)CKH.CKH_USER_INTERFACE, FriendlyName = "", Description = "TODO" });
 
+            ckhEnum.Add((ulong)CKH.CKH_VENDOR_DEFINED + 0x10000001, new EnumMember() { Name = "CKH_PIN_INFO", Value = (ulong)CKH.CKH_VENDOR_DEFINED + 0x10000001, FriendlyName = "", Description = "TODO" });
+            ckhEnum.Add((ulong)CKH.CKH_VENDOR_DEFINED + 0x10000002, new EnumMember() { Name = "CKH_PIN_POLICY_SUPPORT", Value = (ulong)CKH.CKH_VENDOR_DEFINED + 0x10000002, FriendlyName = "", Description = "TODO" });
+            ckhEnum.Add((ulong)CKH.CKH_VENDOR_DEFINED + 0x10000003, new EnumMember() { Name = "CKH_IS_LICENSED", Value = (ulong)CKH.CKH_VENDOR_DEFINED + 0x10000003, FriendlyName = "", Description = "TODO" });
+            ckhEnum.Add((ulong)CKH.CKH_VENDOR_DEFINED + 0x10000004, new EnumMember() { Name = "CKH_PSS_QSCD", Value = (ulong)CKH.CKH_VENDOR_DEFINED + 0x10000004, FriendlyName = "", Description = "TODO" });
+            ckhEnum.Add((ulong)CKH.CKH_VENDOR_DEFINED + 0x10000005, new EnumMember() { Name = "CKH_RFU5", Value = (ulong)CKH.CKH_VENDOR_DEFINED + 0x10000005, FriendlyName = "", Description = "TODO" });
+            ckhEnum.Add((ulong)CKH.CKH_VENDOR_DEFINED + 0x10000006, new EnumMember() { Name = "CKH_RFU6", Value = (ulong)CKH.CKH_VENDOR_DEFINED + 0x10000006, FriendlyName = "", Description = "TODO" });
+
             #endregion
 
             cfg.EnumDefinitions = new EnumDefinitions();
@@ -594,18 +601,25 @@ namespace Net.Pkcs11Admin.Configuration
             cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000001), new ClassAttributes());
             cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000001)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
-            // RFU
+            // PIN_POLICY_SUPPORT
             cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000002), new ClassAttributes());
             cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000002)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
+            // IS_LICENSED
             cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000003), new ClassAttributes());
             cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000003)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
+            // PSS_QSCD
             cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000004), new ClassAttributes());
             cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000004)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
+            // RFU5
             cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000005), new ClassAttributes());
             cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000005)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
+
+            // RFU6
+            cfg.HwFeatureAttributes.TypeSpecificAttributes.Add((ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000006), new ClassAttributes());
+            cfg.HwFeatureAttributes.TypeSpecificAttributes[(ulong)(CKH.CKH_VENDOR_DEFINED + 0x10000006)].Add(new ClassAttribute() { Value = (ulong)CKA.CKA_VALUE, CreateDefaultValue = null, CreateSetByDefault = true });
 
             #endregion
 
